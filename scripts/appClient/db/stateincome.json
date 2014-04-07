@@ -1,0 +1,334 @@
+var stateincome = {
+ "displayFieldName": "NAME",
+ "fieldAliases": {
+  "NAME": "Name",
+  "MEDNW_CY": "2012 Median Net Worth (Esri)"
+ },
+ "fields": [
+  {
+   "name": "NAME",
+   "type": "esriFieldTypeString",
+   "alias": "Name",
+   "length": 20
+  },
+  {
+   "name": "MEDNW_CY",
+   "type": "esriFieldTypeInteger",
+   "alias": "2012 Median Net Worth (Esri)"
+  }
+ ],
+ "features": [
+  {
+   "attributes": {
+    "NAME": "Alabama",
+    "MEDNW_CY": 51949
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Alaska",
+    "MEDNW_CY": 83555
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Arizona",
+    "MEDNW_CY": 64356
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Arkansas",
+    "MEDNW_CY": 42420
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "California",
+    "MEDNW_CY": 64501
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Colorado",
+    "MEDNW_CY": 71324
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Connecticut",
+    "MEDNW_CY": 135462
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Delaware",
+    "MEDNW_CY": 106683
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "District of Columbia",
+    "MEDNW_CY": 35619
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Florida",
+    "MEDNW_CY": 66094
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Florida",
+    "MEDNW_CY": 66094
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Georgia",
+    "MEDNW_CY": 51706
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Hawaii",
+    "MEDNW_CY": 82749
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Idaho",
+    "MEDNW_CY": 56636
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Illinois",
+    "MEDNW_CY": 82164
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Indiana",
+    "MEDNW_CY": 68609
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Iowa",
+    "MEDNW_CY": 78903
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Kansas",
+    "MEDNW_CY": 67300
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Kentucky",
+    "MEDNW_CY": 43916
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Louisiana",
+    "MEDNW_CY": 47973
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Maine",
+    "MEDNW_CY": 72689
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Maryland",
+    "MEDNW_CY": 126239
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Massachusetts",
+    "MEDNW_CY": 92694
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Michigan",
+    "MEDNW_CY": 72299
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Minnesota",
+    "MEDNW_CY": 100850
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Mississippi",
+    "MEDNW_CY": 41367
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Missouri",
+    "MEDNW_CY": 62866
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Montana",
+    "MEDNW_CY": 60007
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Nebraska",
+    "MEDNW_CY": 68657
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Nevada",
+    "MEDNW_CY": 56981
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "New Hampshire",
+    "MEDNW_CY": 111340
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "New Jersey",
+    "MEDNW_CY": 122588
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "New Mexico",
+    "MEDNW_CY": 54477
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "New York",
+    "MEDNW_CY": 58650
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "North Carolina",
+    "MEDNW_CY": 50592
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "North Dakota",
+    "MEDNW_CY": 66486
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Ohio",
+    "MEDNW_CY": 62611
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Oklahoma",
+    "MEDNW_CY": 53391
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Oregon",
+    "MEDNW_CY": 58381
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Pennsylvania",
+    "MEDNW_CY": 79619
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Rhode Island",
+    "MEDNW_CY": 68287
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "South Carolina",
+    "MEDNW_CY": 52818
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "South Dakota",
+    "MEDNW_CY": 62039
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Tennessee",
+    "MEDNW_CY": 50582
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Texas",
+    "MEDNW_CY": 53546
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Utah",
+    "MEDNW_CY": 81801
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Vermont",
+    "MEDNW_CY": 83091
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Virginia",
+    "MEDNW_CY": 91579
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Washington",
+    "MEDNW_CY": 77535
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "West Virginia",
+    "MEDNW_CY": 54706
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Wisconsin",
+    "MEDNW_CY": 73935
+   }
+  },
+  {
+   "attributes": {
+    "NAME": "Wyoming",
+    "MEDNW_CY": 77010
+   }
+  }
+ ]
+};
