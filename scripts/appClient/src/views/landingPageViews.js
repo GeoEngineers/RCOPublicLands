@@ -23,20 +23,13 @@ var LandingPageView = Backbone.Marionette.Layout.extend({
 		//set buttons according to internet settings
 		this.toggleSetButtons();
 		MainApplication.LandingPageMap === undefined ? MainApplication.LandingPageMap = L.mapbox.map('map') : false;
-		//MainApplication.markerLayer = L.mapbox.markers.layer();
-		//MainApplication.LandingPageMap.addLayer(MainApplication.markerLayer);
 			  
 		this.loadCurrentMap();
 		MainApplication.LandingPageMap.on("dragstart",function(){
 			dc.loadCurrentMap();
 		});
-		
-		//MainApplication.LandingPageMap.off('click');
-		/*MainApplication.LandingPageMap.on('click', function(e) {
-			var todoMarker = dc.addMapMarker(e.latlng);
-			MainApplication.views.toDoView.createTodoDetails(todoMarker);
-		});*/
-		//console.log(MainApplication.models.todos.length);
+		this.createUTFGrid();
+		/*
 		for (var i = MainApplication.models.todos.length - 1; i >= 0; i--){
 			if(MainApplication.models.todos.models[i].attributes.Latitude !== undefined && MainApplication.models.todos.models[i].attributes.Longitude !== undefined){
 				todoMarkerItem = this.addMapMarker({
@@ -50,7 +43,7 @@ var LandingPageView = Backbone.Marionette.Layout.extend({
 				todoMarkerItem.markerToolTip.render();
 			}
 		};
-		this.mapFirstView===true ? MainApplication.LandingPageMap.setView([47.2270, -122.1212], 8) : false;
+		this.mapFirstView===true ? MainApplication.LandingPageMap.setView([47.2270, -122.1212], 8) : false;*/
 		this.mapFirstView=false;
 	},
 	addMapMarker: function(b){
@@ -75,6 +68,57 @@ var LandingPageView = Backbone.Marionette.Layout.extend({
 			todo = this.todos.models[x];
 			MainApplication.LandingPageMap.removeLayer(todo.marker);
 		};
+		return false;
+	},
+	createUTFGrid: function(){	
+		var mapbox = L.tileLayer('http://{s}.tiles.mapbox.com/v3/milkator.press_freedom/{z}/{x}/{y}.png').addTo(MainApplication.LandingPageMap);
+
+		/*var osm = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: "Map: <a href='http://www.openstreetmap.org/'>&copy | OpenStreetMap </a>contributers"});
+  		var esri = L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}.png', {attribution: "Map: <a href='http://www.arcgis.com/home/item.html?id=c4ec722a1cd34cf0a23904aadf8923a0'>ArcGIS - World Physical Map</a>", maxZoom: 8});
+  		var cloudmade = L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
+			attribution: 'Map data &copy; 2011 OpenStreetMap contributors | Imagery &copy; 2011 CloudMade | Data &copy; 2013 <a href="http://www.reporter-ohne-grenzen.de/ranglisten/rangliste-2013/">ROG/RSF</a>',
+			key: 'BC9A493B41014CAABB98F0471D759707',
+			styleId: 22677
+		});*/
+		
+		var utfGrid = new L.UtfGrid('http://{s}.tiles.mapbox.com/v3/milkator.press_freedom/{z}/{x}/{y}.grid.json?callback={cb}', {
+			resolution: 4,
+			maxZoom: 5
+		});
+
+		utfGrid.on('mouseover', function(e){ info.update(e);}).on('mouseout', function(e){ info.update();})
+		utfGrid.on('click', function(e){ console.log(e); });
+
+		var info = L.control();
+		info.options.position = 'bottomright';
+		info.onAdd = function (map) {
+		    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+		    this.update();
+		    return this._div;
+		};
+
+		info.update = function (props) {
+			this._div.innerHTML = "<h4>Press Freedom in the world</h4>" +  (props ?
+			"<values><b>" + props.data.name + "</b><br />Ranking position: <rank>" + props.data.rank+"</rank></values>"
+			: 'Hover over a state');
+		};
+		
+		/*
+		var baseLayers = {
+					"Press Freedom - Mapbox" : mapbox,
+					"OSM - Mapnik" : osm,
+					"OSM - Cloudmade": cloudmade,
+					"World Physical - ESRI" : esri
+				};
+		
+		var layerControl = L.control.layers(baseLayers);
+		*/
+		
+		MainApplication.LandingPageMap.setView([30,0], 2)
+			.addLayer(utfGrid)
+			.addControl(info);
+			//.addControl(layerControl);
+		
 		return false;
 	},
 	loadCurrentMap: function(){
