@@ -14,6 +14,12 @@
     background-repeat: repeat-x;
 }
 
+#chartLayer{
+	z-index:999999;
+	position:absolute; 
+	top:0px; 
+	left: 0px;
+}
 .smallHead{
 	color: #25AAE1; 
 	font-size: 12pt; 

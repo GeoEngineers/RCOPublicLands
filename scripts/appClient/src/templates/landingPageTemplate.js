@@ -16,6 +16,7 @@ MainApplication.Templates.LandingPageView = [
 			//"</div>",			
 		"</ul>",
 		"<div id='connectionStatus'><img src='./content/images/38-1.gif'><span class='txt'> Re-connecting...</span></div>",
+		"<div id='chartLayer'></div>",
 		"<div id='map'></div>",
 		//"<div id=\"ToDoContainer\"></div>",
 	"</div>"
