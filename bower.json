@@ -33,6 +33,7 @@
 	"leaflet-providers": "*",
 	"bootstrap-datepicker": "*",
 	"requirejs": "*",
-	"ydn-db": "*"
+	"ydn-db": "*",
+  "Leaflet.utfgrid": "https://github.com/danzel/Leaflet.utfgrid.git"
   }
 }
