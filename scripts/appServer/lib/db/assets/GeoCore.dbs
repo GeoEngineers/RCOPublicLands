@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="PostgreSQL" id="Project2207265" database="PostgreSQL" >
+	<schema name="geo_edp" catalogname="GeoCore_UnitTest" schemaname="geo_edp" defo="y" >
+		<table name="edp_record_info" >
+			<column name="id" type="serial" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="edp_id" type="integer" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="internal_table_name" type="varchar" length="100" jt="12" mandatory="y" regexp_nulls="0" />
+			<column name="internal_record_id" type="integer" length="10" jt="4" />
+			<column name="external_record_id" type="varchar" length="100" jt="12" />
+			<column name="aggregated_import_data" type="text" length="2147483647" jt="12" mandatory="y" regexp_nulls="0" />
+			<column name="last_aggregated_timestamp" type="timestamp" length="29" decimal="6" jt="93" mandatory="y" regexp_nulls="0" >
+				<defo>(&#039;now&#039;::text)::date</defo>
+			</column>
+			<index name="edp_marker_info_pkey" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="edp_marker_info_edp_id_fkey" to_schema="geo_edp" to_table="external_data_provider" >
+				<fk_column name="edp_id" pk="id" />
+			</fk>
+		</table>
+		<table name="external_data_provider" >
+			<column name="id" type="serial" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="name" type="text" length="2147483647" jt="12" mandatory="y" regexp_nulls="0" />
+			<index name="external_data_provider_pkey" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<sequence name="edp_record_info_id_seq" start="1" />
+		<sequence name="external_data_provider_id_seq" start="1" />
+	</schema>
+	<schema name="geo_login" catalogname="GeoCore_UnitTest" schemaname="geo_login" defo="y" >
+		<table name="application" >
+			<column name="id" type="serial" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="uid" type="uuid" length="2147483647" jt="1111" mandatory="y" regexp_nulls="0" />
+			<column name="name" type="varchar" length="100" jt="12" mandatory="y" regexp_nulls="0" />
+			<column name="json_attributes" type="text" length="2147483647" jt="12" />
+			<index name="application_pkey" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="contact" >
+			<column name="id" type="serial" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="uid" type="uuid" length="2147483647" jt="1111" mandatory="y" regexp_nulls="0" >
+				<defo>uuid_generate_v1()</defo>
+			</column>
+			<column name="organization_id" type="integer" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="first_name" type="varchar" length="100" jt="12" mandatory="y" regexp_nulls="0" />
+			<column name="last_name" type="varchar" length="100" jt="12" mandatory="y" regexp_nulls="0" />
+			<column name="phone_number" type="varchar" length="100" jt="12" />
+			<column name="email" type="varchar" length="100" jt="12" />
+			<column name="job_title" type="varchar" length="100" jt="12" />
+			<column name="json_attributes" type="text" length="2147483647" jt="12" />
+			<column name="location_id" type="integer" length="10" jt="4" />
+			<index name="contact_pkey" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="contact_location_id_fkey" to_schema="geo_login" to_table="location" >
+				<fk_column name="location_id" pk="id" />
+			</fk>
+			<fk name="contact_organization_id_fkey" to_schema="geo_login" to_table="organization" >
+				<fk_column name="organization_id" pk="id" />
+			</fk>
+		</table>
+		<table name="license" >
+			<column name="id" type="serial" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="organization_id" type="integer" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="contact_id" type="integer" length="10" jt="4" />
+			<column name="license_type_id" type="integer" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="status" type="varchar" length="20" jt="12" mandatory="y" regexp_nulls="0" >
+				<defo>&#039;INACTIVE&#039;::character varying</defo>
+			</column>
+			<column name="activation_date" type="timestamp" length="29" decimal="6" jt="93" />
+			<column name="expiration_date" type="timestamp" length="29" decimal="6" jt="93" />
+			<column name="json_attributes" type="text" length="2147483647" jt="12" />
+			<index name="license_pkey" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="license_contact_id_fkey" to_schema="geo_login" to_table="contact" >
+				<fk_column name="contact_id" pk="id" />
+			</fk>
+			<fk name="license_type_id_fkey" to_schema="geo_login" to_table="license_type" >
+				<fk_column name="license_type_id" pk="id" />
+			</fk>
+			<fk name="license_organization_id_fkey" to_schema="geo_login" to_table="organization" >
+				<fk_column name="organization_id" pk="id" />
+			</fk>
+		</table>
+		<table name="license_type" >
+			<column name="id" type="serial" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="application_id" type="integer" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="name" type="varchar" length="100" jt="12" mandatory="y" regexp_nulls="0" />
+			<column name="license_type_key" type="varchar" length="20" jt="12" mandatory="y" regexp_nulls="0" />
+			<column name="json_attributes" type="text" length="2147483647" jt="12" />
+			<index name="license_type_pkey" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="license_type_application_id_fkey" to_schema="geo_login" to_table="application" >
+				<fk_column name="application_id" pk="id" />
+			</fk>
+		</table>
+		<table name="location" >
+			<column name="id" type="serial" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="name" type="varchar" length="500" jt="12" />
+			<column name="mercator_lat" type="float8" length="17" decimal="17" jt="8" />
+			<column name="mercator_lon" type="float8" length="17" decimal="17" jt="8" />
+			<column name="geom" type="geometry" length="2147483647" jt="1111" />
+			<column name="address1" type="varchar" length="200" jt="12" />
+			<column name="address2" type="varchar" length="200" jt="12" />
+			<column name="city" type="varchar" length="100" jt="12" />
+			<column name="county" type="varchar" length="100" jt="12" />
+			<column name="state" type="varchar" length="100" jt="12" />
+			<column name="country" type="varchar" length="100" jt="12" />
+			<column name="postal_code" type="varchar" length="20" jt="12" />
+			<column name="json_attributes" type="text" length="2147483647" jt="12" />
+			<index name="location_pkey" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="login_token" >
+			<column name="id" type="serial" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="user_login_id" type="integer" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="token" type="uuid" length="2147483647" jt="1111" mandatory="y" regexp_nulls="0" />
+			<column name="expiration_date" type="timestamp" length="29" decimal="6" jt="93" mandatory="y" regexp_nulls="0" />
+			<index name="login_token_pkey" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="login_token_user_login_id_fkey" to_schema="geo_login" to_table="user_login" >
+				<fk_column name="user_login_id" pk="id" />
+			</fk>
+		</table>
+		<table name="organization" >
+			<column name="id" type="serial" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="uid" type="uuid" length="2147483647" jt="1111" mandatory="y" regexp_nulls="0" />
+			<column name="parent_organization_id" type="integer" length="10" jt="4" />
+			<column name="name" type="varchar" length="100" jt="12" mandatory="y" regexp_nulls="0" />
+			<column name="json_attributes" type="text" length="2147483647" jt="12" />
+			<index name="organization_pkey" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="parent_organization_id_fkey" to_schema="geo_login" to_table="organization" >
+				<fk_column name="parent_organization_id" pk="id" />
+			</fk>
+		</table>
+		<table name="user_login" >
+			<column name="id" type="serial" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="contact_id" type="integer" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="login" type="varchar" length="100" jt="12" mandatory="y" regexp_nulls="0" />
+			<column name="hashed_password" type="text" length="2147483647" jt="12" mandatory="y" regexp_nulls="0" />
+			<index name="user_login_pkey" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="user_login_contact_id_fkey" to_schema="geo_login" to_table="contact" >
+				<fk_column name="contact_id" pk="id" />
+			</fk>
+		</table>
+		<view name="contact_view" >
+			<view_script><![CDATA[SELECT c.id, c.uid, c.organization_id, c.first_name, c.last_name, c.phone_number, c.email, c.job_title, c.json_attributes, c.location_id, o.name AS organization_name, l.name AS location_name, l.address1, l.address2, l.city, l.county, l.country, l.postal_code, l.mercator_lat, l.mercator_lon, l.geom FROM ((geo_login.contact c JOIN geo_login.organization o ON ((c.organization_id = o.id))) LEFT JOIN geo_login.location l ON ((c.location_id = l.id)));]]></view_script>
+			<column name="address1" type="varchar" />
+			<column name="address2" type="varchar" />
+			<column name="city" type="varchar" />
+			<column name="country" type="varchar" />
+			<column name="county" type="varchar" />
+			<column name="email" type="varchar" />
+			<column name="first_name" type="varchar" />
+			<column name="geom" type="geometry" />
+			<column name="id" type="integer" />
+			<column name="job_title" type="varchar" />
+			<column name="json_attributes" type="text" />
+			<column name="last_name" type="varchar" />
+			<column name="location_id" type="integer" />
+			<column name="location_name" type="varchar" />
+			<column name="mercator_lat" type="float8" />
+			<column name="mercator_lon" type="float8" />
+			<column name="organization_id" type="integer" />
+			<column name="organization_name" type="varchar" />
+			<column name="phone_number" type="varchar" />
+			<column name="postal_code" type="varchar" />
+			<column name="uid" type="uuid" />
+		</view>
+		<view name="customer_user_view" >
+			<view_script><![CDATA[SELECT c.id, c.uid, c.organization_id, c.first_name, c.last_name, c.phone_number, c.email, c.job_title, c.json_attributes, c.location_id, o.name AS organization_name, l.status, l.json_attributes AS license_attributes, lt.name AS license_type_name, lt.license_type_key, a.name AS application_name, ul.id AS user_login_id, ul.login, ul.hashed_password FROM (((((geo_login.contact c JOIN geo_login.license l ON ((l.contact_id = c.id))) JOIN geo_login.license_type lt ON ((lt.id = l.license_type_id))) JOIN geo_login.application a ON ((a.id = lt.application_id))) JOIN geo_login.organization o ON ((c.organization_id = o.id))) LEFT JOIN geo_login.user_login ul ON ((ul.contact_id = c.id)));]]></view_script>
+			<column name="application_name" type="varchar" />
+			<column name="email" type="varchar" />
+			<column name="first_name" type="varchar" />
+			<column name="hashed_password" type="text" />
+			<column name="id" type="integer" />
+			<column name="job_title" type="varchar" />
+			<column name="json_attributes" type="text" />
+			<column name="last_name" type="varchar" />
+			<column name="license_attributes" type="text" />
+			<column name="license_type_key" type="varchar" />
+			<column name="license_type_name" type="varchar" />
+			<column name="location_id" type="integer" />
+			<column name="login" type="varchar" />
+			<column name="organization_id" type="integer" />
+			<column name="organization_name" type="varchar" />
+			<column name="phone_number" type="varchar" />
+			<column name="status" type="varchar" />
+			<column name="uid" type="uuid" />
+			<column name="user_login_id" type="integer" />
+		</view>
+		<view name="user_login_token_view" >
+			<view_script><![CDATA[SELECT lt.id, lt.user_login_id, lt.token, lt.expiration_date, ul.login, c.id AS user_id, c.first_name, c.last_name, c.email FROM ((geo_login.login_token lt JOIN geo_login.user_login ul ON ((ul.id = lt.user_login_id))) JOIN geo_login.contact c ON ((c.id = ul.contact_id)));]]></view_script>
+			<column name="email" type="varchar" />
+			<column name="expiration_date" type="timestamp" />
+			<column name="first_name" type="varchar" />
+			<column name="id" type="integer" />
+			<column name="last_name" type="varchar" />
+			<column name="login" type="varchar" />
+			<column name="token" type="uuid" />
+			<column name="user_id" type="integer" />
+			<column name="user_login_id" type="integer" />
+		</view>
+		<sequence name="application_id_seq" start="1" />
+		<sequence name="contact_id_seq" start="1" />
+		<sequence name="license_id_seq" start="1" />
+		<sequence name="license_type_id_seq" start="1" />
+		<sequence name="location_id_seq" start="1" />
+		<sequence name="login_token_id_seq" start="1" />
+		<sequence name="organization_id_seq" start="1" />
+		<sequence name="user_login_id_seq" start="1" />
+		<trigger name="insert_location" id="Trigger2776520" isSystem="false" >
+			<string><![CDATA[CREATE TRIGGER insert_location BEFORE INSERT OR UPDATE ON geo_login.location FOR EACH ROW EXECUTE PROCEDURE geo_login.update_location_geom()]]></string>
+		</trigger>
+		<trigger name="insert_location_001" id="Trigger2776521" isSystem="false" />
+		<function name="update_location_geom" id="Function2776520" isSystem="false" />
+	</schema>
+	<schema name="geo_workflow" catalogname="GeoCore_UnitTest" schemaname="geo_workflow" defo="y" >
+		<table name="audit_entry" >
+			<column name="id" type="serial" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="event_timestamp" type="timestamp" length="29" decimal="6" jt="93" mandatory="y" regexp_nulls="0" >
+				<defo>now()</defo>
+			</column>
+			<column name="event_type" type="varchar" length="50" jt="12" mandatory="y" regexp_nulls="0" />
+			<column name="message" type="varchar" length="100" jt="12" />
+			<column name="event_schema" type="varchar" length="100" jt="12" />
+			<column name="event_table" type="varchar" length="100" jt="12" />
+			<column name="event_record_id" type="integer" length="10" jt="4" />
+			<column name="data_json" type="text" length="2147483647" jt="12" />
+			<column name="customer_user_id" type="integer" length="10" jt="4" />
+			<index name="audit_entry_pkey" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="log_entry" >
+			<column name="id" type="serial" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="log_category" type="varchar" length="50" jt="12" mandatory="y" regexp_nulls="0" />
+			<column name="log_level" type="varchar" length="20" jt="12" mandatory="y" regexp_nulls="0" />
+			<column name="log_timestamp" type="timestamp" length="29" decimal="6" jt="93" mandatory="y" regexp_nulls="0" >
+				<defo>now()</defo>
+			</column>
+			<column name="source" type="varchar" length="500" jt="12" />
+			<column name="message" type="text" length="2147483647" jt="12" />
+			<column name="data_json" type="text" length="2147483647" jt="12" />
+			<index name="log_entry_pkey" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="workflow" >
+			<column name="id" type="serial" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="job_identifier" type="varchar" length="100" jt="12" mandatory="y" regexp_nulls="0" />
+			<column name="priority_weight" type="integer" length="10" jt="4" mandatory="y" regexp_nulls="0" >
+				<defo>50</defo>
+			</column>
+			<column name="data_json" type="text" length="2147483647" jt="12" />
+			<column name="workflow_type" type="varchar" length="50" jt="12" mandatory="y" regexp_nulls="0" />
+			<index name="workflow_pkey" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="workflow_task" >
+			<column name="id" type="serial" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="uid" type="uuid" length="2147483647" jt="1111" mandatory="y" regexp_nulls="0" />
+			<column name="workflow_id" type="integer" length="10" jt="4" />
+			<column name="priority_weight" type="integer" length="10" jt="4" mandatory="y" regexp_nulls="0" >
+				<defo>50</defo>
+			</column>
+			<column name="queue_name" type="varchar" length="100" jt="12" mandatory="y" regexp_nulls="0" />
+			<column name="queued_timestamp" type="timestamp" length="29" decimal="6" jt="93" mandatory="y" regexp_nulls="0" >
+				<defo>now()</defo>
+			</column>
+			<column name="scheduled_timestamp" type="timestamp" length="29" decimal="6" jt="93" />
+			<column name="begin_process_timestamp" type="timestamp" length="29" decimal="6" jt="93" />
+			<column name="end_process_timestamp" type="timestamp" length="29" decimal="6" jt="93" />
+			<column name="process_status" type="varchar" length="30" jt="12" mandatory="y" regexp_nulls="0" />
+			<column name="data_json" type="text" length="2147483647" jt="12" />
+			<column name="result_message" type="text" length="2147483647" jt="12" />
+			<column name="task_type" type="varchar" length="100" jt="12" mandatory="y" regexp_nulls="0" />
+			<index name="workflow_task_pkey" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="workflow_task_workflow_id_fkey" to_schema="geo_workflow" to_table="workflow" >
+				<fk_column name="workflow_id" pk="id" />
+			</fk>
+		</table>
+		<table name="workflow_task_dependency" >
+			<column name="id" type="serial" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="required_task_id" type="integer" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="dependent_task_id" type="integer" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<index name="workflow_task_dependency_pkey" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="wtd_required_task_id_fkey" to_schema="geo_workflow" to_table="workflow_task" >
+				<fk_column name="required_task_id" pk="id" />
+			</fk>
+			<fk name="wtd_dependent_task_id_fkey" to_schema="geo_workflow" to_table="workflow_task" >
+				<fk_column name="dependent_task_id" pk="id" />
+			</fk>
+		</table>
+		<view name="next_workflow_task_view" >
+			<view_script><![CDATA[SELECT DISTINCT ON (wt.queue_name) wt.id, wt.uid, wt.workflow_id, wt.priority_weight, wt.queue_name, wt.task_type, wt.queued_timestamp, wt.scheduled_timestamp, wt.begin_process_timestamp, wt.end_process_timestamp, wt.process_status, wt.data_json, wt.result_message, w.job_identifier, w.data_json AS workflow_data_json FROM (geo_workflow.workflow_task wt LEFT JOIN geo_workflow.workflow w ON ((w.id = wt.workflow_id))) WHERE ((((wt.process_status)::text = 'Queued'::text) AND (wt.scheduled_timestamp IS NOT NULL)) AND (wt.scheduled_timestamp < now())) ORDER BY wt.queue_name, wt.priority_weight DESC, wt.scheduled_timestamp;]]></view_script>
+			<column name="begin_process_timestamp" type="timestamp" />
+			<column name="data_json" type="text" />
+			<column name="end_process_timestamp" type="timestamp" />
+			<column name="id" type="integer" />
+			<column name="job_identifier" type="varchar" />
+			<column name="priority_weight" type="integer" />
+			<column name="process_status" type="varchar" />
+			<column name="queue_name" type="varchar" />
+			<column name="queued_timestamp" type="timestamp" />
+			<column name="result_message" type="text" />
+			<column name="scheduled_timestamp" type="timestamp" />
+			<column name="task_type" type="varchar" />
+			<column name="uid" type="uuid" />
+			<column name="workflow_data_json" type="text" />
+			<column name="workflow_id" type="integer" />
+		</view>
+		<view name="workflow_task_view" >
+			<view_script><![CDATA[SELECT wt.id, wt.uid, wt.workflow_id, wt.priority_weight, wt.queue_name, wt.task_type, wt.queued_timestamp, wt.scheduled_timestamp, wt.begin_process_timestamp, wt.end_process_timestamp, wt.process_status, wt.data_json, wt.result_message, w.job_identifier, w.data_json AS workflow_data_json FROM (geo_workflow.workflow_task wt LEFT JOIN geo_workflow.workflow w ON ((w.id = wt.workflow_id)));]]></view_script>
+			<column name="begin_process_timestamp" type="timestamp" />
+			<column name="data_json" type="text" />
+			<column name="end_process_timestamp" type="timestamp" />
+			<column name="id" type="integer" />
+			<column name="job_identifier" type="varchar" />
+			<column name="priority_weight" type="integer" />
+			<column name="process_status" type="varchar" />
+			<column name="queue_name" type="varchar" />
+			<column name="queued_timestamp" type="timestamp" />
+			<column name="request_type" type="varchar" />
+			<column name="result_message" type="text" />
+			<column name="scheduled_timestamp" type="timestamp" />
+			<column name="uid" type="uuid" />
+			<column name="workflow_data_json" type="text" />
+			<column name="workflow_id" type="integer" />
+		</view>
+		<sequence name="audit_entry_id_seq" start="1" />
+		<sequence name="log_entry_id_seq" start="1" />
+		<sequence name="workflow_id_seq" start="1" />
+		<sequence name="workflow_task_dependency_id_seq" start="1" />
+		<sequence name="workflow_task_id_seq" start="1" />
+	</schema>
+	<connector name="PostgreSQL" database="PostgreSQL" driver_class="org.postgresql.Driver" driver_jar="postgresql-9.1-902.jdbc3.jar" host="54.244.241.130" port="5432" instance="GeoCore_UnitTest" user="postgres" schema_mapping="" />
+	<layout id="Layout2296489" name="geo_login" show_relation_columns="y" >
+		<entity schema="geo_login" name="organization" color="ccffcc" x="510" y="60" />
+		<entity schema="geo_login" name="contact" color="ccffcc" x="285" y="210" />
+		<entity schema="geo_login" name="location" color="ccffcc" x="60" y="240" />
+		<entity schema="geo_login" name="user_login_token_view" color="ccffcc" x="780" y="420" />
+		<entity schema="geo_login" name="customer_user_view" color="ccffcc" x="780" y="60" />
+		<entity schema="geo_login" name="contact_view" color="ccffcc" x="960" y="60" />
+		<entity schema="geo_login" name="user_login" color="ccffcc" x="45" y="75" />
+		<entity schema="geo_login" name="login_token" color="ccffcc" x="330" y="60" />
+		<entity schema="geo_login" name="license_type" color="ccffcc" x="540" y="465" />
+		<entity schema="geo_login" name="application" color="ccffcc" x="255" y="465" />
+		<entity schema="geo_login" name="license" color="ccffcc" x="570" y="255" />
+		<group name="geo_login" color="c4e0f9" >
+			<entity schema="geo_login" name="application" />
+			<entity schema="geo_login" name="contact" />
+			<entity schema="geo_login" name="license" />
+			<entity schema="geo_login" name="license_type" />
+			<entity schema="geo_login" name="organization" />
+			<entity schema="geo_login" name="user_login" />
+			<entity schema="geo_login" name="user_login_token_view" />
+			<entity schema="geo_login" name="location" />
+			<entity schema="geo_login" name="login_token" />
+			<entity schema="geo_login" name="customer_user_view" />
+			<entity schema="geo_login" name="contact_view" />
+		</group>
+	</layout>
+	<layout id="Layout2296499" name="workflow and edp" show_relation_columns="y" >
+		<entity schema="geo_edp" name="external_data_provider" color="c6d9f6" x="660" y="60" />
+		<entity schema="geo_edp" name="edp_record_info" color="c6d9f6" x="645" y="255" />
+		<entity schema="geo_workflow" name="audit_entry" color="99ff99" x="240" y="345" />
+		<entity schema="geo_workflow" name="workflow_task_dependency" color="99ff99" x="435" y="195" />
+		<entity schema="geo_workflow" name="log_entry" color="99ff99" x="75" y="90" />
+		<entity schema="geo_workflow" name="workflow" color="99ff99" x="450" y="60" />
+		<entity schema="geo_workflow" name="next_workflow_task_view" color="99ff99" x="45" y="300" />
+		<entity schema="geo_workflow" name="workflow_task_view" color="99ff99" x="420" y="300" />
+		<entity schema="geo_workflow" name="workflow_task" color="99ff99" x="240" y="60" />
+		<group name="geo_workflow" color="3399ff" >
+			<entity schema="geo_workflow" name="workflow" />
+			<entity schema="geo_workflow" name="workflow_task" />
+			<entity schema="geo_workflow" name="audit_entry" />
+			<entity schema="geo_workflow" name="workflow_task_view" />
+			<entity schema="geo_workflow" name="log_entry" />
+			<entity schema="geo_workflow" name="next_workflow_task_view" />
+			<entity schema="geo_workflow" name="workflow_task_dependency" />
+		</group>
+		<group name="geo_edp" color="66ff33" >
+			<entity schema="geo_edp" name="edp_record_info" />
+			<entity schema="geo_edp" name="external_data_provider" />
+		</group>
+	</layout>
+</project>

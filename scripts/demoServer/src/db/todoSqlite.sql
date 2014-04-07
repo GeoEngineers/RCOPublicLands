@@ -1,0 +1,11 @@
+BEGIN TRANSACTION;
+
+DROP TABLE IF EXISTS todo_item;
+
+CREATE TABLE todo_item (
+	id INTEGER PRIMARY KEY, 
+	description TEXT, 
+	status TEXT
+);
+
+COMMIT;

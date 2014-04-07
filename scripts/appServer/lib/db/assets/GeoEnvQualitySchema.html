@@ -1,0 +1,785 @@
+<?xml version='1.0' encoding='ISO-8859-1' standalone='yes'?>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN' 'http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml' >
+<head>
+<title>Database Documentation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<style type='text/css'>
+	 #dbs {font-family:Tahoma,Dialog,Sans-Serif;font-size:12px;background:#fff;width:80%;border-collapse:collapse;text-align:left;margin:8px;}
+	 #dbs thead{background:#c0d4f3;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffffff), to( #c0d4f3));}
+	 #dbs th{font-size:12px;font-weight:bold;color:#333;border-bottom:1px solid #333;padding:5px 6px;}
+	 #dbs td{border-bottom:1px solid #ddd;padding:3px 5px;white-space: pre;}
+	 td.subpart{background:#c0d4f3;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffffff), to( #c0d4f3));}
+	 #dbs tbody tr:hover td{color:#000;background:#fffcea;}
+</style>
+</head>
+
+<body>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'   width='885' height='695' viewbox='0 0 885 695' >
+<style type='text/css'>
+  text                { fill:#000000; font-family: Tahoma, Dialog, Arial; font-size:11px; stroke:#000000; stroke-width:0.1; }
+  text:hover          { fill:#a00000; font-size:12px;}
+  text.colType        { fill:#a9bdc6; }
+  text.tableTitle     { fill:#000000; }
+  path                { stroke:#797979; stroke-width:1.3; fill:none; }
+  rect.table          { fill:#ffffff; stroke:#4e4c4c; stroke-width:0.3; filter:url(#shadow); }
+  line.table          { stroke:#9ea1a4; stroke-width:0.3; }
+  rect.callout        { fill:url(#calloutGradient); stroke:#aea913; stroke-width:0.5; }
+  rect.grp            { opacity:0.5; stroke:#b1b1b1; stroke-width:1.7; }
+</style>
+<defs>
+  <pattern id='layoutGradient' patternUnits='userSpaceOnUse' x='0' y='0' width='10' height='10' viewBox='0 0 10 10'>
+    <rect x='0' y='0' width='10' height='10' style='fill:#f7f7f0;' />
+    <line x1='5' y1='10' x2='5' y2='0' style='stroke:#949494;stroke-width:0.5;stroke-dasharray:1,9;'  />
+  </pattern>
+  <radialGradient id='layoutGradientOld' cx='20%' cy='20%' r='25%' fx='10%' fy='0%'>
+	   <stop offset='0%' stop-color='#ffffff' />
+    <stop offset='100%' stop-color='#efefef' />
+  </radialGradient>
+  <linearGradient id='tableHeaderGradient1' x1='0%' y1='0%' x2='0%' y2='90%' >
+          <stop offset='0%' stop-color='white'/> 
+          <stop offset='30%' stop-color='white'/> 
+          <stop offset='100%' stop-color='#00ffcc'/> 
+   </linearGradient>
+  <linearGradient id='tableHeaderGradient2' x1='0%' y1='0%' x2='0%' y2='90%' >
+          <stop offset='0%' stop-color='white'/> 
+          <stop offset='30%' stop-color='white'/> 
+          <stop offset='100%' stop-color='#ff66ff'/> 
+   </linearGradient>
+  <linearGradient id='tableHeaderGradient0' x1='0%' y1='0%' x2='0%' y2='90%' >
+          <stop offset='0%' stop-color='white'/> 
+          <stop offset='30%' stop-color='white'/> 
+          <stop offset='100%' stop-color='#66ff00'/> 
+   </linearGradient>
+  <linearGradient id='groupUnderTitleLine' x1='0%' y1='0%' x2='100%' y2='0%' >
+          <stop offset='0%' stop-color='#999999' stop-opacity='0.7'/> 
+          <stop offset='100%' stop-color='#999999' stop-opacity='0' /> 
+   </linearGradient>
+  <radialGradient id='calloutGradient' cx='20%' cy='20%' r='100%' fx='10%' fy='10%'>
+	   <stop offset='0%' stop-color='#ffffff' />
+    <stop offset='100%' stop-color='#f4f1a4' />
+  </radialGradient>
+  <filter id='shadow' width='150%' height='150%'> 
+    <feGaussianBlur in='SourceAlpha' stdDeviation='2' result='image1' /> 
+    <feOffset in='image1' result='image2' dx='2' dy='2' />
+    <feColorMatrix type='matrix' in='image2' result='image3' 
+       values='1 1 1 0 0 
+               1 1 1 0 0 
+               1 1 1 0 0 
+               0 0 0 .5 0'/>
+    <feComposite in='SourceGraphic' in2='image3' operator='over' /> 
+  </filter>
+  <filter id='legendShadow' filterUnits='userSpaceOnUse' x='0' y='0' width='400' height='120'> 
+     <feGaussianBlur in='SourceAlpha' stdDeviation='3' result='blur'/> 
+     <feOffset in='blur' dx='2' dy='2' result='offsetBlur'/> 
+     <feSpecularLighting in='blur' surfaceScale='5' specularConstant='.75' specularExponent='20' lighting-color='#bbbbbb' result='specOut'>
+        <fePointLight x='-5000' y='-10000' z='20000'/>  
+     </feSpecularLighting> 
+     <feComposite in='specOut' in2='SourceAlpha' operator='in' result='specOut'/> 
+     <feComposite in='SourceGraphic' in2='specOut' operator='arithmetic' k1='0' k2='1' k3='1' k4='0' result='litPaint'/>  
+     <feMerge> 
+         <feMergeNode in='offsetBlur'/> 
+         <feMergeNode in='litPaint'/> 
+     </feMerge> 
+  </filter> 
+  <radialGradient id='legendGradient' fx='5%' fy='5%' r='75%' spreadMethod='pad'>
+          <stop offset='0%' stop-color='#cfd7f6' stop-opacity='1'/> 
+          <stop offset='100%' stop-color='#919dd0' stop-opacity='1' /> 
+   </radialGradient>
+  <symbol id='calloutArrowDown' overflow='visible' >
+      <path d='M 0,0 L 7,11 L 15,0 z' style='fill:#f4f1a4; stroke:#aea913; stroke-width:0.5;' />
+  </symbol>
+  <symbol id='calloutArrowUp' overflow='visible' >
+      <path d='M 0,15 L 7,3 L 15,15 z' style='fill:#f4f1a4; stroke:#aea913; stroke-width:0.5;' />
+  </symbol>
+  <symbol id='pk' overflow='visible' >
+    <g transform='scale(0.99)'>
+     <path style='fill:#fbea8e;stroke:#763f17;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;'
+        d='M 9.3678877,3.5695485 C 9.1030218,3.2729386 9.0796382,2.7628519 9.3396185,2.4517097 9.5449651,2.1956495 9.9040386,2.0980533 10.199638,2.2169415 10.533525,2.3415459 10.775153,2.706942 10.750675,3.0842709 10.737029,3.3980003 10.541153,3.699122 10.258248,3.8066067 9.966649,3.9250429 9.6169668,3.8418805 9.4008073,3.6062324 9.3894892,3.5943518 9.3785264,3.582104 9.3678886,3.5695487 z M 11.226617,6.9916004 C 11.888137,6.3548946 12.293488,5.4172188 12.311087,4.442353 12.378144,2.7379364 11.248678,1.0541269 9.7322318,0.44767357 8.3887112,-0.1280313 6.7865012,0.26822889 5.8918395,1.4007929 5.080823,2.3839145 4.9336815,3.8452096 5.3635544,5.101615 L 4.3670905,5.315913 C 4.0664984,5.3682645 4.0967703,5.6316724 4.2574957,5.8208829 L 4.9124,6.5655244 4.1543436,7.2512357 3.2136002,7.2163506 3.1674775,8.5586827 2.0406832,8.5086512 1.5965306,8.9299953 1.5471661,10.179833 0.75616674,10.195223 0.2112857,10.758575 0.15354288,11.735988 0.07199052,12.765553 c 0.36440953,0.238225 0.79006967,0.195492 1.44938278,-0.02675 L 6.3033562,8.1282037 6.8217102,8.6765688 C 6.9985465,8.8799427 7.3003699,8.7497574 7.358381,8.5016252 L 7.4938877,7.5084164 c 0.8537488,0.3985387 1.8303125,0.4711541 2.6851793,0.1427713 0.393927,-0.1407258 0.746858,-0.3701772 1.04755,-0.6595873 z'/>
+     <path d='M 6.8014948,6.3102123 0.15369063,13.024481 0.21560535,12.141962 6.0062342,6.2683782 z'
+        style='fill:#ffe5a5;fill-opacity:1;stroke:#854e31;stroke-width:0.06912433;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:3.00300009'/>
+    </g>
+  </symbol>
+  <symbol id='unq' overflow='visible' >
+    <g transform='scale(0.99)'>
+      <rect style='fill:#e07554;stroke:#7e4d31;stroke-width:0.71934468;stroke-linecap:round;stroke-linejoin:round;'
+         width='2.29' height='8.43' x='7.48' y='-0.76' ry='1.14' transform='matrix(0.701,0.713,-0.727,0.685,0,0)' />
+      <path style='fill:white;stroke:#858585;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;'
+         d='m 26.04,8.64 a 4.13,4.13 0 1 1 -8.26,0 4.13,4.13 0 1 1 8.26,0 z'
+         transform='matrix(1.025,0,0,0.987,-14.690,-3.862)' />
+      <text x='5.5' y='7.7' style='font-size:8px;fill:#0460b5;'>1</text>
+    </g>
+  </symbol>
+  <symbol id='idx' overflow='visible' >
+    <g transform='scale(0.99)'>
+      <rect style='fill:#e07554;stroke:#7e4d31;stroke-width:0.71934468;stroke-linecap:round;stroke-linejoin:round;'
+         width='2.29' height='8.43' x='7.48' y='-0.76' ry='1.14' transform='matrix(0.701,0.713,-0.727,0.685,0,0)' />
+      <path style='fill:white;stroke:#858585;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;'
+         d='m 26.04,8.64 a 4.13,4.13 0 1 1 -8.26,0 4.13,4.13 0 1 1 8.26,0 z'
+         transform='matrix(1.025,0,0,0.987,-14.690,-3.862)' />
+    </g>
+  </symbol>
+  <symbol id='fk' overflow='visible' >
+    <g transform='scale(0.92)'>
+      <path style='fill:#b7d0f6;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+      d='M 12.48,0.33 7.07,0.89 9.067,2.974 0.329,11.731 1.073,12.597 9.811,3.841 11.77,5.78 z' />
+    </g>
+  </symbol>
+  <symbol id='ref' overflow='visible' >
+    <g transform='scale(0.92)'>
+      <path style='fill:#b7d0f6;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+          d='M 0.10,12.70 5.31,12.15 3.40,10.06 11.82,1.32 11.11,0.45 2.68,9.19 0.80,7.24 z'/>
+    </g>
+  </symbol>
+  <symbol id='nn' overflow='visible' >
+  <path style='stroke:#9b3e50;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+          d='M 0,0 3,3 M 0,3 3,0 z'/>
+  </symbol>
+  <marker id='arrow' viewBox='0 0 7 7' refX='0' refY='3' markerUnits='strokeWidth' markerWidth='7' markerHeight='7' orient='auto'>
+    <path d='M 0,0 L 7, 3 L 0,7 z' style='fill:#797979; stroke-width:0px;' />
+  </marker>
+  <marker id='foot' viewBox='0 0 7 7' refX='7' refY='3' markerUnits='strokeWidth' markerWidth='7' markerHeight='7' orient='auto'>
+    <path d='M 0,3 L 15, 3 z' style='stroke:#797979;' />
+  </marker>
+</defs>
+
+<!-- ============= Desktop ============= -->
+<rect x='1' y='1' width='883' height='693' rx='7' ry='7' style='fill:white; stroke:#104576; stroke-width:0.5;' />
+
+<!-- ============= Legend ============= -->
+<g transform='translate(10,10)'>
+  <rect x='10' y='10' width='320' height='76' rx='6' ry='6' style='fill:url(#legendGradient);filter:url(#legendShadow);'/> 
+  <text x='20' y='30'><tspan>Project</tspan> PostgreSQL</text> 
+  <text x='20' y='44'><tspan>Layout</tspan> geo_env_quality</text> 
+  <text x='20' y='58'><tspan>Tip: Move the mouse over columns to read the comments</tspan></text> 
+  <text x='180' y='74'><tspan>Generated using <a xlink:href='http://www.dbschema.com'>DbSchema</a></tspan></text> 
+</g>
+
+<g transform='translate(0,110)'>
+<!-- ============= Group 'geo_env_quality' ============= -->
+<rect class='grp' style='fill:#c4e0f9;' x='29' y='25' width='827' height='515' />
+<text x='40' y='40'>geo_env_quality</text>
+<rect style='fill:url(#groupUnderTitleLine); stroke-width:2;' x='40' y='43' width='805' height='2' />
+
+<path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'    d='M 210 180 L 210,217 Q 210,225 217,225 L 225,225' >
+	<title>Foreign Key analyte_limit_asr_id_fkey
+	analyte_limit references analyte_sample_requirement ( analyte_sample_requirement_id -> id )</title>
+</path>
+<text x='223' y='180' transform='rotate(90 223,180)' title='Foreign Key analyte_limit_asr_id_fkey
+	analyte_limit references analyte_sample_requirement ( analyte_sample_requirement_id -> id )' style='fill:#a1a0a0;'>analyte_sample_requirement_id</text><path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'    d='M 375 210 L 375,157 Q 375,150 382,150 L 390,150' >
+	<title>Foreign Key asr_analyte_sample_source_id_fkey
+	analyte_sample_requirement references analyte_sample_source ( analyte_sample_source_id -> id )</title>
+</path>
+<text x='377' y='205' transform='rotate(270 377,205)' title='Foreign Key asr_analyte_sample_source_id_fkey
+	analyte_sample_requirement references analyte_sample_source ( analyte_sample_source_id -> id )' style='fill:#a1a0a0;'>analyte_sample_source_id</text><path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'    d='M 225 255 L 135,255' >
+	<title>Foreign Key asr_analyte_type_id_fkey
+	analyte_sample_requirement references analyte_type ( analyte_type_id -> id )</title>
+</path>
+<text x='149' y='250' transform='rotate(0 149,250)' title='Foreign Key asr_analyte_type_id_fkey
+	analyte_sample_requirement references analyte_type ( analyte_type_id -> id )' style='fill:#a1a0a0;'>analyte_type_id</text><path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'    d='M 270 360 L 270,412 Q 270,420 262,420 L 255,420' >
+	<title>Foreign Key asr_analyte_units_type_id_fkey
+	analyte_sample_requirement references analyte_units_type ( analyte_units_type_id -> id )</title>
+</path>
+<text x='283' y='360' transform='rotate(90 283,360)' title='Foreign Key asr_analyte_units_type_id_fkey
+	analyte_sample_requirement references analyte_units_type ( analyte_units_type_id -> id )' style='fill:#a1a0a0;'>analyte_units_type_id</text><path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'    d='M 345 360 L 345,375' >
+	<title>Foreign Key asr_sampling_project_id_fkey
+	analyte_sample_requirement references sampling_project ( sampling_project_id -> id )</title>
+</path>
+<text x='358' y='360' transform='rotate(90 358,360)' title='Foreign Key asr_sampling_project_id_fkey
+	analyte_sample_requirement references sampling_project ( sampling_project_id -> id )' style='fill:#a1a0a0;'>sampling_project_id</text><path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'    d='M 705 420 L 772,420 Q 780,420 780,412 L 780,345' >
+	<title>Foreign Key spequ_eq_user_id_fkey
+	sampling_project_eq_user references eq_user ( eq_user_id -> id )</title>
+</path>
+<text x='712' y='415' transform='rotate(0 712,415)' title='Foreign Key spequ_eq_user_id_fkey
+	sampling_project_eq_user references eq_user ( eq_user_id -> id )' style='fill:#a1a0a0;'>eq_user_id</text><path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'    d='M 540 405 L 435,405' >
+	<title>Foreign Key spequ_sampling_project_id_fkey
+	sampling_project_eq_user references sampling_project ( sampling_project_id -> id )</title>
+</path>
+<text x='447' y='400' transform='rotate(0 447,400)' title='Foreign Key spequ_sampling_project_id_fkey
+	sampling_project_eq_user references sampling_project ( sampling_project_id -> id )' style='fill:#a1a0a0;'>sampling_project_id</text><path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'    d='M 645 105 L 540,105' >
+	<title>Foreign Key se_ass_id_fkey
+	sample references analyte_sample_source ( analyte_sample_source_id -> id )</title>
+</path>
+<text x='520' y='100' transform='rotate(0 520,100)' title='Foreign Key se_ass_id_fkey
+	sample references analyte_sample_source ( analyte_sample_source_id -> id )' style='fill:#a1a0a0;'>analyte_sample_source_id</text><path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'  style='stroke-dasharray:4,2;'  d='M 780 210 L 780,240' >
+	<title>Foreign Key se_eq_user_id_fkey
+	sample references eq_user ( captured_by_eq_user_id -> id )</title>
+</path>
+<text x='793' y='210' transform='rotate(90 793,210)' title='Foreign Key se_eq_user_id_fkey
+	sample references eq_user ( captured_by_eq_user_id -> id )' style='fill:#a1a0a0;'>captured_by_eq_user_id</text><path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'    d='M 435 240 L 405,240' >
+	<title>Foreign Key result_asr_id_fkey
+	result references analyte_sample_requirement ( analyte_sample_requirement_id -> id )</title>
+</path>
+<text x='284' y='235' transform='rotate(0 284,235)' title='Foreign Key result_asr_id_fkey
+	result references analyte_sample_requirement ( analyte_sample_requirement_id -> id )' style='fill:#a1a0a0;'>analyte_sample_requirement_id</text><path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'  style='stroke-dasharray:4,2;'  d='M 645 255 L 750,255' >
+	<title>Foreign Key result_eq_user_id_fkey
+	result references eq_user ( captured_by_eq_user_id -> id )</title>
+</path>
+<text x='652' y='250' transform='rotate(0 652,250)' title='Foreign Key result_eq_user_id_fkey
+	result references eq_user ( captured_by_eq_user_id -> id )' style='fill:#a1a0a0;'>captured_by_eq_user_id</text><path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'    d='M 630 210 L 630,187 Q 630,180 637,180 L 645,180' >
+	<title>Foreign Key result_sample_id_fkey
+	result references sample ( sample_id -> id )</title>
+</path>
+<text x='632' y='205' transform='rotate(270 632,205)' title='Foreign Key result_sample_id_fkey
+	result references sample ( sample_id -> id )' style='fill:#a1a0a0;'>sample_id</text><!-- ============= Table 'analyte_units_type' ============= -->
+<rect class='table' x='150' y='398' width='105' height='75' rx='7' ry='7' />
+<path d='M 150.50 424.50 L 150.50 405.50 Q 150.50 398.50 157.50 398.50 L 247.50 398.50 Q 254.50 398.50 254.50 405.50 L 254.50 424.50 L150.50 424.50 ' style='fill:url(#tableHeaderGradient0); stroke:none;' />
+<a xlink:href='#analyte_units_type'><text x='156' y='416' class='tableTitle'>analyte_units_type</text><title>Table geo_env_quality.analyte_units_type</title></a>
+  <use id='nn' x='152' y='432' xlink:href='#nn'/><a xlink:href='#id'><use id='pk' x='152' y='431' xlink:href='#pk'/><title>Primary Key  ( id ) </title></a>
+<a xlink:href='#id'><text x='168' y='442'>id</text><title>id serial not null</title></a>
+<a xlink:href='#id'><use id='ref' x='243' y='431' xlink:href='#ref'/><title>Referred by analyte_sample_requirement ( analyte_units_type_id -> id ) </title></a>
+  <use id='nn' x='152' y='447' xlink:href='#nn'/><a xlink:href='#name'><text x='168' y='457'>name</text><title>name varchar&#040;100&#041; not null</title></a>
+
+<!-- ============= Table 'analyte_type' ============= -->
+<rect class='table' x='45' y='233' width='90' height='90' rx='7' ry='7' />
+<path d='M 45.50 259.50 L 45.50 240.50 Q 45.50 233.50 52.50 233.50 L 127.50 233.50 Q 134.50 233.50 134.50 240.50 L 134.50 259.50 L45.50 259.50 ' style='fill:url(#tableHeaderGradient0); stroke:none;' />
+<a xlink:href='#analyte_type'><text x='58' y='251' class='tableTitle'>analyte_type</text><title>Table geo_env_quality.analyte_type</title></a>
+  <use id='nn' x='47' y='267' xlink:href='#nn'/><a xlink:href='#id'><use id='pk' x='47' y='266' xlink:href='#pk'/><title>Primary Key  ( id ) </title></a>
+<a xlink:href='#id'><text x='63' y='277'>id</text><title>id serial not null</title></a>
+<a xlink:href='#id'><use id='ref' x='123' y='266' xlink:href='#ref'/><title>Referred by analyte_sample_requirement ( analyte_type_id -> id ) </title></a>
+  <use id='nn' x='47' y='282' xlink:href='#nn'/><a xlink:href='#name'><text x='63' y='292'>name</text><title>name varchar&#040;500&#041; not null</title></a>
+  <use id='nn' x='47' y='297' xlink:href='#nn'/><a xlink:href='#abbreviation'><text x='63' y='307'>abbreviation</text><title>abbreviation varchar&#040;10&#041; not null</title></a>
+
+<!-- ============= Table 'analyte_limit' ============= -->
+<rect class='table' x='60' y='53' width='195' height='120' rx='7' ry='7' />
+<path d='M 60.50 79.50 L 60.50 60.50 Q 60.50 53.50 67.50 53.50 L 247.50 53.50 Q 254.50 53.50 254.50 60.50 L 254.50 79.50 L60.50 79.50 ' style='fill:url(#tableHeaderGradient0); stroke:none;' />
+<a xlink:href='#analyte_limit'><text x='127' y='71' class='tableTitle'>analyte_limit</text><title>Table geo_env_quality.analyte_limit</title></a>
+  <use id='nn' x='62' y='87' xlink:href='#nn'/><a xlink:href='#id'><use id='pk' x='62' y='86' xlink:href='#pk'/><title>Primary Key  ( id ) </title></a>
+<a xlink:href='#id'><text x='78' y='97'>id</text><title>id serial not null</title></a>
+  <use id='nn' x='62' y='102' xlink:href='#nn'/><a xlink:href='#limit_value'><text x='78' y='112'>limit_value</text><title>limit_value real not null</title></a>
+  <use id='nn' x='62' y='117' xlink:href='#nn'/><a xlink:href='#limit_type'><text x='78' y='127'>limit_type</text><title>limit_type varchar&#040;20&#041; not null</title></a>
+  <use id='nn' x='62' y='132' xlink:href='#nn'/><a xlink:href='#limit_rollup_type'><text x='78' y='142'>limit_rollup_type</text><title>limit_rollup_type varchar&#040;20&#041; not null</title></a>
+  <use id='nn' x='62' y='147' xlink:href='#nn'/><a xlink:href='#analyte_sample_requirement_id'><text x='78' y='157'>analyte_sample_requirement_id</text><title>analyte_sample_requirement_id integer not null</title></a>
+<a xlink:href='#analyte_sample_requirement_id'><use id='fk' x='243' y='146' xlink:href='#fk'/><title>References analyte_sample_requirement ( analyte_sample_requirement_id -> id ) </title></a>
+
+<!-- ============= Table 'analyte_sample_requirement' ============= -->
+<rect class='table' x='240' y='218' width='165' height='135' rx='7' ry='7' />
+<path d='M 240.50 244.50 L 240.50 225.50 Q 240.50 218.50 247.50 218.50 L 397.50 218.50 Q 404.50 218.50 404.50 225.50 L 404.50 244.50 L240.50 244.50 ' style='fill:url(#tableHeaderGradient0); stroke:none;' />
+<a xlink:href='#analyte_sample_requirement'><text x='253' y='236' class='tableTitle'>analyte_sample_requirement</text><title>Table geo_env_quality.analyte_sample_requirement</title></a>
+  <use id='nn' x='242' y='252' xlink:href='#nn'/><a xlink:href='#id'><use id='pk' x='242' y='251' xlink:href='#pk'/><title>Primary Key  ( id ) </title></a>
+<a xlink:href='#id'><text x='258' y='262'>id</text><title>id serial not null</title></a>
+<a xlink:href='#id'><use id='ref' x='393' y='251' xlink:href='#ref'/><title>Referred by analyte_limit ( analyte_sample_requirement_id -> id ) 
+Referred by result ( analyte_sample_requirement_id -> id ) </title></a>
+  <use id='nn' x='242' y='267' xlink:href='#nn'/><a xlink:href='#analyte_sample_source_id'><text x='258' y='277'>analyte_sample_source_id</text><title>analyte_sample_source_id integer not null</title></a>
+<a xlink:href='#analyte_sample_source_id'><use id='fk' x='393' y='266' xlink:href='#fk'/><title>References analyte_sample_source ( analyte_sample_source_id -> id ) </title></a>
+  <use id='nn' x='242' y='282' xlink:href='#nn'/><a xlink:href='#analyte_type_id'><text x='258' y='292'>analyte_type_id</text><title>analyte_type_id integer not null</title></a>
+<a xlink:href='#analyte_type_id'><use id='fk' x='393' y='281' xlink:href='#fk'/><title>References analyte_type ( analyte_type_id -> id ) </title></a>
+  <use id='nn' x='242' y='297' xlink:href='#nn'/><a xlink:href='#sampling_project_id'><text x='258' y='307'>sampling_project_id</text><title>sampling_project_id integer not null</title></a>
+<a xlink:href='#sampling_project_id'><use id='fk' x='393' y='296' xlink:href='#fk'/><title>References sampling_project ( sampling_project_id -> id ) </title></a>
+  <use id='nn' x='242' y='312' xlink:href='#nn'/><a xlink:href='#analyte_units_type_id'><text x='258' y='322'>analyte_units_type_id</text><title>analyte_units_type_id integer not null</title></a>
+<a xlink:href='#analyte_units_type_id'><use id='fk' x='393' y='311' xlink:href='#fk'/><title>References analyte_units_type ( analyte_units_type_id -> id ) </title></a>
+  <use id='nn' x='242' y='327' xlink:href='#nn'/><a xlink:href='#sampling_frequency'><text x='258' y='337'>sampling_frequency</text><title>sampling_frequency varchar&#040;20&#041; not null</title></a>
+
+<!-- ============= Table 'sampling_project_eq_user' ============= -->
+<rect class='table' x='555' y='398' width='150' height='105' rx='7' ry='7' />
+<path d='M 555.50 424.50 L 555.50 405.50 Q 555.50 398.50 562.50 398.50 L 697.50 398.50 Q 704.50 398.50 704.50 405.50 L 704.50 424.50 L555.50 424.50 ' style='fill:url(#tableHeaderGradient0); stroke:none;' />
+<a xlink:href='#sampling_project_eq_user'><text x='567' y='416' class='tableTitle'>sampling_project_eq_user</text><title>Table geo_env_quality.sampling_project_eq_user</title></a>
+  <use id='nn' x='557' y='432' xlink:href='#nn'/><a xlink:href='#id'><use id='pk' x='557' y='431' xlink:href='#pk'/><title>Primary Key  ( id ) </title></a>
+<a xlink:href='#id'><text x='573' y='442'>id</text><title>id serial not null</title></a>
+  <use id='nn' x='557' y='447' xlink:href='#nn'/><a xlink:href='#eq_user_id'><text x='573' y='457'>eq_user_id</text><title>eq_user_id integer not null</title></a>
+<a xlink:href='#eq_user_id'><use id='fk' x='693' y='446' xlink:href='#fk'/><title>References eq_user ( eq_user_id -> id ) </title></a>
+  <use id='nn' x='557' y='462' xlink:href='#nn'/><a xlink:href='#sampling_project_id'><text x='573' y='472'>sampling_project_id</text><title>sampling_project_id integer not null</title></a>
+<a xlink:href='#sampling_project_id'><use id='fk' x='693' y='461' xlink:href='#fk'/><title>References sampling_project ( sampling_project_id -> id ) </title></a>
+  <use id='nn' x='557' y='477' xlink:href='#nn'/><a xlink:href='#permission_type'><text x='573' y='487'>permission_type</text><title>permission_type varchar&#040;20&#041; not null default &#039;DENY&#039;&#058;&#058;character varying</title></a>
+
+<!-- ============= Table 'sample' ============= -->
+<rect class='table' x='660' y='53' width='180' height='150' rx='7' ry='7' />
+<path d='M 660.50 79.50 L 660.50 60.50 Q 660.50 53.50 667.50 53.50 L 832.50 53.50 Q 839.50 53.50 839.50 60.50 L 839.50 79.50 L660.50 79.50 ' style='fill:url(#tableHeaderGradient0); stroke:none;' />
+<a xlink:href='#sample'><text x='733' y='71' class='tableTitle'>sample</text><title>Table geo_env_quality.sample</title></a>
+  <use id='nn' x='662' y='87' xlink:href='#nn'/><a xlink:href='#id'><use id='pk' x='662' y='86' xlink:href='#pk'/><title>Primary Key  ( id ) </title></a>
+<a xlink:href='#id'><text x='678' y='97'>id</text><title>id serial not null</title></a>
+<a xlink:href='#id'><use id='ref' x='828' y='86' xlink:href='#ref'/><title>Referred by result ( sample_id -> id ) </title></a>
+  <a xlink:href='#captured_by_eq_user_id'><text x='678' y='112'>captured_by_eq_user_id</text><title>captured_by_eq_user_id integer</title></a>
+<a xlink:href='#captured_by_eq_user_id'><use id='fk' x='828' y='101' xlink:href='#fk'/><title>References eq_user ( captured_by_eq_user_id -> id ) </title></a>
+  <a xlink:href='#scheduled_window_open_date'><text x='678' y='127'>scheduled_window_open_date</text><title>scheduled_window_open_date date</title></a>
+  <a xlink:href='#scheduled_window_close_date'><text x='678' y='142'>scheduled_window_close_date</text><title>scheduled_window_close_date date</title></a>
+  <a xlink:href='#executed_date'><text x='678' y='157'>executed_date</text><title>executed_date date</title></a>
+  <use id='nn' x='662' y='162' xlink:href='#nn'/><a xlink:href='#analyte_sample_source_id'><text x='678' y='172'>analyte_sample_source_id</text><title>analyte_sample_source_id integer not null</title></a>
+<a xlink:href='#analyte_sample_source_id'><use id='fk' x='828' y='161' xlink:href='#fk'/><title>References analyte_sample_source ( analyte_sample_source_id -> id ) </title></a>
+  <a xlink:href='#json_attributes'><text x='678' y='187'>json_attributes</text><title>json_attributes text</title></a>
+
+<!-- ============= Table 'result' ============= -->
+<rect class='table' x='450' y='218' width='195' height='135' rx='7' ry='7' />
+<path d='M 450.50 244.50 L 450.50 225.50 Q 450.50 218.50 457.50 218.50 L 637.50 218.50 Q 644.50 218.50 644.50 225.50 L 644.50 244.50 L450.50 244.50 ' style='fill:url(#tableHeaderGradient0); stroke:none;' />
+<a xlink:href='#result'><text x='534' y='236' class='tableTitle'>result</text><title>Table geo_env_quality.result</title></a>
+  <use id='nn' x='452' y='252' xlink:href='#nn'/><a xlink:href='#id'><use id='pk' x='452' y='251' xlink:href='#pk'/><title>Primary Key  ( id ) </title></a>
+<a xlink:href='#id'><text x='468' y='262'>id</text><title>id serial not null</title></a>
+  <use id='nn' x='452' y='267' xlink:href='#nn'/><a xlink:href='#sample_id'><text x='468' y='277'>sample_id</text><title>sample_id integer not null</title></a>
+<a xlink:href='#sample_id'><use id='fk' x='633' y='266' xlink:href='#fk'/><title>References sample ( sample_id -> id ) </title></a>
+  <a xlink:href='#captured_by_eq_user_id'><text x='468' y='292'>captured_by_eq_user_id</text><title>captured_by_eq_user_id integer</title></a>
+<a xlink:href='#captured_by_eq_user_id'><use id='fk' x='633' y='281' xlink:href='#fk'/><title>References eq_user ( captured_by_eq_user_id -> id ) </title></a>
+  <a xlink:href='#result_value'><text x='468' y='307'>result_value</text><title>result_value text</title></a>
+  <a xlink:href='#json_attributes'><text x='468' y='322'>json_attributes</text><title>json_attributes text</title></a>
+  <use id='nn' x='452' y='327' xlink:href='#nn'/><a xlink:href='#analyte_sample_requirement_id'><text x='468' y='337'>analyte_sample_requirement_id</text><title>analyte_sample_requirement_id integer not null</title></a>
+<a xlink:href='#analyte_sample_requirement_id'><use id='fk' x='633' y='326' xlink:href='#fk'/><title>References analyte_sample_requirement ( analyte_sample_requirement_id -> id ) </title></a>
+
+<!-- ============= Table 'analyte_sample_source' ============= -->
+<rect class='table' x='405' y='83' width='135' height='90' rx='7' ry='7' />
+<path d='M 405.50 109.50 L 405.50 90.50 Q 405.50 83.50 412.50 83.50 L 532.50 83.50 Q 539.50 83.50 539.50 90.50 L 539.50 109.50 L405.50 109.50 ' style='fill:url(#tableHeaderGradient1); stroke:none;' />
+<a xlink:href='#analyte_sample_source'><text x='416' y='101' class='tableTitle'>analyte_sample_source</text><title>Table geo_env_quality.analyte_sample_source</title></a>
+  <use id='nn' x='407' y='117' xlink:href='#nn'/><a xlink:href='#id'><use id='pk' x='407' y='116' xlink:href='#pk'/><title>Primary Key  ( id ) </title></a>
+<a xlink:href='#id'><text x='423' y='127'>id</text><title>id serial not null</title></a>
+<a xlink:href='#id'><use id='ref' x='528' y='116' xlink:href='#ref'/><title>Referred by analyte_sample_requirement ( analyte_sample_source_id -> id ) 
+Referred by sample ( analyte_sample_source_id -> id ) </title></a>
+  <use id='nn' x='407' y='132' xlink:href='#nn'/><a xlink:href='#uid'><text x='423' y='142'>uid</text><title>uid uuid&#040;2147483647&#041; not null</title></a>
+  <use id='nn' x='407' y='147' xlink:href='#nn'/><a xlink:href='#name'><text x='423' y='157'>name</text><title>name varchar&#040;100&#041; not null</title></a>
+
+<!-- ============= Table 'eq_user' ============= -->
+<rect class='table' x='765' y='248' width='60' height='90' rx='7' ry='7' />
+<path d='M 765.50 274.50 L 765.50 255.50 Q 765.50 248.50 772.50 248.50 L 817.50 248.50 Q 824.50 248.50 824.50 255.50 L 824.50 274.50 L765.50 274.50 ' style='fill:url(#tableHeaderGradient1); stroke:none;' />
+<a xlink:href='#eq_user'><text x='775' y='266' class='tableTitle'>eq_user</text><title>Table geo_env_quality.eq_user</title></a>
+  <use id='nn' x='767' y='282' xlink:href='#nn'/><a xlink:href='#id'><use id='pk' x='767' y='281' xlink:href='#pk'/><title>Primary Key  ( id ) </title></a>
+<a xlink:href='#id'><text x='783' y='292'>id</text><title>id serial not null</title></a>
+<a xlink:href='#id'><use id='ref' x='813' y='281' xlink:href='#ref'/><title>Referred by result ( captured_by_eq_user_id -> id ) 
+Referred by sample ( captured_by_eq_user_id -> id ) 
+Referred by sampling_project_eq_user ( eq_user_id -> id ) </title></a>
+  <use id='nn' x='767' y='297' xlink:href='#nn'/><a xlink:href='#uid'><text x='783' y='307'>uid</text><title>uid uuid&#040;2147483647&#041; not null</title></a>
+  <use id='nn' x='767' y='312' xlink:href='#nn'/><a xlink:href='#name'><text x='783' y='322'>name</text><title>name varchar&#040;500&#041; not null</title></a>
+
+<!-- ============= Table 'sampling_project' ============= -->
+<rect class='table' x='330' y='383' width='105' height='135' rx='7' ry='7' />
+<path d='M 330.50 409.50 L 330.50 390.50 Q 330.50 383.50 337.50 383.50 L 427.50 383.50 Q 434.50 383.50 434.50 390.50 L 434.50 409.50 L330.50 409.50 ' style='fill:url(#tableHeaderGradient2); stroke:none;' />
+<a xlink:href='#sampling_project'><text x='342' y='401' class='tableTitle'>sampling_project</text><title>Table geo_env_quality.sampling_project</title></a>
+  <use id='nn' x='332' y='417' xlink:href='#nn'/><a xlink:href='#id'><use id='pk' x='332' y='416' xlink:href='#pk'/><title>Primary Key  ( id ) </title></a>
+<a xlink:href='#id'><text x='348' y='427'>id</text><title>id serial not null</title></a>
+<a xlink:href='#id'><use id='ref' x='423' y='416' xlink:href='#ref'/><title>Referred by analyte_sample_requirement ( sampling_project_id -> id ) 
+Referred by sampling_project_eq_user ( sampling_project_id -> id ) </title></a>
+  <use id='nn' x='332' y='432' xlink:href='#nn'/><a xlink:href='#name'><text x='348' y='442'>name</text><title>name varchar&#040;500&#041; not null</title></a>
+  <use id='nn' x='332' y='447' xlink:href='#nn'/><a xlink:href='#uid'><text x='348' y='457'>uid</text><title>uid uuid&#040;2147483647&#041; not null</title></a>
+  <a xlink:href='#start_date'><text x='348' y='472'>start_date</text><title>start_date date</title></a>
+  <a xlink:href='#end_date'><text x='348' y='487'>end_date</text><title>end_date date</title></a>
+  <a xlink:href='#json_attributes'><text x='348' y='502'>json_attributes</text><title>json_attributes text</title></a>
+
+</g></svg>
+
+<br/><br/>
+<table id='dbs' >
+<thead>
+<tr><th colspan='3'><a name='analyte_units_type'>analyte_units_type</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td><a name='id'>id</a></td>
+		<td width='40%'> serial  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='name'>name</a></td>
+		<td width='40%'> varchar&#040; 100 &#041;  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+<tr><td colspan='3' class='subpart'><b>Indexes</b></td></tr>
+	<tr>		<td>analyte&#095;units&#095;type&#095;pkey primary key</td>
+		<td> ON id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<table id='dbs' >
+<thead>
+<tr><th colspan='3'><a name='analyte_type'>analyte_type</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td><a name='id'>id</a></td>
+		<td width='40%'> serial  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='name'>name</a></td>
+		<td width='40%'> varchar&#040; 500 &#041;  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='abbreviation'>abbreviation</a></td>
+		<td width='40%'> varchar&#040; 10 &#041;  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+<tr><td colspan='3' class='subpart'><b>Indexes</b></td></tr>
+	<tr>		<td>analyte&#095;type&#095;pkey primary key</td>
+		<td> ON id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<table id='dbs' >
+<thead>
+<tr><th colspan='3'><a name='analyte_limit'>analyte_limit</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td><a name='id'>id</a></td>
+		<td width='40%'> serial  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='limit_value'>limit&#095;value</a></td>
+		<td width='40%'> real  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='limit_type'>limit&#095;type</a></td>
+		<td width='40%'> varchar&#040; 20 &#041;  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='limit_rollup_type'>limit&#095;rollup&#095;type</a></td>
+		<td width='40%'> varchar&#040; 20 &#041;  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='analyte_sample_requirement_id'>analyte&#095;sample&#095;requirement&#095;id</a></td>
+		<td width='40%'> integer  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+<tr><td colspan='3' class='subpart'><b>Indexes</b></td></tr>
+	<tr>		<td>analyte&#095;limit&#095;pkey primary key</td>
+		<td> ON id</td>
+		<td>  </td>
+	</tr>
+<tr><td colspan='3' class='subpart'><b>Foreign Keys</b></td></tr>
+	<tr>
+		<td>analyte_limit_asr_id_fkey</td>
+		<td > ( analyte&#095;sample&#095;requirement&#095;id ) ref <a href='#analyte&#095;sample&#095;requirement'>analyte&#095;sample&#095;requirement</a> (id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<table id='dbs' >
+<thead>
+<tr><th colspan='3'><a name='analyte_sample_requirement'>analyte_sample_requirement</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td><a name='id'>id</a></td>
+		<td width='40%'> serial  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='analyte_sample_source_id'>analyte&#095;sample&#095;source&#095;id</a></td>
+		<td width='40%'> integer  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='analyte_type_id'>analyte&#095;type&#095;id</a></td>
+		<td width='40%'> integer  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='sampling_project_id'>sampling&#095;project&#095;id</a></td>
+		<td width='40%'> integer  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='analyte_units_type_id'>analyte&#095;units&#095;type&#095;id</a></td>
+		<td width='40%'> integer  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='sampling_frequency'>sampling&#095;frequency</a></td>
+		<td width='40%'> varchar&#040; 20 &#041;  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+<tr><td colspan='3' class='subpart'><b>Indexes</b></td></tr>
+	<tr>		<td>asr&#095;pkey primary key</td>
+		<td> ON id</td>
+		<td>  </td>
+	</tr>
+<tr><td colspan='3' class='subpart'><b>Foreign Keys</b></td></tr>
+	<tr>
+		<td>asr_analyte_sample_source_id_fkey</td>
+		<td > ( analyte&#095;sample&#095;source&#095;id ) ref <a href='#analyte&#095;sample&#095;source'>analyte&#095;sample&#095;source</a> (id) </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>asr_analyte_type_id_fkey</td>
+		<td > ( analyte&#095;type&#095;id ) ref <a href='#analyte&#095;type'>analyte&#095;type</a> (id) </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>asr_analyte_units_type_id_fkey</td>
+		<td > ( analyte&#095;units&#095;type&#095;id ) ref <a href='#analyte&#095;units&#095;type'>analyte&#095;units&#095;type</a> (id) </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>asr_sampling_project_id_fkey</td>
+		<td > ( sampling&#095;project&#095;id ) ref <a href='#sampling&#095;project'>sampling&#095;project</a> (id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<table id='dbs' >
+<thead>
+<tr><th colspan='3'><a name='sampling_project_eq_user'>sampling_project_eq_user</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td><a name='id'>id</a></td>
+		<td width='40%'> serial  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='eq_user_id'>eq&#095;user&#095;id</a></td>
+		<td width='40%'> integer  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='sampling_project_id'>sampling&#095;project&#095;id</a></td>
+		<td width='40%'> integer  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='permission_type'>permission&#095;type</a></td>
+		<td width='40%'> varchar&#040; 20 &#041;  NOT NULL  DEFO 'DENY'::character varying </td>
+		<td width='99%'>  </td>
+	</tr>
+<tr><td colspan='3' class='subpart'><b>Indexes</b></td></tr>
+	<tr>		<td>spequ&#095;pkey primary key</td>
+		<td> ON id</td>
+		<td>  </td>
+	</tr>
+<tr><td colspan='3' class='subpart'><b>Foreign Keys</b></td></tr>
+	<tr>
+		<td>spequ_eq_user_id_fkey</td>
+		<td > ( eq&#095;user&#095;id ) ref <a href='#eq&#095;user'>eq&#095;user</a> (id) </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>spequ_sampling_project_id_fkey</td>
+		<td > ( sampling&#095;project&#095;id ) ref <a href='#sampling&#095;project'>sampling&#095;project</a> (id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<table id='dbs' >
+<thead>
+<tr><th colspan='3'><a name='sample'>sample</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td><a name='id'>id</a></td>
+		<td width='40%'> serial  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='captured_by_eq_user_id'>captured&#095;by&#095;eq&#095;user&#095;id</a></td>
+		<td width='40%'> integer   </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='scheduled_window_open_date'>scheduled&#095;window&#095;open&#095;date</a></td>
+		<td width='40%'> date   </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='scheduled_window_close_date'>scheduled&#095;window&#095;close&#095;date</a></td>
+		<td width='40%'> date   </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='executed_date'>executed&#095;date</a></td>
+		<td width='40%'> date   </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='analyte_sample_source_id'>analyte&#095;sample&#095;source&#095;id</a></td>
+		<td width='40%'> integer  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='json_attributes'>json&#095;attributes</a></td>
+		<td width='40%'> text   </td>
+		<td width='99%'>  </td>
+	</tr>
+<tr><td colspan='3' class='subpart'><b>Indexes</b></td></tr>
+	<tr>		<td>se&#095;pkey primary key</td>
+		<td> ON id</td>
+		<td>  </td>
+	</tr>
+<tr><td colspan='3' class='subpart'><b>Foreign Keys</b></td></tr>
+	<tr>
+		<td>se_ass_id_fkey</td>
+		<td > ( analyte&#095;sample&#095;source&#095;id ) ref <a href='#analyte&#095;sample&#095;source'>analyte&#095;sample&#095;source</a> (id) </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>se_eq_user_id_fkey</td>
+		<td > ( captured&#095;by&#095;eq&#095;user&#095;id ) ref <a href='#eq&#095;user'>eq&#095;user</a> (id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<table id='dbs' >
+<thead>
+<tr><th colspan='3'><a name='result'>result</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td><a name='id'>id</a></td>
+		<td width='40%'> serial  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='sample_id'>sample&#095;id</a></td>
+		<td width='40%'> integer  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='captured_by_eq_user_id'>captured&#095;by&#095;eq&#095;user&#095;id</a></td>
+		<td width='40%'> integer   </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='result_value'>result&#095;value</a></td>
+		<td width='40%'> text   </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='json_attributes'>json&#095;attributes</a></td>
+		<td width='40%'> text   </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='analyte_sample_requirement_id'>analyte&#095;sample&#095;requirement&#095;id</a></td>
+		<td width='40%'> integer  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+<tr><td colspan='3' class='subpart'><b>Indexes</b></td></tr>
+	<tr>		<td>result&#095;pkey primary key</td>
+		<td> ON id</td>
+		<td>  </td>
+	</tr>
+<tr><td colspan='3' class='subpart'><b>Foreign Keys</b></td></tr>
+	<tr>
+		<td>result_asr_id_fkey</td>
+		<td > ( analyte&#095;sample&#095;requirement&#095;id ) ref <a href='#analyte&#095;sample&#095;requirement'>analyte&#095;sample&#095;requirement</a> (id) </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>result_eq_user_id_fkey</td>
+		<td > ( captured&#095;by&#095;eq&#095;user&#095;id ) ref <a href='#eq&#095;user'>eq&#095;user</a> (id) </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>result_sample_id_fkey</td>
+		<td > ( sample&#095;id ) ref <a href='#sample'>sample</a> (id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<table id='dbs' >
+<thead>
+<tr><th colspan='3'><a name='analyte_sample_source'>analyte_sample_source</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td><a name='id'>id</a></td>
+		<td width='40%'> serial  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='uid'>uid</a></td>
+		<td width='40%'> uuid&#040; 2147483647 &#041;  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='name'>name</a></td>
+		<td width='40%'> varchar&#040; 100 &#041;  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+<tr><td colspan='3' class='subpart'><b>Indexes</b></td></tr>
+	<tr>		<td>analyte&#095;sample&#095;source&#095;pkey primary key</td>
+		<td> ON id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<table id='dbs' >
+<thead>
+<tr><th colspan='3'><a name='eq_user'>eq_user</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td><a name='id'>id</a></td>
+		<td width='40%'> serial  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='uid'>uid</a></td>
+		<td width='40%'> uuid&#040; 2147483647 &#041;  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='name'>name</a></td>
+		<td width='40%'> varchar&#040; 500 &#041;  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+<tr><td colspan='3' class='subpart'><b>Indexes</b></td></tr>
+	<tr>		<td>eq&#095;user&#095;pkey primary key</td>
+		<td> ON id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<table id='dbs' >
+<thead>
+<tr><th colspan='3'><a name='sampling_project'>sampling_project</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td><a name='id'>id</a></td>
+		<td width='40%'> serial  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='name'>name</a></td>
+		<td width='40%'> varchar&#040; 500 &#041;  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='uid'>uid</a></td>
+		<td width='40%'> uuid&#040; 2147483647 &#041;  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='start_date'>start&#095;date</a></td>
+		<td width='40%'> date   </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='end_date'>end&#095;date</a></td>
+		<td width='40%'> date   </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='json_attributes'>json&#095;attributes</a></td>
+		<td width='40%'> text   </td>
+		<td width='99%'>  </td>
+	</tr>
+<tr><td colspan='3' class='subpart'><b>Indexes</b></td></tr>
+	<tr>		<td>sampling&#095;project&#095;pkey primary key</td>
+		<td> ON id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+</body></html>

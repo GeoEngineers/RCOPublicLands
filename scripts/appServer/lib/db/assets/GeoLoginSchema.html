@@ -1,0 +1,730 @@
+<?xml version='1.0' encoding='ISO-8859-1' standalone='yes'?>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN' 'http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml' >
+<head>
+<title>Database Documentation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<style type='text/css'>
+	 #dbs {font-family:Tahoma,Dialog,Sans-Serif;font-size:12px;background:#fff;width:80%;border-collapse:collapse;text-align:left;margin:8px;}
+	 #dbs thead{background:#c0d4f3;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffffff), to( #c0d4f3));}
+	 #dbs th{font-size:12px;font-weight:bold;color:#333;border-bottom:1px solid #333;padding:5px 6px;}
+	 #dbs td{border-bottom:1px solid #ddd;padding:3px 5px;white-space: pre;}
+	 td.subpart{background:#c0d4f3;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffffff), to( #c0d4f3));}
+	 #dbs tbody tr:hover td{color:#000;background:#fffcea;}
+</style>
+</head>
+
+<body>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'   width='570' height='740' viewbox='0 0 570 740' >
+<style type='text/css'>
+  text                { fill:#000000; font-family: Tahoma, Dialog, Arial; font-size:11px; stroke:#000000; stroke-width:0.1; }
+  text:hover          { fill:#a00000; font-size:12px;}
+  text.colType        { fill:#a9bdc6; }
+  text.tableTitle     { fill:#000000; }
+  path                { stroke:#797979; stroke-width:1.3; fill:none; }
+  rect.table          { fill:#ffffff; stroke:#4e4c4c; stroke-width:0.3; filter:url(#shadow); }
+  line.table          { stroke:#9ea1a4; stroke-width:0.3; }
+  rect.callout        { fill:url(#calloutGradient); stroke:#aea913; stroke-width:0.5; }
+  rect.grp            { opacity:0.5; stroke:#b1b1b1; stroke-width:1.7; }
+</style>
+<defs>
+  <pattern id='layoutGradient' patternUnits='userSpaceOnUse' x='0' y='0' width='10' height='10' viewBox='0 0 10 10'>
+    <rect x='0' y='0' width='10' height='10' style='fill:#f7f7f0;' />
+    <line x1='5' y1='10' x2='5' y2='0' style='stroke:#949494;stroke-width:0.5;stroke-dasharray:1,9;'  />
+  </pattern>
+  <radialGradient id='layoutGradientOld' cx='20%' cy='20%' r='25%' fx='10%' fy='0%'>
+	   <stop offset='0%' stop-color='#ffffff' />
+    <stop offset='100%' stop-color='#efefef' />
+  </radialGradient>
+  <linearGradient id='tableHeaderGradient0' x1='0%' y1='0%' x2='0%' y2='90%' >
+          <stop offset='0%' stop-color='white'/> 
+          <stop offset='30%' stop-color='white'/> 
+          <stop offset='100%' stop-color='#ccffcc'/> 
+   </linearGradient>
+  <linearGradient id='groupUnderTitleLine' x1='0%' y1='0%' x2='100%' y2='0%' >
+          <stop offset='0%' stop-color='#999999' stop-opacity='0.7'/> 
+          <stop offset='100%' stop-color='#999999' stop-opacity='0' /> 
+   </linearGradient>
+  <radialGradient id='calloutGradient' cx='20%' cy='20%' r='100%' fx='10%' fy='10%'>
+	   <stop offset='0%' stop-color='#ffffff' />
+    <stop offset='100%' stop-color='#f4f1a4' />
+  </radialGradient>
+  <filter id='shadow' width='150%' height='150%'> 
+    <feGaussianBlur in='SourceAlpha' stdDeviation='2' result='image1' /> 
+    <feOffset in='image1' result='image2' dx='2' dy='2' />
+    <feColorMatrix type='matrix' in='image2' result='image3' 
+       values='1 1 1 0 0 
+               1 1 1 0 0 
+               1 1 1 0 0 
+               0 0 0 .5 0'/>
+    <feComposite in='SourceGraphic' in2='image3' operator='over' /> 
+  </filter>
+  <filter id='legendShadow' filterUnits='userSpaceOnUse' x='0' y='0' width='400' height='120'> 
+     <feGaussianBlur in='SourceAlpha' stdDeviation='3' result='blur'/> 
+     <feOffset in='blur' dx='2' dy='2' result='offsetBlur'/> 
+     <feSpecularLighting in='blur' surfaceScale='5' specularConstant='.75' specularExponent='20' lighting-color='#bbbbbb' result='specOut'>
+        <fePointLight x='-5000' y='-10000' z='20000'/>  
+     </feSpecularLighting> 
+     <feComposite in='specOut' in2='SourceAlpha' operator='in' result='specOut'/> 
+     <feComposite in='SourceGraphic' in2='specOut' operator='arithmetic' k1='0' k2='1' k3='1' k4='0' result='litPaint'/>  
+     <feMerge> 
+         <feMergeNode in='offsetBlur'/> 
+         <feMergeNode in='litPaint'/> 
+     </feMerge> 
+  </filter> 
+  <radialGradient id='legendGradient' fx='5%' fy='5%' r='75%' spreadMethod='pad'>
+          <stop offset='0%' stop-color='#cfd7f6' stop-opacity='1'/> 
+          <stop offset='100%' stop-color='#919dd0' stop-opacity='1' /> 
+   </radialGradient>
+  <symbol id='calloutArrowDown' overflow='visible' >
+      <path d='M 0,0 L 7,11 L 15,0 z' style='fill:#f4f1a4; stroke:#aea913; stroke-width:0.5;' />
+  </symbol>
+  <symbol id='calloutArrowUp' overflow='visible' >
+      <path d='M 0,15 L 7,3 L 15,15 z' style='fill:#f4f1a4; stroke:#aea913; stroke-width:0.5;' />
+  </symbol>
+  <symbol id='pk' overflow='visible' >
+    <g transform='scale(0.99)'>
+     <path style='fill:#fbea8e;stroke:#763f17;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;'
+        d='M 9.3678877,3.5695485 C 9.1030218,3.2729386 9.0796382,2.7628519 9.3396185,2.4517097 9.5449651,2.1956495 9.9040386,2.0980533 10.199638,2.2169415 10.533525,2.3415459 10.775153,2.706942 10.750675,3.0842709 10.737029,3.3980003 10.541153,3.699122 10.258248,3.8066067 9.966649,3.9250429 9.6169668,3.8418805 9.4008073,3.6062324 9.3894892,3.5943518 9.3785264,3.582104 9.3678886,3.5695487 z M 11.226617,6.9916004 C 11.888137,6.3548946 12.293488,5.4172188 12.311087,4.442353 12.378144,2.7379364 11.248678,1.0541269 9.7322318,0.44767357 8.3887112,-0.1280313 6.7865012,0.26822889 5.8918395,1.4007929 5.080823,2.3839145 4.9336815,3.8452096 5.3635544,5.101615 L 4.3670905,5.315913 C 4.0664984,5.3682645 4.0967703,5.6316724 4.2574957,5.8208829 L 4.9124,6.5655244 4.1543436,7.2512357 3.2136002,7.2163506 3.1674775,8.5586827 2.0406832,8.5086512 1.5965306,8.9299953 1.5471661,10.179833 0.75616674,10.195223 0.2112857,10.758575 0.15354288,11.735988 0.07199052,12.765553 c 0.36440953,0.238225 0.79006967,0.195492 1.44938278,-0.02675 L 6.3033562,8.1282037 6.8217102,8.6765688 C 6.9985465,8.8799427 7.3003699,8.7497574 7.358381,8.5016252 L 7.4938877,7.5084164 c 0.8537488,0.3985387 1.8303125,0.4711541 2.6851793,0.1427713 0.393927,-0.1407258 0.746858,-0.3701772 1.04755,-0.6595873 z'/>
+     <path d='M 6.8014948,6.3102123 0.15369063,13.024481 0.21560535,12.141962 6.0062342,6.2683782 z'
+        style='fill:#ffe5a5;fill-opacity:1;stroke:#854e31;stroke-width:0.06912433;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:3.00300009'/>
+    </g>
+  </symbol>
+  <symbol id='unq' overflow='visible' >
+    <g transform='scale(0.99)'>
+      <rect style='fill:#e07554;stroke:#7e4d31;stroke-width:0.71934468;stroke-linecap:round;stroke-linejoin:round;'
+         width='2.29' height='8.43' x='7.48' y='-0.76' ry='1.14' transform='matrix(0.701,0.713,-0.727,0.685,0,0)' />
+      <path style='fill:white;stroke:#858585;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;'
+         d='m 26.04,8.64 a 4.13,4.13 0 1 1 -8.26,0 4.13,4.13 0 1 1 8.26,0 z'
+         transform='matrix(1.025,0,0,0.987,-14.690,-3.862)' />
+      <text x='5.5' y='7.7' style='font-size:8px;fill:#0460b5;'>1</text>
+    </g>
+  </symbol>
+  <symbol id='idx' overflow='visible' >
+    <g transform='scale(0.99)'>
+      <rect style='fill:#e07554;stroke:#7e4d31;stroke-width:0.71934468;stroke-linecap:round;stroke-linejoin:round;'
+         width='2.29' height='8.43' x='7.48' y='-0.76' ry='1.14' transform='matrix(0.701,0.713,-0.727,0.685,0,0)' />
+      <path style='fill:white;stroke:#858585;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;'
+         d='m 26.04,8.64 a 4.13,4.13 0 1 1 -8.26,0 4.13,4.13 0 1 1 8.26,0 z'
+         transform='matrix(1.025,0,0,0.987,-14.690,-3.862)' />
+    </g>
+  </symbol>
+  <symbol id='fk' overflow='visible' >
+    <g transform='scale(0.92)'>
+      <path style='fill:#b7d0f6;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+      d='M 12.48,0.33 7.07,0.89 9.067,2.974 0.329,11.731 1.073,12.597 9.811,3.841 11.77,5.78 z' />
+    </g>
+  </symbol>
+  <symbol id='ref' overflow='visible' >
+    <g transform='scale(0.92)'>
+      <path style='fill:#b7d0f6;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+          d='M 0.10,12.70 5.31,12.15 3.40,10.06 11.82,1.32 11.11,0.45 2.68,9.19 0.80,7.24 z'/>
+    </g>
+  </symbol>
+  <symbol id='nn' overflow='visible' >
+  <path style='stroke:#9b3e50;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+          d='M 0,0 3,3 M 0,3 3,0 z'/>
+  </symbol>
+  <marker id='arrow' viewBox='0 0 7 7' refX='0' refY='3' markerUnits='strokeWidth' markerWidth='7' markerHeight='7' orient='auto'>
+    <path d='M 0,0 L 7, 3 L 0,7 z' style='fill:#797979; stroke-width:0px;' />
+  </marker>
+  <marker id='foot' viewBox='0 0 7 7' refX='7' refY='3' markerUnits='strokeWidth' markerWidth='7' markerHeight='7' orient='auto'>
+    <path d='M 0,3 L 15, 3 z' style='stroke:#797979;' />
+  </marker>
+</defs>
+
+<!-- ============= Desktop ============= -->
+<rect x='1' y='1' width='568' height='738' rx='7' ry='7' style='fill:white; stroke:#104576; stroke-width:0.5;' />
+
+<!-- ============= Legend ============= -->
+<g transform='translate(10,10)'>
+  <rect x='10' y='10' width='320' height='76' rx='6' ry='6' style='fill:url(#legendGradient);filter:url(#legendShadow);'/> 
+  <text x='20' y='30'><tspan>Project</tspan> PostgreSQL</text> 
+  <text x='20' y='44'><tspan>Layout</tspan> geo_login</text> 
+  <text x='20' y='58'><tspan>Tip: Move the mouse over columns to read the comments</tspan></text> 
+  <text x='180' y='74'><tspan>Generated using <a xlink:href='http://www.dbschema.com'>DbSchema</a></tspan></text> 
+</g>
+
+<g transform='translate(0,110)'>
+<!-- ============= Group 'geo_login' ============= -->
+<rect class='grp' style='fill:#c4e0f9;' x='29' y='25' width='512' height='560' />
+<text x='40' y='40'>geo_login</text>
+<rect style='fill:url(#groupUnderTitleLine); stroke-width:2;' x='40' y='43' width='490' height='2' />
+
+<path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'  style='stroke-dasharray:4,2;'  d='M 405 255 L 330,255' >
+	<title>Foreign Key license_contact_id_fkey
+	license references contact ( contact_id -> id )</title>
+</path>
+<text x='357' y='250' transform='rotate(0 357,250)' title='Foreign Key license_contact_id_fkey
+	license references contact ( contact_id -> id )' style='fill:#a1a0a0;'>contact_id</text><path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'    d='M 435 420 L 435,450' >
+	<title>Foreign Key license_type_id_fkey
+	license references license_type ( license_type_id -> id )</title>
+</path>
+<text x='448' y='420' transform='rotate(90 448,420)' title='Foreign Key license_type_id_fkey
+	license references license_type ( license_type_id -> id )' style='fill:#a1a0a0;'>license_type_id</text><path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'    d='M 435 240 L 435,180' >
+	<title>Foreign Key license_organization_id_fkey
+	license references organization ( organization_id -> id )</title>
+</path>
+<text x='437' y='235' transform='rotate(270 437,235)' title='Foreign Key license_organization_id_fkey
+	license references organization ( organization_id -> id )' style='fill:#a1a0a0;'>organization_id</text><path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'    d='M 405 480 L 330,480' >
+	<title>Foreign Key license_type_application_id_fkey
+	license_type references application ( application_id -> id )</title>
+</path>
+<text x='342' y='475' transform='rotate(0 342,475)' title='Foreign Key license_type_application_id_fkey
+	license_type references application ( application_id -> id )' style='fill:#a1a0a0;'>application_id</text><path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'  style='stroke-dasharray:4,2;'  d='M 285 60 L 277,60 Q 270,60 270,52 L 270,37 Q 270,30 277,30 L 307,30 Q 315,30 315,37 L 315,45' >
+	<title>Foreign Key parent_organization_id_fkey
+	organization references organization ( parent_organization_id -> id )</title>
+</path>
+<text x='176' y='55' transform='rotate(0 176,55)' title='Foreign Key parent_organization_id_fkey
+	organization references organization ( parent_organization_id -> id )' style='fill:#a1a0a0;'>parent_organization_id</text><path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'    d='M 315 225 L 315,180' >
+	<title>Foreign Key contact_organization_id_fkey
+	contact references organization ( organization_id -> id )</title>
+</path>
+<text x='317' y='220' transform='rotate(270 317,220)' title='Foreign Key contact_organization_id_fkey
+	contact references organization ( organization_id -> id )' style='fill:#a1a0a0;'>organization_id</text><path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'  style='stroke-dasharray:4,2;'  d='M 210 375 L 150,375' >
+	<title>Foreign Key contact_location_id_fkey
+	contact references location ( location_id -> id )</title>
+</path>
+<text x='161' y='370' transform='rotate(0 161,370)' title='Foreign Key contact_location_id_fkey
+	contact references location ( location_id -> id )' style='fill:#a1a0a0;'>location_id</text><path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'    d='M 60 165 L 60,195' >
+	<title>Foreign Key login_token_user_login_id_fkey
+	login_token references user_login ( user_login_id -> id )</title>
+</path>
+<text x='73' y='165' transform='rotate(90 73,165)' title='Foreign Key login_token_user_login_id_fkey
+	login_token references user_login ( user_login_id -> id )' style='fill:#a1a0a0;'>user_login_id</text><path transform='translate(7,0)' marker-start='url(#foot)' marker-end='url(#arrow)'    d='M 165 240 L 210,240' >
+	<title>Foreign Key user_login_contact_id_fkey
+	user_login references contact ( contact_id -> id )</title>
+</path>
+<text x='172' y='235' transform='rotate(0 172,235)' title='Foreign Key user_login_contact_id_fkey
+	user_login references contact ( contact_id -> id )' style='fill:#a1a0a0;'>contact_id</text><!-- ============= Table 'license' ============= -->
+<rect class='table' x='420' y='248' width='105' height='165' rx='7' ry='7' />
+<path d='M 420.50 274.50 L 420.50 255.50 Q 420.50 248.50 427.50 248.50 L 517.50 248.50 Q 524.50 248.50 524.50 255.50 L 524.50 274.50 L420.50 274.50 ' style='fill:url(#tableHeaderGradient0); stroke:none;' />
+<a xlink:href='#license'><text x='456' y='266' class='tableTitle'>license</text><title>Table geo_login.license</title></a>
+  <use id='nn' x='422' y='282' xlink:href='#nn'/><a xlink:href='#id'><use id='pk' x='422' y='281' xlink:href='#pk'/><title>Primary Key  ( id ) </title></a>
+<a xlink:href='#id'><text x='438' y='292'>id</text><title>id serial not null</title></a>
+  <use id='nn' x='422' y='297' xlink:href='#nn'/><a xlink:href='#organization_id'><text x='438' y='307'>organization_id</text><title>organization_id integer not null</title></a>
+<a xlink:href='#organization_id'><use id='fk' x='513' y='296' xlink:href='#fk'/><title>References organization ( organization_id -> id ) </title></a>
+  <a xlink:href='#contact_id'><text x='438' y='322'>contact_id</text><title>contact_id integer</title></a>
+<a xlink:href='#contact_id'><use id='fk' x='513' y='311' xlink:href='#fk'/><title>References contact ( contact_id -> id ) </title></a>
+  <use id='nn' x='422' y='327' xlink:href='#nn'/><a xlink:href='#license_type_id'><text x='438' y='337'>license_type_id</text><title>license_type_id integer not null</title></a>
+<a xlink:href='#license_type_id'><use id='fk' x='513' y='326' xlink:href='#fk'/><title>References license_type ( license_type_id -> id ) </title></a>
+  <use id='nn' x='422' y='342' xlink:href='#nn'/><a xlink:href='#status'><text x='438' y='352'>status</text><title>status varchar&#040;20&#041; not null default &#039;INACTIVE&#039;&#058;&#058;character varying</title></a>
+  <a xlink:href='#json_attributes'><text x='438' y='367'>json_attributes</text><title>json_attributes text</title></a>
+  <a xlink:href='#activation_date'><text x='438' y='382'>activation_date</text><title>activation_date timestamp</title></a>
+  <a xlink:href='#expiration_date'><text x='438' y='397'>expiration_date</text><title>expiration_date timestamp</title></a>
+
+<!-- ============= Table 'license_type' ============= -->
+<rect class='table' x='420' y='458' width='105' height='105' rx='7' ry='7' />
+<path d='M 420.50 484.50 L 420.50 465.50 Q 420.50 458.50 427.50 458.50 L 517.50 458.50 Q 524.50 458.50 524.50 465.50 L 524.50 484.50 L420.50 484.50 ' style='fill:url(#tableHeaderGradient0); stroke:none;' />
+<a xlink:href='#license_type'><text x='442' y='476' class='tableTitle'>license_type</text><title>Table geo_login.license_type</title></a>
+  <use id='nn' x='422' y='492' xlink:href='#nn'/><a xlink:href='#id'><use id='pk' x='422' y='491' xlink:href='#pk'/><title>Primary Key  ( id ) </title></a>
+<a xlink:href='#id'><text x='438' y='502'>id</text><title>id integer not null</title></a>
+<a xlink:href='#id'><use id='ref' x='513' y='491' xlink:href='#ref'/><title>Referred by license ( license_type_id -> id ) </title></a>
+  <use id='nn' x='422' y='507' xlink:href='#nn'/><a xlink:href='#name'><text x='438' y='517'>name</text><title>name varchar&#040;100&#041; not null</title></a>
+  <a xlink:href='#json_attributes'><text x='438' y='532'>json_attributes</text><title>json_attributes text</title></a>
+  <use id='nn' x='422' y='537' xlink:href='#nn'/><a xlink:href='#application_id'><text x='438' y='547'>application_id</text><title>application_id integer not null</title></a>
+<a xlink:href='#application_id'><use id='fk' x='513' y='536' xlink:href='#fk'/><title>References application ( application_id -> id ) </title></a>
+
+<!-- ============= Table 'application' ============= -->
+<rect class='table' x='225' y='458' width='105' height='105' rx='7' ry='7' />
+<path d='M 225.50 484.50 L 225.50 465.50 Q 225.50 458.50 232.50 458.50 L 322.50 458.50 Q 329.50 458.50 329.50 465.50 L 329.50 484.50 L225.50 484.50 ' style='fill:url(#tableHeaderGradient0); stroke:none;' />
+<a xlink:href='#application'><text x='252' y='476' class='tableTitle'>application</text><title>Table geo_login.application</title></a>
+  <use id='nn' x='227' y='492' xlink:href='#nn'/><a xlink:href='#id'><use id='pk' x='227' y='491' xlink:href='#pk'/><title>Primary Key  ( id ) </title></a>
+<a xlink:href='#id'><text x='243' y='502'>id</text><title>id serial not null</title></a>
+<a xlink:href='#id'><use id='ref' x='318' y='491' xlink:href='#ref'/><title>Referred by license_type ( application_id -> id ) </title></a>
+  <use id='nn' x='227' y='507' xlink:href='#nn'/><a xlink:href='#uid'><text x='243' y='517'>uid</text><title>uid uuid&#040;2147483647&#041; not null</title></a>
+  <use id='nn' x='227' y='522' xlink:href='#nn'/><a xlink:href='#name'><text x='243' y='532'>name</text><title>name varchar&#040;100&#041; not null</title></a>
+  <a xlink:href='#json_attributes'><text x='243' y='547'>json_attributes</text><title>json_attributes text</title></a>
+
+<!-- ============= Table 'organization' ============= -->
+<rect class='table' x='300' y='53' width='150' height='120' rx='7' ry='7' />
+<path d='M 300.50 79.50 L 300.50 60.50 Q 300.50 53.50 307.50 53.50 L 442.50 53.50 Q 449.50 53.50 449.50 60.50 L 449.50 79.50 L300.50 79.50 ' style='fill:url(#tableHeaderGradient0); stroke:none;' />
+<a xlink:href='#organization'><text x='345' y='71' class='tableTitle'>organization</text><title>Table geo_login.organization</title></a>
+  <use id='nn' x='302' y='87' xlink:href='#nn'/><a xlink:href='#id'><use id='pk' x='302' y='86' xlink:href='#pk'/><title>Primary Key  ( id ) </title></a>
+<a xlink:href='#id'><text x='318' y='97'>id</text><title>id serial not null</title></a>
+<a xlink:href='#id'><use id='ref' x='438' y='86' xlink:href='#ref'/><title>Referred by contact ( organization_id -> id ) 
+Referred by organization ( parent_organization_id -> id ) 
+Referred by license ( organization_id -> id ) </title></a>
+  <use id='nn' x='302' y='102' xlink:href='#nn'/><a xlink:href='#name'><text x='318' y='112'>name</text><title>name varchar&#040;100&#041; not null</title></a>
+  <use id='nn' x='302' y='117' xlink:href='#nn'/><a xlink:href='#uid'><text x='318' y='127'>uid</text><title>uid uuid&#040;2147483647&#041; not null</title></a>
+  <a xlink:href='#parent_organization_id'><text x='318' y='142'>parent_organization_id</text><title>parent_organization_id integer</title></a>
+<a xlink:href='#parent_organization_id'><use id='fk' x='438' y='131' xlink:href='#fk'/><title>References organization ( parent_organization_id -> id ) </title></a>
+  <a xlink:href='#json_attributes'><text x='318' y='157'>json_attributes</text><title>json_attributes text</title></a>
+
+<!-- ============= Table 'contact' ============= -->
+<rect class='table' x='225' y='233' width='105' height='195' rx='7' ry='7' />
+<path d='M 225.50 259.50 L 225.50 240.50 Q 225.50 233.50 232.50 233.50 L 322.50 233.50 Q 329.50 233.50 329.50 240.50 L 329.50 259.50 L225.50 259.50 ' style='fill:url(#tableHeaderGradient0); stroke:none;' />
+<a xlink:href='#contact'><text x='259' y='251' class='tableTitle'>contact</text><title>Table geo_login.contact</title></a>
+  <use id='nn' x='227' y='267' xlink:href='#nn'/><a xlink:href='#id'><use id='pk' x='227' y='266' xlink:href='#pk'/><title>Primary Key  ( id ) </title></a>
+<a xlink:href='#id'><text x='243' y='277'>id</text><title>id serial not null</title></a>
+<a xlink:href='#id'><use id='ref' x='318' y='266' xlink:href='#ref'/><title>Referred by user_login ( contact_id -> id ) 
+Referred by license ( contact_id -> id ) </title></a>
+  <use id='nn' x='227' y='282' xlink:href='#nn'/><a xlink:href='#first_name'><text x='243' y='292'>first_name</text><title>first_name varchar&#040;100&#041; not null</title></a>
+  <use id='nn' x='227' y='297' xlink:href='#nn'/><a xlink:href='#last_name'><text x='243' y='307'>last_name</text><title>last_name varchar&#040;100&#041; not null</title></a>
+  <a xlink:href='#phone_number'><text x='243' y='322'>phone_number</text><title>phone_number varchar&#040;100&#041;</title></a>
+  <a xlink:href='#email'><text x='243' y='337'>email</text><title>email varchar&#040;100&#041;</title></a>
+  <a xlink:href='#job_title'><text x='243' y='352'>job_title</text><title>job_title varchar&#040;100&#041;</title></a>
+  <use id='nn' x='227' y='357' xlink:href='#nn'/><a xlink:href='#uid'><text x='243' y='367'>uid</text><title>uid uuid&#040;2147483647&#041; not null default uuid&#095;generate&#095;v1&#040;&#041;</title></a>
+  <use id='nn' x='227' y='372' xlink:href='#nn'/><a xlink:href='#organization_id'><text x='243' y='382'>organization_id</text><title>organization_id integer not null</title></a>
+<a xlink:href='#organization_id'><use id='fk' x='318' y='371' xlink:href='#fk'/><title>References organization ( organization_id -> id ) </title></a>
+  <a xlink:href='#location_id'><text x='243' y='397'>location_id</text><title>location_id integer</title></a>
+<a xlink:href='#location_id'><use id='fk' x='318' y='386' xlink:href='#fk'/><title>References location ( location_id -> id ) </title></a>
+  <a xlink:href='#json_attributes'><text x='243' y='412'>json_attributes</text><title>json_attributes text</title></a>
+
+<!-- ============= Table 'login_token' ============= -->
+<rect class='table' x='45' y='53' width='105' height='105' rx='7' ry='7' />
+<path d='M 45.50 79.50 L 45.50 60.50 Q 45.50 53.50 52.50 53.50 L 142.50 53.50 Q 149.50 53.50 149.50 60.50 L 149.50 79.50 L45.50 79.50 ' style='fill:url(#tableHeaderGradient0); stroke:none;' />
+<a xlink:href='#login_token'><text x='70' y='71' class='tableTitle'>login_token</text><title>Table geo_login.login_token</title></a>
+  <use id='nn' x='47' y='87' xlink:href='#nn'/><a xlink:href='#id'><use id='pk' x='47' y='86' xlink:href='#pk'/><title>Primary Key  ( id ) </title></a>
+<a xlink:href='#id'><text x='63' y='97'>id</text><title>id serial not null</title></a>
+  <use id='nn' x='47' y='102' xlink:href='#nn'/><a xlink:href='#token'><text x='63' y='112'>token</text><title>token uuid&#040;2147483647&#041; not null</title></a>
+  <use id='nn' x='47' y='117' xlink:href='#nn'/><a xlink:href='#expiration_date'><text x='63' y='127'>expiration_date</text><title>expiration_date timestamp not null</title></a>
+  <use id='nn' x='47' y='132' xlink:href='#nn'/><a xlink:href='#user_login_id'><text x='63' y='142'>user_login_id</text><title>user_login_id integer not null</title></a>
+<a xlink:href='#user_login_id'><use id='fk' x='138' y='131' xlink:href='#fk'/><title>References user_login ( user_login_id -> id ) </title></a>
+
+<!-- ============= Table 'user_login' ============= -->
+<rect class='table' x='45' y='203' width='120' height='105' rx='7' ry='7' />
+<path d='M 45.50 229.50 L 45.50 210.50 Q 45.50 203.50 52.50 203.50 L 157.50 203.50 Q 164.50 203.50 164.50 210.50 L 164.50 229.50 L45.50 229.50 ' style='fill:url(#tableHeaderGradient0); stroke:none;' />
+<a xlink:href='#user_login'><text x='80' y='221' class='tableTitle'>user_login</text><title>Table geo_login.user_login</title></a>
+  <use id='nn' x='47' y='237' xlink:href='#nn'/><a xlink:href='#id'><use id='pk' x='47' y='236' xlink:href='#pk'/><title>Primary Key  ( id ) </title></a>
+<a xlink:href='#id'><text x='63' y='247'>id</text><title>id serial not null</title></a>
+<a xlink:href='#id'><use id='ref' x='153' y='236' xlink:href='#ref'/><title>Referred by login_token ( user_login_id -> id ) </title></a>
+  <use id='nn' x='47' y='252' xlink:href='#nn'/><a xlink:href='#login'><text x='63' y='262'>login</text><title>login varchar&#040;100&#041; not null</title></a>
+  <use id='nn' x='47' y='267' xlink:href='#nn'/><a xlink:href='#hashed_password'><text x='63' y='277'>hashed_password</text><title>hashed_password varchar&#040;100&#041; not null</title></a>
+  <use id='nn' x='47' y='282' xlink:href='#nn'/><a xlink:href='#contact_id'><text x='63' y='292'>contact_id</text><title>contact_id integer not null</title></a>
+<a xlink:href='#contact_id'><use id='fk' x='153' y='281' xlink:href='#fk'/><title>References contact ( contact_id -> id ) </title></a>
+
+<!-- ============= Table 'location' ============= -->
+<rect class='table' x='45' y='353' width='105' height='210' rx='7' ry='7' />
+<path d='M 45.50 379.50 L 45.50 360.50 Q 45.50 353.50 52.50 353.50 L 142.50 353.50 Q 149.50 353.50 149.50 360.50 L 149.50 379.50 L45.50 379.50 ' style='fill:url(#tableHeaderGradient0); stroke:none;' />
+<a xlink:href='#location'><text x='79' y='371' class='tableTitle'>location</text><title>Table geo_login.location</title></a>
+  <use id='nn' x='47' y='387' xlink:href='#nn'/><a xlink:href='#id'><use id='pk' x='47' y='386' xlink:href='#pk'/><title>Primary Key  ( id ) </title></a>
+<a xlink:href='#id'><text x='63' y='397'>id</text><title>id serial not null</title></a>
+<a xlink:href='#id'><use id='ref' x='138' y='386' xlink:href='#ref'/><title>Referred by contact ( location_id -> id ) </title></a>
+  <use id='nn' x='47' y='402' xlink:href='#nn'/><a xlink:href='#name'><text x='63' y='412'>name</text><title>name varchar&#040;500&#041; not null</title></a>
+  <a xlink:href='#geom'><text x='63' y='427'>geom</text><title>geom geometry&#040;2147483647&#041;</title></a>
+  <a xlink:href='#address_1'><text x='63' y='442'>address_1</text><title>address_1 varchar&#040;200&#041;</title></a>
+  <a xlink:href='#address_2'><text x='63' y='457'>address_2</text><title>address_2 varchar&#040;200&#041;</title></a>
+  <a xlink:href='#city'><text x='63' y='472'>city</text><title>city varchar&#040;100&#041;</title></a>
+  <a xlink:href='#county'><text x='63' y='487'>county</text><title>county varchar&#040;100&#041;</title></a>
+  <a xlink:href='#state'><text x='63' y='502'>state</text><title>state varchar&#040;100&#041;</title></a>
+  <a xlink:href='#country'><text x='63' y='517'>country</text><title>country varchar&#040;100&#041;</title></a>
+  <a xlink:href='#postal_code'><text x='63' y='532'>postal_code</text><title>postal_code varchar&#040;20&#041;</title></a>
+  <a xlink:href='#json_attributes'><text x='63' y='547'>json_attributes</text><title>json_attributes text</title></a>
+
+</g></svg>
+
+<br/><br/>
+<table id='dbs' >
+<thead>
+<tr><th colspan='3'><a name='license'>license</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td><a name='id'>id</a></td>
+		<td width='40%'> serial  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='organization_id'>organization&#095;id</a></td>
+		<td width='40%'> integer  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='contact_id'>contact&#095;id</a></td>
+		<td width='40%'> integer   </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='license_type_id'>license&#095;type&#095;id</a></td>
+		<td width='40%'> integer  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='status'>status</a></td>
+		<td width='40%'> varchar&#040; 20 &#041;  NOT NULL  DEFO 'INACTIVE'::character varying </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='json_attributes'>json&#095;attributes</a></td>
+		<td width='40%'> text   </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='activation_date'>activation&#095;date</a></td>
+		<td width='40%'> timestamp   </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='expiration_date'>expiration&#095;date</a></td>
+		<td width='40%'> timestamp   </td>
+		<td width='99%'>  </td>
+	</tr>
+<tr><td colspan='3' class='subpart'><b>Indexes</b></td></tr>
+	<tr>		<td>license&#095;pkey primary key</td>
+		<td> ON id</td>
+		<td>  </td>
+	</tr>
+<tr><td colspan='3' class='subpart'><b>Foreign Keys</b></td></tr>
+	<tr>
+		<td>license_contact_id_fkey</td>
+		<td > ( contact&#095;id ) ref <a href='#contact'>contact</a> (id) </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>license_type_id_fkey</td>
+		<td > ( license&#095;type&#095;id ) ref <a href='#license&#095;type'>license&#095;type</a> (id) </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>license_organization_id_fkey</td>
+		<td > ( organization&#095;id ) ref <a href='#organization'>organization</a> (id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<table id='dbs' >
+<thead>
+<tr><th colspan='3'><a name='license_type'>license_type</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td><a name='id'>id</a></td>
+		<td width='40%'> integer  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='name'>name</a></td>
+		<td width='40%'> varchar&#040; 100 &#041;  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='json_attributes'>json&#095;attributes</a></td>
+		<td width='40%'> text   </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='application_id'>application&#095;id</a></td>
+		<td width='40%'> integer  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+<tr><td colspan='3' class='subpart'><b>Indexes</b></td></tr>
+	<tr>		<td>license&#095;type&#095;pkey primary key</td>
+		<td> ON id</td>
+		<td>  </td>
+	</tr>
+<tr><td colspan='3' class='subpart'><b>Foreign Keys</b></td></tr>
+	<tr>
+		<td>license_type_application_id_fkey</td>
+		<td > ( application&#095;id ) ref <a href='#application'>application</a> (id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<table id='dbs' >
+<thead>
+<tr><th colspan='3'><a name='application'>application</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td><a name='id'>id</a></td>
+		<td width='40%'> serial  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='uid'>uid</a></td>
+		<td width='40%'> uuid&#040; 2147483647 &#041;  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='name'>name</a></td>
+		<td width='40%'> varchar&#040; 100 &#041;  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='json_attributes'>json&#095;attributes</a></td>
+		<td width='40%'> text   </td>
+		<td width='99%'>  </td>
+	</tr>
+<tr><td colspan='3' class='subpart'><b>Indexes</b></td></tr>
+	<tr>		<td>application&#095;pkey primary key</td>
+		<td> ON id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<table id='dbs' >
+<thead>
+<tr><th colspan='3'><a name='organization'>organization</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td><a name='id'>id</a></td>
+		<td width='40%'> serial  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='name'>name</a></td>
+		<td width='40%'> varchar&#040; 100 &#041;  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='uid'>uid</a></td>
+		<td width='40%'> uuid&#040; 2147483647 &#041;  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='parent_organization_id'>parent&#095;organization&#095;id</a></td>
+		<td width='40%'> integer   </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='json_attributes'>json&#095;attributes</a></td>
+		<td width='40%'> text   </td>
+		<td width='99%'>  </td>
+	</tr>
+<tr><td colspan='3' class='subpart'><b>Indexes</b></td></tr>
+	<tr>		<td>organization&#095;pkey primary key</td>
+		<td> ON id</td>
+		<td>  </td>
+	</tr>
+<tr><td colspan='3' class='subpart'><b>Foreign Keys</b></td></tr>
+	<tr>
+		<td>parent_organization_id_fkey</td>
+		<td > ( parent&#095;organization&#095;id ) ref <a href='#organization'>organization</a> (id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<table id='dbs' >
+<thead>
+<tr><th colspan='3'><a name='contact'>contact</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td><a name='id'>id</a></td>
+		<td width='40%'> serial  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='first_name'>first&#095;name</a></td>
+		<td width='40%'> varchar&#040; 100 &#041;  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='last_name'>last&#095;name</a></td>
+		<td width='40%'> varchar&#040; 100 &#041;  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='phone_number'>phone&#095;number</a></td>
+		<td width='40%'> varchar&#040; 100 &#041;   </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='email'>email</a></td>
+		<td width='40%'> varchar&#040; 100 &#041;   </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='job_title'>job&#095;title</a></td>
+		<td width='40%'> varchar&#040; 100 &#041;   </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='uid'>uid</a></td>
+		<td width='40%'> uuid&#040; 2147483647 &#041;  NOT NULL  DEFO uuid_generate_v1() </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='organization_id'>organization&#095;id</a></td>
+		<td width='40%'> integer  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='location_id'>location&#095;id</a></td>
+		<td width='40%'> integer   </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='json_attributes'>json&#095;attributes</a></td>
+		<td width='40%'> text   </td>
+		<td width='99%'>  </td>
+	</tr>
+<tr><td colspan='3' class='subpart'><b>Indexes</b></td></tr>
+	<tr>		<td>contact&#095;pkey primary key</td>
+		<td> ON id</td>
+		<td>  </td>
+	</tr>
+<tr><td colspan='3' class='subpart'><b>Foreign Keys</b></td></tr>
+	<tr>
+		<td>contact_organization_id_fkey</td>
+		<td > ( organization&#095;id ) ref <a href='#organization'>organization</a> (id) </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>contact_location_id_fkey</td>
+		<td > ( location&#095;id ) ref <a href='#location'>location</a> (id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<table id='dbs' >
+<thead>
+<tr><th colspan='3'><a name='login_token'>login_token</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td><a name='id'>id</a></td>
+		<td width='40%'> serial  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='token'>token</a></td>
+		<td width='40%'> uuid&#040; 2147483647 &#041;  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='expiration_date'>expiration&#095;date</a></td>
+		<td width='40%'> timestamp  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='user_login_id'>user&#095;login&#095;id</a></td>
+		<td width='40%'> integer  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+<tr><td colspan='3' class='subpart'><b>Indexes</b></td></tr>
+	<tr>		<td>login&#095;token&#095;pkey primary key</td>
+		<td> ON id</td>
+		<td>  </td>
+	</tr>
+<tr><td colspan='3' class='subpart'><b>Foreign Keys</b></td></tr>
+	<tr>
+		<td>login_token_user_login_id_fkey</td>
+		<td > ( user&#095;login&#095;id ) ref <a href='#user&#095;login'>user&#095;login</a> (id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<table id='dbs' >
+<thead>
+<tr><th colspan='3'><a name='user_login'>user_login</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td><a name='id'>id</a></td>
+		<td width='40%'> serial  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='login'>login</a></td>
+		<td width='40%'> varchar&#040; 100 &#041;  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='hashed_password'>hashed&#095;password</a></td>
+		<td width='40%'> varchar&#040; 100 &#041;  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='contact_id'>contact&#095;id</a></td>
+		<td width='40%'> integer  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+<tr><td colspan='3' class='subpart'><b>Indexes</b></td></tr>
+	<tr>		<td>user&#095;login&#095;pkey primary key</td>
+		<td> ON id</td>
+		<td>  </td>
+	</tr>
+<tr><td colspan='3' class='subpart'><b>Foreign Keys</b></td></tr>
+	<tr>
+		<td>user_login_contact_id_fkey</td>
+		<td > ( contact&#095;id ) ref <a href='#contact'>contact</a> (id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<table id='dbs' >
+<thead>
+<tr><th colspan='3'><a name='location'>location</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td><a name='id'>id</a></td>
+		<td width='40%'> serial  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='name'>name</a></td>
+		<td width='40%'> varchar&#040; 500 &#041;  NOT NULL  </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='geom'>geom</a></td>
+		<td width='40%'> geometry&#040; 2147483647 &#041;   </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='address_1'>address&#095;1</a></td>
+		<td width='40%'> varchar&#040; 200 &#041;   </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='address_2'>address&#095;2</a></td>
+		<td width='40%'> varchar&#040; 200 &#041;   </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='city'>city</a></td>
+		<td width='40%'> varchar&#040; 100 &#041;   </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='county'>county</a></td>
+		<td width='40%'> varchar&#040; 100 &#041;   </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='state'>state</a></td>
+		<td width='40%'> varchar&#040; 100 &#041;   </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='country'>country</a></td>
+		<td width='40%'> varchar&#040; 100 &#041;   </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='postal_code'>postal&#095;code</a></td>
+		<td width='40%'> varchar&#040; 20 &#041;   </td>
+		<td width='99%'>  </td>
+	</tr>
+	<tr>
+		<td><a name='json_attributes'>json&#095;attributes</a></td>
+		<td width='40%'> text   </td>
+		<td width='99%'>  </td>
+	</tr>
+<tr><td colspan='3' class='subpart'><b>Indexes</b></td></tr>
+	<tr>		<td>location&#095;pkey primary key</td>
+		<td> ON id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+</body></html>

@@ -1,0 +1,42 @@
+{
+  "name": "env-quality",
+  "version": "0.1.0",
+  "author": "SmartMine",
+  "description": "Environmental Permit Sampling",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/notsureyet"
+  },
+  "dependencies": {
+    "lodash": "~2.4.1",
+    "bookshelf": "*",
+    "pg": "*",
+    "when": "*",
+    "geojson": "*",
+    "restify": "*",
+    "minify": "*",
+    "crypto-js": "*",
+    "node-cryptojs-aes": "*",
+    "moment": "*",
+    "node-uuid": "*",
+    "aws-sdk": "*",
+    "sqlite3": "~2.1.19",
+    "change-case": "~1.0.4",
+    "should": "*",
+    "socket.io": "*",
+    "passport": "~0.2.0",
+    "passport-local": "~0.1.6",
+    "passport-http": "~0.2.2",
+    "util": "~0.10.3",
+    "password-hash": "~1.2.1",
+    "newrelic": "~1.4.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "mocha-phantomjs": "~3.3.1",
+    "grunt-mocha-test": "~0.9.0"
+  },
+  "engines": {
+    "node": ">=0.6"
+  }
+}

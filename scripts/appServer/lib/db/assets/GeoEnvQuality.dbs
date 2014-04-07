@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="PostgreSQL" id="Project5880933" database="PostgreSQL" >
+	<schema name="geo_env_quality" catalogname="GeoEnvQuality_UnitTest" schemaname="geo_env_quality" defo="y" >
+		<table name="analyte_limit" >
+			<column name="id" type="serial" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="limit_value" type="real" length="8" decimal="8" jt="7" mandatory="y" regexp_nulls="0" />
+			<column name="limit_type" type="varchar" length="20" jt="12" mandatory="y" regexp_nulls="0" />
+			<column name="limit_rollup_type" type="varchar" length="20" jt="12" mandatory="y" regexp_nulls="0" />
+			<column name="analyte_sample_requirement_id" type="integer" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<index name="analyte_limit_pkey" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="analyte_limit_asr_id_fkey" to_schema="geo_env_quality" to_table="analyte_sample_requirement" >
+				<fk_column name="analyte_sample_requirement_id" pk="id" />
+			</fk>
+		</table>
+		<table name="analyte_sample_requirement" >
+			<column name="id" type="serial" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="analyte_sample_source_id" type="integer" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="analyte_type_id" type="integer" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="sampling_project_id" type="integer" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="analyte_units_type_id" type="integer" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="sampling_frequency" type="varchar" length="20" jt="12" mandatory="y" regexp_nulls="0" />
+			<index name="asr_pkey" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="asr_analyte_sample_source_id_fkey" to_schema="geo_env_quality" to_table="analyte_sample_source" >
+				<fk_column name="analyte_sample_source_id" pk="id" />
+			</fk>
+			<fk name="asr_analyte_type_id_fkey" to_schema="geo_env_quality" to_table="analyte_type" >
+				<fk_column name="analyte_type_id" pk="id" />
+			</fk>
+			<fk name="asr_analyte_units_type_id_fkey" to_schema="geo_env_quality" to_table="analyte_units_type" >
+				<fk_column name="analyte_units_type_id" pk="id" />
+			</fk>
+			<fk name="asr_sampling_project_id_fkey" to_schema="geo_env_quality" to_table="sampling_project" >
+				<fk_column name="sampling_project_id" pk="id" />
+			</fk>
+		</table>
+		<table name="analyte_sample_source" >
+			<column name="id" type="serial" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="uid" type="uuid" length="2147483647" jt="1111" mandatory="y" regexp_nulls="0" />
+			<column name="name" type="varchar" length="100" jt="12" mandatory="y" regexp_nulls="0" />
+			<column name="json_attributes" type="text" length="2147483647" jt="12" />
+			<index name="analyte_sample_source_pkey" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="analyte_type" >
+			<column name="id" type="serial" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="name" type="varchar" length="500" jt="12" mandatory="y" regexp_nulls="0" />
+			<column name="abbreviation" type="varchar" length="10" jt="12" />
+			<column name="json_attributes" type="text" length="2147483647" jt="12" />
+			<index name="analyte_type_pkey" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="analyte_units_type" >
+			<column name="id" type="serial" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="name" type="varchar" length="100" jt="12" mandatory="y" regexp_nulls="0" />
+			<index name="analyte_units_type_pkey" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="eq_user" >
+			<column name="id" type="serial" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="uid" type="uuid" length="2147483647" jt="1111" mandatory="y" regexp_nulls="0" />
+			<column name="name" type="varchar" length="500" jt="12" mandatory="y" regexp_nulls="0" />
+			<column name="json_attributes" type="text" length="2147483647" jt="12" />
+			<index name="eq_user_pkey" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="result" >
+			<column name="id" type="serial" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="sample_id" type="integer" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="captured_by_eq_user_id" type="integer" length="10" jt="4" />
+			<column name="result_value" type="text" length="2147483647" jt="12" />
+			<column name="json_attributes" type="text" length="2147483647" jt="12" />
+			<column name="analyte_sample_requirement_id" type="integer" length="10" jt="4" />
+			<column name="analyte_type_id" type="integer" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="analyte_units_type_id" type="integer" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<index name="result_pkey" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="result_asr_id_fkey" to_schema="geo_env_quality" to_table="analyte_sample_requirement" >
+				<fk_column name="analyte_sample_requirement_id" pk="id" />
+			</fk>
+			<fk name="result_eq_user_id_fkey" to_schema="geo_env_quality" to_table="eq_user" >
+				<fk_column name="captured_by_eq_user_id" pk="id" />
+			</fk>
+			<fk name="result_sample_id_fkey" to_schema="geo_env_quality" to_table="sample" >
+				<fk_column name="sample_id" pk="id" />
+			</fk>
+			<fk name="asr_analyte_type_id_fkey" to_schema="geo_env_quality" to_table="analyte_type" >
+				<fk_column name="analyte_type_id" pk="id" />
+			</fk>
+			<fk name="result_analyte_units_type_id_fkey" to_schema="geo_env_quality" to_table="analyte_units_type" >
+				<fk_column name="analyte_units_type_id" pk="id" />
+			</fk>
+		</table>
+		<table name="sample" >
+			<column name="id" type="serial" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="captured_by_eq_user_id" type="integer" length="10" jt="4" />
+			<column name="scheduled_window_open_date" type="date" length="13" jt="91" />
+			<column name="scheduled_window_close_date" type="date" length="13" jt="91" />
+			<column name="executed_date" type="date" length="13" jt="91" />
+			<column name="analyte_sample_source_id" type="integer" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="json_attributes" type="text" length="2147483647" jt="12" />
+			<index name="se_pkey" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="se_ass_id_fkey" to_schema="geo_env_quality" to_table="analyte_sample_source" >
+				<fk_column name="analyte_sample_source_id" pk="id" />
+			</fk>
+			<fk name="se_eq_user_id_fkey" to_schema="geo_env_quality" to_table="eq_user" >
+				<fk_column name="captured_by_eq_user_id" pk="id" />
+			</fk>
+		</table>
+		<table name="sampling_project" >
+			<column name="id" type="serial" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="name" type="varchar" length="500" jt="12" mandatory="y" regexp_nulls="0" />
+			<column name="uid" type="uuid" length="2147483647" jt="1111" mandatory="y" regexp_nulls="0" />
+			<column name="start_date" type="date" length="13" jt="91" />
+			<column name="end_date" type="date" length="13" jt="91" />
+			<column name="json_attributes" type="text" length="2147483647" jt="12" />
+			<index name="sampling_project_pkey" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="sampling_project_eq_user" >
+			<column name="id" type="serial" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="eq_user_id" type="integer" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="sampling_project_id" type="integer" length="10" jt="4" mandatory="y" regexp_nulls="0" />
+			<column name="permission_type" type="varchar" length="20" jt="12" mandatory="y" regexp_nulls="0" >
+				<defo>&#039;DENY&#039;::character varying</defo>
+			</column>
+			<index name="spequ_pkey" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="spequ_eq_user_id_fkey" to_schema="geo_env_quality" to_table="eq_user" >
+				<fk_column name="eq_user_id" pk="id" />
+			</fk>
+			<fk name="spequ_sampling_project_id_fkey" to_schema="geo_env_quality" to_table="sampling_project" >
+				<fk_column name="sampling_project_id" pk="id" />
+			</fk>
+		</table>
+		<sequence name="analyte_limit_id_seq" start="1" />
+		<sequence name="analyte_sample_requirement_id_seq" start="1" />
+		<sequence name="analyte_sample_source_id_seq" start="1" />
+		<sequence name="analyte_type_id_seq" start="1" />
+		<sequence name="analyte_units_type_id_seq" start="1" />
+		<sequence name="eq_user_id_seq" start="1" />
+		<sequence name="result_id_seq" start="1" />
+		<sequence name="sample_id_seq" start="1" />
+		<sequence name="sampling_project_eq_user_id_seq" start="1" />
+		<sequence name="sampling_project_id_seq" start="1" />
+	</schema>
+	<connector name="PostgreSQL" database="PostgreSQL" driver_class="org.postgresql.Driver" driver_jar="postgresql-9.1-902.jdbc3.jar" host="54.244.241.130" port="5432" instance="GeoEnvQuality_UnitTest" user="postgres" passwd="UCVzc3dvcmQzOQ==" schema_mapping="" />
+	<layout id="Layout5896119" name="geo_env_quality" show_relation_columns="y" >
+		<entity schema="geo_env_quality" name="sample" color="66ff00" x="870" y="60" />
+		<entity schema="geo_env_quality" name="analyte_limit" color="66ff00" x="45" y="90" />
+		<entity schema="geo_env_quality" name="sampling_project" color="ff66ff" x="75" y="405" />
+		<entity schema="geo_env_quality" name="analyte_sample_requirement" color="66ff00" x="225" y="255" />
+		<entity schema="geo_env_quality" name="analyte_units_type" color="66ff00" x="465" y="330" />
+		<entity schema="geo_env_quality" name="sampling_project_eq_user" color="66ff00" x="450" y="435" />
+		<entity schema="geo_env_quality" name="analyte_sample_source" color="00ffcc" x="270" y="60" />
+		<entity schema="geo_env_quality" name="analyte_type" color="66ff00" x="450" y="105" />
+		<entity schema="geo_env_quality" name="result" color="66ff00" x="615" y="195" />
+		<entity schema="geo_env_quality" name="eq_user" color="00ffcc" x="945" y="315" />
+		<group name="geo_env_quality" color="c4e0f9" >
+			<entity schema="geo_env_quality" name="analyte_limit" />
+			<entity schema="geo_env_quality" name="analyte_sample_requirement" />
+			<entity schema="geo_env_quality" name="analyte_sample_source" />
+			<entity schema="geo_env_quality" name="analyte_type" />
+			<entity schema="geo_env_quality" name="analyte_units_type" />
+			<entity schema="geo_env_quality" name="eq_user" />
+			<entity schema="geo_env_quality" name="result" />
+			<entity schema="geo_env_quality" name="sample" />
+			<entity schema="geo_env_quality" name="sampling_project" />
+			<entity schema="geo_env_quality" name="sampling_project_eq_user" />
+		</group>
+	</layout>
+</project>
