@@ -34,18 +34,17 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
 			});
 			MainApplication.toDoRegion.show(MainApplication.views.toDoView);
 		});
-		MainApplication.models.todos.fetch({
-			reset:true, 
-			dataType: 'json',
-			cache: false,
-			//async: true,
-			success: function(){
+		//MainApplication.models.todos.fetch({
+		//	reset:true, 
+		//	dataType: 'json',
+		//	cache: false,
+		//	success: function(){
 				MainApplication.mainRegion.show(MainApplication.views.landingPageView);		
-			},
-			error: function(model, response, options) {
-				console.log("Error retrieving todos");
-			}
-		});
+		//	},
+		//	error: function(model, response, options) {
+		//		console.log("Error retrieving todos");
+		//	}
+		//});
 			
 		MainApplication.views.landingPageFooterView = new LandingPageFooterView({
 			genericCollection: MainApplication.models.genericCollection,
