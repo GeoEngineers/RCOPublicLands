@@ -38,6 +38,7 @@ MainApplication.Templates.LandingPageFooterTemplate = [
 			"<div class='container'>",
 				"<ul class='navbar-nav iconsNav'>",
 					"<li id='lnkTodos' class='navLink'><a href='#'><i class='icon-comments icon-large'></i><div class='txt'>Add Todo</div></a></li>",
+					"<li id='lnkChart' class='navLink'><a href='#'><i class='icon-bar-chart icon-large'></i><div class='txt'>Compare</div></a></li>",
 					//"<li id='lnkTOC' class='navLink'><a href='#'><i class='icon-filter icon-large'></i><div class='txt'>TOC</div></a></li>",
 					//"<li id='lnkLocate' class='navLink'><a href='#'><i class='icon-compass icon-large'></i><div class='txt'>Geo Locate</div></a></li>",
 				"</ul>",

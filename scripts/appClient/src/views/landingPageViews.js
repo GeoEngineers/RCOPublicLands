@@ -86,11 +86,6 @@ var LandingPageView = Backbone.Marionette.Layout.extend({
 			maxZoom: 5
 		});
 
-		//var popup = L.popup()
-		//.setLatLng(latlng)
-		//.setContent('<p>Hello world!<br />This is a nice popup.</p>')
-		//.openOn(map);
-		
 		utfGrid.on('mouseover', function(e){ info.update(e);}).on('mouseout', function(e){ info.update();})
 		utfGrid.on('click', function(props){
 			if(props.data){
@@ -252,6 +247,7 @@ var LandingPageFooterView = Backbone.Marionette.ItemView.extend({
         _.bindAll(this, 'loadContactUs', 'addTodos');
     },
 	events: {
+		"click #lnkChart" : "loadD3Example",
 		"click #lnkContactUs" : "loadContactUs",
 		"click #lnkTodos" : "addTodos",
 		"click #lnkLocate" : "geoLocate"
@@ -276,6 +272,10 @@ var LandingPageFooterView = Backbone.Marionette.ItemView.extend({
 	},		
 	loadContactUs: function(){
 	 	window[ApplicationName].router.navigate("ContactUs", { trigger: true });
+		return false;
+	},
+	loadD3Example: function(){
+		console.log("Load D3 example");
 		return false;
 	},
 	geoLocate: function(){
