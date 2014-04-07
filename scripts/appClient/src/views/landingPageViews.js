@@ -86,8 +86,21 @@ var LandingPageView = Backbone.Marionette.Layout.extend({
 			maxZoom: 5
 		});
 
+		//var popup = L.popup()
+		//.setLatLng(latlng)
+		//.setContent('<p>Hello world!<br />This is a nice popup.</p>')
+		//.openOn(map);
+		
 		utfGrid.on('mouseover', function(e){ info.update(e);}).on('mouseout', function(e){ info.update();})
-		utfGrid.on('click', function(e){ console.log(e); });
+		utfGrid.on('click', function(props){
+			if(props.data){
+				var popup = L.popup()
+					.setLatLng(props.latlng)
+					.setContent("<h4>Press Freedom in the world &nbsp;&nbsp;&nbsp;&nbsp;</h4>" +  (props ?
+						"<values><b>" + props.data.name + "</b><br />Ranking position: <rank>" + props.data.rank+"</rank></values>" : "Select a state"))
+					.openOn(MainApplication.LandingPageMap); 
+			}
+		});
 
 		var info = L.control();
 		info.options.position = 'bottomright';
