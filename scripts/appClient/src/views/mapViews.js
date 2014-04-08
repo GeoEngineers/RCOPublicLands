@@ -79,13 +79,13 @@ var MapView = Backbone.Marionette.Layout.extend({
 			if(props.data){
 				console.log(props);
 				var markerToolTip = new MapTipView({
-            		ParcelName: "Mikes",
-            		Owner: "Mike",
+            		ParcelName: "Parcel",
+            		Owner: "Washington DNR",
             		TotalArea: props.data.GISAcres,
             		AquisitionDate: '1/1/2010',
             		Cost: 1000
         		});
-        
+
         		markerToolTip.render();
 				var popup = L.popup()
 					.setLatLng(props.latlng)
