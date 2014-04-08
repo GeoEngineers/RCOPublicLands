@@ -31,7 +31,6 @@
 
 #chartLayer{
 	z-index:999999;
-	position:absolute; 
 	top:0px; 
 	left: 0px;
 }

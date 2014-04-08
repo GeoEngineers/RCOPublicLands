@@ -16,7 +16,6 @@ MainApplication.Templates.MapTemplate = [
 			//"</div>",			
 		"</ul>",
 		"<div id='connectionStatus'><img src='./content/images/38-1.gif'><span class='txt'> Re-connecting...</span></div>",
-		"<div id='chartLayer'></div>",
 		"<div id='map'></div>",
 		//"<div id=\"ToDoContainer\"></div>",
 	"</div>"
@@ -37,9 +36,6 @@ MainApplication.Templates.MapFooterTemplate = [
 	"<div class='navbar navbar-inverse navbar-fixed-bottom'>",
 		"<div class='navbar-inner'>",
 			"<div class='container'>",
-				"<ul class='navbar-nav iconsNav'>",
-					"<li id='lnkChart'><a href='#'>&#9776;<div class='txt'>Compare</div></a></li>",
-				"</ul>",
 				"<ul class='navbar-nav iconsNav' style='float:right;'>",
 					"<li class='slide-menu'><a href='#' id='lnkSlideMenu' class='navLink' href='#SummaryPaneSlideOut'><i class='icon-bar-chart icon-large'></i><div class='txt'>Navigation</div></a></li>",
 				"</ul>",				
@@ -49,12 +45,13 @@ MainApplication.Templates.MapFooterTemplate = [
 ].join("\n");
 
 MainApplication.Templates.MapPaneTemplate = [
+	"<div id='chartLayer'></div>",
 	"<ul>",
-		"<li><a href='#'>Home</a></li>",
-		"<li><a href='#'>The Ballad of El Goodo</a></li>",
-		"<li><a href='#'>Thirteen</a></li>",
-		"<li><a href='#'>September Gurls</a></li>",
-		"<li><a href='#'>What's Going Ahn</a></li>",
+		"<li><a href='#'>Other</a></li>",
+		"<li><a href='#'>Test data</a></li>",
+		"<li><a href='#'>Presented</a></li>",
+		"<li><a href='#'>Presentably</a></li>",
+		"<li><a href='#'>And other things!</a></li>",
 	"</ul>"
 ].join("\n");
 

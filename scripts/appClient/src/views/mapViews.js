@@ -261,7 +261,6 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
         _.bindAll(this, 'loadContactUs', 'addTodos');
     },
 	events: {
-		"click #lnkChart" : "loadD3Example",
 		"click #lnkContactUs" : "loadContactUs",
 		"click #lnkTodos" : "addTodos",
 		"click #lnkLocate" : "geoLocate",
@@ -301,54 +300,6 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 	 	window[ApplicationName].router.navigate("ContactUs", { trigger: true });
 		return false;
 	},
-	loadD3Example: function(){
-		console.log("Load D3 example");
-	
-		var width = 960,
-			height = 500,
-			radius = Math.min(width, height) / 2;
-
-		var color = d3.scale.ordinal()
-			.range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
-
-		var arc = d3.svg.arc()
-			.outerRadius(radius - 10)
-			.innerRadius(0);
-
-		var pie = d3.layout.pie()
-			.sort(null)
-			.value(function(d) { return d.population; });
-
-		var svg = d3.select("#chartLayer").append("svg")
-			.attr("width", width)
-			.attr("height", height)
-		  .append("g")
-			.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-		d3.csv("/scripts/appClient/src/extensions/data.csv", function(error, data) {
-
-		  data.forEach(function(d) {
-			d.population = +d.population;
-		  });
-
-		  var g = svg.selectAll(".arc")
-			  .data(pie(data))
-			.enter().append("g")
-			  .attr("class", "arc");
-
-		  g.append("path")
-			  .attr("d", arc)
-			  .style("fill", function(d) { return color(d.data.age); });
-
-		  g.append("text")
-			  .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-			  .attr("dy", ".35em")
-			  .style("text-anchor", "middle")
-			  .text(function(d) { return d.data.age; });
-
-		});		
-		return false;
-	},
 	geoLocate: function(){
 		if (navigator.geolocation) {
 			MainApplication.Map.once('locationfound', function (e) {
@@ -372,7 +323,74 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
     },
     initialize: function (options) {
 		//nada
-    }
+		
+    },
+	onShow: function(){
+		this.loadD3Example();
+	},
+	loadD3Example: function(){
+		var dc=this;
+		console.log("Load D3 example");
+	
+		var width = 200, //960
+			height = 200, //500
+			radius = Math.min(width, height) / 2;
+
+		var color = d3.scale.ordinal()
+			.range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+
+		var arc = d3.svg.arc()
+			.outerRadius(radius - 10)
+			.innerRadius(0);
+
+		var pie = d3.layout.pie()
+			.sort(null)
+			.value(function(d) { return d.population; });
+
+		var svg = d3.select("#chartLayer").append("svg")
+			.attr("width", width)
+			.attr("height", height)
+			.append("g")
+			.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+		d3.csv("/scripts/appClient/src/extensions/data.csv", function(error, data) {
+
+		  data.forEach(function(d) {
+			d.population = +d.population;
+		  });
+
+		  var g = svg.selectAll(".arc")
+			  .data(pie(data))
+			.enter().append("g")
+			  .attr("class", "arc");
+
+		  g.append("path")
+		  .on('click', function(){ console.log("test"); })
+			  .on('mouseover', dc.synchronizedMouseOver)
+			  .on("mouseout", dc.synchronizedMouseOut)
+			  .attr("d", arc)
+			  .style("fill", function(d) { return color(d.data.age); });
+
+		  g.append("text")
+		  .on('click', function(){ console.log("test"); })
+			  .on('mouseover', dc.synchronizedMouseOver)
+			  .on("mouseout", dc.synchronizedMouseOut)
+			  .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+			  .attr("dy", ".35em")
+			  .style("text-anchor", "middle")
+			  .text(function(d) { return d.data.age; });
+
+		});		
+		return false;
+	},
+	synchronizedMouseOver: function(ev){
+console.log(ev);
+		return false;
+	},
+	synchronizedMouseOut: function(ev){
+console.log(ev);
+		return false;
+	}
 });
 
 var WelcomeView = Backbone.Marionette.ItemView.extend({
