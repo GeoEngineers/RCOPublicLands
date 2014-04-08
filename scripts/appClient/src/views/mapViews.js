@@ -7,6 +7,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 
 		this.defaultMap = L.tileLayer('http://a.tiles.mapbox.com/v3/examples.map-y7l23tes/{z}/{x}/{y}.png');
 		this.offlineMap = new L.TileLayer.OfflineMBTiles('', {tms:true, minZoom:1, maxZoom: 12,attribution: "Washington"});	
+		this.dnrLands = L.tileLayer('http://a.tiles.mapbox.com/v3/smartmine.kr5jc3di/{z}/{x}/{y}.png', {minZoom:8 });
 		
 		this.mapFirstView = true;
         _.bindAll(this, 'onShow');
@@ -34,6 +35,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 			dc.loadCurrentMap();
 		});
 		this.createUTFGrid();
+		this.createDNRLands();
 		/*
 		for (var i = MainApplication.models.todos.length - 1; i >= 0; i--){
 			if(MainApplication.models.todos.models[i].attributes.Latitude !== undefined && MainApplication.models.todos.models[i].attributes.Longitude !== undefined){
@@ -66,6 +68,10 @@ var MapView = Backbone.Marionette.Layout.extend({
 			this.openPopup();
 		});
 		return unboundMarker;
+	},
+	createDNRLands: function(){
+		var dnrLands = this.dnrLands.addTo(MainApplication.Map);
+		return dnrLands;
 	},
 	clearMapMarkers: function(){
 		var collection = this.todos;
