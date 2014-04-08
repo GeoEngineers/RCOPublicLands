@@ -73,11 +73,33 @@ MainApplication.Templates.WelcomeTemplate = [
 
 
 MainApplication.Templates.MapTipTemplate = [
-    "<b>{{ParcelName}}</b><br />",
+    "<h4>{{ParcelName}}</h4>",
 		"Owner: {{Owner}} <br />",
 		"Total Area (Acres): {{TotalArea}}<br />",
 		"Acquisition Date: {{AquisitionDate}} <br />",
-		"Cost: {{Cost}} <br />",
+		"Cost: {{Cost}} <br /><br/>",
 		"<button class=\"btn btn-primary\" type=\"button\" id=\"btnQuestionPost\">Post a Question</button>",	
 ].join("\n");
+
+
+MainApplication.Templates.QuestionTemplate = [
+	"<div class=\"modal-dialog\">",
+		"<div class=\"modal-content\">",
+			"<div class=\"modal-header\">",
+				"<h4 id=\"mySlideLabel\">Post a Question</h4>",
+			"</div>",
+			"<div class=\"modal-body\">",
+				"<label for=\"txtName\">Your Name:</label><input type=\"text\" class=\"form-control\" id=\"txtName\" /><br />",
+				"<label for=\"txtEmail\">Email Address:</label><input class=\"form-control\" type=\"text\" id=\"txtEmail\" /><br />",
+				"<label for=\"txtQuestion\">Your Question:</label><br />",
+				"<textarea id=\"txtQuestion\" class=\"form-control\"/>",
+			"</div>",
+			"<div class=\"modal-footer\">",
+				"<button class=\"btn btn-primary\" type=\"button\" id=\"btnCloseQuestion\">Submit</button>",
+				"<button class=\"btn btn-warning\" type=\"button\" id=\"btnCancelQuestion\">Cancel</button>",
+			"</div>",
+		"</div>",
+	"</div>",
+].join("\n");
+
 

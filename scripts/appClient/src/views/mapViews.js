@@ -78,10 +78,18 @@ var MapView = Backbone.Marionette.Layout.extend({
 		utfGrid.on('click', function(props){
 			if(props.data){
 				console.log(props);
+				var markerToolTip = new MapTipView({
+            		ParcelName: "Parcel",
+            		Owner: "Washington DNR",
+            		TotalArea: props.data.GISAcres,
+            		AquisitionDate: '1/1/2010',
+            		Cost: 1000
+        		});
+
+        		markerToolTip.render();
 				var popup = L.popup()
 					.setLatLng(props.latlng)
-					.setContent("<h4>Acreage over an area &nbsp;&nbsp;&nbsp;&nbsp;</h4>" +  (props ?
-						"<values><b>" + props.data.GISAcres + "</b><br />Percentage: <rank>" + props.data.GISAcres+"</rank></values>" : "Select a state"))
+					.setContent(markerToolTip.$el[0])
 					.openOn(MainApplication.Map); 
 			}
 		});
@@ -406,4 +414,52 @@ var WelcomeView = Backbone.Marionette.ItemView.extend({
 		MainApplication.modalRegion.hideModal();
 		return false;
 	}	
+});
+
+var QuestionView = Backbone.Marionette.ItemView.extend({
+    template: function (serialized_model) {
+		return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.QuestionTemplate);
+    },
+	initialize: function(options){
+	},
+    events: {
+		"click #btnCloseQuestion": "closeModal",
+		"click #btnCancelQuestion": "closeModal"
+    },
+	closeModal: function () {
+		MainApplication.modalRegion.hideModal();
+		return false;
+	}	
+});
+
+
+var MapTipView = Backbone.Marionette.ItemView.extend({
+    template: function (serialized_model) {
+        return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.MapTipTemplate);
+    },
+    templateHelpers: function()
+    {
+    	return {
+    		ParcelName: this.ParcelName,
+			Owner: this.Owner,
+			TotalArea: this.TotalArea,
+			AquisitionDate: this.AquisitionDate,
+			Cost: this.Cost
+    	}
+    },
+    initialize: function (options) {
+		this.ParcelName = options.ParcelName;
+		this.Owner = options.Owner;
+		this.TotalArea = options.TotalArea;
+		this.AquisitionDate = options.AquisitionDate;
+		this.Cost = options.Cost;
+    },
+    events: {
+		"click #btnQuestionPost": "postQuestion",
+    },
+    postQuestion: function(){
+
+		var questionView = new QuestionView({});
+		MainApplication.modalRegion.show(questionView);
+    }
 });
