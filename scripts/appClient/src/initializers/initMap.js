@@ -6,6 +6,7 @@ MainApplication.pageInitializer[this_page_name] = MainApplication.module(this_pa
 //Initial View Loader
 MainApplication.pageInitializer[this_page_name].on("start", function (options) {
 	MainApplication.defaultMarker = new Todo().getTodoLeafletMarker("teal");
+	MainApplication.models.dnrModel = new DnrModel();
 	//synching on command:
 	//wipe todos, fetch current todos
 	var queueItemsPromise=GeoAppBase.localDatabaseCollectionGet("todoItemQueue");
@@ -22,7 +23,8 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
 		//continue app as normal after, might become a callback to sync queue depending on promise structure
 		MainApplication.models.todos = new Todos();
 		MainApplication.views.mapView = new MapView({
-			todos: MainApplication.models.todos
+			todos: MainApplication.models.todos,
+			dnrResources: MainApplication.models.dnrModel
 		});
 		MainApplication.views.mapView.on("show",function(){
 			MainApplication.views.toDoView = new TodoAppView({

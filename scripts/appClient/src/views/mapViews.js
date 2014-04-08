@@ -4,11 +4,13 @@ var MapView = Backbone.Marionette.Layout.extend({
     },
     initialize: function (options) {
 		this.todos = options.todos;
+		this.dnrResources = options.dnrResources;
+		//examples.map-y7l23tes
 
-		this.defaultMap = L.tileLayer('http://a.tiles.mapbox.com/v3/examples.map-y7l23tes/{z}/{x}/{y}.png');
-		this.offlineMap = new L.TileLayer.OfflineMBTiles('', {tms:true, minZoom:1, maxZoom: 12,attribution: "Washington"});	
-		this.dnrLands = L.tileLayer('http://a.tiles.mapbox.com/v3/smartmine.kr5jc3di/{z}/{x}/{y}.png', {minZoom:8 });
-		
+		this.defaultMap = L.tileLayer('http://a.tiles.mapbox.com/v3/smartmine.ho5fmi29/{z}/{x}/{y}.png');
+		this.dnrLands = L.tileLayer('http://a.tiles.mapbox.com/v3/smartmine.82f647vi/{z}/{x}/{y}.png', {minZoom:4 });
+		this.dnrGrid = L.tileLayer('http://a.tiles.mapbox.com/v3/smartmine.82f647vi/{z}/{x}/{y}.png', {minZoom:4 });
+
 		this.mapFirstView = true;
         _.bindAll(this, 'onShow');
     },
@@ -23,9 +25,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.bounds = false;
 		//set buttons according to internet settings
 		this.toggleSetButtons();
-		
-		console.log(MainApplication.Map);
-		
+
 		MainApplication.Map === undefined ? MainApplication.Map = L.mapbox.map('map') : false;
 			  
 		//console.log(MainApplication.Map);
@@ -34,8 +34,9 @@ var MapView = Backbone.Marionette.Layout.extend({
 		MainApplication.Map.on("dragstart",function(){
 			dc.loadCurrentMap();
 		});
-		this.createUTFGrid();
-		this.createDNRLands();
+		//this.createUTFGrid();
+		//this.createDNRLands();
+		this.createDNRGrid();
 		/*
 		for (var i = MainApplication.models.todos.length - 1; i >= 0; i--){
 			if(MainApplication.models.todos.models[i].attributes.Latitude !== undefined && MainApplication.models.todos.models[i].attributes.Longitude !== undefined){
@@ -70,8 +71,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 		return unboundMarker;
 	},
 	createDNRLands: function(){
-		var dnrLands = this.dnrLands.addTo(MainApplication.Map);
-		return dnrLands;
+		var dnrGrid = this.dnrGrid.addTo(MainApplication.Map);
+		return dnrGrid;
 	},
 	clearMapMarkers: function(){
 		var collection = this.todos;
@@ -81,6 +82,49 @@ var MapView = Backbone.Marionette.Layout.extend({
 		};
 		return false;
 	},
+	createDNRGrid: function(){	
+		var mapbox = L.tileLayer('http://{s}.tiles.mapbox.com/v3/smartmine.izm5nrk9/{z}/{x}/{y}.png', { minZoom: 4, maxZoom: 13 }).addTo(MainApplication.Map);
+		
+		var utfGrid = new L.UtfGrid('http://{s}.tiles.mapbox.com/v3/smartmine.izm5nrk9/{z}/{x}/{y}.grid.json?callback={cb}');
+
+		utfGrid.on('mouseover', function(e){ 
+			if(e.data){ info.update(e); }
+		}).on('mouseout', function(e){ 
+			info.update();
+		})
+		utfGrid.on('click', function(props){
+			if(props.data){
+				console.log(props);
+				var popup = L.popup()
+					.setLatLng(props.latlng)
+					.setContent("<h4>Acreage over an area &nbsp;&nbsp;&nbsp;&nbsp;</h4>" +  (props ?
+						"<values><b>" + props.data.GISAcres + "</b><br />Percentage: <rank>" + props.data.GISAcres+"</rank></values>" : "Select a state"))
+					.openOn(MainApplication.Map); 
+			}
+		});
+
+		var info = L.control();
+		info.options.position = 'bottomright';
+		info.onAdd = function (map) {
+		    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+		    this.update();
+		    return this._div;
+		};
+
+		info.update = function (props) {
+			if(props){
+				this._div.innerHTML = "<h4>Acreage over an area &nbsp;&nbsp;&nbsp;&nbsp;</h4>" +  (props ?
+							"<values><b>" + props.data.GISAcres + "</b><br />Percentage: <rank>" + props.data.GISAcres +"</rank></values>"
+				: 'Hover over a state');
+			}
+		};
+		
+		MainApplication.Map.setView([30,0], 2)
+			.addLayer(utfGrid)
+			.addControl(info);
+		
+		return false;
+	},		
 	createUTFGrid: function(){	
 		var mapbox = L.tileLayer('http://{s}.tiles.mapbox.com/v3/milkator.press_freedom/{z}/{x}/{y}.png').addTo(MainApplication.Map);
 
@@ -261,8 +305,13 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 		"click #lnkChart" : "loadD3Example",
 		"click #lnkContactUs" : "loadContactUs",
 		"click #lnkTodos" : "addTodos",
-		"click #lnkLocate" : "geoLocate"
-	},	
+		"click #lnkLocate" : "geoLocate",
+		"click #lnkRightSlide" : "loadRightSlide"
+	},
+	loadRightSlide: function(){
+		
+		return false;
+	},
 	addTodos: function(){
 		//Create new marker
 		var bounds = MainApplication.Map.getCenter();

@@ -4,6 +4,14 @@ var GenericModel = Backbone.Model.extend({
     idAttribute: 'Id'
 });
 
+var DnrModel = Backbone.Model.extend({
+    urlRoot: 'dnrResources',
+    idAttribute: 'Id',
+	initialize: function(){
+		this.set(BootstrapVars.dnrStats);
+	}
+});
+
 /*
 var BikePathModel = Backbone.Model.extend({
     urlRoot: 'scripts/source/config/esri_sunriver_conference_poker_ride.geojson',
