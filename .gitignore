@@ -1,7 +1,6 @@
 lib-cov
 *.seed
 *.log
-*.csv
 *.dat
 *.out
 *.pid
@@ -14,5 +13,4 @@ results
 node_modules
 bower_components
 npm-debug.log
-
-.elasticbeanstalk/
+.elasticbeanstalk/
