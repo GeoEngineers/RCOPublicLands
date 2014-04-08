@@ -33,6 +33,8 @@ MainApplication.Templates.MapNewMarkerTipTemplate = [
 ].join("\n");
 
 
+
+
 MainApplication.Templates.MapFooterTemplate = [
 	"<div class='navbar navbar-inverse navbar-fixed-bottom'>",
 		"<div class='navbar-inner'>",
@@ -73,3 +75,14 @@ MainApplication.Templates.WelcomeTemplate = [
 		"</div>",
 	"</div>",
 ].join("\n");
+
+
+MainApplication.Templates.MapTipTemplate = [
+    "<b>{{ParcelName}}</b><br />",
+		"Owner: {{Owner}} <br />",
+		"Total Area (Acres): {{TotalArea}}<br />",
+		"Acquisition Date: {{AquisitionDate}} <br />",
+		"Cost: {{Cost}} <br />",
+		"<button class=\"btn btn-primary\" type=\"button\" id=\"btnQuestionPost\">Post a Question</button>",	
+].join("\n");
+
