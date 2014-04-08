@@ -76,11 +76,11 @@ MainApplication.Templates.WelcomeTemplate = [
 
 
 MainApplication.Templates.MapTipTemplate = [
-    "<b>{{ParcelName}}</b><br />",
+    "<h4>{{ParcelName}}</h4>",
 		"Owner: {{Owner}} <br />",
 		"Total Area (Acres): {{TotalArea}}<br />",
 		"Acquisition Date: {{AquisitionDate}} <br />",
-		"Cost: {{Cost}} <br />",
+		"Cost: {{Cost}} <br /><br/>",
 		"<button class=\"btn btn-primary\" type=\"button\" id=\"btnQuestionPost\">Post a Question</button>",	
 ].join("\n");
 
