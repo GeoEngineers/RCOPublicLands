@@ -35,7 +35,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 			dc.loadCurrentMap();
 		});
 		//this.createUTFGrid();
-		//this.createDNRLands();
 		this.createDNRGrid();
 		/*
 		for (var i = MainApplication.models.todos.length - 1; i >= 0; i--){
