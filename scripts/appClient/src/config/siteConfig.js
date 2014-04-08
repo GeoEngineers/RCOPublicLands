@@ -80,7 +80,7 @@ Backbone.Marionette.TemplateCache.prototype.compileTemplate = function (rawTempl
  
 
 ////////////////////Application Details//////////////////////////
-MainApplication.LandingPage = "LandingPage";
+MainApplication.LandingPage = "Map";
 MainApplication.hostURL = window.location.protocol + "//" + window.location.host;
 //MainApplication.hostURL = "http://smboilerplate-env.elasticbeanstalk.com";
 //path ID 1 is our libraries we bring into the app (as opposed to getting them with bower, this can be for shims, fixes, overrides, whatever, the rest of the paths are arbitrary, and as such as completely flexible, that being said, we store our files in source)
@@ -95,7 +95,7 @@ MainApplication.pathsConfig = [
 //These are the files we use which are stored in the paths above
 MainApplication.ConfigFiles = {
     //this page is the default page
-    "LandingPage" : {
+    "Map" : {
         "Id": 1,
         "hashPath": "*actions",
         "containerClass": "node-outline",
@@ -109,14 +109,14 @@ MainApplication.ConfigFiles = {
             { "model" : "toDoModels.js" }
         ],
         "templates": [
-            { "template" : "landingPageTemplate.js" },
+            { "template" : "mapTemplate.js" },
             { "template" : "toDoTemplates.js" }
         ],
         "views": [
-            { "view": "landingPageViews.js" },
+            { "view": "mapViews.js" },
             { "view": "toDoViews.js" }
         ],
-        "initializers": "initLandingPage.js"
+        "initializers": "initMap.js"
     },
     "ContactUs": {
         "Id": 6,

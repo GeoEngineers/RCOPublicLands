@@ -1,6 +1,6 @@
 ﻿MainApplication.Templates = MainApplication.Templates || {};
 
-MainApplication.Templates.LandingPageView = [
+MainApplication.Templates.MapTemplate = [
 	"<div style='color:#000000;'>",
 		"This is the landing page area, you can place any content here.",
 		"<ul id='map-buttons'>",
@@ -23,7 +23,7 @@ MainApplication.Templates.LandingPageView = [
 ].join("\n");
 
 
-MainApplication.Templates.LandingPageNewMarkerTipTemplate = [
+MainApplication.Templates.MapNewMarkerTipTemplate = [
     "<div class='unboundNewMarkerMsg'>",
 		"<b>{{Description}}</b><br />",
 		"Select \"Edit\" to rename or move this item.<br />",
@@ -33,7 +33,7 @@ MainApplication.Templates.LandingPageNewMarkerTipTemplate = [
 ].join("\n");
 
 
-MainApplication.Templates.LandingPageFooterTemplate = [
+MainApplication.Templates.MapFooterTemplate = [
 	"<div class='navbar navbar-inverse navbar-fixed-bottom'>",
 		"<div class='navbar-inner'>",
 			"<div class='container'>",

@@ -2,7 +2,7 @@ _.extend(MainApplication, {
 	onDeviceOnline : function(e){	
 		alert("You are now back online.");	
 		//switch to online maps
-		MainApplication.views.landingPageView !== undefined && MainApplication.views.landingPageView.setBaseMapDefault!== undefined ? MainApplication.views.landingPageView.setBaseMapDefault() : false;
+		MainApplication.views.mapView !== undefined && MainApplication.views.mapView.setBaseMapDefault!== undefined ? MainApplication.views.mapView.setBaseMapDefault() : false;
 		//switch to online todos
 		GeoAppBase.synchTodoQueue(
 			function(){
@@ -27,7 +27,7 @@ _.extend(MainApplication, {
 			//console.log("Switching to offline mode.");
 			alert("Your application has gone offline.  Once reconnected the application may have to syncronize before any changes are saved to the server.");
 			//switch to offline maps
-			MainApplication.views.landingPageView.setBaseMapOffline();
+			MainApplication.views.mapView.setBaseMapOffline();
 			MainApplication.clientOfflineMode = true;
 			$("#connectionStatus").css({"display":"block"});
 		}

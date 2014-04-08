@@ -109,7 +109,7 @@ _.extend(GeoAppBase, {
 		//return (states[networkState] > 1 || navigator.onLine);
 	},
 	geolocateApp: function(){
-		MainApplication.LandingPageMap.locate();		
+		MainApplication.Map.locate();		
 	},
     getHashTag: function () {
         return window.location.hash.substring(1);

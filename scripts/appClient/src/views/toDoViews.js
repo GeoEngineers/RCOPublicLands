@@ -88,7 +88,7 @@ var TodoAppView = Backbone.Marionette.Layout.extend({
 		return false;
 	},	
 	addTodo: function() {
-		MainApplication.views.landingPageFooterView.addTodos();
+		MainApplication.views.mapFooterView.addTodos();
 	},
 	removeCompleted: function() {
 		var dc =this;
@@ -102,7 +102,7 @@ var TodoAppView = Backbone.Marionette.Layout.extend({
 		return false;
 	},
 	removeCompletedItem: function(t){
-		t.marker !== undefined ? MainApplication.LandingPageMap.removeLayer(t.marker) : false;
+		t.marker !== undefined ? MainApplication.Map.removeLayer(t.marker) : false;
 		$("#todoItem-"+t.cid).remove();
 		t.destroy({
 			success: function(model, response) {
@@ -151,7 +151,7 @@ var TodoTitleModal = Backbone.Marionette.ItemView.extend({
 			var todo = this.todos.get(this.marker.markerToolTip.Id);
 			this.setupTodoDetails(todo);
 		}else{
-			MainApplication.LandingPageMap.removeLayer(this.marker);
+			MainApplication.Map.removeLayer(this.marker);
 		}
 		//MainApplication.modalRegion.hideModal();
 		return false;

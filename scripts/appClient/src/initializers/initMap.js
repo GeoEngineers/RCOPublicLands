@@ -1,5 +1,5 @@
 ﻿//Initial View Loader
-var this_page_name = "LandingPage";
+var this_page_name = "Map";
 MainApplication.pageInitializer[this_page_name] = MainApplication.module(this_page_name+"Module", function () {
     this.startWithParent = false;
 });
@@ -21,10 +21,10 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
 		}
 		//continue app as normal after, might become a callback to sync queue depending on promise structure
 		MainApplication.models.todos = new Todos();
-		MainApplication.views.landingPageView = new LandingPageView({
+		MainApplication.views.mapView = new MapView({
 			todos: MainApplication.models.todos
 		});
-		MainApplication.views.landingPageView.on("show",function(){
+		MainApplication.views.mapView.on("show",function(){
 			MainApplication.views.toDoView = new TodoAppView({
 				todos : MainApplication.models.todos
 			});
@@ -39,17 +39,17 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
 		//	dataType: 'json',
 		//	cache: false,
 		//	success: function(){
-				MainApplication.mainRegion.show(MainApplication.views.landingPageView);		
+				MainApplication.mainRegion.show(MainApplication.views.mapView);		
 		//	},
 		//	error: function(model, response, options) {
 		//		console.log("Error retrieving todos");
 		//	}
 		//});
 			
-		MainApplication.views.landingPageFooterView = new LandingPageFooterView({
+		MainApplication.views.mapFooterView = new MapFooterView({
 			genericCollection: MainApplication.models.genericCollection,
 			todos: MainApplication.models.todos
 		});
-		MainApplication.footerRegion.show(MainApplication.views.landingPageFooterView);	
+		MainApplication.footerRegion.show(MainApplication.views.mapFooterView);	
 	});
 });
