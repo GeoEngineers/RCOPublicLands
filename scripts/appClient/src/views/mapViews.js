@@ -118,7 +118,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 			}
 		};
 		
-		MainApplication.Map.setView([30,0], 2)
+		MainApplication.Map.setView([47,-121], 6)
 			.addLayer(utfGrid)
 			.addControl(info);
 		
