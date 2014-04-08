@@ -8,8 +8,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 		//examples.map-y7l23tes
 
 		this.defaultMap = L.tileLayer('http://a.tiles.mapbox.com/v3/smartmine.ho5fmi29/{z}/{x}/{y}.png', { minZoom:4, maxZoom: 13 });
-		this.dnrLands = L.tileLayer('http://{s}.tiles.mapbox.com/v3/smartmine.izm5nrk9/{z}/{x}/{y}.png', {minZoom:4, maxZoom: 13 });
-		this.dnrGrid = L.tileLayer('http://{s}.tiles.mapbox.com/v3/smartmine.izm5nrk9/{z}/{x}/{y}.grid.json?callback={cb}', {minZoom:4, maxZoom: 13 });
+		this.dnrLands = 'http://{s}.tiles.mapbox.com/v3/smartmine.izm5nrk9/{z}/{x}/{y}.png';
+		this.dnrGrid = 'http://{s}.tiles.mapbox.com/v3/smartmine.izm5nrk9/{z}/{x}/{y}.grid.json?callback={cb}';
 
 		this.mapFirstView = true;
         _.bindAll(this, 'onShow');
@@ -31,14 +31,10 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.toggleSetButtons();
 
 		MainApplication.Map === undefined ? MainApplication.Map = L.mapbox.map('map',{ minZoom:4, maxZoom: 13 }) : false;
-			  
-		//console.log(MainApplication.Map);
-			  
 		this.loadCurrentMap();
 		MainApplication.Map.on("dragstart",function(){
 			dc.loadCurrentMap();
 		});
-		//this.createUTFGrid();
 		this.createDNRGrid();
 		this.mapFirstView=false;
 	},
@@ -70,7 +66,10 @@ var MapView = Backbone.Marionette.Layout.extend({
 		};
 		return false;
 	},
-	createDNRGrid: function(){			
+	createDNRGrid: function(){	
+		this.dnrlayer = L.tileLayer(this.dnrLands, {minZoom:4, maxZoom: 13 });
+		MainApplication.Map.addLayer(this.dnrlayer);	
+		
 		var utfGrid = new L.UtfGrid(this.dnrGrid);
 		utfGrid.on('mouseover', function(e){ 
 			if(e.data){ info.update(e); }
