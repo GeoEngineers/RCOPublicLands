@@ -54,14 +54,14 @@ MainApplication.PaneRegion = Backbone.Marionette.Region.extend({
     },
     slideOut: function (view) {
 		//fix for first time display
-		$("#SummaryPaneSlideOut").css("display","block");
+		//$("#SummaryPaneSlideOut").css("display","block");
 		this.slideOpen = true;
     },
     slideIn: function () {
 		this.slideOpen = false;	
     }
 });
-$("#SummaryPaneSlideOut").css("display","none");
+//$("#SummaryPaneSlideOut").css("display","none");
 
 
 MainApplication.ModalRegion = Backbone.Marionette.Region.extend({

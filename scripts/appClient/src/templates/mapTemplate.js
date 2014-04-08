@@ -33,8 +33,6 @@ MainApplication.Templates.MapNewMarkerTipTemplate = [
 ].join("\n");
 
 
-
-
 MainApplication.Templates.MapFooterTemplate = [
 	"<div class='navbar navbar-inverse navbar-fixed-bottom'>",
 		"<div class='navbar-inner'>",
@@ -43,7 +41,7 @@ MainApplication.Templates.MapFooterTemplate = [
 					"<li id='lnkChart'><a href='#'>&#9776;<div class='txt'>Compare</div></a></li>",
 				"</ul>",
 				"<ul class='navbar-nav iconsNav' style='float:right;'>",
-					"<li id='lnkSlideMenu' class='navLink' href='#SummaryPaneSlideOut' class='slide-menu'><a href='#'><i class='icon-bar-chart icon-large'></i><div class='txt'>Navigation</div></a></li>",
+					"<li class='slide-menu'><a href='#' id='lnkSlideMenu' class='navLink' href='#SummaryPaneSlideOut'><i class='icon-bar-chart icon-large'></i><div class='txt'>Navigation</div></a></li>",
 				"</ul>",				
 			"</div>",
 		"</div>",

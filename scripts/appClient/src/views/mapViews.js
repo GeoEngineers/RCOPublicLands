@@ -55,8 +55,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 		return unboundMarker;
 	},
 	createDNRLands: function(){
-		var dnrGrid = this.dnrGrid.addTo(MainApplication.Map);
-		return dnrGrid;
+		this.dnrlayer = L.tileLayer(this.dnrLands, {minZoom:4, maxZoom: 13 });
+		this.dnrlayer.addTo(MainApplication.Map);
 	},
 	clearMapMarkers: function(){
 		var collection = this.todos;
@@ -67,9 +67,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 		return false;
 	},
 	createDNRGrid: function(){	
-		this.dnrlayer = L.tileLayer(this.dnrLands, {minZoom:4, maxZoom: 13 });
-		MainApplication.Map.addLayer(this.dnrlayer);	
-		
+		this.createDNRLands()
+
 		var utfGrid = new L.UtfGrid(this.dnrGrid);
 		utfGrid.on('mouseover', function(e){ 
 			if(e.data){ info.update(e); }
