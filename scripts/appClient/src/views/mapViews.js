@@ -36,9 +36,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 		});
 		//this.createUTFGrid();
 		this.createDNRGrid();
-		$(document).ready(function() {
-			$('.menu-link').bigSlide();
-		});
 		/*
 		for (var i = MainApplication.models.todos.length - 1; i >= 0; i--){
 			if(MainApplication.models.todos.models[i].attributes.Latitude !== undefined && MainApplication.models.todos.models[i].attributes.Longitude !== undefined){
@@ -308,10 +305,18 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 		"click #lnkContactUs" : "loadContactUs",
 		"click #lnkTodos" : "addTodos",
 		"click #lnkLocate" : "geoLocate",
-		"click #lnkRightSlide" : "loadRightSlide"
+		"click #lnkSlideMenu" : "loadRightSlide"
+	},
+	onShow: function(){
+		//temp fix until menu is completely ready
+		$(document).ready(function() {
+			$('.slide-menu').bigSlide({ side:"right", menu:"#SummaryPaneSlideOut" }).css("z-index","999999");
+		});
+		return false;
 	},
 	loadRightSlide: function(){
-		
+		this.mapPaneView =  new MapPaneView();
+		MainApplication.paneRegion.show(this.mapPaneView);
 		return false;
 	},
 	addTodos: function(){
@@ -399,4 +404,13 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 		}
 		return false;
 	}
+});
+
+var MapPaneView = Backbone.Marionette.ItemView.extend({
+    template: function (serialized_model) {
+        return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.MapPaneTemplate);
+    },
+    initialize: function (options) {
+		//nada
+    }
 });

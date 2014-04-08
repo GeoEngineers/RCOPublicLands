@@ -39,6 +39,30 @@
     }
 });
 
+MainApplication.PaneRegion = Backbone.Marionette.Region.extend({
+    el: "#SummaryPaneSlideOut",
+    constructor: function () {
+        _.bindAll(this, 'getEl', 'slideOut', 'slideIn');
+        Backbone.Marionette.Region.prototype.constructor.apply(this, arguments);
+        this.on("show", this.slideOut, this);
+		this.slideOpen = false;
+    },
+    getEl: function (selector) {
+        var $el = $(selector);
+        $el.on("hidden", this.close);
+        return $el;
+    },
+    slideOut: function (view) {
+		//fix for first time display
+		$("#SummaryPaneSlideOut").css("display","block");
+		this.slideOpen = true;
+    },
+    slideIn: function () {
+		this.slideOpen = false;	
+    }
+});
+$("#SummaryPaneSlideOut").css("display","none");
+
 MainApplication.ModalRegion = Backbone.Marionette.Region.extend({
     el: "#localModalBlock",
     constructor: function () {
@@ -76,5 +100,6 @@ MainApplication.addRegions({
 	footerRegion: "#FooterNavContainer",
 	headerRegion: "#HeaderNavContainer",
 	slideRegion: MainApplication.SlideRegion,
-    modalRegion: MainApplication.ModalRegion
+    modalRegion: MainApplication.ModalRegion,
+	paneRegion: MainApplication.PaneRegion
 });

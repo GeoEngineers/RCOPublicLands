@@ -15,15 +15,6 @@ MainApplication.Templates.MapTemplate = [
 			//	"<button id='lnkSyncQueueData' class='btn'>Sync Me!</button>",
 			//"</div>",			
 		"</ul>",
-		"<nav id='menu' class='panel' role='navigation'>",
-			"<ul>",
-				"<li><a href='#'>Home</a></li>",
-				"<li><a href='#'>The Ballad of El Goodo</a></li>",
-				"<li><a href='#'>Thirteen</a></li>",
-				"<li><a href='#'>September Gurls</a></li>",
-				"<li><a href='#'>What's Going Ahn</a></li>",
-			"</ul>",
-		"</nav>",
 		"<div id='connectionStatus'><img src='./content/images/38-1.gif'><span class='txt'> Re-connecting...</span></div>",
 		"<div id='chartLayer'></div>",
 		"<div id='map'></div>",
@@ -49,11 +40,22 @@ MainApplication.Templates.MapFooterTemplate = [
 				"<ul class='navbar-nav iconsNav'>",
 					"<li id='lnkTodos' class='navLink'><a href='#'><i class='icon-comments icon-large'></i><div class='txt'>Add Todo</div></a></li>",
 					"<li id='lnkChart' class='navLink'><a href='#'><i class='icon-bar-chart icon-large'></i><div class='txt'>Compare</div></a></li>",
-					"<a href='#menu' class='menu-link'>&#9776;</a>",
+					"<li id='lnkSlideMenu' href='#SummaryPaneSlideOut' class='slide-menu'><a href='#'>&#9776;<div class='txt'>Compare</div></a></li>",
 					//"<li id='lnkTOC' class='navLink'><a href='#'><i class='icon-filter icon-large'></i><div class='txt'>TOC</div></a></li>",
 					//"<li id='lnkLocate' class='navLink'><a href='#'><i class='icon-compass icon-large'></i><div class='txt'>Geo Locate</div></a></li>",
 				"</ul>",
 			"</div>",
 		"</div>",
 	"</div>"
+].join("\n");
+
+
+MainApplication.Templates.MapPaneTemplate = [
+	"<ul>",
+		"<li><a href='#'>Home</a></li>",
+		"<li><a href='#'>The Ballad of El Goodo</a></li>",
+		"<li><a href='#'>Thirteen</a></li>",
+		"<li><a href='#'>September Gurls</a></li>",
+		"<li><a href='#'>What's Going Ahn</a></li>",
+	"</ul>"
 ].join("\n");
