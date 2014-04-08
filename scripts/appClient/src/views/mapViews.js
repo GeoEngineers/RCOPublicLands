@@ -330,8 +330,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
         return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.MapPaneTemplate);
     },
     initialize: function (options) {
-		//nada
-		
+		this.arcColor="#000000";
     },
 	onShow: function(){
 		this.loadD3Example();
@@ -380,9 +379,9 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			  .style("fill", function(d) { return color(d.data.age); });
 
 		  g.append("text")
-		  .on('click', function(){ console.log("test"); })
-			  .on('mouseover', dc.synchronizedMouseOver)
-			  .on("mouseout", dc.synchronizedMouseOut)
+		 // .on('click', function(){ console.log("test"); })
+			  .on('mouseover', function(ev){ ev.preventDefault(); return false; })
+			  .on("mouseout", function(ev){ ev.preventDefault(); return false; })
 			  .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
 			  .attr("dy", ".35em")
 			  .style("text-anchor", "middle")
@@ -392,11 +391,18 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		return false;
 	},
 	synchronizedMouseOver: function(ev){
-console.log(ev);
+		var arc = d3.select(this);
+		//console.log(arc); 		
+		var indexValue = arc.attr("index_value");
+		this.arcColor = arc[0][0].style.fill;
+		arc[0][0].style.fill="Maroon";
 		return false;
 	},
 	synchronizedMouseOut: function(ev){
-console.log(ev);
+		var arc = d3.select(this);
+		//console.log(arc); 
+		var indexValue = arc.attr("index_value");
+		arc[0][0].style.fill=this.arcColor;
 		return false;
 	}
 });
