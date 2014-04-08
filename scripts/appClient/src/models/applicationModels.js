@@ -8,7 +8,7 @@ var DnrModel = Backbone.Model.extend({
     urlRoot: 'dnrResources',
     idAttribute: 'Id',
 	initialize: function(){
-		this.set(BootstrapVars.areaStats[0]);
+		this.set(BootstrapVars.areaStats);
 	}
 });
 
