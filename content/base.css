@@ -14,6 +14,20 @@
     background-repeat: repeat-x;
 }
 
+.navbar-fixed-top, .navbar-fixed-bottom{
+	z-index:1050;
+}
+
+#SummaryPaneSlideOut {
+    background-color: #DDEEFF;
+    border: 1px solid #AACCEE;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    list-style: none outside none;
+    margin: 0;
+    padding: 20px 0 0;
+}
+
 #chartLayer{
 	z-index:999999;
 	position:absolute; 

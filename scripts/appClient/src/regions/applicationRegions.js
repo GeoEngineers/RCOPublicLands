@@ -63,6 +63,7 @@ MainApplication.PaneRegion = Backbone.Marionette.Region.extend({
 });
 $("#SummaryPaneSlideOut").css("display","none");
 
+
 MainApplication.ModalRegion = Backbone.Marionette.Region.extend({
     el: "#localModalBlock",
     constructor: function () {
