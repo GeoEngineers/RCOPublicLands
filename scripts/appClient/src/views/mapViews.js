@@ -398,6 +398,23 @@ var WelcomeView = Backbone.Marionette.ItemView.extend({
 	}	
 });
 
+var QuestionView = Backbone.Marionette.ItemView.extend({
+    template: function (serialized_model) {
+		return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.QuestionTemplate);
+    },
+	initialize: function(options){
+	},
+    events: {
+		"click #btnCloseQuestion": "closeModal",
+		"click #btnCancelQuestion": "closeModal"
+    },
+	closeModal: function () {
+		MainApplication.modalRegion.hideModal();
+		return false;
+	}	
+});
+
+
 var MapTipView = Backbone.Marionette.ItemView.extend({
     template: function (serialized_model) {
         return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.MapTipTemplate);
@@ -423,6 +440,8 @@ var MapTipView = Backbone.Marionette.ItemView.extend({
 		"click #btnQuestionPost": "postQuestion",
     },
     postQuestion: function(){
-        return false;
+
+		var questionView = new QuestionView({});
+		MainApplication.modalRegion.show(questionView);
     }
 });

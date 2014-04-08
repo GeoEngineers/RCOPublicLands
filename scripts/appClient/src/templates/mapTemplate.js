@@ -84,3 +84,25 @@ MainApplication.Templates.MapTipTemplate = [
 		"<button class=\"btn btn-primary\" type=\"button\" id=\"btnQuestionPost\">Post a Question</button>",	
 ].join("\n");
 
+
+MainApplication.Templates.QuestionTemplate = [
+	"<div class=\"modal-dialog\">",
+		"<div class=\"modal-content\">",
+			"<div class=\"modal-header\">",
+				"<h4 id=\"mySlideLabel\">Post a Question</h4>",
+			"</div>",
+			"<div class=\"modal-body\">",
+				"<label>Your Name:</label><input type=\"text\" id=\"txtName\" /><br />",
+				"<label>Email Address:</label><input type=\"text\" id=\"txtName\" /><br />",
+				"<label>Your Question:</label><br />",
+				"<textarea id=\"txtQuestion\" />",
+			"</div>",
+			"<div class=\"modal-footer\">",
+				"<button class=\"btn btn-primary\" type=\"button\" id=\"btnCloseQuestion\">Submit</button>",
+				"<button class=\"btn btn-warning\" type=\"button\" id=\"btnCancelQuestion\">Cancel</button>",
+			"</div>",
+		"</div>",
+	"</div>",
+].join("\n");
+
+
