@@ -22,6 +22,10 @@ var MapView = Backbone.Marionette.Layout.extend({
 	},	
 	onShow: function(){
 		var dc=this;
+
+		var welcomeView = new WelcomeView({});
+		MainApplication.modalRegion.show(welcomeView);
+
 		this.bounds = false;
 		//set buttons according to internet settings
 		this.toggleSetButtons();
@@ -413,4 +417,19 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
     initialize: function (options) {
 		//nada
     }
+});
+
+var WelcomeView = Backbone.Marionette.ItemView.extend({
+    template: function (serialized_model) {
+		return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.WelcomeTemplate);
+    },
+	initialize: function(options){
+	},
+    events: {
+		"click #btnCloseWelcome": "closeModal",
+    },
+	closeModal: function () {
+		MainApplication.modalRegion.hideModal();
+		return false;
+	}	
 });

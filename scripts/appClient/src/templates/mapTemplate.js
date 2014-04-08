@@ -49,7 +49,6 @@ MainApplication.Templates.MapFooterTemplate = [
 	"</div>"
 ].join("\n");
 
-
 MainApplication.Templates.MapPaneTemplate = [
 	"<ul>",
 		"<li><a href='#'>Home</a></li>",
@@ -58,4 +57,20 @@ MainApplication.Templates.MapPaneTemplate = [
 		"<li><a href='#'>September Gurls</a></li>",
 		"<li><a href='#'>What's Going Ahn</a></li>",
 	"</ul>"
+].join("\n");
+
+MainApplication.Templates.WelcomeTemplate = [
+	"<div class=\"modal-dialog\">",
+		"<div class=\"modal-content\">",
+			"<div class=\"modal-header\">",
+				"<h4 id=\"mySlideLabel\">Welcome to the Public Lands Inventory</h4>",
+			"</div>",
+			"<div class=\"modal-body\">",
+				"Add some text here",
+			"</div>",
+			"<div class=\"modal-footer\">",
+				"<button class=\"btn btn-primary\" type=\"button\" id=\"btnCloseWelcome\">Continue</button>",
+			"</div>",
+		"</div>",
+	"</div>",
 ].join("\n");
