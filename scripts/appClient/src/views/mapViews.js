@@ -7,9 +7,9 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.dnrResources = options.dnrResources;
 		//examples.map-y7l23tes
 
-		this.defaultMap = L.tileLayer('http://a.tiles.mapbox.com/v3/smartmine.ho5fmi29/{z}/{x}/{y}.png');
-		this.dnrLands = L.tileLayer('http://a.tiles.mapbox.com/v3/smartmine.82f647vi/{z}/{x}/{y}.png', {minZoom:4 });
-		this.dnrGrid = L.tileLayer('http://a.tiles.mapbox.com/v3/smartmine.82f647vi/{z}/{x}/{y}.png', {minZoom:4 });
+		this.defaultMap = L.tileLayer('http://a.tiles.mapbox.com/v3/smartmine.ho5fmi29/{z}/{x}/{y}.png', { minZoom:4, maxZoom: 13 });
+		this.dnrLands = L.tileLayer('http://a.tiles.mapbox.com/v3/smartmine.82f647vi/{z}/{x}/{y}.png', {minZoom:4, maxZoom: 13 });
+		this.dnrGrid = L.tileLayer('http://a.tiles.mapbox.com/v3/smartmine.82f647vi/{z}/{x}/{y}.png', {minZoom:4, maxZoom: 13 });
 
 		this.mapFirstView = true;
         _.bindAll(this, 'onShow');
@@ -26,7 +26,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		//set buttons according to internet settings
 		this.toggleSetButtons();
 
-		MainApplication.Map === undefined ? MainApplication.Map = L.mapbox.map('map') : false;
+		MainApplication.Map === undefined ? MainApplication.Map = L.mapbox.map('map',{ minZoom:4, maxZoom: 13 }) : false;
 			  
 		//console.log(MainApplication.Map);
 			  
@@ -36,6 +36,9 @@ var MapView = Backbone.Marionette.Layout.extend({
 		});
 		//this.createUTFGrid();
 		this.createDNRGrid();
+		$(document).ready(function() {
+			$('.menu-link').bigSlide();
+		});
 		/*
 		for (var i = MainApplication.models.todos.length - 1; i >= 0; i--){
 			if(MainApplication.models.todos.models[i].attributes.Latitude !== undefined && MainApplication.models.todos.models[i].attributes.Longitude !== undefined){
@@ -82,7 +85,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		return false;
 	},
 	createDNRGrid: function(){	
-		var mapbox = L.tileLayer('http://{s}.tiles.mapbox.com/v3/smartmine.izm5nrk9/{z}/{x}/{y}.png', { minZoom: 4, maxZoom: 13 }).addTo(MainApplication.Map);
+		var mapbox = L.tileLayer('http://{s}.tiles.mapbox.com/v3/smartmine.izm5nrk9/{z}/{x}/{y}.png', { minZoom: 4, maxZoom:13 }).addTo(MainApplication.Map);
 		
 		var utfGrid = new L.UtfGrid('http://{s}.tiles.mapbox.com/v3/smartmine.izm5nrk9/{z}/{x}/{y}.grid.json?callback={cb}');
 
