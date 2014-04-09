@@ -2,6 +2,7 @@ BootstrapVars = {} || BootstrapVars;
 
 BootstrapVars.areaStats = [
 	{
+		abbrev: "dnr",
 		agency: "Department of Fish & Wildlife",
 		total_acres : "912984.589506",
 		total_cost: "123456934.00",
@@ -10,6 +11,7 @@ BootstrapVars.areaStats = [
 		icon: "dfw.png"
 	},
 	{
+		abbrev: "blm",
 		agency: "Bureau of Land Managment",
 		total_acres : "2912984.589506",
 		total_cost: "567456934.00",

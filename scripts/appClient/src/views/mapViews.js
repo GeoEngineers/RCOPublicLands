@@ -253,7 +253,7 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
     initialize: function (options) {
 		this.todos = options.todos;
 		this.genericCollection = options.genericCollection;
-		
+		this.activeLayers=[];
         _.bindAll(this, 'loadContactUs', 'addTodos');
     },
 	events: {
@@ -269,12 +269,16 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 		});
 		return false;
 	},
-	actToggleBLMLayer : function(){
+	actToggleBLMLayer : function(ev){
+		this.toggleActiveLayers($(ev.currentTarget).attr("data-layerlabel"));
 		MainApplication.views.mapView.toggleMapLayer(MainApplication.views.mapView.blmLayer);
+		this.loadRightSlide();
 		return false;
 	},
-	actToggleDNRLayer : function(){
+	actToggleDNRLayer : function(ev){
+		this.toggleActiveLayers($(ev.currentTarget).attr("data-layerlabel"));
 		MainApplication.views.mapView.toggleMapLayer(MainApplication.views.mapView.dnrLayer);
+		this.loadRightSlide();
 		return false;
 	},	
 	addTodos: function(){
@@ -315,8 +319,22 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 		return false;
 	},
 	loadRightSlide: function(){
-		this.mapPaneView =  new MapPaneView();
+		this.mapPaneView =  new MapPaneView({
+			activeLayers : this.activeLayers
+		});
 		MainApplication.paneRegion.show(this.mapPaneView);
+		return false;
+	},
+	toggleActiveLayers: function(label){
+		if($.inArray(label,this.activeLayers) > -1){
+			$('#lnkToggle' + label.toUpperCase()).removeClass('btn-success');
+			this.activeLayers = _.reject(this.activeLayers,function(item){
+				return item===label;
+			});
+		}else{
+			$('#lnkToggle' + label.toUpperCase()).addClass('btn-success');
+			this.activeLayers.push(label);
+		}
 		return false;
 	}
 });
@@ -326,64 +344,60 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
         return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.MapPaneTemplate);
     },
     initialize: function (options) {
+		this.activeLayers = options.activeLayers
 		this.arcColor="#000000";
     },
 	onShow: function(){
-		this.loadD3Example();
+		this.loadD3LayerComparison();
 	},
-	loadD3Example: function(){
+	loadD3LayerComparison: function(){	
 		var dc=this;
-		console.log("Load D3 example");
-	
 		var width = 200, //960
 			height = 200, //500
 			radius = Math.min(width, height) / 2;
-
 		var color = d3.scale.ordinal()
 			.range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
-
 		var arc = d3.svg.arc()
 			.outerRadius(radius - 10)
 			.innerRadius(0);
-
 		var pie = d3.layout.pie()
 			.sort(null)
-			.value(function(d) { return d.population; });
-
+			.value(function(d) { return d.total_acres; });
 		var svg = d3.select("#chartLayer").append("svg")
 			.attr("width", width)
 			.attr("height", height)
 			.append("g")
 			.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-		d3.csv("/scripts/appClient/src/extensions/data.csv", function(error, data) {
-
-		  data.forEach(function(d) {
-			d.population = +d.population;
-		  });
-
-		  var g = svg.selectAll(".arc")
-			  .data(pie(data))
+		//d3.csv("/scripts/appClient/src/extensions/data.csv", function(error, data) {
+			//data.forEach(function(d) {
+			//	d.population = +d.population;
+			//});
+		//var data = BootstrapVars.areaStats;
+		var data = _.filter(BootstrapVars.areaStats, function(area){ 
+			return $.inArray(area.abbrev, dc.activeLayers) > -1; 
+		});
+		
+		var g = svg.selectAll(".arc")
+			.data(pie(data))
 			.enter().append("g")
-			  .attr("class", "arc");
+			.attr("class", "arc");
 
-		  g.append("path")
-		  .on('click', function(){ console.log("test"); })
-			  .on('mouseover', dc.synchronizedMouseOver)
-			  .on("mouseout", dc.synchronizedMouseOut)
-			  .attr("d", arc)
-			  .style("fill", function(d) { return color(d.data.age); });
+		g.append("path")
+		.on('click', function(){ console.log("test"); })
+			.on('mouseover', dc.synchronizedMouseOver)
+			.on("mouseout", dc.synchronizedMouseOut)
+			.attr("d", arc)
+			.style("fill", function(d) { return color(d.data.agency); });
 
-		  g.append("text")
-		 // .on('click', function(){ console.log("test"); })
-			  .on('mouseover', function(ev){ ev.preventDefault(); return false; })
-			  .on("mouseout", function(ev){ ev.preventDefault(); return false; })
-			  .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-			  .attr("dy", ".35em")
-			  .style("text-anchor", "middle")
-			  .text(function(d) { return d.data.age; });
-
-		});		
+		g.append("text")
+			.on('mouseover', function(ev){ console.log(ev); return false; })
+			.on("mouseout", function(ev){ console.log(ev); return false; })
+			.attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+			.attr("dy", ".35em")
+			.style("text-anchor", "middle")
+			.text(function(d) { return d.data.age; });
+		//});		
 		return false;
 	},
 	synchronizedMouseOver: function(ev){

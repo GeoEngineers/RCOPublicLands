@@ -26,8 +26,10 @@ MainApplication.Templates.MapFooterTemplate = [
 		"<div class='navbar-inner'>",
 			"<div class='container'>",
 				"<ul class='navbar-nav iconsNav'>",
-					"<li><button href='#' id='lnkToggleBLM' class='navLink btn'>BLM</button></li>",
-					"<li><button href='#' id='lnkToggleDNR' class='navLink btn'>DNR</button></li>",
+					"<li><button href='#' id='lnkToggleBLM' class='navLink btn' data-layerlabel='blm'>BLM</button></li>",
+					"<li><button href='#' id='lnkToggleDNR' class='navLink btn' data-layerlabel='dnr'>DNR</button></li>",
+					
+					//revenue producing, habitat and recreation, recreation, conservation 
 				"</ul>",				
 				"<ul class='navbar-nav iconsNav' style='float:right;'>",
 					"<li class='slide-menu'><a href='#' id='lnkSlideMenu' class='navLink' href='#SummaryPaneSlideOut'><i class='icon-bar-chart icon-large'></i><div class='txt'>Navigation</div></a></li>",
