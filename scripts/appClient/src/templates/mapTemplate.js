@@ -21,21 +21,14 @@ MainApplication.Templates.MapTemplate = [
 	"</div>"
 ].join("\n");
 
-
-MainApplication.Templates.MapNewMarkerTipTemplate = [
-    "<div class='unboundNewMarkerMsg'>",
-		"<b>{{Description}}</b><br />",
-		"Select \"Edit\" to rename or move this item.<br />",
-		"<a href='#' class='geoEditTodo'>Edit Todo</a> - ",
-		"<a href='#' class='geoDeleteTodo'>Delete Todo</a>",		
-	"</div>"
-].join("\n");
-
-
 MainApplication.Templates.MapFooterTemplate = [
 	"<div class='navbar navbar-inverse navbar-fixed-bottom'>",
 		"<div class='navbar-inner'>",
 			"<div class='container'>",
+				"<ul class='navbar-nav iconsNav'>",
+					"<li><button href='#' id='lnkToggleBLM' class='navLink btn'>BLM</button></li>",
+					"<li><button href='#' id='lnkToggleDNR' class='navLink btn'>DNR</button></li>",
+				"</ul>",				
 				"<ul class='navbar-nav iconsNav' style='float:right;'>",
 					"<li class='slide-menu'><a href='#' id='lnkSlideMenu' class='navLink' href='#SummaryPaneSlideOut'><i class='icon-bar-chart icon-large'></i><div class='txt'>Navigation</div></a></li>",
 				"</ul>",				
@@ -55,6 +48,15 @@ MainApplication.Templates.MapPaneTemplate = [
 	"</ul>"
 ].join("\n");
 
+MainApplication.Templates.MapNewMarkerTipTemplate = [
+    "<div class='unboundNewMarkerMsg'>",
+		"<b>{{Description}}</b><br />",
+		"Select \"Edit\" to rename or move this item.<br />",
+		"<a href='#' class='geoEditTodo'>Edit Todo</a> - ",
+		"<a href='#' class='geoDeleteTodo'>Delete Todo</a>",		
+	"</div>"
+].join("\n");
+
 MainApplication.Templates.WelcomeTemplate = [
 	"<div class=\"modal-dialog\">",
 		"<div class=\"modal-content\">",
@@ -71,7 +73,6 @@ MainApplication.Templates.WelcomeTemplate = [
 	"</div>",
 ].join("\n");
 
-
 MainApplication.Templates.MapTipTemplate = [
     "<h4>{{ParcelName}}</h4>",
 		"Owner: {{Owner}} <br />",
@@ -80,7 +81,6 @@ MainApplication.Templates.MapTipTemplate = [
 		"Cost: {{Cost}} <br /><br/>",
 		"<button class=\"btn btn-primary\" type=\"button\" id=\"btnQuestionPost\">Post a Question</button>",	
 ].join("\n");
-
 
 MainApplication.Templates.QuestionTemplate = [
 	"<div class=\"modal-dialog\">",
@@ -101,5 +101,3 @@ MainApplication.Templates.QuestionTemplate = [
 		"</div>",
 	"</div>",
 ].join("\n");
-
-

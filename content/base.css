@@ -13,7 +13,11 @@
     background-image: linear-gradient(to bottom, #23446D, #23446D);
     background-repeat: repeat-x;
 }
-
+.navLink{
+	height:40px; 
+	width: 70px; 
+	margin: 0px 10px 0px 0px; 
+}
 .navbar-fixed-top, .navbar-fixed-bottom{
 	z-index:1050;
 }

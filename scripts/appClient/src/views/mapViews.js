@@ -7,13 +7,13 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.dnrResources = options.dnrResources;
 		//examples.map-y7l23tes
 		
-		this.terrainMap = L.tileLayer.provider('MapBox.smartmine.g7poe7h9', { minZoom:4, maxZoom: 13 });
-		this.imageryMap = L.tileLayer.provider('MapBox.smartmine.map-nco5bdjp', { minZoom:4, maxZoom: 13 });
+		this.terrainMap = L.tileLayer.provider('MapBox.smartmine.g7poe7h9', { minZoom:4, maxZoom: 13, zIndex: 4 });
+		this.imageryMap = L.tileLayer.provider('MapBox.smartmine.map-nco5bdjp', { minZoom:4, maxZoom: 13, zIndex: 4 });
 		
-		this.dnrLands = new L.mapbox.tileLayer('smartmine.izm5nrk9');
-		this.dnrGrid = new L.UtfGrid('http://{s}.tiles.mapbox.com/v3/smartmine.izm5nrk9/{z}/{x}/{y}.grid.json?callback={cb}');
-		this.blmLands = new L.mapbox.tileLayer('smartmine.yyb3ayvi');
-		this.blmGrid = new L.UtfGrid('http://{s}.tiles.mapbox.com/v3/smartmine.yyb3ayvi/{z}/{x}/{y}.grid.json?callback={cb}');
+		this.dnrLands = new L.mapbox.tileLayer('smartmine.izm5nrk9', { zIndex: 5 });
+		this.dnrGrid = new L.UtfGrid('http://{s}.tiles.mapbox.com/v3/smartmine.izm5nrk9/{z}/{x}/{y}.grid.json?callback={cb}', { zIndex: 5 });
+		this.blmLands = new L.mapbox.tileLayer('smartmine.yyb3ayvi', { zIndex: 5 });
+		this.blmGrid = new L.UtfGrid('http://{s}.tiles.mapbox.com/v3/smartmine.yyb3ayvi/{z}/{x}/{y}.grid.json?callback={cb}', { zIndex: 5 });
 		
 		this.mapFirstView = true;
         _.bindAll(this, 'onShow');
@@ -43,23 +43,29 @@ var MapView = Backbone.Marionette.Layout.extend({
 		L.control.layers({
 			'Terrain': this.terrainMap.addTo(MainApplication.Map),
 			'Imagery': this.imageryMap
-		}, {
-			'BLM': L.layerGroup([
-				this.blmLands,
-				this.createGrid(this.blmGrid)
-			]),
-			'DNR': L.layerGroup([
-				this.dnrLands,
-				this.createGrid(this.dnrGrid)
-			])
-		},{
+		},{},{
 			position:'bottomleft'
-		}).addTo(MainApplication.Map);		
+		}).addTo(MainApplication.Map);
+		
+		this.blmLayer = L.layerGroup([
+			this.blmLands,
+			this.createGrid(this.blmGrid)
+		]);
+		this.dnrLayer = L.layerGroup([
+			this.dnrLands,
+			this.createGrid(this.dnrGrid)
+		]);
 		
 		MainApplication.Map.setView([47,-121], 6)
 			.addLayer(this.terrainMap);
-		
 		this.mapFirstView=false;
+	},
+	toggleMapLayer: function(layer){
+		if(MainApplication.Map.hasLayer(layer)){
+			MainApplication.Map.removeLayer(layer);
+		}else{
+			MainApplication.Map.addLayer(layer);
+		}
 	},
 	addMapMarker: function(b){
 		var bounds = b;
@@ -239,15 +245,21 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
     template: function (serialized_model) {
         return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.MapFooterTemplate);
     },
+	templateHelpers: function(){
+		return { 
+			layers : this.layersObject
+		}
+	},
     initialize: function (options) {
 		this.todos = options.todos;
 		this.genericCollection = options.genericCollection;
+		
         _.bindAll(this, 'loadContactUs', 'addTodos');
     },
 	events: {
-		"click #lnkContactUs" : "loadContactUs",
+		"click #lnkToggleBLM" : "actToggleBLMLayer",
+		"click #lnkToggleDNR" : "actToggleDNRLayer",
 		"click #lnkTodos" : "addTodos",
-		"click #lnkLocate" : "geoLocate",
 		"click #lnkSlideMenu" : "loadRightSlide"
 	},
 	onShow: function(){
@@ -257,11 +269,14 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 		});
 		return false;
 	},
-	loadRightSlide: function(){
-		this.mapPaneView =  new MapPaneView();
-		MainApplication.paneRegion.show(this.mapPaneView);
+	actToggleBLMLayer : function(){
+		MainApplication.views.mapView.toggleMapLayer(MainApplication.views.mapView.blmLayer);
 		return false;
 	},
+	actToggleDNRLayer : function(){
+		MainApplication.views.mapView.toggleMapLayer(MainApplication.views.mapView.dnrLayer);
+		return false;
+	},	
 	addTodos: function(){
 		//Create new marker
 		var bounds = MainApplication.Map.getCenter();
@@ -279,11 +294,7 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 			this.openPopup();
 		});
 		return false;
-	},		
-	loadContactUs: function(){
-	 	window[ApplicationName].router.navigate("ContactUs", { trigger: true });
-		return false;
-	},
+	},	
 	geoLocate: function(){
 		if (navigator.geolocation) {
 			MainApplication.Map.once('locationfound', function (e) {
@@ -297,6 +308,15 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 		}else{
 			alert("Geolocation is unavailable on this device.  We apologize for any inconvenience.");
 		}
+		return false;
+	},		
+	loadContactUs: function(){
+	 	window[ApplicationName].router.navigate("ContactUs", { trigger: true });
+		return false;
+	},
+	loadRightSlide: function(){
+		this.mapPaneView =  new MapPaneView();
+		MainApplication.paneRegion.show(this.mapPaneView);
 		return false;
 	}
 });
