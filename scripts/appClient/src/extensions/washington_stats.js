@@ -14,7 +14,7 @@ BootstrapVars.areaStats = [
   		total_acres : "2912984.589506",
       total_cost: "567456934.00",
       total_revenue: "435456934.00",
-  		mapUrl: "http://{s}.tiles.mapbox.com/v3/smartmine.1cqv9529/"
+  		mapUrl: "http://{s}.tiles.mapbox.com/v3/smartmine.yyb3ayvi/"
       icon: "blm.png"
 	}
 ];
