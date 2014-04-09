@@ -15,7 +15,12 @@
 }
 .navLink{
 	height:40px; 
-	width: 70px; 
+	width: 100px;
+	margin: 0px 10px 0px 0px; 
+}
+.navLinkExt{
+	height:40px; 
+	width: 150px;
 	margin: 0px 10px 0px 0px; 
 }
 .navbar-fixed-top, .navbar-fixed-bottom{

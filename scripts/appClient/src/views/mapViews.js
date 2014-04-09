@@ -22,7 +22,9 @@ var MapView = Backbone.Marionette.Layout.extend({
 		"click #lnkOfflineButton" : "setBaseMapOffline",
 		"click #lnkDefaultButton" : "setBaseMapDefault",
 		"click #lnkSyncQueueData" : "syncLiveData",
-		"click #lnkToggleConnection" : "toggleConnection"
+		"click #lnkToggleConnection" : "toggleConnection",
+		"click #lnkAgency" : "showAgencyOptions",
+		"click #lnkLandTypes" : "showLandOptions"
 	},	
 	onShow: function(){
 		var dc=this;
@@ -197,6 +199,19 @@ var MapView = Backbone.Marionette.Layout.extend({
 			$("#lnkToggleConnection").removeClass("btn-primary");
 			$("#lnkSyncQueueData").css("display","none");
 		}	
+	},
+	showAgencyOptions : function(){
+		$('#lnkLandTypes').removeClass("btn-primary");
+		$('#lnkAgency').hasClass("btn-primary") ? false : $('#lnkAgency').addClass("btn-primary");
+		$('#agencyToggles').css("display","block");
+		$('#landUseToggles').css("display","none");
+	},
+	showLandOptions : function(){
+		$('#lnkAgency').removeClass("btn-primary");
+		console.log($('#lnkLandTypes').hasClass("btn-primary"));
+		$('#lnkLandTypes').hasClass("btn-primary") ? false : $('#lnkLandTypes').addClass("btn-primary");
+		$('#agencyToggles').css("display","none");
+		$('#landUseToggles').css("display","block");
 	}
 });	
 
