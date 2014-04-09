@@ -6,7 +6,18 @@
     /*height: 100%;*/
     width: 100%;
 }
-
+.mapbox-info-toggle{
+	display:none;
+}
+.leaflet-popup-close-button {
+    z-index: 1050;
+}
+.leaflet-popup-close-button:hover {
+	background-color: none !important;
+}
+.leaflet-control-layers-toggle {
+    background-position: 0 -122px;
+}
 .leaflet-bar a, .mapbox-icon, .map-tooltip.closable .close, .leaflet-control-layers-toggle, .leaflet-popup-close-button, .mapbox-button-icon:before {
     height: 36px !important;
     width: 36px !important;

@@ -6,11 +6,15 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.todos = options.todos;
 		this.dnrResources = options.dnrResources;
 		//examples.map-y7l23tes
-
-		this.defaultMap = L.tileLayer('http://a.tiles.mapbox.com/v3/smartmine.ho5fmi29/{z}/{x}/{y}.png', { minZoom:4, maxZoom: 13 });
-		this.dnrLands = 'http://{s}.tiles.mapbox.com/v3/smartmine.izm5nrk9/{z}/{x}/{y}.png';
-		this.dnrGrid = 'http://{s}.tiles.mapbox.com/v3/smartmine.izm5nrk9/{z}/{x}/{y}.grid.json?callback={cb}';
-
+		
+		this.terrainMap = L.tileLayer.provider('MapBox.smartmine.g7poe7h9', { minZoom:4, maxZoom: 13 });
+		this.imageryMap = L.tileLayer.provider('MapBox.smartmine.map-nco5bdjp', { minZoom:4, maxZoom: 13 });
+		
+		this.dnrLands = new L.mapbox.tileLayer('smartmine.izm5nrk9');
+		this.dnrGrid = new L.UtfGrid('http://{s}.tiles.mapbox.com/v3/smartmine.izm5nrk9/{z}/{x}/{y}.grid.json?callback={cb}');
+		this.blmLands = new L.mapbox.tileLayer('smartmine.yyb3ayvi');
+		this.blmGrid = new L.UtfGrid('http://{s}.tiles.mapbox.com/v3/smartmine.yyb3ayvi/{z}/{x}/{y}.grid.json?callback={cb}');
+		
 		this.mapFirstView = true;
         _.bindAll(this, 'onShow');
     },
@@ -35,7 +39,26 @@ var MapView = Backbone.Marionette.Layout.extend({
 		MainApplication.Map.on("dragstart",function(){
 			dc.loadCurrentMap();
 		});
-		this.createDNRGrid();
+		
+		L.control.layers({
+			'Terrain': this.terrainMap.addTo(MainApplication.Map),
+			'Imagery': this.imageryMap
+		}, {
+			'BLM': L.layerGroup([
+				this.blmLands,
+				this.createGrid(this.blmGrid)
+			]),
+			'DNR': L.layerGroup([
+				this.dnrLands,
+				this.createGrid(this.dnrGrid)
+			])
+		},{
+			position:'bottomleft'
+		}).addTo(MainApplication.Map);		
+		
+		MainApplication.Map.setView([47,-121], 6)
+			.addLayer(this.terrainMap);
+		
 		this.mapFirstView=false;
 	},
 	addMapMarker: function(b){
@@ -54,10 +77,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 		});
 		return unboundMarker;
 	},
-	createDNRLands: function(){
-		this.dnrlayer = L.tileLayer(this.dnrLands, {minZoom:4, maxZoom: 13 });
-		this.dnrlayer.addTo(MainApplication.Map);
-	},
 	clearMapMarkers: function(){
 		var collection = this.todos;
 		for (var x=0;x<this.todos.length;x++){
@@ -66,16 +85,13 @@ var MapView = Backbone.Marionette.Layout.extend({
 		};
 		return false;
 	},
-	createDNRGrid: function(){	
-		this.createDNRLands()
-
-		var utfGrid = new L.UtfGrid(this.dnrGrid);
-		utfGrid.on('mouseover', function(e){ 
+	createGrid: function(gridLayer){	
+		gridLayer.on('mouseover', function(e){ 
 			if(e.data){ info.update(e); }
 		}).on('mouseout', function(e){ 
 			info.update();
 		})
-		utfGrid.on('click', function(props){
+		gridLayer.on('click', function(props){
 			if(props.data){
 				console.log(props);
 				var markerToolTip = new MapTipView({
@@ -103,57 +119,17 @@ var MapView = Backbone.Marionette.Layout.extend({
 		
 		info.update = function (props) {
 			if(props){
-				this._div.innerHTML = "<h4>Acreage over an area &nbsp;&nbsp;&nbsp;&nbsp;</h4>" +  (props ?
-							"<values><b>" + props.data.GISAcres + "</b><br />Percentage: <rank>" + props.data.GISAcres +"</rank></values>"
-				: 'Hover over a state');
+				//this._div.innerHTML = "<h4>Acreage over an area &nbsp;&nbsp;&nbsp;&nbsp;</h4>" +  (props ?
+				//	"<values><b>" + props.data.GISAcres + "</b><br />Percentage: <rank>" + props.data.GISAcres +"</rank></values>"
+				//: 'Hover over a state');
 			}
 		};
 		
-		MainApplication.Map.setView([47,-121], 6)
-			.addLayer(utfGrid)
-			.addControl(info);
-		
-		return false;
-	},		
-	createUTFGrid: function(){	
-		var utfGrid = new L.UtfGrid('http://{s}.tiles.mapbox.com/v3/milkator.press_freedom/{z}/{x}/{y}.grid.json?callback={cb}', {
-			resolution: 4,
-			maxZoom: 5
-		});
-		utfGrid.on('mouseover', function(e){ info.update(e);}).on('mouseout', function(e){ info.update();})
-		utfGrid.on('click', function(props){
-			if(props.data){
-				var popup = L.popup()
-					.setLatLng(props.latlng)
-					.setContent("<h4>Press Freedom in the world &nbsp;&nbsp;&nbsp;&nbsp;</h4>" +  (props ?
-						"<values><b>" + props.data.name + "</b><br />Ranking position: <rank>" + props.data.rank+"</rank></values>" : "Select a state"))
-					.openOn(MainApplication.Map); 
-			}
-		});
-
-		var info = L.control();
-		info.options.position = 'bottomright';
-		info.onAdd = function (map) {
-		    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-		    this.update();
-		    return this._div;
-		};
-
-		info.update = function (props) {
-			this._div.innerHTML = "<h4>Press Freedom in the world</h4>" +  (props ?
-			"<values><b>" + props.data.name + "</b><br />Ranking position: <rank>" + props.data.rank+"</rank></values>"
-			: 'Hover over a state');
-		};
-		
-		MainApplication.Map.setView([30,0], 2)
-			.addLayer(utfGrid)
-			.addControl(info);
-		
-		return false;
-	},
+		return gridLayer;
+	},	
 	loadCurrentMap: function(){
 		if(GeoAppBase.connectionAvailable()){
-			MainApplication.Map.hasLayer(this.defaultMap)===false ? this.setBaseMapDefault() : false;
+			MainApplication.Map.hasLayer(this.terrainMap)===false ? this.setBaseMapDefault() : false;
 		}else{
 			MainApplication.Map.hasLayer(this.offlineMap)===false ? this.setBaseMapOffline() : false;
 		}
@@ -163,11 +139,11 @@ var MapView = Backbone.Marionette.Layout.extend({
 		$("#lnkOfflineButton").removeClass('btn-primary');
 		$("#lnkDefaultButton").removeClass('btn-primary');
 		
-		//console.log(MainApplication.Map.hasLayer(this.defaultMap));
+		//console.log(MainApplication.Map.hasLayer(this.terrainMap));
 		//console.log(MainApplication.Map.hasLayer(this.offlineMap));
 		
-		if (MainApplication.Map.hasLayer(this.defaultMap)) {
-			MainApplication.Map.removeLayer(this.defaultMap);
+		if (MainApplication.Map.hasLayer(this.terrainMap)) {
+			MainApplication.Map.removeLayer(this.terrainMap);
 		}
 		if (MainApplication.Map.hasLayer(this.offlineMap)) {
 			MainApplication.Map.removeLayer(this.offlineMap);
@@ -176,7 +152,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 	setBaseMapDefault: function(){
 		this.resetBaseMaps();
 		$("#lnkDefaultButton").addClass('btn-primary');
-		this.defaultMap.addTo(MainApplication.Map);
+		this.terrainMap.addTo(MainApplication.Map);
 		return false;
 	},
 	setBaseMapOffline: function(){
