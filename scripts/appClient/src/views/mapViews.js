@@ -393,15 +393,18 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
         return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.MapPaneTemplate);
     },
     initialize: function (options) {
-		this.activeLayers = options.activeLayers
+		this.activeLayers = options.activeLayers;
 		this.arcColor="#000000";
     },
 	onShow: function(){
-		this.loadD3LayerComparison();
+		var dc=this;
+		dc.loadD3LayerComparison();
+		$( "#ddlSummaryType" ).change(function() {
+			dc.loadD3LayerComparison();
+		});
 	},
 	loadD3LayerComparison: function(){	
 		var dc=this;
-
 
 		var data = _.filter(BootstrapVars.areaStats, function(area){ 
 			return $.inArray(area.abbrev, dc.activeLayers) > -1; 
@@ -410,14 +413,30 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		var summaryText = "";
 		var total = 0;
 		var colorRange = [];
+		this.type = $( "#ddlSummaryType" ).val();
+
+		var isCurrency = this.type === "total_acres" ? "" : "$";
 		_.each(data, function(area){
-			summaryText += "- "+area.abbrev + ": " + area.total_acres + " acres<br/>";
-			total += area.total_acres;
+			var val = 0;
+			switch(dc.type)
+			{
+				case "total_acres":
+					val = area.total_acres;
+				case "total_cost":
+					val = area.total_cost;
+				case "total_revenue":
+					val =  area.total_revenue;
+				default:
+					break;
+			}
+			summaryText += "- "+area.abbrev + ": " + isCurrency + dc.formatCurrency(val)+ " acres<br/>";
+			total += val;
 			colorRange.push(area.color);
 		});
-		summaryText = "Total: "  + total+ " acres<br/>" + summaryText + "";
+		summaryText = "Total " + this.type.replace("total_", "")  + ": " + isCurrency  + dc.formatCurrency(total)+ " <br/>" + summaryText + "";
 
 		$("#summaryLayer").html(summaryText);
+		$("#chartLayer").html("");
 
 
 		var width = 200, //960
@@ -430,7 +449,20 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			.innerRadius(0);
 		var pie = d3.layout.pie()
 			.sort(null)
-			.value(function(d) { return d.total_acres; });
+			.value(function(d) {
+				var val = 0;
+				switch(dc.type)
+				{
+					case "total_acres":
+						return d.total_acres;
+					case "total_cost":
+						return d.total_cost;
+					case "total_revenue":
+						return d.total_revenue;
+					default:
+						return 0;
+				}
+			});
 		var svg = d3.select("#chartLayer").append("svg")
 			.attr("width", width)
 			.attr("height", height)
@@ -466,6 +498,10 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			.text(function(d) { return d.data.abbrev; });
 		//});		
 		return false;
+	},
+	formatCurrency: function(value)
+	{
+		return parseFloat(value, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString();
 	},
 	synchronizedMouseOver: function(ev){
 		var arc = d3.select(this);
