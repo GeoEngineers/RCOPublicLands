@@ -10,7 +10,8 @@ BootstrapVars.areaStats = [
 		mapTarget: "smartmine.izm5nrk9",
 		visible: true,
 		layerGroup: null,
-		symbol: '#x214a;'
+		symbol: '#x214a;',
+		color: '#ECC92E'
 
 	},
 	{
@@ -22,7 +23,8 @@ BootstrapVars.areaStats = [
 		mapTarget: "smartmine.yyb3ayvi",
 		visible: true,
 		layerGroup: null,
-		symbol: '#x2190;'
+		symbol: '#x2190;',
+		color: '#756BB1'
 	},
 	{
 		abbrev: "RCO",
@@ -33,6 +35,7 @@ BootstrapVars.areaStats = [
 		mapTarget: "smartmine.yyb3ayvi",
 		visible: true,
 		layerGroup: null,
-		symbol: '#x219a;'
+		symbol: '#x219a;',
+		color: '#428BCA'
 	}
 ];

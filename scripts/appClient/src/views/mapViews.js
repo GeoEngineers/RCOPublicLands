@@ -301,7 +301,7 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 		_.each(BootstrapVars.areaStats, function(area){
 			if(area.visible){
 				dc.activeLayers.push(area.abbrev);
-				$('#ownerToggle' + area.abbrev).css("color","#dddddd");
+				$('#ownerToggle' + area.abbrev).css("color",area.color);
 			}
 		});
 		dc.loadRightSlide();
@@ -375,7 +375,13 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 				return item===label;
 			});
 		}else{
-			$('#ownerToggle' + label).css("color","#dddddd");
+			var color = '';
+			_.each(BootstrapVars.areaStats, function(area){
+				if(area.abbrev == label){
+					color = area.color;
+				}
+			});
+			$('#ownerToggle' + label).css("color",color);
 			this.activeLayers.push(label);
 		}
 		return false;
@@ -395,11 +401,30 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 	},
 	loadD3LayerComparison: function(){	
 		var dc=this;
+
+
+		var data = _.filter(BootstrapVars.areaStats, function(area){ 
+			return $.inArray(area.abbrev, dc.activeLayers) > -1; 
+		});
+
+		var summaryText = "";
+		var total = 0;
+		var colorRange = [];
+		_.each(data, function(area){
+			summaryText += "- "+area.abbrev + ": " + area.total_acres + " acres<br/>";
+			total += area.total_acres;
+			colorRange.push(area.color);
+		});
+		summaryText = "Total: "  + total+ " acres<br/>" + summaryText + "";
+
+		$("#summaryLayer").html(summaryText);
+
+
 		var width = 200, //960
 			height = 200, //500
 			radius = Math.min(width, height) / 2;
 		var color = d3.scale.ordinal()
-			.range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+			.range(colorRange);
 		var arc = d3.svg.arc()
 			.outerRadius(radius - 10)
 			.innerRadius(0);
@@ -417,19 +442,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			//	d.population = +d.population;
 			//});
 		//var data = BootstrapVars.areaStats;
-		var data = _.filter(BootstrapVars.areaStats, function(area){ 
-			return $.inArray(area.abbrev, dc.activeLayers) > -1; 
-		});
-
-		var summaryText = "";
-		var total = 0;
-		_.each(data, function(area){
-			summaryText += "- "+area.abbrev + ": " + area.total_acres + " acres<br/>";
-			total += area.total_acres;
-		});
-		summaryText = "Total: "  + total+ " acres<br/>" + summaryText + "";
-
-		$("#summaryLayer").html(summaryText);
+		
 
 		var g = svg.selectAll(".arc")
 			.data(pie(data))
