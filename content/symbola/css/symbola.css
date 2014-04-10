@@ -1,0 +1,39 @@
+@font-face { font-family: Symbola; src: url('../fonts/Symbola.otf'); }
+.clear { clear: both; }
+
+.main {
+  margin-top: 60px;
+}
+
+.downloads {
+  float: right;
+  padding-top: 12px;
+}
+
+.download {
+  font-size: 13pt !important;
+  margin: 0 12px;
+}
+
+.icons {
+  margin-top: 28px;
+}
+
+.icon {
+  font-family: Symbola;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  margin: 3px;
+  line-height: 20px !important;
+  text-decoration: none;
+
+}
+
+.icon:hover {
+  text-decoration: none !important;
+}
+
+.font-size {
+  width: 260px;
+}

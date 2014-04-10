@@ -910,7 +910,9 @@ background-color: #dbeeff;
 .ownerToggle {
   display: inline-block;
 }
-
+.ownerToggle:hover {
+  color: #333333;
+}
 
 
 .abtn {

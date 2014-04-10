@@ -10,8 +10,21 @@ BootstrapVars.areaStats = [
 		mapTarget: "smartmine.izm5nrk9",
 		icon: "dfw.png",
 		visible: true,
-		layerGroup: null
+		layerGroup: null,
+		symbol: '#x214a;'
 
+	},
+	{
+		abbrev: "DFW",
+		agency: "Department of Fish and Wildlife",
+		total_acres : "2912984.589506",
+		total_cost: "567456934.00",
+		total_revenue: "435456934.00",
+		mapTarget: "smartmine.yyb3ayvi",
+		icon: "blm.png",
+		visible: true,
+		layerGroup: null,
+		symbol: '#x2190;'
 	},
 	{
 		abbrev: "RCO",
@@ -22,6 +35,7 @@ BootstrapVars.areaStats = [
 		mapTarget: "smartmine.yyb3ayvi",
 		icon: "blm.png",
 		visible: true,
-		layerGroup: null
+		layerGroup: null,
+		symbol: '#x219a;'
 	}
 ];

@@ -268,7 +268,7 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 	templateHelpers: function(){
 		var owners = [];
 		_.each(BootstrapVars.areaStats, function(area){
-			owners.push({owner: area.abbrev.toUpperCase()});
+			owners.push({owner: area.abbrev.toUpperCase(), symbol: area.symbol});
 		});
 		return { 
 			owners : owners,
@@ -299,8 +299,6 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 			if(area.visible){
 				dc.activeLayers.push(area.abbrev);
 				$('#ownerToggle' + area.abbrev).css("color","#dddddd");
-				$('#ownerCheck' + area.abbrev).removeClass('icon-check-empty icon-large');
-				$('#ownerCheck' + area.abbrev).addClass('icon-check icon-large');
 			}
 		});
 		dc.loadRightSlide();
@@ -366,15 +364,11 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 	toggleActiveLayers: function(label){
 		if($.inArray(label,this.activeLayers) > -1){
 			$('#ownerToggle' + label).css("color","#444444");
-			$('#ownerCheck' + label).removeClass('icon-check icon-large');
-			$('#ownerCheck' + label).addClass('icon-check-empty icon-large');
 			this.activeLayers = _.reject(this.activeLayers,function(item){
 				return item===label;
 			});
 		}else{
 			$('#ownerToggle' + label).css("color","#dddddd");
-			$('#ownerCheck' + label).removeClass('icon-check-empty icon-large');
-			$('#ownerCheck' + label).addClass('icon-check icon-large');
 			this.activeLayers.push(label);
 		}
 		return false;

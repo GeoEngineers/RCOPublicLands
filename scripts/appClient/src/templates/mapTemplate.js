@@ -28,7 +28,8 @@ MainApplication.Templates.MapFooterTemplate = [
 			"<div class='container'>",
 				"<ul class='navbar-nav iconsNav' id='agencyToggles'>",
 				"{{#each owners}}",
-					"<li><a href='#' id='ownerToggle{{owner}}' class='ownerToggle' data-layerlabel='{{owner}}'> <i class='icon-check-empty icon-large' id='ownerCheck{{owner}}'></i><div class='txt'>{{owner}}</div></a></li>",
+					"<li><a href='#' id='ownerToggle{{owner}}' class='ownerToggle' data-layerlabel='{{owner}}'> <i class=\"icon\">&{{symbol}}</i><div class='txt' style=\"font-size: 10pt\">{{owner}}</div></a></li>",
+					
 				"{{/each}}",
 				"</ul>",
 				"<ul class='navbar-nav iconsNav' id='landUseToggles' style='display:none;'>",
