@@ -3,17 +3,13 @@ var MapView = Backbone.Marionette.Layout.extend({
         return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.MapTemplate);
     },
     initialize: function (options) {
+    	var dc = this;
 		this.todos = options.todos;
 		this.dnrResources = options.dnrResources;
 		//examples.map-y7l23tes
 		
 		this.terrainMap = L.tileLayer.provider('MapBox.smartmine.g7poe7h9', { minZoom:4, maxZoom: 13, zIndex: 4 });
 		this.imageryMap = L.tileLayer.provider('MapBox.smartmine.map-nco5bdjp', { minZoom:4, maxZoom: 13, zIndex: 4 });
-		
-		this.dnrLands = new L.mapbox.tileLayer('smartmine.izm5nrk9', { zIndex: 5 });
-		this.dnrGrid = new L.UtfGrid('http://{s}.tiles.mapbox.com/v3/smartmine.izm5nrk9/{z}/{x}/{y}.grid.json?callback={cb}', { zIndex: 5 });
-		this.blmLands = new L.mapbox.tileLayer('smartmine.yyb3ayvi', { zIndex: 5 });
-		this.blmGrid = new L.UtfGrid('http://{s}.tiles.mapbox.com/v3/smartmine.yyb3ayvi/{z}/{x}/{y}.grid.json?callback={cb}', { zIndex: 5 });
 		
 		this.mapFirstView = true;
         _.bindAll(this, 'onShow');
@@ -49,18 +45,27 @@ var MapView = Backbone.Marionette.Layout.extend({
 			position:'bottomleft'
 		}).addTo(MainApplication.Map);
 		
-		this.blmLayer = L.layerGroup([
-			this.blmLands,
-			this.createGrid(this.blmGrid)
-		]);
-		this.dnrLayer = L.layerGroup([
-			this.dnrLands,
-			this.createGrid(this.dnrGrid)
-		]);
+
+		_.each(BootstrapVars.areaStats, function(area){ 
+				console.log(area);
+				var tileLayer = new L.mapbox.tileLayer(area.mapTarget, { zIndex: 5 });
+				var utfGrid = new L.UtfGrid('http://{s}.tiles.mapbox.com/v3/'+area.mapTarget+'/{z}/{x}/{y}.grid.json?callback={cb}', { zIndex: 5 });
+				area.layerGroup =  L.layerGroup([
+						tileLayer,
+						dc.createGrid(utfGrid, area)
+				]);			
+		});		
 		
 		MainApplication.Map.setView([47,-121], 6)
 			.addLayer(this.terrainMap);
 		this.mapFirstView=false;
+		_.each(BootstrapVars.areaStats, function(area){ 
+			if(area.visible){
+				console.log(area.layerGroup);
+				MainApplication.Map.addLayer(area.layerGroup);	
+				console.log("Loaded area:" + area.abbrev)	
+			}
+		});	
 	},
 	toggleMapLayer: function(layer){
 		if(MainApplication.Map.hasLayer(layer)){
@@ -93,7 +98,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		};
 		return false;
 	},
-	createGrid: function(gridLayer){	
+	createGrid: function(gridLayer, area){	
 		gridLayer.on('mouseover', function(e){ 
 			if(e.data){ info.update(e); }
 		}).on('mouseout', function(e){ 
@@ -104,7 +109,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 				console.log(props);
 				var markerToolTip = new MapTipView({
             		ParcelName: "Parcel",
-            		Owner: "Washington DNR",
+            		Owner: area.agency,
             		TotalArea: props.data.GISAcres,
             		AquisitionDate: '1/1/2010',
             		Cost: 1000
@@ -261,41 +266,59 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
         return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.MapFooterTemplate);
     },
 	templateHelpers: function(){
+		var owners = [];
+		_.each(BootstrapVars.areaStats, function(area){
+			owners.push({owner: area.abbrev.toUpperCase()});
+		});
 		return { 
+			owners : owners,
 			layers : this.layersObject
 		}
 	},
     initialize: function (options) {
+    	var dc = this;
 		this.todos = options.todos;
 		this.genericCollection = options.genericCollection;
-		this.activeLayers=[];
+
+		
         _.bindAll(this, 'loadContactUs', 'addTodos');
     },
 	events: {
-		"click #lnkToggleBLM" : "actToggleBLMLayer",
-		"click #lnkToggleDNR" : "actToggleDNRLayer",
+		"click .ownerToggle" : "actToggleLayer",
 		"click #lnkTodos" : "addTodos",
 		"click #lnkSlideMenu" : "loadRightSlide"
 	},
 	onShow: function(){
 		//temp fix until menu is completely ready
+		var dc = this;
 		$(document).ready(function() {
-			$('.slide-menu').bigSlide({ side:"right", menu:"#SummaryPaneSlideOut" }).css("z-index","1040");
+			 $('.slide-menu').bigSlide({ side:"right", menu:"#SummaryPaneSlideOut" }).css("z-index","1040");
 		});
+		this.activeLayers=[];
+		_.each(BootstrapVars.areaStats, function(area){
+			if(area.visible){
+				dc.activeLayers.push(area.abbrev);
+				$('#ownerToggle' + area.abbrev).css("color","#dddddd");
+				$('#ownerCheck' + area.abbrev).removeClass('icon-check-empty icon-large');
+				$('#ownerCheck' + area.abbrev).addClass('icon-check icon-large');
+			}
+		});
+		dc.loadRightSlide();
 		return false;
 	},
-	actToggleBLMLayer : function(ev){
-		this.toggleActiveLayers($(ev.currentTarget).attr("data-layerlabel"));
-		MainApplication.views.mapView.toggleMapLayer(MainApplication.views.mapView.blmLayer);
+	actToggleLayer : function(ev){
+		var areaName = $(ev.currentTarget).attr("data-layerlabel").toString();
+		this.toggleActiveLayers(areaName);		
+		_.each(BootstrapVars.areaStats, function(area){
+			if(area.abbrev == areaName)
+			{
+				MainApplication.views.mapView.toggleMapLayer(area.layerGroup);
+			}
+		});
+
 		this.loadRightSlide();
 		return false;
 	},
-	actToggleDNRLayer : function(ev){
-		this.toggleActiveLayers($(ev.currentTarget).attr("data-layerlabel"));
-		MainApplication.views.mapView.toggleMapLayer(MainApplication.views.mapView.dnrLayer);
-		this.loadRightSlide();
-		return false;
-	},	
 	addTodos: function(){
 		//Create new marker
 		var bounds = MainApplication.Map.getCenter();
@@ -342,12 +365,16 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 	},
 	toggleActiveLayers: function(label){
 		if($.inArray(label,this.activeLayers) > -1){
-			$('#lnkToggle' + label.toUpperCase()).removeClass('btn-success');
+			$('#ownerToggle' + label).css("color","#444444");
+			$('#ownerCheck' + label).removeClass('icon-check icon-large');
+			$('#ownerCheck' + label).addClass('icon-check-empty icon-large');
 			this.activeLayers = _.reject(this.activeLayers,function(item){
 				return item===label;
 			});
 		}else{
-			$('#lnkToggle' + label.toUpperCase()).addClass('btn-success');
+			$('#ownerToggle' + label).css("color","#dddddd");
+			$('#ownerCheck' + label).removeClass('icon-check-empty icon-large');
+			$('#ownerCheck' + label).addClass('icon-check icon-large');
 			this.activeLayers.push(label);
 		}
 		return false;
@@ -441,7 +468,7 @@ var WelcomeView = Backbone.Marionette.ItemView.extend({
     events: {
 		"click #btnCloseWelcome": "closeModal",
     },
-	closeModal: function () {
+	closeModal: function () {			 
 		MainApplication.modalRegion.hideModal();
 		return false;
 	}	

@@ -907,7 +907,9 @@ background-color: #dbeeff;
     background-repeat: repeat-x;
 }
 
-
+.ownerToggle {
+  display: inline-block;
+}
 
 
 

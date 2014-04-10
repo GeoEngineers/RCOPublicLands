@@ -2,21 +2,26 @@ BootstrapVars = {} || BootstrapVars;
 
 BootstrapVars.areaStats = [
 	{
-		abbrev: "dnr",
-		agency: "Department of Fish & Wildlife",
+		abbrev: "DNR",
+		agency: "Department of Natural Resources",
 		total_acres : "912984.589506",
 		total_cost: "123456934.00",
 		total_revenue: "234456934.00",
-		mapUrl: "http://{s}.tiles.mapbox.com/v3/smartmine.izm5nrk9/",
-		icon: "dfw.png"
+		mapTarget: "smartmine.izm5nrk9",
+		icon: "dfw.png",
+		visible: true,
+		layerGroup: null
+
 	},
 	{
-		abbrev: "blm",
-		agency: "Bureau of Land Managment",
+		abbrev: "RCO",
+		agency: "Recreation and Conservation Office",
 		total_acres : "2912984.589506",
 		total_cost: "567456934.00",
 		total_revenue: "435456934.00",
-		mapUrl: "http://{s}.tiles.mapbox.com/v3/smartmine.yyb3ayvi/",
-		icon: "blm.png"
+		mapTarget: "smartmine.yyb3ayvi",
+		icon: "blm.png",
+		visible: true,
+		layerGroup: null
 	}
 ];
