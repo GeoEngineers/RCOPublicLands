@@ -422,10 +422,13 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			{
 				case "total_acres":
 					val = area.total_acres;
+					break;
 				case "total_cost":
 					val = area.total_cost;
+					break;
 				case "total_revenue":
 					val =  area.total_revenue;
+					break;
 				default:
 					break;
 			}
