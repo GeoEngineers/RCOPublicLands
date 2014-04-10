@@ -56,7 +56,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 				]);			
 		});		
 		
-		MainApplication.Map.setView([47,-121], 6)
+		MainApplication.Map.setView([47,-120], 7)
 			.addLayer(this.terrainMap);
 		this.mapFirstView=false;
 		_.each(BootstrapVars.areaStats, function(area){ 
