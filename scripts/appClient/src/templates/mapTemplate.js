@@ -17,7 +17,7 @@ MainApplication.Templates.MapTemplate = [
 			"</div>",			
 		"</ul>",
 		"<div id='connectionStatus'><img src='./content/images/38-1.gif'><span class='txt'> Re-connecting...</span></div>",
-		"<div id='map'></div>",
+		"<div id='map' style=\"top: 35px\"></div>",
 		//"<div id=\"ToDoContainer\"></div>",
 	"</div>"
 ].join("\n");
@@ -28,16 +28,15 @@ MainApplication.Templates.MapFooterTemplate = [
 			"<div class='container'>",
 				"<ul class='navbar-nav iconsNav' id='agencyToggles'>",
 				"{{#each owners}}",
-					"<li><a href='#' id='ownerToggle{{owner}}' class='ownerToggle' data-layerlabel='{{owner}}'> <i class=\"icon\">&{{symbol}}</i><div class='txt' style=\"font-size: 10pt\">{{owner}}</div></a></li>",
-					
+					"<li style=\"width: 80px\"><a href='#' id='ownerToggle{{owner}}' class='ownerToggle' data-layerlabel='{{owner}}'> <i class=\"icon\">&{{symbol}}</i><div class='txt' style=\"font-size: 10pt\">{{owner}}</div></a></li>",
 				"{{/each}}",
 				"</ul>",
 				"<ul class='navbar-nav iconsNav' id='landUseToggles' style='display:none;'>",
-					"<li><button href='#' id='lnkToggleRevenue' class='navLinkExt btn' data-layerlabel='revenue'>Revenue Producing</button></li>",
-					"<li><button href='#' id='lnkToggleHabitat' class='navLinkExt btn' data-layerlabel='habitat'>Habitat and Recreation</button></li>",
-					"<li><button href='#' id='lnkToggleRecreation' class='navLink btn' data-layerlabel='habitat'>Recreation</button></li>",
-					"<li><button href='#' id='lnkToggleConservation' class='navLink btn' data-layerlabel='conservation'>Conservation</button></li>",
-				"</ul>",					
+					"<li style=\"width: 100px\"><a href='#' id='ownerToggleRevenueProducing' class='landuseToggle' data-layerlabel=''> <i class=\"icon\">&#x2109;</i><div class='txt' style=\"font-size: 10pt\">REVENUE</div></a></li>",
+					"<li style=\"width: 100px\"><a href='#' id='ownerToggleHabitat' class='landuseToggle' data-layerlabel=''> <i class=\"icon\" style=\"margin-left:20px\">&#x21fc;</i><div class='txt' style=\"font-size: 10pt\">HABITAT</div></a></li>",
+					"<li style=\"width: 100px\"><a href='#' id='ownerToggleRecreation' class='landuseToggle' data-layerlabel=''> <i class=\"icon\" style=\"margin-left:20px\">&#x21c7;</i><div class='txt' style=\"font-size: 10pt\">RECREATION</div></a></li>",
+					"<li style=\"width: 100px\"><a href='#' id='ownerToggleConservation' class='landuseToggle' data-layerlabel=''> <i class=\"icon\" style=\"margin-left:20px\">&#x2150;</i><div class='txt' style=\"font-size: 10pt\">CONSERVATION</div></a></li>",
+					"</ul>",					
 				"<ul class='navbar-nav iconsNav' style='float:right;'>",
 					"<li class='slide-menu'><a href='#' id='lnkSlideMenu' class='navLink' href='#SummaryPaneSlideOut'><i class='icon-bar-chart icon-large'></i><div class='txt'>Summary</div></a></li>",
 				"</ul>",				
@@ -109,4 +108,8 @@ MainApplication.Templates.QuestionTemplate = [
 			"</div>",
 		"</div>",
 	"</div>",
+].join("\n");
+
+MainApplication.Templates.HeaderTemplate = [ 
+	"<h4>Washington Public Lands Inventory</h4>",
 ].join("\n");

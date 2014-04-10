@@ -41,13 +41,15 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
 		//	dataType: 'json',
 		//	cache: false,
 		//	success: function(){
-				MainApplication.mainRegion.show(MainApplication.views.mapView);		
+		MainApplication.mainRegion.show(MainApplication.views.mapView);		
 		//	},
 		//	error: function(model, response, options) {
 		//		console.log("Error retrieving todos");
 		//	}
 		//});
-			
+		MainApplication.views.headerView = new HeaderView();
+		MainApplication.headerRegion.show(MainApplication.views.headerView);
+
 		MainApplication.views.mapFooterView = new MapFooterView({
 			genericCollection: MainApplication.models.genericCollection,
 			todos: MainApplication.models.todos

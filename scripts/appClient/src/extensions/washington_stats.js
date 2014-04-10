@@ -8,7 +8,6 @@ BootstrapVars.areaStats = [
 		total_cost: "123456934.00",
 		total_revenue: "234456934.00",
 		mapTarget: "smartmine.izm5nrk9",
-		icon: "dfw.png",
 		visible: true,
 		layerGroup: null,
 		symbol: '#x214a;'
@@ -21,7 +20,6 @@ BootstrapVars.areaStats = [
 		total_cost: "567456934.00",
 		total_revenue: "435456934.00",
 		mapTarget: "smartmine.yyb3ayvi",
-		icon: "blm.png",
 		visible: true,
 		layerGroup: null,
 		symbol: '#x2190;'
@@ -33,7 +31,6 @@ BootstrapVars.areaStats = [
 		total_cost: "567456934.00",
 		total_revenue: "435456934.00",
 		mapTarget: "smartmine.yyb3ayvi",
-		icon: "blm.png",
 		visible: true,
 		layerGroup: null,
 		symbol: '#x219a;'

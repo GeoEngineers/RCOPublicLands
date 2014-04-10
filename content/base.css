@@ -28,14 +28,17 @@
 }
 
 #SummaryPaneSlideOut {
-    background-color: #DDEEFF;
-    border: 1px solid #AACCEE;
-    border-bottom-left-radius: 10px;
-    border-top-left-radius: 10px;
-    list-style: none outside none;
+    background-color:  rgba(25, 25, 25, .9);
+    border-left: 1px solid #dddddd;
+    border-radius: 0px;
     margin: 0;
-	right:-500px;
-    padding: 20px 0 0;
+    right: 0px;
+    padding: 0px;
+    color: #dddddd;
+    display: none;
+}
+#SummaryPaneSlideOut a{
+    color: #dddddd;
 }
 
 #chartLayer{
@@ -913,7 +916,13 @@ background-color: #dbeeff;
 .ownerToggle:hover {
   color: #333333;
 }
-
+.landuseToggle {
+  display: inline-block;
+  text-align: center;
+}
+.landuseToggle:hover {
+  color: #333333;
+}
 
 .abtn {
     padding:  5px 20px 5px 20px;
@@ -1077,14 +1086,26 @@ svg {
 
 
 .header {
-	background-color: #404041; 
+	background-color: #222222; 
 	position: relative; 
 	top: -0.8em;
-	left: 1em;
-	margin-bottom: 30px;
+	left: 0px;
+	margin-bottom: 20px;
 	padding:10px;
-	color: #ffffff
+	color: #dddddd;
+    border-bottom: 1px solid #dddddd;
 }
+
+#HeaderNavContainer {
+    background-color: #222222; 
+    position: relative; 
+    top: -0.8em;
+    left: 0px;
+    margin-bottom: 30px;
+    padding:10px;
+    color: #dddddd;
+}
+
 
 #FooterNavSlideOut{
 	padding: 0px 0px 0px 0px;
@@ -1120,7 +1141,6 @@ svg {
 #lnkFeedback{
 	margin-left:10px
 }
-
 #aboutFeedback{
 	color:#FFFFFF;
 }

@@ -285,6 +285,7 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
     },
 	events: {
 		"click .ownerToggle" : "actToggleLayer",
+		"click .landuseToggle": "actToggleLand",
 		"click #lnkTodos" : "addTodos",
 		"click #lnkSlideMenu" : "loadRightSlide"
 	},
@@ -292,7 +293,9 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 		//temp fix until menu is completely ready
 		var dc = this;
 		$(document).ready(function() {
-			 $('.slide-menu').bigSlide({ side:"right", menu:"#SummaryPaneSlideOut" }).css("z-index","1040");
+			 dc.slide = $('.slide-menu').bigSlide({ side:"right", menu:"#SummaryPaneSlideOut" }).css("z-index","1040").css("top", "35px");
+			
+			 
 		});
 		this.activeLayers=[];
 		_.each(BootstrapVars.areaStats, function(area){
@@ -315,6 +318,10 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 		});
 
 		this.loadRightSlide();
+		return false;
+	},
+	actToggleLand: function(ev){
+		alert("Not available at this time.");
 		return false;
 	},
 	addTodos: function(){
@@ -464,6 +471,8 @@ var WelcomeView = Backbone.Marionette.ItemView.extend({
     },
 	closeModal: function () {			 
 		MainApplication.modalRegion.hideModal();
+		$("#SummaryPaneSlideOut").css("display","block");
+		MainApplication.views.mapFooterView.slide.open();
 		return false;
 	}	
 });
@@ -482,6 +491,14 @@ var QuestionView = Backbone.Marionette.ItemView.extend({
 		MainApplication.modalRegion.hideModal();
 		return false;
 	}	
+});
+
+var HeaderView = Backbone.Marionette.ItemView.extend({
+    template: function (serialized_model) {
+		return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.HeaderTemplate);
+    },
+	initialize: function(options){
+	}
 });
 
 
