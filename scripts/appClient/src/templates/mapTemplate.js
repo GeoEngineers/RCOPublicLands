@@ -46,14 +46,11 @@ MainApplication.Templates.MapFooterTemplate = [
 ].join("\n");
 
 MainApplication.Templates.MapPaneTemplate = [
-	"<div id='chartLayer'></div>",
-	"<ul>",
-		"<li><a href='#'>Other</a></li>",
-		"<li><a href='#'>Test data</a></li>",
-		"<li><a href='#'>Presented</a></li>",
-		"<li><a href='#'>Presentably</a></li>",
-		"<li><a href='#'>And other things!</a></li>",
-	"</ul>"
+	"<div style=\"padding: 10px\">",
+		"<h3>Summary</h3>",
+		"<div id='chartLayer'></div>",
+		"<div id='summaryLayer'></div>",
+	"</div>"
 ].join("\n");
 
 MainApplication.Templates.MapNewMarkerTipTemplate = [
@@ -62,7 +59,7 @@ MainApplication.Templates.MapNewMarkerTipTemplate = [
 		"Select \"Edit\" to rename or move this item.<br />",
 		"<a href='#' class='geoEditTodo'>Edit Todo</a> - ",
 		"<a href='#' class='geoDeleteTodo'>Delete Todo</a>",		
-	"</div>"
+	"</div>",
 ].join("\n");
 
 MainApplication.Templates.WelcomeTemplate = [

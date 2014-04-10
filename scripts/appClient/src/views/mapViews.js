@@ -420,11 +420,22 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		var data = _.filter(BootstrapVars.areaStats, function(area){ 
 			return $.inArray(area.abbrev, dc.activeLayers) > -1; 
 		});
-		
+
+		var summaryText = "";
+		var total = 0;
+		_.each(data, function(area){
+			summaryText += "- "+area.abbrev + ": " + area.total_acres + " acres<br/>";
+			total += area.total_acres;
+		});
+		summaryText = "Total: "  + total+ " acres<br/>" + summaryText + "";
+
+		$("#summaryLayer").html(summaryText);
+
 		var g = svg.selectAll(".arc")
 			.data(pie(data))
 			.enter().append("g")
-			.attr("class", "arc");
+			.attr("class", "arc")
+			;
 
 		g.append("path")
 		.on('click', function(){ console.log("test"); })
@@ -439,7 +450,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			.attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
 			.attr("dy", ".35em")
 			.style("text-anchor", "middle")
-			.text(function(d) { return d.data.age; });
+			.text(function(d) { return d.data.abbrev; });
 		//});		
 		return false;
 	},
