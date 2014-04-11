@@ -8,7 +8,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.dnrResources = options.dnrResources;
 		//examples.map-y7l23tes
 		
-		this.terrainMap = L.tileLayer.provider('MapBox.smartmine.g7poe7h9', { minZoom:4, maxZoom: 13, zIndex: 4 });
+		this.terrainMap = L.tileLayer.provider('MapBox.smartmine.ho5fmi29', { minZoom:4, maxZoom: 13, zIndex: 4 });
 		this.imageryMap = L.tileLayer.provider('MapBox.smartmine.map-nco5bdjp', { minZoom:4, maxZoom: 13, zIndex: 4 });
 		
 		this.mapFirstView = true;
@@ -39,7 +39,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		});
 		
 		L.control.layers({
-			'Terrain': this.terrainMap.addTo(MainApplication.Map),
+			'Streets': this.terrainMap.addTo(MainApplication.Map),
 			'Imagery': this.imageryMap
 		},{},{
 			position:'bottomleft'
