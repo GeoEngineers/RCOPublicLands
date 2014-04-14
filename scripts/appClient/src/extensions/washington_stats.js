@@ -24,7 +24,7 @@ BootstrapVars.areaStats = [
 		visible: true,
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#756BB1'
+		color: '#428BCA'
 	},
 	{
 		abbrev: "RCO",
@@ -36,6 +36,18 @@ BootstrapVars.areaStats = [
 		visible: true,
 		layerGroup: null,
 		symbol: '#x219a;',
-		color: '#428BCA'
+		color: '#756BB1'
+	},
+	{
+		abbrev: "PARKS",
+		agency: "Washington Parks Department",
+		total_acres : 2912984.45,
+		total_cost: 5674934.00,
+		total_revenue: 4356934.00,
+		mapTarget: "smartmine.yyb3ayvi",
+		visible: true,
+		layerGroup: null,
+		symbol: '#x219a;',
+		color: '#229900'
 	}
 ];

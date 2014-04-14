@@ -7,9 +7,9 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.todos = options.todos;
 		this.dnrResources = options.dnrResources;
 		//examples.map-y7l23tes
-		
-		this.terrainMap = L.tileLayer.provider('MapBox.smartmine.ho5fmi29', { minZoom:4, maxZoom: 13, zIndex: 4 });
-		this.imageryMap = L.tileLayer.provider('MapBox.smartmine.map-nco5bdjp', { minZoom:4, maxZoom: 13, zIndex: 4 });
+		this.streetsMap = L.tileLayer.provider('MapBox.smartmine.tm2-basemap', { minZoom:4, zIndex: 4 });		
+		this.terrainMap = L.tileLayer.provider('MapBox.smartmine.ho5fmi29', { minZoom:4, zIndex: 4 });
+		this.imageryMap = L.tileLayer.provider('MapBox.smartmine.map-nco5bdjp', { minZoom:4, zIndex: 4 });
 		
 		this.mapFirstView = true;
         _.bindAll(this, 'onShow');
@@ -32,14 +32,15 @@ var MapView = Backbone.Marionette.Layout.extend({
 		//set buttons according to internet settings
 		this.toggleSetButtons();
 
-		MainApplication.Map === undefined ? MainApplication.Map = L.mapbox.map('map',{ minZoom:4, maxZoom: 13 }) : false;
+		MainApplication.Map === undefined ? MainApplication.Map = L.mapbox.map('map',{ minZoom:4 }) : false;
 		this.loadCurrentMap();
 		MainApplication.Map.on("dragstart",function(){
 			dc.loadCurrentMap();
 		});
 		
 		L.control.layers({
-			'Streets': this.terrainMap.addTo(MainApplication.Map),
+			'Terrain': this.terrainMap,
+			'Streets': this.streetsMap.addTo(MainApplication.Map),
 			'Imagery': this.imageryMap
 		},{},{
 			position:'bottomleft'
@@ -57,7 +58,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		});		
 		
 		MainApplication.Map.setView([47,-120], 7)
-			.addLayer(this.terrainMap);
+			.addLayer(this.streetsMap);
 		this.mapFirstView=false;
 		_.each(BootstrapVars.areaStats, function(area){ 
 			if(area.visible){
@@ -142,7 +143,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 	},	
 	loadCurrentMap: function(){
 		if(GeoAppBase.connectionAvailable()){
-			MainApplication.Map.hasLayer(this.terrainMap)===false ? this.setBaseMapDefault() : false;
+			MainApplication.Map.hasLayer(this.streetsMap)===false ? this.setBaseMapDefault() : false;
 		}else{
 			MainApplication.Map.hasLayer(this.offlineMap)===false ? this.setBaseMapOffline() : false;
 		}
@@ -155,8 +156,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 		//console.log(MainApplication.Map.hasLayer(this.terrainMap));
 		//console.log(MainApplication.Map.hasLayer(this.offlineMap));
 		
-		if (MainApplication.Map.hasLayer(this.terrainMap)) {
-			MainApplication.Map.removeLayer(this.terrainMap);
+		if (MainApplication.Map.hasLayer(this.streetsMap)) {
+			MainApplication.Map.removeLayer(this.streetsMap);
 		}
 		if (MainApplication.Map.hasLayer(this.offlineMap)) {
 			MainApplication.Map.removeLayer(this.offlineMap);
@@ -165,7 +166,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 	setBaseMapDefault: function(){
 		this.resetBaseMaps();
 		$("#lnkDefaultButton").addClass('btn-primary');
-		this.terrainMap.addTo(MainApplication.Map);
+		this.streetsMap.addTo(MainApplication.Map);
 		return false;
 	},
 	setBaseMapOffline: function(){
