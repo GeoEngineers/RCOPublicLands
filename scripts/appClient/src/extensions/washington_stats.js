@@ -41,9 +41,9 @@ BootstrapVars.areaStats = [
 	{
 		abbrev: "PARKS",
 		agency: "Washington Parks Department",
-		total_acres : 2912984.45,
-		total_cost: 5674934.00,
-		total_revenue: 4356934.00,
+		total_acres : 0,
+		total_cost: 0,
+		total_revenue: 0,
 		mapTarget: "smartmine.yyb3ayvi",
 		visible: true,
 		layerGroup: null,

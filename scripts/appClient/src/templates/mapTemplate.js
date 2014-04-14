@@ -50,7 +50,7 @@ MainApplication.Templates.MapPaneTemplate = [
 		"<h3>Summary</h3>",		
 		"<div id='chartLayer'></div>",
 		"<div style=\"text-align: right; width: 100%\"><select id=\"ddlSummaryType\">",
-			"<option value=\"total_acres\">Total Acres</option>",
+			"<option value=\"total_acres\" selected>Total Acres</option>",
 			"<option value=\"total_cost\">Total Cost</option>",
 			"<option value=\"total_revenue\">Total Revenue</option>",
 		"</select></div><br/>",

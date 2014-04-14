@@ -39,7 +39,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 		});
 		
 		L.control.layers({
-			'Terrain': this.terrainMap,
 			'Streets': this.streetsMap.addTo(MainApplication.Map),
 			'Imagery': this.imageryMap
 		},{},{
