@@ -312,15 +312,22 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 	},
 	actToggleLayer : function(ev){
 		var areaName = $(ev.currentTarget).attr("data-layerlabel").toString();
-		this.toggleActiveLayers(areaName);		
-		_.each(BootstrapVars.areaStats, function(area){
-			if(area.abbrev == areaName)
-			{
-				MainApplication.views.mapView.toggleMapLayer(area.layerGroup);
-			}
-		});
+		if(areaName == "RCO" ||  areaName == "DNR")
+		{
+			alert("Not available at this time.");
+		}
+		else
+		{
+			this.toggleActiveLayers(areaName);		
+			_.each(BootstrapVars.areaStats, function(area){
+				if(area.abbrev == areaName)
+				{
+					MainApplication.views.mapView.toggleMapLayer(area.layerGroup);
+				}
+			});
 
-		this.loadRightSlide();
+			this.loadRightSlide();
+		}
 		return false;
 	},
 	actToggleLand: function(ev){
@@ -435,11 +442,25 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				default:
 					break;
 			}
-			summaryText += "- "+area.abbrev + ": " + isCurrency + dc.formatCurrency(val)+ " acres<br/>";
+			summaryText += "- "+area.abbrev + ": " + isCurrency + dc.formatCurrency(val)+ "<br/>";
 			total += val;
 			colorRange.push(area.color);
 		});
-		summaryText = "Total " + this.type.replace("total_", "")  + ": " + isCurrency  + dc.formatCurrency(total)+ " <br/>" + summaryText + "";
+
+		switch(dc.type)
+			{
+				case "total_acres":
+					summaryText = "Total " + this.type.replace("total_", "")  + ": " + isCurrency  + dc.formatCurrency(total)+ " <br/>" + summaryText + "";
+					break;
+				case "total_cost":
+					summaryText = "(Available Soon)";
+					break;
+				case "total_revenue":
+					summaryText = "(Available Soon)";
+					break;
+				default:
+					break;
+			}
 
 		$("#summaryLayer").html(summaryText);
 		$("#chartLayer").html("");
