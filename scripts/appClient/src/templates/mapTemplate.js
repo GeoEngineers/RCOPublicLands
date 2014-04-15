@@ -4,13 +4,6 @@ MainApplication.Templates.MapTemplate = [
 	"<div style='color:#000000;'>",
 		"This is the landing page area, you can place any content here.",
 		"<ul id='map-buttons'>",
-			//"<div class='btn-group'>",
-			//	"<button id='lnkOfflineButton' class='btn'>Offline</button>",
-			//	"<button id='lnkDefaultButton' class='btn btn-primary'>Default</button>",
-			//"</div>",
-			//"<div class='btn-group'>",
-			//	"<button id='lnkToggleConnection' class='btn btn-primary'>Internet</button>",
-			//"</div>",
 			"<div class='btn-group'>",
 				"<button id='lnkAgency' class='btn btn-primary'>Agency</button>",
 				"<button id='lnkLandTypes' class='btn'>Land Types</button>",
@@ -18,7 +11,6 @@ MainApplication.Templates.MapTemplate = [
 		"</ul>",
 		"<div id='connectionStatus'><img src='./content/images/38-1.gif'><span class='txt'> Re-connecting...</span></div>",
 		"<div id='map'></div>",
-		//"<div id=\"ToDoContainer\"></div>",
 	"</div>"
 ].join("\n");
 

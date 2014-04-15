@@ -208,7 +208,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 	},
 	showLandOptions : function(){
 		$('#lnkAgency').removeClass("btn-primary");
-		console.log($('#lnkLandTypes').hasClass("btn-primary"));
 		$('#lnkLandTypes').hasClass("btn-primary") ? false : $('#lnkLandTypes').addClass("btn-primary");
 		$('#agencyToggles').css("display","none");
 		$('#landUseToggles').css("display","block");
