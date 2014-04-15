@@ -10,7 +10,7 @@ MainApplication.Templates.MapTemplate = [
 			"</div>",			
 		"</ul>",
 		"<div id='connectionStatus'><img src='./content/images/38-1.gif'><span class='txt'> Re-connecting...</span></div>",
-		"<div id='map'></div>",
+		"<div id='map' style=\"top: 35px\"></div>",
 	"</div>"
 ].join("\n");
 
@@ -19,17 +19,18 @@ MainApplication.Templates.MapFooterTemplate = [
 		"<div class='navbar-inner'>",
 			"<div class='container'>",
 				"<ul class='navbar-nav iconsNav' id='agencyToggles'>",
-					"<li><button href='#' id='lnkToggleBLM' class='navLink btn' data-layerlabel='blm'>BLM</button></li>",
-					"<li><button href='#' id='lnkToggleDNR' class='navLink btn' data-layerlabel='dnr'>DNR</button></li>",
+				"{{#each owners}}",
+					"<li style=\"width: 80px\"><a href='#' id='ownerToggle{{owner}}' class='ownerToggle' data-layerlabel='{{owner}}'> <i class=\"icon\">&{{symbol}}</i><div class='txt' style=\"font-size: 10pt\">{{owner}}</div></a></li>",
+				"{{/each}}",
 				"</ul>",
 				"<ul class='navbar-nav iconsNav' id='landUseToggles' style='display:none;'>",
-					"<li><button href='#' id='lnkToggleRevenue' class='navLinkExt btn' data-layerlabel='revenue'>Revenue Producing</button></li>",
-					"<li><button href='#' id='lnkToggleHabitat' class='navLinkExt btn' data-layerlabel='habitat'>Habitat and Recreation</button></li>",
-					"<li><button href='#' id='lnkToggleRecreation' class='navLink btn' data-layerlabel='habitat'>Recreation</button></li>",
-					"<li><button href='#' id='lnkToggleConservation' class='navLink btn' data-layerlabel='conservation'>Conservation</button></li>",
-				"</ul>",					
+					"<li style=\"width: 100px\"><a href='#' id='ownerToggleRevenueProducing' class='landuseToggle' data-layerlabel=''> <i class=\"icon\">&#x2109;</i><div class='txt' style=\"font-size: 10pt\">REVENUE</div></a></li>",
+					"<li style=\"width: 100px\"><a href='#' id='ownerToggleHabitat' class='landuseToggle' data-layerlabel=''> <i class=\"icon\" style=\"margin-left:20px\">&#x21fc;</i><div class='txt' style=\"font-size: 10pt\">HABITAT</div></a></li>",
+					"<li style=\"width: 100px\"><a href='#' id='ownerToggleRecreation' class='landuseToggle' data-layerlabel=''> <i class=\"icon\" style=\"margin-left:20px\">&#x21c7;</i><div class='txt' style=\"font-size: 10pt\">RECREATION</div></a></li>",
+					"<li style=\"width: 100px\"><a href='#' id='ownerToggleConservation' class='landuseToggle' data-layerlabel=''> <i class=\"icon\" style=\"margin-left:20px\">&#x2150;</i><div class='txt' style=\"font-size: 10pt\">CONSERVATION</div></a></li>",
+					"</ul>",					
 				"<ul class='navbar-nav iconsNav' style='float:right;'>",
-					"<li class='slide-menu'><a href='#' id='lnkSlideMenu' class='navLink' href='#SummaryPaneSlideOut'><i class='icon-bar-chart icon-large'></i><div class='txt'>Navigation</div></a></li>",
+					"<li class='slide-menu'><a href='#' id='lnkSlideMenu' class='navLink' href='#SummaryPaneSlideOut'><i class='icon-bar-chart icon-large'></i><div class='txt'>Summary</div></a></li>",
 				"</ul>",				
 			"</div>",
 		"</div>",
@@ -37,14 +38,16 @@ MainApplication.Templates.MapFooterTemplate = [
 ].join("\n");
 
 MainApplication.Templates.MapPaneTemplate = [
-	"<div id='chartLayer'></div>",
-	"<ul>",
-		"<li><a href='#'>Other</a></li>",
-		"<li><a href='#'>Test data</a></li>",
-		"<li><a href='#'>Presented</a></li>",
-		"<li><a href='#'>Presentably</a></li>",
-		"<li><a href='#'>And other things!</a></li>",
-	"</ul>"
+	"<div style=\"padding: 10px\">",
+		"<h3>Summary</h3>",		
+		"<div id='chartLayer'></div>",
+		"<div style=\"text-align: right; width: 100%\"><select id=\"ddlSummaryType\">",
+			"<option value=\"total_acres\" selected>Total Acres</option>",
+			"<option value=\"total_cost\">Total Cost</option>",
+			"<option value=\"total_revenue\">Total Revenue</option>",
+		"</select></div><br/>",
+		"<div id='summaryLayer'></div>",
+	"</div>"
 ].join("\n");
 
 MainApplication.Templates.MapNewMarkerTipTemplate = [
@@ -53,7 +56,7 @@ MainApplication.Templates.MapNewMarkerTipTemplate = [
 		"Select \"Edit\" to rename or move this item.<br />",
 		"<a href='#' class='geoEditTodo'>Edit Todo</a> - ",
 		"<a href='#' class='geoDeleteTodo'>Delete Todo</a>",		
-	"</div>"
+	"</div>",
 ].join("\n");
 
 MainApplication.Templates.WelcomeTemplate = [
@@ -63,10 +66,18 @@ MainApplication.Templates.WelcomeTemplate = [
 				"<h4 id=\"mySlideLabel\">Welcome to the Public Lands Inventory</h4>",
 			"</div>",
 			"<div class=\"modal-body\">",
-				"Add some text here",
+				"<p>The Washington Public Lands Inventory was developed by a partnership of federal and state agencies. ", 
+				"Data is provided by WA State Parks and the Washington State Parks and Recreation Commission and Washington State Recreation and Conservation Office.</p>", 
+				"<br/><div style='text-align:center;'><a href='http://www.rco.wa.gov'><img src='./content/images/logos/LogoWARCO-sm.jpg' style='padding: 0px 4px 4px 0px;background-color:#FFFFFF;margin-bottom:4px;' /></a></div>",
+				"<div class='aboutLogos'>",
+					"<div><a href='http://www.fws.gov'><img src='./content/images/logos/LogoUSFWS-sm.jpg' /></a></div>",
+					"<div><a href='http://www.wdfw.wa.gov'><img src='./content/images/logos/LogoWADFW-sm.jpg' /></a></div>",
+					"<div><a href='http://www.parks.wa.gov'><img src='./content/images/logos/WSPLogo_200.png' /></a></div>",
+					"<div class='padout'><a href='http://www.geoengineers.com/smartmine'><img src='./content/images/smartmine-logo.png' /></a></div>",
+				"</div>",
 			"</div>",
-			"<div class=\"modal-footer\">",
-				"<button class=\"btn btn-primary\" type=\"button\" id=\"btnCloseWelcome\">Continue</button>",
+			"<div class=\"modal-footer\" style=\"text-align: center\">",
+				"<button class=\"btn btn-primary\" type=\"button\" id=\"btnCloseWelcome\" style=\"width: 200px\">Continue</button>",
 			"</div>",
 		"</div>",
 	"</div>",
@@ -76,8 +87,8 @@ MainApplication.Templates.MapTipTemplate = [
     "<h4>{{ParcelName}}</h4>",
 		"Owner: {{Owner}} <br />",
 		"Total Area (Acres): {{TotalArea}}<br />",
-		"Acquisition Date: {{AquisitionDate}} <br />",
-		"Cost: {{Cost}} <br /><br/>",
+		"Acquisition Date: <span style=\" color: #FFFF00\">{{AquisitionDate}}</span><br />",
+		"Cost: <span style=\" color: #FFFF00\">{{Cost}}</span><br /><br/>",
 		"<button class=\"btn btn-primary\" type=\"button\" id=\"btnQuestionPost\">Post a Question</button>",	
 ].join("\n");
 
@@ -99,4 +110,8 @@ MainApplication.Templates.QuestionTemplate = [
 			"</div>",
 		"</div>",
 	"</div>",
+].join("\n");
+
+MainApplication.Templates.HeaderTemplate = [ 
+	"<h4>Washington Public Lands Inventory</h4>",
 ].join("\n");

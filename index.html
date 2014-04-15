@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; minimum-scale=1.0; user-scalable=0;" />
 		<meta name="apple-mobile-web-app-capable" content="yes">
-		<title>Your Application</title>
+		<title>Washington State Public Lands Inventory</title>
 		<link href="./favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 		<link rel="stylesheet" type='text/css' href="./content/jquery-ui/jquery-ui.css">
@@ -16,6 +16,8 @@
 		<link rel="stylesheet" type='text/css' href="./bower_components/jasmine/lib/jasmine-core/jasmine.css">
 		<link rel="stylesheet" type='text/css' href="./content/base.css">
 		<link rel="stylesheet" type='text/css' href="./content/maps.css">
+		<link rel="stylesheet" type='text/css' href="./content/symbola/css/symbola.css">
+
 		
         <!--[if lte IE 8]>
 		<link rel="stylesheet" type='text/css' href='http://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.ie.css' >
@@ -23,11 +25,11 @@
         <link rel="stylesheet" type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans'>
 	</head>
     <body>
+    	<header>    		
+				<div id="HeaderNavContainer"></div>	
+    	</header>
         <div id="mainBody" class="form-horizontal" style="width: 100%;">
-            <div class="container">
-				<div id="HeaderNavContainer"></div>
-			
-                <!--
+            <div class="container">                <!--
 				Disabled proper templating while map is being developed this should be turned on and the map rendered when this app is done -->
 				<div id="ApplicationContainer"></div>
                 <div id="localModalBlock" class="modal" data-backdrop="static"></div>				
