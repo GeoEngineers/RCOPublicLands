@@ -15,18 +15,6 @@ BootstrapVars.areaStats = [
 
 	},
 	{
-		abbrev: "DFW",
-		agency: "Department of Fish and Wildlife",
-		total_acres : 291284.34,
-		total_cost: 5674934.00,
-		total_revenue: 4354534.00,
-		mapTarget: "smartmine.yyb3ayvi",
-		visible: true,
-		layerGroup: null,
-		symbol: '#x2190;',
-		color: '#428BCA'
-	},
-	{
 		abbrev: "RCO",
 		agency: "Recreation and Conservation Office",
 		total_acres : 2912984.45,
@@ -39,15 +27,27 @@ BootstrapVars.areaStats = [
 		color: '#756BB1'
 	},
 	{
+		abbrev: "DFW",
+		agency: "Department of Fish and Wildlife",
+		total_acres : 291284.34,
+		total_cost: 5674934.00,
+		total_revenue: 4354534.00,
+		mapTarget: "smartmine.yyb3ayvi",
+		visible: false,
+		layerGroup: null,
+		symbol: '#x2190;',
+		color: '#428BCA'
+	},
+	{
 		abbrev: "PARKS",
 		agency: "Washington Parks Department",
 		total_acres : 0,
 		total_cost: 0,
 		total_revenue: 0,
 		mapTarget: "smartmine.yyb3ayvi",
-		visible: true,
+		visible: false,
 		layerGroup: null,
-		symbol: '#x219a;',
+		symbol: '#x21f4;',
 		color: '#229900'
 	}
 ];

@@ -95,8 +95,8 @@ MainApplication.Templates.MapTipTemplate = [
     "<h4>{{ParcelName}}</h4>",
 		"Owner: {{Owner}} <br />",
 		"Total Area (Acres): {{TotalArea}}<br />",
-		"Acquisition Date: {{AquisitionDate}} <br />",
-		"Cost: {{Cost}} <br /><br/>",
+		"Acquisition Date: <span style=\" color: #FFFF00\">{{AquisitionDate}}</span><br />",
+		"Cost: <span style=\" color: #FFFF00\">{{Cost}}</span><br /><br/>",
 		"<button class=\"btn btn-primary\" type=\"button\" id=\"btnQuestionPost\">Post a Question</button>",	
 ].join("\n");
 

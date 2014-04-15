@@ -8,7 +8,10 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.dnrResources = options.dnrResources;
 		//examples.map-y7l23tes
 		this.streetsMap = L.tileLayer.provider('MapBox.smartmine.tm2-basemap', { minZoom:4, zIndex: 4 });		
-		this.terrainMap = L.tileLayer.provider('MapBox.smartmine.ho5fmi29', { minZoom:4, zIndex: 4 });
+		this.openMap = L.tileLayer('http://b.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+    			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
+    			maxZoom: 18
+		});
 		this.imageryMap = L.tileLayer.provider('MapBox.smartmine.map-nco5bdjp', { minZoom:4, zIndex: 4 });
 		
 		this.mapFirstView = true;
@@ -39,6 +42,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		});
 		
 		L.control.layers({
+			'Open Street Map': this.openMap,
 			'Streets': this.streetsMap.addTo(MainApplication.Map),
 			'Imagery': this.imageryMap
 		},{},{
@@ -111,8 +115,8 @@ var MapView = Backbone.Marionette.Layout.extend({
             		ParcelName: "Parcel",
             		Owner: area.agency,
             		TotalArea: props.data.GISAcres,
-            		AquisitionDate: '1/1/2010',
-            		Cost: 1000
+            		AquisitionDate: '(Available Soon)',
+            		Cost: '(Available Soon)'
         		});
 
         		markerToolTip.render();
