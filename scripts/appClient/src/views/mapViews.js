@@ -302,15 +302,14 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 		"click .ownerToggle" : "actToggleLayer",
 		"click .landuseToggle": "actToggleLand",
 		"click #lnkTodos" : "addTodos",
-		"click #lnkSlideMenu" : "loadRightSlide"
+		"click #lnkSlideMenu" : "loadRightSlide",
+		"click #lnkPrismFunding" : "loadPrismFunding"
 	},
 	onShow: function(){
 		//temp fix until menu is completely ready
 		var dc = this;
 		$(document).ready(function() {
 			 dc.slide = $('.slide-menu').bigSlide({ side:"right", menu:"#SummaryPaneSlideOut" }).css("z-index","1040").css("top", "35px");
-			
-			 
 		});
 		this.activeLayers=[];
 		_.each(BootstrapVars.areaStats, function(area){
@@ -381,6 +380,10 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 	},		
 	loadContactUs: function(){
 	 	window[ApplicationName].router.navigate("ContactUs", { trigger: true });
+		return false;
+	},
+	loadPrismFunding: function(){
+		console.log("Lets load that funding layers!");
 		return false;
 	},
 	loadRightSlide: function(){

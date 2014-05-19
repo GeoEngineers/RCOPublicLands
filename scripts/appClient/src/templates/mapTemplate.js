@@ -42,7 +42,7 @@ MainApplication.Templates.MapFooterTemplate = [
 					"<li class='slide-menu'><a href='#' id='lnkSlideMenu' class='navLink' href='#SummaryPaneSlideOut'><i class='icon-bar-chart icon-large'></i><div class='txt'>SUMMARY</div></a></li>",
 				"</ul>",
 				"<ul class='navbar-nav iconsNav iconsNav-right' style='float:right;'>",
-					"<li class='slide-menu'><a href='#' id='lnkSlideMenu' class='navLink' href='#SummaryPaneSlideOut'><i class='icon-bar-chart icon-large '></i><div class='txt'>PRISM</div></a></li>",
+					"<li style='padding:5px 20px 0px 0px;'><a href='#' id='lnkPrismFunding' class='navLink' href='#lnkPrismFunding'><i class=\"icon\" style=\"margin:0px; width: 16px; height:16px; font-size: 15px;\">&#x2109;</i><div class='txt'>RCO FUNDING</div></a></li>",
 				"</ul>",
 			"</div>",
 		"</div>",

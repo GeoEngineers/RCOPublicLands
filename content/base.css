@@ -1111,6 +1111,9 @@ svg {
     position: relative;
     top: -0.8em;
 }
+#HeaderNavContainer h4{
+	font-size:13pt;
+}
 
 #FooterNavSlideOut{
 	padding: 0px 0px 0px 0px;
