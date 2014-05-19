@@ -596,6 +596,7 @@ var HeaderView = Backbone.Marionette.ItemView.extend({
     template: function (serialized_model) {
 		return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.HeaderTemplate);
     },
+	className: "container",
 	initialize: function(options){
 	}
 });

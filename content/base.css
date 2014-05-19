@@ -252,7 +252,7 @@ a .genericHomeButton{
 	margin-top:3px;
 }
 .navbar-fixed-bottom{
-	border-top:1px solid #333333;
+	border-top:1px solid #111111;
 }
 .navbar-nav > li {
     float: left;
@@ -1101,15 +1101,16 @@ svg {
 }
 
 #HeaderNavContainer {
-    background-color: #222222; 
-    position: relative; 
+    background-color: #222222;
+    border-bottom: 1px solid #000000;
+    color: #DDDDDD;
+    height: 28px;
+    left: 0;
+    margin: 0 0 4px;
+    padding: 9px 0 36px 10px;
+    position: relative;
     top: -0.8em;
-    left: 0px;
-    margin-bottom: 30px;
-    padding:10px;
-    color: #dddddd;
 }
-
 
 #FooterNavSlideOut{
 	padding: 0px 0px 0px 0px;
@@ -1126,8 +1127,11 @@ svg {
     height: 50px;
     list-style: none outside none;
     min-width: 50px;
-    padding: 4px 0 0;
+    padding: 6px 0 0;
     text-align: center;
+}
+.iconsNav.iconsNav-right li {
+    padding: 4px 0 0;
 }
 .iconsNav li.active{
     background-color: #000000;

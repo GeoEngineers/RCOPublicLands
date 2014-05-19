@@ -38,9 +38,12 @@ MainApplication.Templates.MapFooterTemplate = [
 					"<li style=\"width: 80px\"><a href='#' id='aquisitionToggle{{owner}}' class='aquisitionToggle' data-layerlabel='{{owner}}'> <i class=\"icon\">&{{symbol}}</i><div class='txt'>{{owner}}</div></a></li>",
 				"{{/each}}",
 				"</ul>",				
-				"<ul class='navbar-nav iconsNav' style='float:right;'>",
-					"<li class='slide-menu'><a href='#' id='lnkSlideMenu' class='navLink' href='#SummaryPaneSlideOut'><i class='icon-bar-chart icon-large'></i><div class='txt'>Summary</div></a></li>",
-				"</ul>",				
+				"<ul class='navbar-nav iconsNav iconsNav-right' style='float:right;'>",
+					"<li class='slide-menu'><a href='#' id='lnkSlideMenu' class='navLink' href='#SummaryPaneSlideOut'><i class='icon-bar-chart icon-large'></i><div class='txt'>SUMMARY</div></a></li>",
+				"</ul>",
+				"<ul class='navbar-nav iconsNav iconsNav-right' style='float:right;'>",
+					"<li class='slide-menu'><a href='#' id='lnkSlideMenu' class='navLink' href='#SummaryPaneSlideOut'><i class='icon-bar-chart icon-large '></i><div class='txt'>PRISM</div></a></li>",
+				"</ul>",
 			"</div>",
 		"</div>",
 	"</div>"
@@ -122,5 +125,5 @@ MainApplication.Templates.QuestionTemplate = [
 ].join("\n");
 
 MainApplication.Templates.HeaderTemplate = [ 
-	"<h4>Washington Public Lands Inventory</h4>",
+	"<h4>WASHINGTON PUBLIC LANDS INVENTORY</h4>",
 ].join("\n");
