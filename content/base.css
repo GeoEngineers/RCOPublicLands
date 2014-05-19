@@ -248,7 +248,9 @@ a .genericHomeButton{
     margin-bottom: 0 !important;
     padding: 16px;
 }
-
+.navbar-inner{
+	margin-top:3px;
+}
 .navbar-fixed-bottom{
 	border-top:1px solid #333333;
 }
@@ -258,7 +260,9 @@ a .genericHomeButton{
     padding: 4px 7px 0 0;
     text-align: center;
 }
-
+.navToggles .txt{
+	font-size: 9pt;
+}
 #homeControls .homeLink{
 	display:inline-block;
 	min-height: 100px; 

@@ -23,6 +23,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		"click #lnkSyncQueueData" : "syncLiveData",
 		"click #lnkToggleConnection" : "toggleConnection",
 		"click #lnkAgency" : "showAgencyOptions",
+		"click #lnkAquisitions" : "showAquisitions",
 		"click #lnkLandTypes" : "showLandOptions"
 	},	
 	onShow: function(){
@@ -209,17 +210,28 @@ var MapView = Backbone.Marionette.Layout.extend({
 			$("#lnkSyncQueueData").css("display","none");
 		}	
 	},
+	resetNavOptions: function(){
+		$('.navLayers').removeClass("btn-primary");
+		$('.navToggles').css("display","none");
+		return false;
+	},	
 	showAgencyOptions : function(){
-		$('#lnkLandTypes').removeClass("btn-primary");
+		this.resetNavOptions();
 		$('#lnkAgency').hasClass("btn-primary") ? false : $('#lnkAgency').addClass("btn-primary");
 		$('#agencyToggles').css("display","block");
-		$('#landUseToggles').css("display","none");
+		return false;
+	},
+	showAquisitions : function(){
+		this.resetNavOptions();
+		$('#lnkAquisitions').hasClass("btn-primary") ? false : $('#lnkAquisitions').addClass("btn-primary");
+		$('#aquisitionToggles').css("display","block");
+		return false;
 	},
 	showLandOptions : function(){
-		$('#lnkAgency').removeClass("btn-primary");
+		this.resetNavOptions();
 		$('#lnkLandTypes').hasClass("btn-primary") ? false : $('#lnkLandTypes').addClass("btn-primary");
-		$('#agencyToggles').css("display","none");
 		$('#landUseToggles').css("display","block");
+		return false;
 	}
 });	
 
