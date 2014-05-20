@@ -344,7 +344,8 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 	events: {
 		"click .ownerToggle" : "actToggleLayer",
 		"click .aquisitionToggle" : "actToggleLayer",
-		"click .landuseToggle": "actToggleLand",
+		"click .landuseToggle": "actToggleLayer",
+		//"click .landuseToggle": "actToggleLand",
 		"click #lnkTodos" : "addTodos",
 		"click #lnkSlideMenu" : "loadRightSlide",
 		"click #lnkPrismFunding" : "loadPrismFunding"
@@ -367,7 +368,7 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 	},
 	actToggleLayer : function(ev){
 		var areaName = $(ev.currentTarget).attr("data-layerlabel").toString();
-		if(areaName == "RCO" ||  areaName == "DNR")
+		if(1 != 1)
 		{
 			alert("Not available at this time.");
 		}
