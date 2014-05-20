@@ -14,10 +14,10 @@ var MapView = Backbone.Marionette.Layout.extend({
 		});
 		this.imageryMap = L.tileLayer.provider('MapBox.smartmine.map-nco5bdjp', { minZoom:4, zIndex: 4 });
 		
-		this.esriMap = L.esri.tiledMapLayer("http://server.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_Median_Household_Income/MapServer", {
-			opacity: 0.3,
-			zIndex: 1060
+		this.esriMap = L.esri.dynamicMapLayer("http://gismanagerweb.rco.wa.gov/arcgis/rest/services/public_lands/WA_RCO_Public_Lands_Inventory_PRISM/MapServer", {
+			position: "front"
 		});
+	
 		this.esriMap.on("click",function(ev){
 			console.log(ev);
 			console.log($(ev.currentTarget));
@@ -52,7 +52,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		MainApplication.Map.on("dragstart",function(){
 			dc.loadCurrentMap();
 		});
-		
+	
 		L.control.layers({
 			'Open Street Map': this.openMap,
 			'Streets': this.streetsMap.addTo(MainApplication.Map),
