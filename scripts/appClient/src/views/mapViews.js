@@ -9,11 +9,22 @@ var MapView = Backbone.Marionette.Layout.extend({
 		//examples.map-y7l23tes
 		this.streetsMap = L.tileLayer.provider('MapBox.smartmine.tm2-basemap', { minZoom:4, zIndex: 4 });		
 		this.openMap = L.tileLayer('http://b.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-    			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
+    		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
     			maxZoom: 18
 		});
 		this.imageryMap = L.tileLayer.provider('MapBox.smartmine.map-nco5bdjp', { minZoom:4, zIndex: 4 });
 		
+		this.esriMap = L.esri.tiledMapLayer("http://server.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_Median_Household_Income/MapServer", {
+			opacity: 0.3,
+			zIndex: 1060
+		});
+		this.esriMap.on("click",function(ev){
+			console.log(ev);
+			console.log($(ev.currentTarget));
+			console.log(this);
+			return false;
+		});
+
 		this.mapFirstView = true;
         _.bindAll(this, 'onShow');
     },
@@ -60,9 +71,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 						dc.createGrid(utfGrid, area)
 				]);			
 		});		
-		
-		MainApplication.Map.setView([47,-120], 7)
-			.addLayer(this.streetsMap);
+
+		MainApplication.Map.setView([47,-120], 7).addLayer(this.streetsMap);
 		this.mapFirstView=false;
 		_.each(BootstrapVars.areaStats, function(area){ 
 			if(area.visible){
@@ -294,8 +304,6 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
     	var dc = this;
 		this.todos = options.todos;
 		this.genericCollection = options.genericCollection;
-
-		
         _.bindAll(this, 'loadContactUs', 'addTodos');
     },
 	events: {
@@ -383,7 +391,7 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 		return false;
 	},
 	loadPrismFunding: function(){
-		console.log("Lets load that funding layers!");
+		MainApplication.Map.hasLayer(MainApplication.views.mapView.esriMap) ? MainApplication.Map.removeLayer(MainApplication.views.mapView.esriMap) : MainApplication.views.mapView.esriMap.addTo(MainApplication.Map);
 		return false;
 	},
 	loadRightSlide: function(){
