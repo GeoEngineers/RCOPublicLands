@@ -17,13 +17,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.esriMap = L.esri.dynamicMapLayer("http://gismanagerweb.rco.wa.gov/arcgis/rest/services/public_lands/WA_RCO_Public_Lands_Inventory_PRISM/MapServer", {
 			position: "front"
 		});
-	
-		this.esriMap.on("click",function(ev){
-			console.log(ev);
-			console.log($(ev.currentTarget));
-			console.log(this);
-			return false;
-		});
 
 		this.mapFirstView = true;
         _.bindAll(this, 'onShow');
@@ -72,6 +65,29 @@ var MapView = Backbone.Marionette.Layout.extend({
 				]);			
 		});		
 
+		//ESRI Prism data check
+		MainApplication.Map.on("click", function(e) {
+			if(MainApplication.Map.hasLayer(MainApplication.views.mapView.esriMap)){
+				MainApplication.views.mapView.esriMap.identify(e.latlng, function(data) {
+					if(data.results.length > 0) {
+						// Popup toevoegen en informatie toevoegen
+						 popupText =  "<div style='overflow:scroll; max-width:250px; max-height:260px;'>";
+						 for (prop in data.results[0].attributes) {
+							var val = data.results[0].attributes[prop];
+							if (val != 'undefined' && val != "0" && prop !="OBJECTID" && prop != "Name") {
+								popupText += "<b>" + prop.replace(" (Esri)",'') + "</b>: " + val + "<br>";
+							}
+						}
+					popupText += "</div>";
+					var popup = L.popup()
+						.setLatLng(e.latlng)
+						.setContent(popupText)
+						.openOn(MainApplication.Map); 				
+					}
+				});
+			}
+		});		
+		
 		MainApplication.Map.setView([47,-120], 7).addLayer(this.streetsMap);
 		this.mapFirstView=false;
 		_.each(BootstrapVars.areaStats, function(area){ 
@@ -121,7 +137,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 		})
 		gridLayer.on('click', function(props){
 			if(props.data){
-				console.log(props);
 				var markerToolTip = new MapTipView({
             		ParcelName: "Parcel",
             		Owner: area.agency,
@@ -292,7 +307,27 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
     },
 	templateHelpers: function(){
 		var owners = [];
-		_.each(BootstrapVars.areaStats, function(area){
+		_.each([
+			{
+				abbrev: "DFW",
+				agency: "Department of Fish and Wildlife",
+				symbol: '#x2190;'
+			},
+			{
+				abbrev: "PARKS",
+				agency: "Washington Parks Department",
+				symbol: '#x21f4;'
+			},
+			{
+				abbrev: "RCO",
+				agency: "Recreation and Conservation Office",
+				symbol: '#x219a;'
+			},
+			{
+				abbrev: "DNR",
+				agency: "Department of Natural Resources",
+				symbol: '#x214a;'
+		}], function(area){
 			owners.push({owner: area.abbrev.toUpperCase(), symbol: area.symbol});
 		});
 		return { 
@@ -308,6 +343,7 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
     },
 	events: {
 		"click .ownerToggle" : "actToggleLayer",
+		"click .aquisitionToggle" : "actToggleLayer",
 		"click .landuseToggle": "actToggleLand",
 		"click #lnkTodos" : "addTodos",
 		"click #lnkSlideMenu" : "loadRightSlide",
@@ -337,7 +373,12 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 		}
 		else
 		{
-			this.toggleActiveLayers(areaName);		
+			var className = "";
+			className = $(ev.currentTarget).hasClass("ownerToggle") ? "owner" : className;
+			className = $(ev.currentTarget).hasClass("landuseToggle") ? "landuse" : className;
+			className = $(ev.currentTarget).hasClass("aquisitionToggle") ? "aquisition" : className;
+			
+			this.toggleActiveLayers(className, areaName);		
 			_.each(BootstrapVars.areaStats, function(area){
 				if(area.abbrev == areaName)
 				{
@@ -391,7 +432,13 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 		return false;
 	},
 	loadPrismFunding: function(){
-		MainApplication.Map.hasLayer(MainApplication.views.mapView.esriMap) ? MainApplication.Map.removeLayer(MainApplication.views.mapView.esriMap) : MainApplication.views.mapView.esriMap.addTo(MainApplication.Map);
+		if(MainApplication.Map.hasLayer(MainApplication.views.mapView.esriMap)){
+			$('#lnkPrismFunding').css("color","#999999");
+			MainApplication.Map.removeLayer(MainApplication.views.mapView.esriMap);	
+		}else{
+			$('#lnkPrismFunding').css("color","#FFFFFF");
+			MainApplication.views.mapView.esriMap.addTo(MainApplication.Map);
+		}
 		return false;
 	},
 	loadRightSlide: function(){
@@ -401,9 +448,9 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 		MainApplication.paneRegion.show(this.mapPaneView);
 		return false;
 	},
-	toggleActiveLayers: function(label){
+	toggleActiveLayers: function(className, label){
 		if($.inArray(label,this.activeLayers) > -1){
-			$('#ownerToggle' + label).css("color","#444444");
+			$('#'+className+'Toggle' + label).css("color","#999999");
 			this.activeLayers = _.reject(this.activeLayers,function(item){
 				return item===label;
 			});
@@ -411,10 +458,13 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 			var color = '';
 			_.each(BootstrapVars.areaStats, function(area){
 				if(area.abbrev == label){
+					console.log(area.abbrev);
+					console.log(area.color);
 					color = area.color;
 				}
 			});
-			$('#ownerToggle' + label).css("color",color);
+			console.log('#'+className+'Toggle' + label);
+			$('#'+className+'Toggle' + label).css("color",color);
 			this.activeLayers.push(label);
 		}
 		return false;
