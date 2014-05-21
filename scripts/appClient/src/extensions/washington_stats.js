@@ -26,7 +26,7 @@ BootstrapVars.areaStats = [
 		symbol: '#x21f4;',
 		color: '#FFCC00'
 	},
-	{
+	/*{
 		abbrev: "RCO",
 		agency: "Recreation and Conservation Office",
 		total_acres : 112554.00,
@@ -37,7 +37,7 @@ BootstrapVars.areaStats = [
 		layerGroup: null,
 		symbol: '#x219a;',
 		color: '#229900'
-	},
+	},*/
 	{
 		abbrev: "DNR",
 		agency: "Department of Natural Resources",
