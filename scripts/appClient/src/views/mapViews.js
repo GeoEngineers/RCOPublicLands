@@ -378,9 +378,9 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 	actToggleLayer : function(ev){
 		var areaName = $(ev.currentTarget).attr("data-layerlabel").toString();
 		var areaDetails = _.find(BootstrapVars.areaStats,function(item){
-			return item.abbrev == "DFW";
-		});		
-		if(areaDetails.toital_acres === 0)
+			return item.abbrev == areaName;
+		});
+		if(areaDetails.total_acres === 0)
 		{
 			alert("Not available at this time.");
 		}

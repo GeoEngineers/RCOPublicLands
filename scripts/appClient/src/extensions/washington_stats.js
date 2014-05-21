@@ -126,9 +126,9 @@ BootstrapVars.areaStats = [
 	{
 		abbrev: "OTHER",
 		agency: "other",
-		total_acres 0: ,
+		total_acres: 0,
 		total_cost: 0,
-		total_revenue: ,
+		total_revenue: 0,
 		mapTarget: "",
 		visible: false,
 		layerGroup: null,
