@@ -71,18 +71,27 @@ var MapView = Backbone.Marionette.Layout.extend({
 				MainApplication.views.mapView.esriMap.identify(e.latlng, function(data) {
 					if(data.results.length > 0) {
 						// Popup toevoegen en informatie toevoegen
-						 popupText =  "<div style='overflow:scroll; max-width:250px; max-height:260px;'>";
-						 for (prop in data.results[0].attributes) {
+						popupText =  "<div style='overflow:scroll; max-width:250px; max-height:260px;'>";
+						for (prop in data.results[0].attributes) {
 							var val = data.results[0].attributes[prop];
+							var linkId = "shapshot"+ data.results[0].attributes.OBJECTID;
+							if(prop === "Snapshot URL"){
+								val = "<a href='" + val + "' id='shapshot"+ data.results[0].attributes.OBJECTID +"'>" + val + "</a>";
+							}
 							if (val != 'undefined' && val != "0" && prop !="OBJECTID" && prop != "Name") {
 								popupText += "<b>" + prop.replace(" (Esri)",'') + "</b>: " + val + "<br>";
 							}
 						}
-					popupText += "</div>";
-					var popup = L.popup()
-						.setLatLng(e.latlng)
-						.setContent(popupText)
-						.openOn(MainApplication.Map); 				
+						popupText += "</div>";
+						var popup = L.popup()
+							.setLatLng(e.latlng)
+							.setContent(popupText)
+							.openOn(MainApplication.Map);
+
+						$('#'+linkId).on("click",function(ev){
+							window.open($(ev.currentTarget).attr("href"),'PRISM','width=1000,height=550,scroll=1,scrolling=1,scrollbars=1');
+							return false;
+						});
 					}
 				});
 			}
@@ -318,11 +327,11 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 				agency: "Washington Parks Department",
 				symbol: '#x21f4;'
 			},
-			{
+			/*{
 				abbrev: "RCO",
 				agency: "Recreation and Conservation Office",
 				symbol: '#x219a;'
-			},
+			},*/
 			{
 				abbrev: "DNR",
 				agency: "Department of Natural Resources",
