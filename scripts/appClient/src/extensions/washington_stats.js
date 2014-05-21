@@ -11,7 +11,7 @@ BootstrapVars.areaStats = [
 		visible: true,
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#ECC92E'
+		color: '#FFEBCD'
 
 	},
 	{
@@ -20,11 +20,11 @@ BootstrapVars.areaStats = [
 		total_acres : 112554.00,
 		total_cost: 1,
 		total_revenue: 1,
-		mapTarget: "smartmine.yyb3ayvi",
+		mapTarget: "smartmine.zypq4cxr",
 		visible: true,
 		layerGroup: null,
 		symbol: '#x21f4;',
-		color: '#756BB1'
+		color: '#FFCC00'
 	},
 	{
 		abbrev: "RCO",
@@ -44,7 +44,7 @@ BootstrapVars.areaStats = [
 		total_acres : 112554.00,
 		total_cost: 1.00,
 		total_revenue: 1.00,
-		mapTarget: "smartmine.yyb3ayvi",
+		mapTarget: "smartmine.to36usor",
 		visible: false,
 		layerGroup: null,
 		symbol: '#x214a;',
@@ -97,7 +97,7 @@ BootstrapVars.areaStats = [
 		visible: false,
 		layerGroup: null,
 		symbol: '#x214a;',
-		color: '#428BCA'
+		color: '#347235'
 	},
 	{
 		abbrev: "TRIBAL",
@@ -105,11 +105,11 @@ BootstrapVars.areaStats = [
 		total_acres : 0.99,
 		total_cost: 1.00,
 		total_revenue: 1.00,
-		mapTarget: "smartmine.izm5nrk9",
+		mapTarget: "smartmine.0eyx2yb9",
 		visible: false,
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#ECC92E'
+		color: '#FFFF00'
 	},	
 	{
 		abbrev: "FEDERAL",
@@ -117,11 +117,11 @@ BootstrapVars.areaStats = [
 		total_acres : 0.99,
 		total_cost: 1.00,
 		total_revenue: 1.00,
-		mapTarget: "smartmine.izm5nrk9",
+		mapTarget: "smartmine.2rrltyb9",
 		visible: false,
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#ECC92E'
+		color: '#C3FDB8'
 	},	
 	{
 		abbrev: "OTHER",
@@ -157,7 +157,7 @@ BootstrapVars.areaStats = [
 		visible: false,
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#ECC92E'
+		color: '#CC9900'
 	},	
 	{
 		abbrev: "RECREATION",
@@ -177,10 +177,10 @@ BootstrapVars.areaStats = [
 		total_acres : 0.99,
 		total_cost: 1.00,
 		total_revenue: 1.00,
-		mapTarget: "smartmine.izm5nrk9",
+		mapTarget: "smartmine.tpwopqfr",
 		visible: false,
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#ECC92E'
+		color: '#00FFFF'
 	}
 ];
