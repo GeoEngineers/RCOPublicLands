@@ -4,7 +4,7 @@ BootstrapVars.areaStats = [
 	{
 		abbrev: "DFW",
 		agency: "Department of Fish and Wildlife",
-		total_acres : 912984.58,
+		total_acres : 995329.78,
 		total_cost: 1.00,
 		total_revenue: 1.00,
 		mapTarget: "smartmine.izm5nrk9",
@@ -17,7 +17,7 @@ BootstrapVars.areaStats = [
 	{
 		abbrev: "PARKS",
 		agency: "Washington Parks Department",
-		total_acres : 112554.00,
+		total_acres : 397973.62,
 		total_cost: 1,
 		total_revenue: 1,
 		mapTarget: "smartmine.zypq4cxr",
@@ -41,7 +41,7 @@ BootstrapVars.areaStats = [
 	{
 		abbrev: "DNR",
 		agency: "Department of Natural Resources",
-		total_acres : 112554.00,
+		total_acres : 392340.89,
 		total_cost: 1.00,
 		total_revenue: 1.00,
 		mapTarget: "smartmine.to36usor",
@@ -150,10 +150,10 @@ BootstrapVars.areaStats = [
 	{
 		abbrev: "HABITAT",
 		agency: "habitat",
-		total_acres : 0.99,
+		total_acres : 845671.68,
 		total_cost: 1.00,
 		total_revenue: 1.00,
-		mapTarget: "smartmine.izm5nrk9",
+		mapTarget: "smartmine.u6wxko6r",
 		visible: false,
 		layerGroup: null,
 		symbol: '#x2190;',
@@ -162,19 +162,19 @@ BootstrapVars.areaStats = [
 	{
 		abbrev: "RECREATION",
 		agency: "recreation",
-		total_acres : 0.99,
+		total_acres : 183428.78,
 		total_cost: 1.00,
 		total_revenue: 1.00,
-		mapTarget: "smartmine.izm5nrk9",
+		mapTarget: "smartmine.nxwrvn29",
 		visible: false,
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#ECC92E'
+		color: '#CC00CC'
 	},	
 	{
 		abbrev: "CONSERVATION",
 		agency: "conservation",
-		total_acres : 0.99,
+		total_acres : 159789.33,
 		total_cost: 1.00,
 		total_revenue: 1.00,
 		mapTarget: "smartmine.tpwopqfr",

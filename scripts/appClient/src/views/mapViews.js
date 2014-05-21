@@ -140,7 +140,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 				var markerToolTip = new MapTipView({
             		ParcelName: "Parcel",
             		Owner: area.agency,
-            		TotalArea: props.data.GISAcres,
+            		TotalArea: props.data.gisacres,
             		AquisitionDate: '(Available Soon)',
             		Cost: '(Available Soon)'
         		});
@@ -163,7 +163,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		info.update = function (props) {
 			if(props){
 				//this._div.innerHTML = "<h4>Acreage over an area &nbsp;&nbsp;&nbsp;&nbsp;</h4>" +  (props ?
-				//	"<values><b>" + props.data.GISAcres + "</b><br />Percentage: <rank>" + props.data.GISAcres +"</rank></values>"
+				//	"<values><b>" + props.data.GISAcres + "</b><br />Percentage: <rank>" + props.data.gisacres +"</rank></values>"
 				//: 'Hover over a state');
 			}
 		};
