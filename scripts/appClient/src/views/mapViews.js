@@ -377,7 +377,10 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 	},
 	actToggleLayer : function(ev){
 		var areaName = $(ev.currentTarget).attr("data-layerlabel").toString();
-		if(1 != 1)
+		var areaDetails = _.find(BootstrapVars.areaStats,function(item){
+			return item.abbrev == "DFW";
+		});		
+		if(areaDetails.toital_acres === 0)
 		{
 			alert("Not available at this time.");
 		}
@@ -389,12 +392,7 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 			className = $(ev.currentTarget).hasClass("aquisitionToggle") ? "aquisition" : className;
 			
 			this.toggleActiveLayers(className, areaName);		
-			_.each(BootstrapVars.areaStats, function(area){
-				if(area.abbrev == areaName)
-				{
-					MainApplication.views.mapView.toggleMapLayer(area.layerGroup);
-				}
-			});
+			MainApplication.views.mapView.toggleMapLayer(areaDetails.layerGroup);
 
 			this.loadRightSlide();
 		}
@@ -468,12 +466,9 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 			var color = '';
 			_.each(BootstrapVars.areaStats, function(area){
 				if(area.abbrev == label){
-					console.log(area.abbrev);
-					console.log(area.color);
 					color = area.color;
 				}
 			});
-			console.log('#'+className+'Toggle' + label);
 			$('#'+className+'Toggle' + label).css("color",color);
 			this.activeLayers.push(label);
 		}
