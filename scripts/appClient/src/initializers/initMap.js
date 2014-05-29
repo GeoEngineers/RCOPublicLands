@@ -32,7 +32,7 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
 			});
 			//overwrites previous region on init
 			MainApplication.addRegions({
-			  toDoRegion: "#ToDoContainer"
+				toDoRegion: "#ToDoContainer"
 			});
 			MainApplication.toDoRegion.show(MainApplication.views.toDoView);
 		});
@@ -40,12 +40,8 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
 		MainApplication.views.headerView = new HeaderView();
 		MainApplication.headerRegion.show(MainApplication.views.headerView);
 
-		/*
-			MainApplication.views.mapFooterView = new MapFooterView({
-				genericCollection: MainApplication.models.genericCollection,
-				todos: MainApplication.models.todos
-			});
-			MainApplication.footerRegion.show(MainApplication.views.mapFooterView);	
-		*/
+		var mapSelectorSlideView = new MapSelectorSlideView();
+		mapSelectorSlideView.openMinimized=true;
+		MainApplication.slideRegion.show(mapSelectorSlideView);
 	});
 });

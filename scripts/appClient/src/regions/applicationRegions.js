@@ -12,30 +12,16 @@
         return $el;
     },
     slideOut: function (view) {
-		$('#FooterNavSlideOut').collapse('show');
-		this.slideOpen = true;
-		//kludgy fix to address display issues sometimes in firefox
-		setTimeout(function(){
-			if($('#FooterNavSlideOut').hasClass("collapsing")){
-				$('#FooterNavSlideOut').css("height","auto");
-				$('#FooterNavSlideOut').slideDown();
-				$('#FooterNavSlideOut').removeClass("collapsing");	
-				$('#FooterNavSlideOut').addClass("in");		
-			}
-		},500);
+		if(view && view.openMinimized !== undefined && view.openMinimized===true){
+			this.slideIn();
+		}else{
+			$('#FooterNavSlideOut').css("top","70%");
+			this.slideOpen = true;
+		}
     },
-    slideIn: function () {
-		$('#FooterNavSlideOut').collapse('hide');
+    slideIn: function (view) {
+		$('#FooterNavSlideOut').css("top","95%");
 		this.slideOpen = false;
-		//kludgy fix to address display issues sometimes in firefox
-		setTimeout(function(){
-			if($('#FooterNavSlideOut').hasClass("in")){
-				$('#FooterNavSlideOut').css("height","auto");
-				$('#FooterNavSlideOut').slideUp();
-				$('#FooterNavSlideOut').removeClass("in");		
-				$('#FooterNavSlideOut').addClass("collapsing");		
-			}
-		},500);		
     }
 });
 

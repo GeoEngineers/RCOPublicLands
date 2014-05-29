@@ -330,6 +330,31 @@ var MapView = Backbone.Marionette.Layout.extend({
 });	
 
 
+var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
+    template: function (serialized_model) {
+		return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.MapSelectorSlideTemplate);
+    },
+	templateHelpers: function(){
+		return {
+			Description: "Helper"
+		};
+	},
+	events: {
+		"click #lnkMapsSlideToggle" : "toggleSlide"
+	},
+	toggleSlide: function(){
+		console.log("Toggling");
+		console.log(MainApplication.slideRegion);
+		console.log(MainApplication.slideRegion.slideOpen);
+		if(MainApplication.slideRegion.slideOpen === true){
+			MainApplication.slideRegion.slideIn();
+		}else{
+			MainApplication.slideRegion.slideOut();			
+		}
+		return false;
+	}
+});
+
 var NewMarkerToolTip = Backbone.Marionette.ItemView.extend({
     template: function (serialized_model) {
 		return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.MapNewMarkerTipTemplate);

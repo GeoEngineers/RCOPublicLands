@@ -27,6 +27,13 @@ MainApplication.Templates.MapTemplate = [
 	"</div>"
 ].join("\n");
 
+MainApplication.Templates.MapSelectorSlideTemplate = [
+	"<div>",
+		"<a href='#' id='lnkMapsSlideToggle'>Maps</a>",
+	"</div>"
+].join("\n");
+
+/*
 MainApplication.Templates.MapFooterTemplate = [
 	"<div class='navbar navbar-inverse navbar-fixed-bottom'>",
 		"<div class='navbar-inner'>",
@@ -60,6 +67,7 @@ MainApplication.Templates.MapFooterTemplate = [
 		"</div>",
 	"</div>"
 ].join("\n");
+*/
 
 MainApplication.Templates.MapPaneTemplate = [
 	"<div style=\"padding: 10px\">",

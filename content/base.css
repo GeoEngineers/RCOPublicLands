@@ -1117,9 +1117,11 @@ svg {
 }
 
 #FooterNavSlideOut{
-	padding: 0px 0px 0px 0px;
 	background-color:rgba(13,106,132,1);
-    /*#0D6A84*/
+	padding: 0px 0px 0px 0px;
+	position:absolute; 
+	top:70%;
+	width:100%;
 }
 
 .iconsNav{
