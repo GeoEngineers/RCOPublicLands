@@ -26,6 +26,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		"click #lnkDefaultButton" : "setBaseMapDefault",
 		"click #lnkSyncQueueData" : "syncLiveData",
 		"click #lnkToggleConnection" : "toggleConnection",
+		"click #lnkMapsSlide" : "showMapsSlide",
 		"click #lnkAgency" : "showAgencyOptions",
 		"click #lnkAquisitions" : "showAquisitions",
 		"click #lnkLandTypes" : "showLandOptions"
@@ -249,22 +250,59 @@ var MapView = Backbone.Marionette.Layout.extend({
 		$('.navToggles').css("display","none");
 		return false;
 	},	
+	setDisplayedLayers : function(layerType){
+		console.log(layerType);
+		console.log(BootstrapVars.areaStats);
+		console.log("Set them layers");
+		
+		/*
+		var areaName = $(ev.currentTarget).attr("data-layerlabel").toString();
+		var areaDetails = _.find(BootstrapVars.areaStats,function(item){
+			return item.abbrev == areaName;
+		});
+		if(areaDetails.total_acres === 0)
+		{
+			alert("Not available at this time.");
+		}
+		else
+		{
+			var className = "";
+			className = $(ev.currentTarget).hasClass("ownerToggle") ? "owner" : className;
+			className = $(ev.currentTarget).hasClass("landuseToggle") ? "landuse" : className;
+			className = $(ev.currentTarget).hasClass("aquisitionToggle") ? "aquisition" : className;
+			
+			this.toggleActiveLayers(className, areaName);		
+			MainApplication.views.mapView.toggleMapLayer(areaDetails.layerGroup);
+
+			this.loadRightSlide();
+		}
+		return false;		
+		*/
+		return false;
+	},
+	showMapsSlide : function(){
+		console.log("Slide Data");
+		return false;
+	},
 	showAgencyOptions : function(){
 		this.resetNavOptions();
 		$('#lnkAgency').hasClass("btn-primary") ? false : $('#lnkAgency').addClass("btn-primary");
 		$('#agencyToggles').css("display","block");
+		this.setDisplayedLayers("agency");
 		return false;
 	},
 	showAquisitions : function(){
 		this.resetNavOptions();
 		$('#lnkAquisitions').hasClass("btn-primary") ? false : $('#lnkAquisitions').addClass("btn-primary");
 		$('#aquisitionToggles').css("display","block");
+		this.setDisplayedLayers("aquisitions");
 		return false;
 	},
 	showLandOptions : function(){
 		this.resetNavOptions();
 		$('#lnkLandTypes').hasClass("btn-primary") ? false : $('#lnkLandTypes').addClass("btn-primary");
 		$('#landUseToggles').css("display","block");
+		this.setDisplayedLayers("landtypes");
 		return false;
 	}
 });	

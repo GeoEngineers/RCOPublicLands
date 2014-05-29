@@ -9,7 +9,7 @@ BootstrapVars.areaStats = [
 		total_revenue: 1.00,
 		mapTarget: "smartmine.izm5nrk9",
 		visible: true,
-		layerGroup: null,
+		layerGroup: "agency",
 		symbol: '#x2190;',
 		color: '#FFEBCD'
 
@@ -22,7 +22,7 @@ BootstrapVars.areaStats = [
 		total_revenue: 1,
 		mapTarget: "smartmine.zypq4cxr",
 		visible: true,
-		layerGroup: null,
+		layerGroup: "agency",
 		symbol: '#x21f4;',
 		color: '#FFCC00'
 	},
@@ -34,7 +34,7 @@ BootstrapVars.areaStats = [
 		total_revenue: 1.00,
 		mapTarget: "smartmine.yyb3ayvi",
 		visible: false,
-		layerGroup: null,
+		layerGroup: "agency",
 		symbol: '#x219a;',
 		color: '#229900'
 	},*/
@@ -45,11 +45,47 @@ BootstrapVars.areaStats = [
 		total_cost: 1.00,
 		total_revenue: 1.00,
 		mapTarget: "smartmine.to36usor",
-		visible: false,
-		layerGroup: null,
+		visible: true,
+		layerGroup: "agency",
 		symbol: '#x214a;',
 		color: '#428BCA'
 	},
+	{
+		abbrev: "TRIBAL",
+		agency: "tribal",
+		total_acres : 24098.61,
+		total_cost: 1.00,
+		total_revenue: 1.00,
+		mapTarget: "smartmine.0eyx2yb9",
+		visible: true,
+		layerGroup: "agency",
+		symbol: '#x2190;',
+		color: '#FFFF00'
+	},	
+	{
+		abbrev: "FEDERAL",
+		agency: "federal",
+		total_acres : 15727892.11,
+		total_cost: 1.00,
+		total_revenue: 1.00,
+		mapTarget: "smartmine.2rrltyb9",
+		visible: true,
+		layerGroup: "agency",
+		symbol: '#x2190;',
+		color: '#C3FDB8'
+	},	
+	/*{
+		abbrev: "OTHER",
+		agency: "other",
+		total_acres: 0,
+		total_cost: 0,
+		total_revenue: 0,
+		mapTarget: "",
+		visible: false,
+		layerGroup: "agency",
+		symbol: '#x2190;',
+		color: '#ECC92E'
+	},	*/
 	{
 		abbrev: "AQ-DFW",
 		agency: "Department of Fish and Wildlife",
@@ -58,7 +94,7 @@ BootstrapVars.areaStats = [
 		total_revenue: 1.00,
 		mapTarget: "smartmine.izm5nrk9",
 		visible: false,
-		layerGroup: null,
+		layerGroup: "aquisitions",
 		symbol: '#x2190;',
 		color: '#ECC92E'
 
@@ -71,7 +107,7 @@ BootstrapVars.areaStats = [
 		total_revenue: 1,
 		mapTarget: "smartmine.yyb3ayvi",
 		visible: false,
-		layerGroup: null,
+		layerGroup: "aquisitions",
 		symbol: '#x21f4;',
 		color: '#756BB1'
 	},
@@ -83,7 +119,7 @@ BootstrapVars.areaStats = [
 		total_revenue: 1.00,
 		mapTarget: "smartmine.yyb3ayvi",
 		visible: false,
-		layerGroup: null,
+		layerGroup: "aquisitions",
 		symbol: '#x219a;',
 		color: '#229900'
 	},
@@ -95,46 +131,10 @@ BootstrapVars.areaStats = [
 		total_revenue: 1.00,
 		mapTarget: "smartmine.yyb3ayvi",
 		visible: false,
-		layerGroup: null,
+		layerGroup: "aquisitions",
 		symbol: '#x214a;',
 		color: '#347235'
 	},
-	{
-		abbrev: "TRIBAL",
-		agency: "tribal",
-		total_acres : 24098.61,
-		total_cost: 1.00,
-		total_revenue: 1.00,
-		mapTarget: "smartmine.0eyx2yb9",
-		visible: false,
-		layerGroup: null,
-		symbol: '#x2190;',
-		color: '#FFFF00'
-	},	
-	{
-		abbrev: "FEDERAL",
-		agency: "federal",
-		total_acres : 15727892.11,
-		total_cost: 1.00,
-		total_revenue: 1.00,
-		mapTarget: "smartmine.2rrltyb9",
-		visible: false,
-		layerGroup: null,
-		symbol: '#x2190;',
-		color: '#C3FDB8'
-	},	
-	{
-		abbrev: "OTHER",
-		agency: "other",
-		total_acres: 0,
-		total_cost: 0,
-		total_revenue: 0,
-		mapTarget: "",
-		visible: false,
-		layerGroup: null,
-		symbol: '#x2190;',
-		color: '#ECC92E'
-	},	
 	{
 		abbrev: "REVENUE",
 		agency: "revenue",
@@ -143,7 +143,7 @@ BootstrapVars.areaStats = [
 		total_revenue: 0,
 		mapTarget: "smartmine.izm5nrk9",
 		visible: false,
-		layerGroup: null,
+		layerGroup: "landtypes",
 		symbol: '#x2190;',
 		color: '#ECC92E'
 	},	
@@ -155,7 +155,7 @@ BootstrapVars.areaStats = [
 		total_revenue: 1.00,
 		mapTarget: "smartmine.u6wxko6r",
 		visible: false,
-		layerGroup: null,
+		layerGroup: "landtypes",
 		symbol: '#x2190;',
 		color: '#CC9900'
 	},	
@@ -167,7 +167,7 @@ BootstrapVars.areaStats = [
 		total_revenue: 1.00,
 		mapTarget: "smartmine.nxwrvn29",
 		visible: false,
-		layerGroup: null,
+		layerGroup: "landtypes",
 		symbol: '#x2190;',
 		color: '#CC00CC'
 	},	
@@ -179,7 +179,7 @@ BootstrapVars.areaStats = [
 		total_revenue: 1.00,
 		mapTarget: "smartmine.tpwopqfr",
 		visible: false,
-		layerGroup: null,
+		layerGroup: "landtypes",
 		symbol: '#x2190;',
 		color: '#00FFFF'
 	}

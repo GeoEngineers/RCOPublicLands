@@ -3,6 +3,11 @@
 MainApplication.Templates.MapTemplate = [
 	"<div style='color:#000000;'>",
 		"This is the landing page area, you can place any content here.",
+		"<ul id='map-slide-button'>",
+			"<div class='btn-group'>",
+				"<button id='lnkMapsSlide' class='btn btn-primary navLayers'>Maps</button>",
+			"</div>",			
+		"</ul>",		
 		"<ul id='map-buttons'>",
 			"<div class='btn-group'>",
 				"<button id='lnkAgency' class='btn btn-primary navLayers'>Agency</button>",
