@@ -36,24 +36,16 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
 			});
 			MainApplication.toDoRegion.show(MainApplication.views.toDoView);
 		});
-		//MainApplication.models.todos.fetch({
-		//	reset:true, 
-		//	dataType: 'json',
-		//	cache: false,
-		//	success: function(){
 		MainApplication.mainRegion.show(MainApplication.views.mapView);		
-		//	},
-		//	error: function(model, response, options) {
-		//		console.log("Error retrieving todos");
-		//	}
-		//});
 		MainApplication.views.headerView = new HeaderView();
 		MainApplication.headerRegion.show(MainApplication.views.headerView);
 
-		MainApplication.views.mapFooterView = new MapFooterView({
-			genericCollection: MainApplication.models.genericCollection,
-			todos: MainApplication.models.todos
-		});
-		MainApplication.footerRegion.show(MainApplication.views.mapFooterView);	
+		/*
+			MainApplication.views.mapFooterView = new MapFooterView({
+				genericCollection: MainApplication.models.genericCollection,
+				todos: MainApplication.models.todos
+			});
+			MainApplication.footerRegion.show(MainApplication.views.mapFooterView);	
+		*/
 	});
 });

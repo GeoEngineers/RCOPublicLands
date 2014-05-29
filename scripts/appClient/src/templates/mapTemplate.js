@@ -6,6 +6,13 @@ MainApplication.Templates.MapTemplate = [
 		"<ul id='map-slide-button'>",
 			"<div class='btn-group'>",
 				"<button id='lnkMapsSlide' class='btn btn-primary navLayers'>Maps</button>",
+
+				"<ul class='navbar-nav iconsNav iconsNav-right' style='float:right;'>",
+					"<li class='slide-menu'><a href='#' id='lnkSlideMenu' class='navLink' href='#SummaryPaneSlideOut'><i class='icon-bar-chart icon-large'></i><div class='txt'>SUMMARY</div></a></li>",
+				"</ul>",
+				"<ul class='navbar-nav iconsNav iconsNav-right' style='float:right;'>",
+					"<li style='padding:5px 20px 0px 0px;'><a href='#' id='lnkPrismFunding' class='navLink' href='#lnkPrismFunding'><i class=\"icon\" style=\"margin:0px; width: 16px; height:16px; font-size: 15px;\">&#x2106;</i><div class='txt'>RCO FUNDING</div></a></li>",
+				"</ul>",
 			"</div>",			
 		"</ul>",		
 		"<ul id='map-buttons'>",

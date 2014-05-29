@@ -29,11 +29,24 @@ var MapView = Backbone.Marionette.Layout.extend({
 		"click #lnkMapsSlide" : "showMapsSlide",
 		"click #lnkAgency" : "showAgencyOptions",
 		"click #lnkAquisitions" : "showAquisitions",
-		"click #lnkLandTypes" : "showLandOptions"
+		"click #lnkLandTypes" : "showLandOptions",
+		"click #lnkPrismFunding" : "loadPrismFunding"
 	},	
 	onShow: function(){
 		var dc=this;
 
+		$(document).ready(function() {
+			 dc.slide = $('.slide-menu').bigSlide({ side:"right", menu:"#SummaryPaneSlideOut" }).css("z-index","1040").css("top", "35px");
+		});
+		this.activeLayers=[];
+		_.each(BootstrapVars.areaStats, function(area){
+			if(area.visible){
+				dc.activeLayers.push(area.abbrev);
+				$('#ownerToggle' + area.abbrev).css("color",area.color);
+			}
+		});
+		this.loadRightSlide();
+		
 		var welcomeView = new WelcomeView({});
 		MainApplication.modalRegion.show(welcomeView);
 
@@ -54,16 +67,14 @@ var MapView = Backbone.Marionette.Layout.extend({
 		},{},{
 			position:'bottomleft'
 		}).addTo(MainApplication.Map);
-		
 
 		_.each(BootstrapVars.areaStats, function(area){ 
-				console.log(area);
-				var tileLayer = new L.mapbox.tileLayer(area.mapTarget, { zIndex: 5 });
-				var utfGrid = new L.UtfGrid('http://{s}.tiles.mapbox.com/v3/'+area.mapTarget+'/{z}/{x}/{y}.grid.json?callback={cb}', { zIndex: 5 });
-				area.layerGroup =  L.layerGroup([
-						tileLayer,
-						dc.createGrid(utfGrid, area)
-				]);			
+			var tileLayer = new L.mapbox.tileLayer(area.mapTarget, { zIndex: 5 });
+			var utfGrid = new L.UtfGrid('http://{s}.tiles.mapbox.com/v3/'+area.mapTarget+'/{z}/{x}/{y}.grid.json?callback={cb}', { zIndex: 5 });
+			area.layerGroup =  L.layerGroup([
+				tileLayer,
+				dc.createGrid(utfGrid, area)
+			]);
 		});		
 
 		//ESRI Prism data check
@@ -102,18 +113,9 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.mapFirstView=false;
 		_.each(BootstrapVars.areaStats, function(area){ 
 			if(area.visible){
-				console.log(area.layerGroup);
 				MainApplication.Map.addLayer(area.layerGroup);	
-				console.log("Loaded area:" + area.abbrev)	
 			}
 		});	
-	},
-	toggleMapLayer: function(layer){
-		if(MainApplication.Map.hasLayer(layer)){
-			MainApplication.Map.removeLayer(layer);
-		}else{
-			MainApplication.Map.addLayer(layer);
-		}
 	},
 	addMapMarker: function(b){
 		var bounds = b;
@@ -188,6 +190,23 @@ var MapView = Backbone.Marionette.Layout.extend({
 		}
 		return false;
 	},
+	loadPrismFunding: function(){
+		if(MainApplication.Map.hasLayer(MainApplication.views.mapView.esriMap)){
+			$('#lnkPrismFunding').css("color","#999999");
+			MainApplication.Map.removeLayer(MainApplication.views.mapView.esriMap);	
+		}else{
+			$('#lnkPrismFunding').css("color","#FFFFFF");
+			MainApplication.views.mapView.esriMap.addTo(MainApplication.Map);
+		}
+		return false;
+	},	
+	loadRightSlide: function(){
+		this.mapPaneView =  new MapPaneView({
+			activeLayers : this.activeLayers
+		});
+		MainApplication.paneRegion.show(this.mapPaneView);
+		return false;
+	},	
 	resetBaseMaps: function(){
 		$("#lnkOfflineButton").removeClass('btn-primary');
 		$("#lnkDefaultButton").removeClass('btn-primary');
@@ -202,6 +221,11 @@ var MapView = Backbone.Marionette.Layout.extend({
 			MainApplication.Map.removeLayer(this.offlineMap);
 		}	
 	},
+	resetNavOptions: function(){
+		$('.navLayers').removeClass("btn-primary");
+		$('.navToggles').css("display","none");
+		return false;
+	},	
 	setBaseMapDefault: function(){
 		this.resetBaseMaps();
 		$("#lnkDefaultButton").addClass('btn-primary');
@@ -214,70 +238,30 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.offlineMap.addTo(MainApplication.Map);
 		return false;
 	},
-	syncLiveData: function(){
-		//clear local todos as well, we're syncing!
-		GeoAppBase.localDatabaseCollectionClear("todoItems");
-		var dc = this;
-		
-		this.clearMapMarkers();
-		this.todos.fetch({
-			success: function(){
-				dc.onShow();
-			}
-		});
-		return false;
-	},
-	toggleConnection: function(){
-		GeoAppBase.toggleConnectionVar();
-		this.toggleSetButtons();
-		if(MainApplication.connectionActive === true){
-			MainApplication.onDeviceOnline();
-		}else{
-			MainApplication.onDeviceOffline();
-		}
-	},
-	toggleSetButtons: function(){
-		if(MainApplication.connectionActive === true){
-			$("#lnkToggleConnection").addClass("btn-primary");
-			$("#lnkSyncQueueData").css("display","block");
-		}else{
-			$("#lnkToggleConnection").removeClass("btn-primary");
-			$("#lnkSyncQueueData").css("display","none");
-		}	
-	},
-	resetNavOptions: function(){
-		$('.navLayers').removeClass("btn-primary");
-		$('.navToggles').css("display","none");
-		return false;
-	},	
 	setDisplayedLayers : function(layerType){
+		var dc=this;
+		
+		console.log("Set them layers");
 		console.log(layerType);
 		console.log(BootstrapVars.areaStats);
-		console.log("Set them layers");
-		
-		/*
-		var areaName = $(ev.currentTarget).attr("data-layerlabel").toString();
-		var areaDetails = _.find(BootstrapVars.areaStats,function(item){
-			return item.abbrev == areaName;
+	
+		this.activeLayers = [];		
+		_.each(BootstrapVars.areaStats,function(mapLayer){
+			if(mapLayer.layerGroupName === layerType){
+				mapLayer.visible = true;
+				dc.activeLayers.push(mapLayer.abbrev);
+				MainApplication.Map.addLayer(mapLayer.layerGroup);
+				
+			}else{
+				mapLayer.visible = false;
+				MainApplication.Map.hasLayer(mapLayer.layerGroup) ? MainApplication.Map.removeLayer(mapLayer.layerGroup) : false;
+				
+			}
+			return false;
 		});
-		if(areaDetails.total_acres === 0)
-		{
-			alert("Not available at this time.");
-		}
-		else
-		{
-			var className = "";
-			className = $(ev.currentTarget).hasClass("ownerToggle") ? "owner" : className;
-			className = $(ev.currentTarget).hasClass("landuseToggle") ? "landuse" : className;
-			className = $(ev.currentTarget).hasClass("aquisitionToggle") ? "aquisition" : className;
-			
-			this.toggleActiveLayers(className, areaName);		
-			MainApplication.views.mapView.toggleMapLayer(areaDetails.layerGroup);
-
-			this.loadRightSlide();
-		}
-		return false;		
-		*/
+		//refreshes the right slide
+		this.loadRightSlide();
+		
 		return false;
 	},
 	showMapsSlide : function(){
@@ -304,6 +288,44 @@ var MapView = Backbone.Marionette.Layout.extend({
 		$('#landUseToggles').css("display","block");
 		this.setDisplayedLayers("landtypes");
 		return false;
+	},
+	syncLiveData: function(){
+		//clear local todos as well, we're syncing!
+		GeoAppBase.localDatabaseCollectionClear("todoItems");
+		var dc = this;
+		
+		this.clearMapMarkers();
+		this.todos.fetch({
+			success: function(){
+				dc.onShow();
+			}
+		});
+		return false;
+	},
+	toggleConnection: function(){
+		GeoAppBase.toggleConnectionVar();
+		this.toggleSetButtons();
+		if(MainApplication.connectionActive === true){
+			MainApplication.onDeviceOnline();
+		}else{
+			MainApplication.onDeviceOffline();
+		}
+	},
+	toggleMapLayer: function(layer){
+		if(MainApplication.Map.hasLayer(layer)){
+			MainApplication.Map.removeLayer(layer);
+		}else{
+			MainApplication.Map.addLayer(layer);
+		}
+	},	
+	toggleSetButtons: function(){
+		if(MainApplication.connectionActive === true){
+			$("#lnkToggleConnection").addClass("btn-primary");
+			$("#lnkSyncQueueData").css("display","block");
+		}else{
+			$("#lnkToggleConnection").removeClass("btn-primary");
+			$("#lnkSyncQueueData").css("display","none");
+		}	
 	}
 });	
 
@@ -347,7 +369,7 @@ var NewMarkerToolTip = Backbone.Marionette.ItemView.extend({
 	}
 });
 
-
+/*
 var MapFooterView = Backbone.Marionette.ItemView.extend({
     template: function (serialized_model) {
         return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.MapFooterTemplate);
@@ -365,11 +387,11 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 				agency: "Washington Parks Department",
 				symbol: '#x21f4;'
 			},
-			/*{
-				abbrev: "RCO",
-				agency: "Recreation and Conservation Office",
-				symbol: '#x219a;'
-			},*/
+			//{
+			//	abbrev: "RCO",
+			//	agency: "Recreation and Conservation Office",
+			//	symbol: '#x219a;'
+			//},
 			{
 				abbrev: "DNR",
 				agency: "Department of Natural Resources",
@@ -513,6 +535,7 @@ var MapFooterView = Backbone.Marionette.ItemView.extend({
 		return false;
 	}
 });
+*/
 
 var MapPaneView = Backbone.Marionette.ItemView.extend({
     template: function (serialized_model) {
@@ -675,7 +698,7 @@ var WelcomeView = Backbone.Marionette.ItemView.extend({
 	closeModal: function () {			 
 		MainApplication.modalRegion.hideModal();
 		$("#SummaryPaneSlideOut").css("display","block");
-		MainApplication.views.mapFooterView.slide.open();
+		MainApplication.views.mapView.slide.open();
 		return false;
 	}	
 });

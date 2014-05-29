@@ -2,7 +2,7 @@
     position: absolute;
     left: 0px;
 	top: 0px;
-    bottom: 50px; /* forget height, use this */
+    bottom: 0px; /* forget height, use this */
     /*height: 100%;*/
     width: 100%;
 }
@@ -43,7 +43,7 @@
 }
 
 #map-slide-button{
-    bottom: 111px;
+    bottom: 61px;
     left: 105px;
     list-style: none outside none;
     margin: 0;
@@ -53,7 +53,7 @@
 }
 
 #map-buttons {
-    bottom: 61px;
+    bottom: 11px;
     left: 105px;
     list-style: none outside none;
     margin: 0;
