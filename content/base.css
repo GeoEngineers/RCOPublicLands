@@ -41,6 +41,47 @@
     color: #dddddd;
 }
 
+#FooterNavSlideOut{
+	background-color: rgba(34,34,34,1);
+	border-top: 1px solid #000000;
+	bottom: 0px;
+	height:30px;
+	overflow: hidden;
+	padding: 0px 0px 0px 0px;
+	position: absolute; 
+	width: 100%;
+	z-index:1039;
+}
+
+#FooterNavSlideOut a{
+	color:#FFFFFF;
+}
+#FooterNavSlideOut #mapLayers, #FooterNavSlideOut #mapOverlays, #FooterNavSlideOut #mapControls {
+    display: inline-block;
+}
+#FooterNavSlideOut #mapLayers > div {
+    display: inline-block;
+}
+#FooterNavSlideOut #mapControls > div {
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+    width: 125px;
+}
+#FooterNavSlideOut #mapOverlays{
+	float:left;
+	padding: 0 10px;
+}
+#FooterNavSlideOut #mapLayers {
+    padding: 10px;
+	padding: 0 10px;
+}
+#FooterNavSlideOut #mapControls {
+	float:right;
+}
+#mapOverlays .navLink .txt {
+    float: right;
+}
 
 #chartLayer{
 	z-index:999999;
@@ -1112,22 +1153,6 @@ svg {
 }
 #HeaderNavContainer h4{
 	font-size:13pt;
-}
-
-#FooterNavSlideOut{
-	background-color: rgba(24,24,24,1);
-	border-top: 1px solid #000000;
-	bottom: 0px;
-	height:30px;
-	overflow: hidden;
-	padding: 0px 0px 0px 0px;
-	position: absolute; 
-	width: 100%;
-	z-index:1041;
-}
-
-#FooterNavSlideOut a{
-	color:#FFFFFF;
 }
 
 #lnkMapsSlideToggle {

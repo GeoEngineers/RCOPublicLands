@@ -332,7 +332,7 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 		"click #lnkPrismFunding" : "loadPrismFunding"
 	},
 	onShow : function(){
-		this.slide = $('.slide-menu').bigSlide({ side:"right", menu:"#SummaryPaneSlideOut" }).css("z-index","1040").css({"top":"35px","right":"0px"});
+		this.slide = $('.slide-menu').bigSlide({ side:"right", menu:"#SummaryPaneSlideOut" }).css({ "z-index":"1030", "top":"35px","right":"0px"});
 		this.slide._state = "open";
 	},
 	loadPrismFunding : function(ev){
@@ -421,173 +421,6 @@ var NewMarkerToolTip = Backbone.Marionette.ItemView.extend({
 	}
 });
 
-/*
-var MapFooterView = Backbone.Marionette.ItemView.extend({
-    template: function (serialized_model) {
-        return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.MapFooterTemplate);
-    },
-	templateHelpers: function(){
-		var owners = [];
-		_.each([
-			{
-				abbrev: "DFW",
-				agency: "Department of Fish and Wildlife",
-				symbol: '#x2190;'
-			},
-			{
-				abbrev: "PARKS",
-				agency: "Washington Parks Department",
-				symbol: '#x21f4;'
-			},
-			//{
-			//	abbrev: "RCO",
-			//	agency: "Recreation and Conservation Office",
-			//	symbol: '#x219a;'
-			//},
-			{
-				abbrev: "DNR",
-				agency: "Department of Natural Resources",
-				symbol: '#x214a;'
-		}], function(area){
-			owners.push({owner: area.abbrev.toUpperCase(), symbol: area.symbol});
-		});
-		return { 
-			owners : owners,
-			layers : this.layersObject
-		}
-	},
-    initialize: function (options) {
-    	var dc = this;
-		this.todos = options.todos;
-		this.genericCollection = options.genericCollection;
-        _.bindAll(this, 'loadContactUs', 'addTodos');
-    },
-	events: {
-		"click .ownerToggle" : "actToggleLayer",
-		"click .aquisitionToggle" : "actToggleLayer",
-		"click .landuseToggle": "actToggleLayer",
-		//"click .landuseToggle": "actToggleLand",
-		"click #lnkTodos" : "addTodos",
-		"click #lnkSlideMenu" : "loadRightSlide",
-		"click #lnkPrismFunding" : "loadPrismFunding"
-	},
-	onShow: function(){
-		//temp fix until menu is completely ready
-		var dc = this;
-		$(document).ready(function() {
-			 dc.slide = $('.slide-menu').bigSlide({ side:"right", menu:"#SummaryPaneSlideOut" }).css("z-index","1040").css("top", "35px");
-		});
-		this.activeLayers=[];
-		_.each(BootstrapVars.areaStats, function(area){
-			if(area.visible){
-				dc.activeLayers.push(area.abbrev);
-				$('#ownerToggle' + area.abbrev).css("color",area.color);
-			}
-		});
-		dc.loadRightSlide();
-		return false;
-	},
-	actToggleLayer : function(ev){
-		var areaName = $(ev.currentTarget).attr("data-layerlabel").toString();
-		var areaDetails = _.find(BootstrapVars.areaStats,function(item){
-			return item.abbrev == areaName;
-		});
-		if(areaDetails.total_acres === 0)
-		{
-			alert("Not available at this time.");
-		}
-		else
-		{
-			var className = "";
-			className = $(ev.currentTarget).hasClass("ownerToggle") ? "owner" : className;
-			className = $(ev.currentTarget).hasClass("landuseToggle") ? "landuse" : className;
-			className = $(ev.currentTarget).hasClass("aquisitionToggle") ? "aquisition" : className;
-			
-			this.toggleActiveLayers(className, areaName);		
-			MainApplication.views.mapView.toggleMapLayer(areaDetails.layerGroup);
-
-			this.loadRightSlide();
-		}
-		return false;
-	},
-	actToggleLand: function(ev){
-		alert("Not available at this time.");
-		return false;
-	},
-	addTodos: function(){
-		//Create new marker
-		var bounds = MainApplication.Map.getCenter();
-		var unboundMarker = L.marker([bounds.lat, bounds.lng], {icon: MainApplication.defaultMarker, draggable: true});
-		unboundMarker.addTo(MainApplication.Map);
-		unboundMarker.markerEditModal = new TodoTitleModal({
-			todos : this.todos,
-			marker : unboundMarker
-		});
-		unboundMarker.markerEditModal.render();
-		
-		unboundMarker.bindPopup(unboundMarker.markerEditModal.$el[0], { closeButton:false, closeOnClick:false, minWidth: 300 });
-		unboundMarker.openPopup();
-		unboundMarker.on("dragend", function(){
-			this.openPopup();
-		});
-		return false;
-	},	
-	geoLocate: function(){
-		if (navigator.geolocation) {
-			MainApplication.Map.once('locationfound', function (e) {
-				//MainApplication.geoLocationResults = e;
-				MainApplication.Map.setView(e.latlng, 13, {animate: false});
-			});
-			MainApplication.Map.once('locationerror', function (e) {
-				alert('We could not locate your position.');
-			});		
-			MainApplication.Map.locate();
-		}else{
-			alert("Geolocation is unavailable on this device.  We apologize for any inconvenience.");
-		}
-		return false;
-	},		
-	loadContactUs: function(){
-	 	window[ApplicationName].router.navigate("ContactUs", { trigger: true });
-		return false;
-	},
-	loadPrismFunding: function(){
-		if(MainApplication.Map.hasLayer(MainApplication.views.mapView.esriMap)){
-			$('#lnkPrismFunding').css("color","#999999");
-			MainApplication.Map.removeLayer(MainApplication.views.mapView.esriMap);	
-		}else{
-			$('#lnkPrismFunding').css("color","#FFFFFF");
-			MainApplication.views.mapView.esriMap.addTo(MainApplication.Map);
-		}
-		return false;
-	},
-	loadRightSlide: function(){
-		this.mapPaneView =  new MapPaneView({
-			activeLayers : this.activeLayers
-		});
-		MainApplication.paneRegion.show(this.mapPaneView);
-		return false;
-	},
-	toggleActiveLayers: function(className, label){
-		if($.inArray(label,this.activeLayers) > -1){
-			$('#'+className+'Toggle' + label).css("color","#999999");
-			this.activeLayers = _.reject(this.activeLayers,function(item){
-				return item===label;
-			});
-		}else{
-			var color = '';
-			_.each(BootstrapVars.areaStats, function(area){
-				if(area.abbrev == label){
-					color = area.color;
-				}
-			});
-			$('#'+className+'Toggle' + label).css("color",color);
-			this.activeLayers.push(label);
-		}
-		return false;
-	}
-});
-*/
 
 var MapPaneView = Backbone.Marionette.ItemView.extend({
     template: function (serialized_model) {
@@ -599,12 +432,14 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
     },
 	onShow: function(){
 		var dc=this;
-		dc.loadD3LayerComparison();
+		this.loadD3PieLayerComparison();
+		this.loadD3BarLayerComparison();
 		$( "#ddlSummaryType" ).change(function() {
-			dc.loadD3LayerComparison();
+			dc.loadD3PieLayerComparison();
+			dc.loadD3BarLayerComparison();
 		});
 	},
-	loadD3LayerComparison: function(){	
+	loadD3PieLayerComparison: function(){	
 		var dc=this;
 
 		var data = _.filter(BootstrapVars.areaStats, function(area){ 
@@ -715,6 +550,9 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			.style("text-anchor", "middle")
 			.text(function(d) { return d.data.abbrev; });
 		//});		
+		return false;
+	},
+	loadD3BarLayerComparison: function(){	
 		return false;
 	},
 	formatCurrency: function(value)
