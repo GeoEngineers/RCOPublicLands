@@ -41,6 +41,7 @@ MainApplication.Templates.MapPaneTemplate = [
 			"<option value=\"total_cost\">Total Cost</option>",
 			"<option value=\"total_revenue\">Total Revenue</option>",
 		"</select></div><br/>",
+		"<svg class='chart'></svg>",
 		"<div id='summaryLayer'></div>",
 	"</div>"
 ].join("\n");

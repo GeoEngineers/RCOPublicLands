@@ -171,5 +171,18 @@ BootstrapVars.areaStats = [
 		layerGroup: null,
 		symbol: '#x2190;',
 		color: '#00FFFF'
-	}
+	},
+	{
+		abbrev: "PROP-RCO",
+		agency: "Recreation and Conservation Office",
+		total_acres : 1,
+		total_cost: 1.00,
+		total_revenue: 1.00,
+		mapTarget: "smartmine.yyb3ayvi",
+		visible: false,
+		layerGroupName: "proposed",
+		layerGroup: null,
+		symbol: '#x219a;',
+		color: '#229900'
+	},	
 ];
