@@ -542,8 +542,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		var g = svg.selectAll(".arc")
 			.data(pie(data))
 			.enter().append("g")
-			.attr("class", "arc")
-			;
+			.attr("class", "arc");
 
 		g.append("path")
 		.on('click', function(){ console.log("test"); })
@@ -573,32 +572,49 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			.attr("width", width)
 			.attr("height", height);
 
-		d3.tsv("/scripts/appClient/src/extensions/data.tsv", type, function(error, data) {
-		  y.domain([0, d3.max(data, function(d) { return d.value; })]);
+		var data = [	
+			{
+				"name" : "DFW",
+				"value" : 995329.78
+			}, 
+			{
+				"name" : "PARKS",
+				"value" : 397973.62
+			}, 
+			{
+				"name" : "DNR",
+				"value" : 392340.89
+			}, 
+			{
+				"name" : "TRIBAL",
+				"value" : 24098.61
+			}, 
+			{
+				"name" : "FEDERAL",
+				"value" : 15727892.11
+			}
+		];
 
-		  var barWidth = width / data.length;
+		console.log(data);
+		
+		y.domain([0, d3.max(data, function(d) { return d.value; })]);
+		var barWidth = width / data.length;
 
-		  var bar = chart.selectAll("g")
-			  .data(data)
+		var bar = chart.selectAll("g")
+			.data(data)
 			.enter().append("g")
-			  .attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; });
+			.attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; });
 
-		  bar.append("rect")
-			  .attr("y", function(d) { return y(d.value); })
-			  .attr("height", function(d) { return height - y(d.value); })
-			  .attr("width", barWidth - 1);
+		bar.append("rect")
+			.attr("y", function(d) { return y(d.value); })
+			.attr("height", function(d) { return height - y(d.value); })
+			.attr("width", barWidth - 1);
 
-		  bar.append("text")
-			  .attr("x", barWidth / 2)
-			  .attr("y", function(d) { return y(d.value) + 3; })
-			  .attr("dy", ".75em")
-			  .text(function(d) { return d.value; });
-		});
-
-		function type(d) {
-		  d.value = +d.value; // coerce to number
-		  return d;
-		}
+		bar.append("text")
+			.attr("x", barWidth / 2)
+			.attr("y", function(d) { return y(d.value) + 3; })
+			.attr("dy", ".75em")
+			.text(function(d) { return d.value; });
 		return false;
 	},
 	formatCurrency: function(value)
