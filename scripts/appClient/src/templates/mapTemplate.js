@@ -4,6 +4,9 @@ MainApplication.Templates.MapTemplate = [
 	"<div style='color:#000000;'>",
 		"This is the landing page area, you can place any content here.",
 		"<div id='connectionStatus'><img src='./content/images/38-1.gif'><span class='txt'> Re-connecting...</span></div>",
+		"<select name='selectState' id='selectStateInput' class='form-control'>",
+			"<option value=''>-- Select a County --</option>",
+		"</select>",
 		"<div id='map' style=\"top: 35px\"></div>",
 	"</div>"
 ].join("\n");
@@ -20,6 +23,7 @@ MainApplication.Templates.MapSelectorSlideTemplate = [
 			"<button id='lnkAgency' class='btn btn-primary navLayers'>Agency</button>",
 			"<button id='lnkLandTypes' class='btn navLayers'>Land Types</button>",
 			"<button id='lnkAquisitions' class='btn navLayers'>Aquisitions</button>",
+			"<button id='lnkProposed' class='btn navLayers'>Proposed</button>",
 		"</div>",
 		"<div id='mapControls'>",
 			"<div class='slide-menu'><a href='#' id='lnkSlideMenu' class='navLink' href='#SummaryPaneSlideOut'><i class='icon-bar-chart icon-large'></i><div class='txt'>SUMMARY</div></a></div>",

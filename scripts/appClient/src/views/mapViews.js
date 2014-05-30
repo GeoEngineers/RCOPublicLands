@@ -239,7 +239,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 			}else{
 				mapLayer.visible = false;
 				MainApplication.Map.hasLayer(mapLayer.layerGroup) ? MainApplication.Map.removeLayer(mapLayer.layerGroup) : false;
-				
 			}
 			return false;
 		});
@@ -273,6 +272,13 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.setDisplayedLayers("landtypes");
 		return false;
 	},
+	showProposed : function(){
+		this.resetNavOptions();
+		$('#lnkProposed').hasClass("btn-primary") ? false : $('#lnkProposed').addClass("btn-primary");
+		$('#proposedToggles').css("display","block");
+		this.setDisplayedLayers("proposed");
+		return false;
+	},	
 	syncLiveData: function(){
 		//clear local todos as well, we're syncing!
 		GeoAppBase.localDatabaseCollectionClear("todoItems");
@@ -329,10 +335,11 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 		"click #lnkAgency" : "showAgencyOptions",
 		"click #lnkAquisitions" : "showAquisitions",
 		"click #lnkLandTypes" : "showLandOptions",
+		"click #lnkProposed" : "showProposed",
 		"click #lnkPrismFunding" : "loadPrismFunding"
 	},
 	onShow : function(){
-		this.slide = $('.slide-menu').bigSlide({ side:"right", menu:"#SummaryPaneSlideOut" }).css({ "z-index":"1030", "top":"35px","right":"0px"});
+		this.slide = $('.slide-menu').bigSlide({ side:"right", menu:"#SummaryPaneSlideOut" }).css({ "z-index":"1030", "top":"35px", "right":"0px"});
 		this.slide._state = "open";
 	},
 	loadPrismFunding : function(ev){
@@ -350,6 +357,10 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 	showLandOptions : function(ev){
 		MainApplication.views.mapView.showLandOptions(ev);	
 		return false;
+	},
+	showProposed : function(ev){
+		MainApplication.views.mapView.showProposed(ev);	
+		return false;	
 	},
 	toggleSlide: function(){
 		console.log("Toggling");

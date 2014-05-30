@@ -82,6 +82,13 @@
 #mapOverlays .navLink .txt {
     float: right;
 }
+#selectStateInput {
+    left: 55px;
+    position: absolute;
+    top: 45px;
+    width: 185px;
+    z-index: 1030;
+}
 
 #chartLayer{
 	z-index:999999;

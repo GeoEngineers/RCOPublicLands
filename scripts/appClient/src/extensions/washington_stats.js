@@ -28,19 +28,6 @@ BootstrapVars.areaStats = [
 		symbol: '#x21f4;',
 		color: '#FFCC00'
 	},
-	/*{
-		abbrev: "RCO",
-		agency: "Recreation and Conservation Office",
-		total_acres : 112554.00,
-		total_cost: 1.00,
-		total_revenue: 1.00,
-		mapTarget: "smartmine.yyb3ayvi",
-		visible: false,
-		layerGroupName: "agency",
-		layerGroup: null,
-		symbol: '#x219a;',
-		color: '#229900'
-	},*/
 	{
 		abbrev: "DNR",
 		agency: "Department of Natural Resources",
@@ -80,19 +67,6 @@ BootstrapVars.areaStats = [
 		symbol: '#x2190;',
 		color: '#C3FDB8'
 	},	
-	/*{
-		abbrev: "OTHER",
-		agency: "other",
-		total_acres: 0,
-		total_cost: 0,
-		total_revenue: 0,
-		mapTarget: "",
-		visible: false,
-		layerGroupName: "agency",
-		layerGroup: null,
-		symbol: '#x2190;',
-		color: '#ECC92E'
-	},	*/
 	{
 		abbrev: "AQ-DFW",
 		agency: "Department of Fish and Wildlife",
