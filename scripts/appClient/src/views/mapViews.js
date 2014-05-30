@@ -26,18 +26,10 @@ var MapView = Backbone.Marionette.Layout.extend({
 		"click #lnkDefaultButton" : "setBaseMapDefault",
 		"click #lnkSyncQueueData" : "syncLiveData",
 		"click #lnkToggleConnection" : "toggleConnection",
-		"click #lnkMapsSlide" : "showMapsSlide",
-		"click #lnkAgency" : "showAgencyOptions",
-		"click #lnkAquisitions" : "showAquisitions",
-		"click #lnkLandTypes" : "showLandOptions",
-		"click #lnkPrismFunding" : "loadPrismFunding"
+		"click #lnkMapsSlide" : "showMapsSlide"
 	},	
 	onShow: function(){
 		var dc=this;
-
-		$(document).ready(function() {
-			 dc.slide = $('.slide-menu').bigSlide({ side:"right", menu:"#SummaryPaneSlideOut" }).css("z-index","1040").css("top", "35px");
-		});
 		this.activeLayers=[];
 		_.each(BootstrapVars.areaStats, function(area){
 			if(area.visible){
@@ -60,14 +52,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 			dc.loadCurrentMap();
 		});
 	
-		L.control.layers({
-			'Open Street Map': this.openMap,
-			'Streets': this.streetsMap.addTo(MainApplication.Map),
-			'Imagery': this.imageryMap
-		},{},{
-			position:'bottomleft'
-		}).addTo(MainApplication.Map);
-
 		_.each(BootstrapVars.areaStats, function(area){ 
 			var tileLayer = new L.mapbox.tileLayer(area.mapTarget, { zIndex: 5 });
 			var utfGrid = new L.UtfGrid('http://{s}.tiles.mapbox.com/v3/'+area.mapTarget+'/{z}/{x}/{y}.grid.json?callback={cb}', { zIndex: 5 });
@@ -340,7 +324,32 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 		};
 	},
 	events: {
-		"click #lnkMapsSlideToggle" : "toggleSlide"
+		"click #lnkMapsSlideToggle" : "toggleSlide",
+		"click .baseMapLink" : "toggleMapLayer",
+		"click #lnkAgency" : "showAgencyOptions",
+		"click #lnkAquisitions" : "showAquisitions",
+		"click #lnkLandTypes" : "showLandOptions",
+		"click #lnkPrismFunding" : "loadPrismFunding"
+	},
+	onShow : function(){
+		this.slide = $('.slide-menu').bigSlide({ side:"right", menu:"#SummaryPaneSlideOut" }).css("z-index","1040").css({"top":"35px","right":"0px"});
+		this.slide._state = "open";
+	},
+	loadPrismFunding : function(ev){
+		MainApplication.views.mapView.loadPrismFunding(ev);
+		return false;
+	},
+	showAgencyOptions : function(ev){
+		MainApplication.views.mapView.showAgencyOptions(ev);	
+		return false;
+	},
+	showAquisitions : function(ev){
+		MainApplication.views.mapView.showAquisitions(ev);	
+		return false;
+	},
+	showLandOptions : function(ev){
+		MainApplication.views.mapView.showLandOptions(ev);	
+		return false;
 	},
 	toggleSlide: function(){
 		console.log("Toggling");
@@ -352,6 +361,24 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 			MainApplication.slideRegion.slideOut();			
 		}
 		return false;
+	},
+	toggleMapLayer: function(ev){
+		var mapType = $(ev.currentTarget).attr("data-maptype");
+		var mapsObject = [
+			{ name: 'osm', path : MainApplication.views.mapView.openMap }, 
+			{ name: 'streets', path : MainApplication.views.mapView.streetsMap }, 
+			{ name: 'imagery', path : MainApplication.views.mapView.imageryMap }
+		];
+		_.each(mapsObject,function(map){
+			if(mapType===map.name){
+				if(MainApplication.Map.hasLayer(map.path) !== true){
+					MainApplication.Map.addLayer(map.path);
+				}
+			}else{
+				MainApplication.Map.removeLayer(map.path);
+			}
+		});	
+		return false
 	}
 });
 
@@ -723,7 +750,7 @@ var WelcomeView = Backbone.Marionette.ItemView.extend({
 	closeModal: function () {			 
 		MainApplication.modalRegion.hideModal();
 		$("#SummaryPaneSlideOut").css("display","block");
-		MainApplication.views.mapView.slide.open();
+		MainApplication.views.mapSelectorSlideView.slide.open();
 		return false;
 	}	
 });

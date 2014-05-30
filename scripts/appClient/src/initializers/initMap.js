@@ -40,8 +40,8 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
 		MainApplication.views.headerView = new HeaderView();
 		MainApplication.headerRegion.show(MainApplication.views.headerView);
 
-		var mapSelectorSlideView = new MapSelectorSlideView();
-		mapSelectorSlideView.openMinimized=true;
-		MainApplication.slideRegion.show(mapSelectorSlideView);
+		MainApplication.views.mapSelectorSlideView = new MapSelectorSlideView();
+		MainApplication.views.mapSelectorSlideView.openMinimized=true;
+		MainApplication.slideRegion.show(MainApplication.views.mapSelectorSlideView);
 	});
 });

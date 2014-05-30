@@ -15,12 +15,12 @@
 		if(view && view.openMinimized !== undefined && view.openMinimized===true){
 			this.slideIn();
 		}else{
-			$('#FooterNavSlideOut').css("top","70%");
+			$('#FooterNavSlideOut').animate({"height":"150px"});
 			this.slideOpen = true;
 		}
     },
     slideIn: function (view) {
-		$('#FooterNavSlideOut').css("top","95%");
+		$('#FooterNavSlideOut').animate({"height":"30px"});
 		this.slideOpen = false;
     }
 });

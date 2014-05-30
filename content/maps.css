@@ -42,23 +42,10 @@
 	display:none;
 }
 
-#map-slide-button{
-    bottom: 61px;
-    left: 105px;
+#map-slide-button, #map-buttons{
     list-style: none outside none;
     margin: 0;
     padding: 0;
-    position: absolute;
-    z-index: 100;
-}
-
-#map-buttons {
-    bottom: 11px;
-    left: 105px;
-    list-style: none outside none;
-    margin: 0;
-    padding: 0;
-    position: absolute;
     z-index: 100;
 }
 

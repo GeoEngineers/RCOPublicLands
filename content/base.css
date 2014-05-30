@@ -1066,8 +1066,8 @@ svg {
     background-image: linear-gradient(to bottom, #b51b2a, #830915);
     background-repeat: repeat-x;
     color: white;
-
 }
+
 .DifferenceBoxGreen {
     width: 170px;
     border: solid 1px #888;
@@ -1086,9 +1086,7 @@ svg {
     background-image: linear-gradient(to bottom, #00dd00, #00aa00);
     background-repeat: repeat-x;
     color: white;
-
 }
-
 
 .header {
 	background-color: #222222; 
@@ -1117,11 +1115,24 @@ svg {
 }
 
 #FooterNavSlideOut{
-	background-color:rgba(13,106,132,1);
+	background-color: rgba(24,24,24,1);
+	border-top: 1px solid #000000;
+	bottom: 0px;
+	height:30px;
+	overflow: hidden;
 	padding: 0px 0px 0px 0px;
-	position:absolute; 
-	top:70%;
-	width:100%;
+	position: absolute; 
+	width: 100%;
+	z-index:1041;
+}
+
+#FooterNavSlideOut a{
+	color:#FFFFFF;
+}
+
+#lnkMapsSlideToggle {
+    display: block;
+    padding: 5px;
 }
 
 .iconsNav{
