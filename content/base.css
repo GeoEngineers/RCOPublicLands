@@ -41,6 +41,12 @@
     color: #dddddd;
 }
 
+.custom-cluster{
+    display:inline-block;
+    height: 40px;
+    width: 40px;
+}
+
 #FooterNavSlideOut{
 	background-color: rgba(34,34,34,1);
 	border-top: 1px solid #000000;

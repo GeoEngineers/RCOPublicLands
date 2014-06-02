@@ -14,9 +14,15 @@ var MapView = Backbone.Marionette.Layout.extend({
 		});
 		this.imageryMap = L.tileLayer.provider('MapBox.smartmine.map-nco5bdjp', { minZoom:4, zIndex: 4 });
 		
-		this.esriMap = L.esri.dynamicMapLayer("http://gismanagerweb.rco.wa.gov/arcgis/rest/services/public_lands/WA_RCO_Public_Lands_Inventory_PRISM/MapServer", {
-			position: "front"
-		});
+		//this.esriMap = L.esri.dynamicMapLayer("http://gismanagerweb.rco.wa.gov/arcgis/rest/services/public_lands/WA_RCO_Public_Lands_Inventory_PRISM/MapServer", {
+		//	position: "front"
+		//});
+
+
+
+
+		
+
 
 		this.mapFirstView = true;
         _.bindAll(this, 'onShow');
@@ -51,7 +57,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		MainApplication.Map.on("dragstart",function(){
 			dc.loadCurrentMap();
 		});
-	
+		
 		_.each(BootstrapVars.areaStats, function(area){ 
 			var tileLayer = new L.mapbox.tileLayer(area.mapTarget, { zIndex: 5 });
 			var utfGrid = new L.UtfGrid('http://{s}.tiles.mapbox.com/v3/'+area.mapTarget+'/{z}/{x}/{y}.grid.json?callback={cb}', { zIndex: 5 });
@@ -60,9 +66,25 @@ var MapView = Backbone.Marionette.Layout.extend({
 				dc.createGrid(utfGrid, area)
 			]);
 		});		
-
+		this.esriMap =  L.esri.clusteredFeatureLayer("http://gismanagerweb.rco.wa.gov/arcgis/rest/services/public_lands/WA_RCO_Public_Lands_Inventory_PRISM/MapServer/0/", {
+   			cluster: new L.MarkerClusterGroup(),
+   			onEachMarker: function(geojson, marker) {
+   				popupText =  "<div style='overflow:scroll; max-width:250px; max-height:260px;'>";
+						for (prop in geojson.properties) {
+							var val = geojson.properties[prop];
+							var linkId = "shapshot"+ geojson.properties.OBJECTID;
+							if(prop.replace("PRISM.DBO.SV_DMPROJECT1.", "") === "SnapshotURL"){
+								val = "<a href='" + val + "' id='shapshot"+ geojson.properties.OBJECTID +"'>" + val + "</a>";
+							}
+							if (val != 'undefined' && val != "0" && prop !="OBJECTID" && prop != "Name") {
+								popupText += "<b>" + prop.replace(" (Esri)",'').replace("PRISM.DBO.SV_DMPROJECT1.", "") + "</b>: " + val + "<br>";
+							}
+						}
+      					marker.bindPopup(popupText);
+        	}
+      	});
 		//ESRI Prism data check
-		MainApplication.Map.on("click", function(e) {
+		/*MainApplication.Map.on("click", function(e) {
 			if(MainApplication.Map.hasLayer(MainApplication.views.mapView.esriMap)){
 				MainApplication.views.mapView.esriMap.identify(e.latlng, function(data) {
 					if(data.results.length > 0) {
@@ -91,9 +113,11 @@ var MapView = Backbone.Marionette.Layout.extend({
 					}
 				});
 			}
-		});		
+		});	*/	
 		
 		MainApplication.Map.setView([47,-120], 7).addLayer(this.streetsMap);
+		console.log(MainApplication.Map.getBounds());
+		
 		this.mapFirstView=false;
 		_.each(BootstrapVars.areaStats, function(area){ 
 			if(area.visible){
