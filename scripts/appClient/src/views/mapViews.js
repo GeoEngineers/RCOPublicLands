@@ -18,7 +18,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		//	position: "front"
 		//});
 
-
+	
 
 
 		
@@ -69,7 +69,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.esriMap =  L.esri.clusteredFeatureLayer("http://gismanagerweb.rco.wa.gov/arcgis/rest/services/public_lands/WA_RCO_Public_Lands_Inventory_PRISM/MapServer/0/", {
    			cluster: new L.MarkerClusterGroup(),
    			onEachMarker: function(geojson, marker) {
-   				popupText =  "<div style='overflow:scroll; max-width:250px; max-height:260px;'>";
+   				popupText =  "<div style='overflow:scroll; max-width:350px; max-height:260px;'>";
 						for (prop in geojson.properties) {
 							var val = geojson.properties[prop];
 							var linkId = "shapshot"+ geojson.properties.OBJECTID;
@@ -83,6 +83,20 @@ var MapView = Backbone.Marionette.Layout.extend({
       					marker.bindPopup(popupText);
         	}
       	});
+
+      	/*$.getJSON("http://ec2-54-189-42-248.us-west-2.compute.amazonaws.com/tiles/tiles.py/wa_publiclands_1/7/22/44.geojson", function(data) {
+			var myStyle = {
+				"color": "#ff7800",
+				"weight": 5,
+				"opacity": 0.65
+			};
+			console.log(data);
+    		L.geoJson(data, {
+        		style: myStyle
+    		}).addTo(MainApplication.Map);
+		});*/
+
+		//var genericLayer = new L.mapbox.tileLayer('http://ec2-54-189-42-248.us-west-2.compute.amazonaws.com/tiles/tiles.py/wa_publiclands_1/7/22/44.geojson', { zIndex: 5 }).addTo(MainApplication.Map);;
 		//ESRI Prism data check
 		/*MainApplication.Map.on("click", function(e) {
 			if(MainApplication.Map.hasLayer(MainApplication.views.mapView.esriMap)){

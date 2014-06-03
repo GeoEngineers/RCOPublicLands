@@ -29,7 +29,8 @@
     "passport-http": "~0.2.2",
     "util": "~0.10.3",
     "password-hash": "~1.2.1",
-    "newrelic": "~1.4.0"
+    "newrelic": "~1.4.0",
+    "handlebars": "~2.0.0-alpha.2",
   },
   "devDependencies": {
     "grunt": "~0.4.2",
