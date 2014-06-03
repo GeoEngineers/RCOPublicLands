@@ -82,6 +82,18 @@ var MapView = Backbone.Marionette.Layout.extend({
       					marker.bindPopup(popupText);
         	}
       	});
+      	var myStyle = {
+				"color": "#ff7800",
+				"weight": 5,
+				"opacity": 0.65
+			};
+
+      	new L.TileLayer.d3_topoJSON("http://ec2-54-189-137-204.us-west-2.compute.amazonaws.com/tiles/tiles.py/wa_publiclands_federal/{z}/{x}/{y}.topojson", {
+  			class: "road",
+  			layerName: "vectile",
+  			style: myStyle
+		}).addTo(MainApplication.Map);
+
 
       	/*$.getJSON("http://ec2-54-189-42-248.us-west-2.compute.amazonaws.com/tiles/tiles.py/wa_publiclands_1/7/22/44.geojson", function(data) {
 			var myStyle = {
@@ -129,11 +141,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		});	*/	
 		
 		MainApplication.Map.setView([47,-120], 7).addLayer(this.streetsMap);
-
-
-
 		L.control.layers(this.baseMaps, null, {position: 'bottomleft'}).addTo(MainApplication.Map);
-		$(".leaflet-bottom").css("margin-bottom", "150px");
 		this.mapFirstView=false;
 		_.each(BootstrapVars.areaStats, function(area){ 
 			if(area.visible){
@@ -410,7 +418,7 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 		if(MainApplication.slideRegion.slideOpen === true){
 			MainApplication.slideRegion.slideIn();
 		}else{
-			MainApplication.slideRegion.slideOut();			
+			MainApplication.slideRegion.slideOut();	
 		}
 		return false;
 	},
@@ -649,12 +657,13 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		bar.append("rect")
 			.attr("y", function(d) { return y(d.value); })
 			.attr("height", function(d) { return height - y(d.value); })
+      		.attr("fill", "steelblue")
 			.attr("width", barWidth - 1);
 
 		bar.append("text")
 			.attr("x", barWidth / 2)
 			.attr("y", function(d) { return y(d.value) + 3; })
-			.attr("dy", ".75em")
+			.attr("dy", "-.75em")
 			.text(function(d) { return d.value; });
 		return false;
 	},
@@ -667,7 +676,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		//console.log(arc); 		
 		var indexValue = arc.attr("index_value");
 		this.arcColor = arc[0][0].style.fill;
-		arc[0][0].style.fill="Maroon";
+		arc[0][0].style.fill="DarkBlue";
 		return false;
 	},
 	synchronizedMouseOut: function(ev){
