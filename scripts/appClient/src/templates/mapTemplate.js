@@ -17,11 +17,6 @@ MainApplication.Templates.MapTemplate = [
 MainApplication.Templates.MapSelectorSlideTemplate = [
 	"<div>",
 		"<a href='#' id='lnkMapsSlideToggle'>Maps</a>",
-		"<div id='mapOverlays'>",
-			"<div><a href='#' class='navLink baseMapLink' data-maptype='osm' href='#'><i class=\"icon\" style=\"margin:0px; width: 16px; height:16px; font-size: 15px;\">&#x2106;</i><div class='txt'>Open Street Map</div></a></div>",
-			"<div><a href='#' class='navLink baseMapLink' data-maptype='streets' href='#'><i class=\"icon\" style=\"margin:0px; width: 16px; height:16px; font-size: 15px;\">&#x2106;</i><div class='txt'>Streets</div></a></div>",
-			"<div><a href='#' class='navLink baseMapLink' data-maptype='imagery' href='#'><i class=\"icon\" style=\"margin:0px; width: 16px; height:16px; font-size: 15px;\">&#x2106;</i><div class='txt'>Imagery</div></a></div>",
-		"</div>",
 		"<div id='mapLayers'>",
 			"<button id='lnkAgency' class='btn btn-primary navLayers'>Agency</button>",
 			"<button id='lnkLandTypes' class='btn navLayers'>Land Types</button>",

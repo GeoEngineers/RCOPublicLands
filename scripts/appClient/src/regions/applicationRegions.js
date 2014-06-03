@@ -16,11 +16,13 @@
 			this.slideIn();
 		}else{
 			$('#FooterNavSlideOut').animate({"height":"150px"});
+            $(".leaflet-bottom").animate({"margin-bottom": "150px"});
 			this.slideOpen = true;
 		}
     },
     slideIn: function (view) {
 		$('#FooterNavSlideOut').animate({"height":"30px"});
+        $(".leaflet-bottom").animate({"margin-bottom": "30px"});
 		this.slideOpen = false;
     }
 });

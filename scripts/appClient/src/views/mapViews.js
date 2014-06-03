@@ -17,12 +17,11 @@ var MapView = Backbone.Marionette.Layout.extend({
 		//this.esriMap = L.esri.dynamicMapLayer("http://gismanagerweb.rco.wa.gov/arcgis/rest/services/public_lands/WA_RCO_Public_Lands_Inventory_PRISM/MapServer", {
 		//	position: "front"
 		//});
-
-	
-
-
-		
-
+		this.baseMaps = {
+                    "Streets": this.streetsMap,
+                    "Open Street Map" : this.openMap,
+                    "Imagery": this.imageryMap
+         };
 
 		this.mapFirstView = true;
         _.bindAll(this, 'onShow');
@@ -130,8 +129,11 @@ var MapView = Backbone.Marionette.Layout.extend({
 		});	*/	
 		
 		MainApplication.Map.setView([47,-120], 7).addLayer(this.streetsMap);
-		console.log(MainApplication.Map.getBounds());
-		
+
+
+
+		L.control.layers(this.baseMaps, null, {position: 'bottomleft'}).addTo(MainApplication.Map);
+		$(".leaflet-bottom").css("margin-bottom", "150px");
 		this.mapFirstView=false;
 		_.each(BootstrapVars.areaStats, function(area){ 
 			if(area.visible){
@@ -356,6 +358,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		}	
 	}
 });	
+
 
 
 var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
