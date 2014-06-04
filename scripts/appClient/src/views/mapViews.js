@@ -754,8 +754,6 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			});
 		});		
 		
-		console.log(dc.type);
-		console.log(data);
 		$(".barChartLayer").html("");
 		
 		var width = 205,
