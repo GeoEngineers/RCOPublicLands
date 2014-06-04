@@ -408,9 +408,6 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 		return false;	
 	},
 	toggleSlide: function(){
-		console.log("Toggling");
-		console.log(MainApplication.slideRegion);
-		console.log(MainApplication.slideRegion.slideOpen);
 		if(MainApplication.slideRegion.slideOpen === true){
 			MainApplication.slideRegion.slideIn();
 		}else{
@@ -608,14 +605,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 	},
 	loadD3BarLayerComparison: function(){
 		var dc=this;
-		var width = 205,
-			height = 170;
-
-		var y = d3.scale.linear()
-			.range([height, 0]);
-		var chart = d3.select(".chart")
-			.attr("width", width)
-			.attr("height", height);
+		
 		var selectedAreas = _.filter(BootstrapVars.areaStats, function(area){ 
 			return $.inArray(area.abbrev, dc.activeLayers) > -1; 
 		});
@@ -623,39 +613,18 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		_.each(selectedAreas, function(area){
 			data.push({
 				"name" : area.agency,
-				"value" : area.total_acres
+				"value" : area.total_acres,
+				"color" : area.color
 			});
-			//console.log(area);
-		});
+		});		
 		
-		
-		
-		console.log(data);
-console.log(data);		
-		/*	
-		var data = [	
-			{
-				"name" : "DFW",
-				"value" : 995329.78
-			}, 
-			{
-				"name" : "PARKS",
-				"value" : 397973.62
-			}, 
-			{
-				"name" : "DNR",
-				"value" : 392340.89
-			}, 
-			{
-				"name" : "TRIBAL",
-				"value" : 24098.61
-			}, 
-			{
-				"name" : "FEDERAL",
-				"value" : 15727892.11
-			}
-		];
-		*/
+		var width = 205,
+			height = 170;
+		var y = d3.scale.linear()
+			.range([height, 0]);
+		var chart = d3.select(".chart")
+			.attr("width", width)
+			.attr("height", height);
 		
 		y.domain([0, d3.max(data, function(d) { return d.value; })]);
 		var barWidth = width / data.length;
@@ -668,7 +637,7 @@ console.log(data);
 		bar.append("rect")
 			.attr("y", function(d) { return y(d.value); })
 			.attr("height", function(d) { return height - y(d.value); })
-      		.attr("fill", "steelblue")
+      		.attr("fill", function(d) { return d.color; })
 			.attr("width", barWidth - 1);
 
 		bar.append("text")
