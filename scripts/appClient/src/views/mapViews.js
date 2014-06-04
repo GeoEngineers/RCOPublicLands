@@ -201,8 +201,17 @@ var MapView = Backbone.Marionette.Layout.extend({
 				MainApplication.selectedBoundary = boundary;
 				$('#selectAreaInput').css("display", "block");
 				$('#selectAreaInput').empty().append('<option value="">- Select Area -</option>');
-				MainApplication.Map.addLayer(boundary.jsonLayer);	
-				_.each(boundary.json.features, function(feature){
+				MainApplication.Map.addLayer(boundary.jsonLayer);
+				var features = boundary.json.features;
+				features.sort(function(a,b){
+					var returnval = 0;
+					if(a.properties[boundary.NameField] < b.properties[boundary.NameField])
+						returnval = -1;
+					if(a.properties[boundary.NameField] > b.properties[boundary.NameField])
+						returnval = 1;
+					return returnval;
+				});	
+				_.each(features, function(feature){
 					$("#selectAreaInput").append(new Option(boundary.SelectText + ' ' + feature.properties[boundary.NameField], feature.properties[boundary.NameField]));
 				});
 				//console.log(boundary.json.features);
