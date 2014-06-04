@@ -31,6 +31,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		"click #lnkDefaultButton" : "setBaseMapDefault",
 		"click #lnkSyncQueueData" : "syncLiveData",
 		"click #lnkToggleConnection" : "toggleConnection",
+		"change #selectStateInput" : "boundaryChange",
 		"click #lnkMapsSlide" : "showMapsSlide"
 	},	
 	onShow: function(){
@@ -144,6 +145,17 @@ var MapView = Backbone.Marionette.Layout.extend({
 				MainApplication.Map.addLayer(area.layerGroup);	
 			}
 		});	
+	},
+	boundaryChange: function(){
+		var selectedBoundary = $('#selectStateInput').val();
+		_.each(MainApplication.boundaries, function(boundary){
+			if(MainApplication.Map.hasLayer(boundary.jsonLayer)){
+				MainApplication.Map.removeLayer(boundary.jsonLayer);	
+			}
+			if(boundary.Name === selectedBoundary){
+				MainApplication.Map.addLayer(boundary.jsonLayer);	
+			}
+		})
 	},
 	addMapMarker: function(b){
 		var bounds = b;
