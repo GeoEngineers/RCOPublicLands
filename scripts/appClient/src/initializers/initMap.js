@@ -20,6 +20,57 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
 				//be wary, the content below may need to be made a callback before long
 			});
 		}
+
+		MainApplication.boundaries = [];
+		var counties = {
+			Id: 1,
+			Name: "Counties",
+			jsonLayer: L.geoJson(boundary, { 
+				style: 
+				{
+					color: "#00cccc",
+    				weight: 1,
+    				opacity: 1.0
+    			}})
+		};
+		var wrias = {
+			Id: 2,
+			Name: "WRIAs",
+			jsonLayer: L.geoJson(boundary, { 
+				style: 
+				{
+					color: "#0000cc",
+    				weight: 1,
+    				opacity: 1.0
+    			}})
+		};
+		var congressionalDisticts = {
+			Id: 3,
+			Name: "Congressional Districts",
+			jsonLayer: L.geoJson(boundary, { 
+				style: 
+				{
+					color: "#00cc00",
+    				weight: 1,
+    				opacity: 1.0
+    			}})
+		};
+		var legislativeDistricts = {
+			Id: 4,
+			Name: "Legislative Districts",
+			jsonLayer: L.geoJson(boundary, { 
+				style: 
+				{
+					color: "#cc0000",
+    				weight: 1,
+    				opacity: 1.0
+    			}})
+		};
+		MainApplication.boundaries.push(counties);
+		MainApplication.boundaries.push(wrias);
+		MainApplication.boundaries.push(congressionalDisticts);
+		MainApplication.boundaries.push(legislativeDistricts);
+
 		//continue app as normal after, might become a callback to sync queue depending on promise structure
 		MainApplication.models.todos = new Todos();
 		MainApplication.views.mapView = new MapView({
