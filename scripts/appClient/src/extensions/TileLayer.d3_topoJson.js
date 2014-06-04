@@ -12,6 +12,7 @@
 L.TileLayer.d3_topoJSON =  L.TileLayer.extend({
     onAdd : function(map) {
         L.TileLayer.prototype.onAdd.call(this,map);
+        console.log(d3.geo.path());
         this._path = d3.geo.path().projection(function(d) {
             var point = map.latLngToLayerPoint(new L.LatLng(d[1],d[0]));
             return [point.x,point.y];

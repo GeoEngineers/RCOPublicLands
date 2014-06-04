@@ -57,6 +57,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 			dc.loadCurrentMap();
 		});
 		
+//var hash = new L.Hash(MainApplication.Map);
 		_.each(BootstrapVars.areaStats, function(area){ 
 			var tileLayer = new L.mapbox.tileLayer(area.mapTarget, { zIndex: 5 });
 			var utfGrid = new L.UtfGrid('http://{s}.tiles.mapbox.com/v3/'+area.mapTarget+'/{z}/{x}/{y}.grid.json?callback={cb}', { zIndex: 5 });
@@ -82,17 +83,12 @@ var MapView = Backbone.Marionette.Layout.extend({
       					marker.bindPopup(popupText);
         	}
       	});
-      	var myStyle = {
-				"color": "#ff7800",
-				"weight": 5,
-				"opacity": 0.65
-			};
-
-      	new L.TileLayer.d3_topoJSON("http://ec2-54-189-137-204.us-west-2.compute.amazonaws.com/tiles/tiles.py/wa_publiclands_federal/{z}/{x}/{y}.topojson", {
-  			class: "road",
+      	
+      	/*new L.TileLayer.d3_topoJSON("http://ec2-54-184-254-142.us-west-2.compute.amazonaws.com/tiles/tiles.py/wa_federal/{z}/{x}/{y}.topojson", {
+  			class: "landuse",
   			layerName: "vectile",
-  			style: myStyle
-		}).addTo(MainApplication.Map);
+  			style: "fill: #ff7800"
+		}).addTo(MainApplication.Map);*/
 
 
       	/*$.getJSON("http://ec2-54-189-42-248.us-west-2.compute.amazonaws.com/tiles/tiles.py/wa_publiclands_1/7/22/44.geojson", function(data) {
@@ -139,8 +135,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 				});
 			}
 		});	*/	
-		
-		MainApplication.Map.setView([47,-120], 7).addLayer(this.streetsMap);
+		MainApplication.Map.setView([47,-120], 7);
+		//MainApplication.Map.setView([47,-120], 7).addLayer(this.streetsMap);
 		L.control.layers(this.baseMaps, null, {position: 'bottomleft'}).addTo(MainApplication.Map);
 		this.mapFirstView=false;
 		_.each(BootstrapVars.areaStats, function(area){ 
