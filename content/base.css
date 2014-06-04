@@ -103,6 +103,16 @@ path.building { stroke: #f00; stroke-width: 0; fill: #f00; }
     z-index: 1030;
 }
 
+#selectAreaInput {
+    left: 55px;
+    position: absolute;
+    top: 85px;
+    width: 185px;
+    z-index: 1030;
+    display: none;
+}
+
+
 #chartLayer{
 	z-index:999999;
 	top:0px; 
