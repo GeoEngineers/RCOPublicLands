@@ -11,6 +11,9 @@ MainApplication.Templates.MapTemplate = [
 			"<option value='WRIAs'>WRIAs</option>",
 			"<option value='Congressional Districts'>Congressional Districts</option>",
 		"</select>",
+		"<select name='selectArea' id='selectAreaInput' class='form-control'>",
+			"<option value=''>- Select Area -</option>",
+		"</select>",
 		"<div id='map' style=\"top: 35px\"></div>",
 	"</div>"
 ].join("\n");

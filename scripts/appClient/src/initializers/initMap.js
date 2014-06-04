@@ -25,6 +25,9 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
 		var countiesBoundary = {
 			Id: 1,
 			Name: "Counties",
+			NameField: "COUNTY_NM",
+			SelectText: "",
+			json: counties,
 			jsonLayer: L.geoJson(counties, { 
 				style: 
 				{
@@ -36,6 +39,9 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
 		var wriasBoundary = {
 			Id: 2,
 			Name: "WRIAs",
+			NameField: "WRIA_NM",
+			SelectText: "",
+			json: wrias,
 			jsonLayer: L.geoJson(wrias, { 
 				style: 
 				{
@@ -47,6 +53,9 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
 		var congressionalDistictsBoundary = {
 			Id: 3,
 			Name: "Congressional Districts",
+			NameField: "DISTRICT_NR",
+			SelectText: "District",
+			json: congressionaldistricts,
 			jsonLayer: L.geoJson(congressionaldistricts, { 
 				style: 
 				{
@@ -58,6 +67,9 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
 		var legislativeDistrictsBoundary = {
 			Id: 4,
 			Name: "Legislative Districts",
+			NameField: "DISTRICT_NR",
+			SelectText: "District",
+			json: legislativedistricts,
 			jsonLayer: L.geoJson(legislativedistricts, { 
 				style: 
 				{

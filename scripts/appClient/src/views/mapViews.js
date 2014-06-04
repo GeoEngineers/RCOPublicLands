@@ -32,6 +32,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		"click #lnkSyncQueueData" : "syncLiveData",
 		"click #lnkToggleConnection" : "toggleConnection",
 		"change #selectStateInput" : "boundaryChange",
+		"change #selectAreaInput" : "areaChange",
 		"click #lnkMapsSlide" : "showMapsSlide"
 	},	
 	onShow: function(){
@@ -190,15 +191,52 @@ var MapView = Backbone.Marionette.Layout.extend({
 		});	
 	},
 	boundaryChange: function(){
-		var selectedBoundary = $('#selectStateInput').val();
+		var selectedVal = $('#selectStateInput').val();
+		$('#selectAreaInput').css("display", "none");
 		_.each(MainApplication.boundaries, function(boundary){
 			if(MainApplication.Map.hasLayer(boundary.jsonLayer)){
 				MainApplication.Map.removeLayer(boundary.jsonLayer);	
 			}
-			if(boundary.Name === selectedBoundary){
+			if(boundary.Name === selectedVal){
+				MainApplication.selectedBoundary = boundary;
+				$('#selectAreaInput').css("display", "block");
+				$('#selectAreaInput').empty().append('<option value="">- Select Area -</option>');
 				MainApplication.Map.addLayer(boundary.jsonLayer);	
+				_.each(boundary.json.features, function(feature){
+					$("#selectAreaInput").append(new Option(boundary.SelectText + ' ' + feature.properties[boundary.NameField], feature.properties[boundary.NameField]));
+				});
+				//console.log(boundary.json.features);
 			}
 		})
+	},
+	areaChange: function()
+	{
+		var selectedVal = $('#selectAreaInput').val();
+		console.log(selectedVal);
+		var boundary = MainApplication.selectedBoundary;
+		_.each(boundary.json.features, function(feature){
+				if(selectedVal.toString() === feature.properties[boundary.NameField].toString())
+				{
+					var maxX = -1000, maxY = -1000, minX = 1000, minY = 1000;
+					_.each(feature.geometry.coordinates, function(ring){
+						_.each(ring, function(coords){
+							if(maxX < coords[0])
+								maxX = coords[0];
+							if(maxY < coords[1])
+								maxY = coords[1];
+							if(minX > coords[0])
+								minX = coords[0];
+							if(minY > coords[1])
+								minY = coords[1];
+						});
+					});
+					var southWest = L.latLng(minY, minX),
+    					northEast = L.latLng(maxY, maxX),
+    					bounds = L.latLngBounds(southWest, northEast);
+    					console.log(bounds);
+    				MainApplication.Map.fitBounds(bounds);
+				}
+		});
 	},
 	addMapMarker: function(b){
 		var bounds = b;
