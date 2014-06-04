@@ -18,9 +18,9 @@ var MapView = Backbone.Marionette.Layout.extend({
 		//	position: "front"
 		//});
 		this.baseMaps = {
-                    "Streets": this.streetsMap,
-                    "Open Street Map" : this.openMap,
-                    "Imagery": this.imageryMap
+			"Streets": this.streetsMap,
+			"Open Street Map" : this.openMap,
+			"Imagery": this.imageryMap
          };
 
 		this.mapFirstView = true;
@@ -44,7 +44,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 				$('#ownerToggle' + area.abbrev).css("color",area.color);
 			}
 		});
-		this.loadRightSlide();
 		
 		var welcomeView = new WelcomeView({});
 		MainApplication.modalRegion.show(welcomeView);
@@ -59,7 +58,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 			dc.loadCurrentMap();
 		});
 		
-//var hash = new L.Hash(MainApplication.Map);
 		_.each(BootstrapVars.areaStats, function(area){ 
 			var tileLayer = new L.mapbox.tileLayer(area.mapTarget, { zIndex: 5 });
 			var utfGrid = new L.UtfGrid('http://{s}.tiles.mapbox.com/v3/'+area.mapTarget+'/{z}/{x}/{y}.grid.json?callback={cb}', { zIndex: 5 });
@@ -86,102 +84,10 @@ var MapView = Backbone.Marionette.Layout.extend({
         	}
       	});
       	
-		
+		this.loadRightSlide();
 
-        //L.control.layers(MainApplication.baseLayers).addTo(this.map);
-        var MarkersControl = L.Control.extend({
-            options: {
-                position: 'bottomright'
-            },
-            onAdd: function (map) {
-                var container = L.DomUtil.create('div', 'custom-control');
-                var stop = L.DomEvent.stopPropagation;
-                L.DomEvent
-                  .on(container, 'click', stop)
-                  .on(container, 'mousedown', stop)
-                  .on(container, 'dblclick', stop)
-                  .on(container, 'click', L.DomEvent.preventDefault);
-
-                $(container).attr("id", "customLayers");
-                return container;
-            }
-        });
-        MainApplication.Map.addControl(new MarkersControl());
-        this.addRegions({ leafletControlsRegion: "#customLayers" });
-        this.layersView = new LayersView({});
-        this.leafletControlsRegion.show(dc.layersView); //show the view in question here
-        $("#gisLayerControls").on("mouseenter click", function () {
-            MainApplication.Map.scrollWheelZoom.disable();
-            $("#gisLayerControlsExpanded").css({ "display": "block" });
-            $("#gisLayerControls").css({ "display": "none" });
-        });
-        $("#gisLayerControlsExpanded").on("mouseenter", function () {
-            MainApplication.Map.scrollWheelZoom.disable();
-            $("#gisLayerControlsExpanded").css({ "display": "block" });
-            $("#gisLayerControls").css({ "display": "none" });
-        });
-        $("#gisLayerControlsExpanded").on("mouseleave", function () {
-            MainApplication.Map.scrollWheelZoom.enable();
-            $("#gisLayerControlsExpanded").css({ "display": "none" });
-            $("#gisLayerControls").css({ "display": "block" });
-        });       
-		
-		
-		
-
-      	/*new L.TileLayer.d3_topoJSON("http://ec2-54-184-254-142.us-west-2.compute.amazonaws.com/tiles/tiles.py/wa_federal/{z}/{x}/{y}.topojson", {
-  			class: "landuse",
-  			layerName: "vectile",
-  			style: "fill: #ff7800"
-		}).addTo(MainApplication.Map);*/
-
-
-      	/*$.getJSON("http://ec2-54-189-42-248.us-west-2.compute.amazonaws.com/tiles/tiles.py/wa_publiclands_1/7/22/44.geojson", function(data) {
-			var myStyle = {
-				"color": "#ff7800",
-				"weight": 5,
-				"opacity": 0.65
-			};
-			console.log(data);
-    		L.geoJson(data, {
-        		style: myStyle
-    		}).addTo(MainApplication.Map);
-		});*/
-
-		//var genericLayer = new L.mapbox.tileLayer('http://ec2-54-189-42-248.us-west-2.compute.amazonaws.com/tiles/tiles.py/wa_publiclands_1/7/22/44.geojson', { zIndex: 5 }).addTo(MainApplication.Map);;
-		//ESRI Prism data check
-		/*MainApplication.Map.on("click", function(e) {
-			if(MainApplication.Map.hasLayer(MainApplication.views.mapView.esriMap)){
-				MainApplication.views.mapView.esriMap.identify(e.latlng, function(data) {
-					if(data.results.length > 0) {
-						// Popup toevoegen en informatie toevoegen
-						popupText =  "<div style='overflow:scroll; max-width:250px; max-height:260px;'>";
-						for (prop in data.results[0].attributes) {
-							var val = data.results[0].attributes[prop];
-							var linkId = "shapshot"+ data.results[0].attributes.OBJECTID;
-							if(prop === "Snapshot URL"){
-								val = "<a href='" + val + "' id='shapshot"+ data.results[0].attributes.OBJECTID +"'>" + val + "</a>";
-							}
-							if (val != 'undefined' && val != "0" && prop !="OBJECTID" && prop != "Name") {
-								popupText += "<b>" + prop.replace(" (Esri)",'') + "</b>: " + val + "<br>";
-							}
-						}
-						popupText += "</div>";
-						var popup = L.popup()
-							.setLatLng(e.latlng)
-							.setContent(popupText)
-							.openOn(MainApplication.Map);
-
-						$('#'+linkId).on("click",function(ev){
-							window.open($(ev.currentTarget).attr("href"),'PRISM','width=1000,height=550,scroll=1,scrolling=1,scrollbars=1');
-							return false;
-						});
-					}
-				});
-			}
-		});	*/	
 		MainApplication.Map.setView([47,-120], 7);
-		//MainApplication.Map.setView([47,-120], 7).addLayer(this.streetsMap);
+
 		L.control.layers(this.baseMaps, null, {position: 'bottomleft'}).addTo(MainApplication.Map);
 		this.mapFirstView=false;
 		_.each(BootstrapVars.areaStats, function(area){ 
@@ -189,6 +95,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 				MainApplication.Map.addLayer(area.layerGroup);	
 			}
 		});	
+
+		this.setLegendContents();
 	},
 	boundaryChange: function(){
 		var selectedVal = $('#selectStateInput').val();
@@ -374,24 +282,39 @@ var MapView = Backbone.Marionette.Layout.extend({
 		console.log("Set them layers");
 		console.log(layerType);
 		console.log(BootstrapVars.areaStats);
-	
-		this.activeLayers = [];		
+
+		this.activeLayers = [];
 		_.each(BootstrapVars.areaStats,function(mapLayer){
 			if(mapLayer.layerGroupName === layerType){
 				mapLayer.visible = true;
 				dc.activeLayers.push(mapLayer.abbrev);
 				MainApplication.Map.addLayer(mapLayer.layerGroup);
-				
 			}else{
 				mapLayer.visible = false;
 				MainApplication.Map.hasLayer(mapLayer.layerGroup) ? MainApplication.Map.removeLayer(mapLayer.layerGroup) : false;
 			}
 			return false;
 		});
-		//refreshes the right slide
+		//refreshes the right slide and legend
+		this.setLegendContents();			
 		this.loadRightSlide();
 		
 		return false;
+	},
+	setLegendContents : function(){
+		var dc=this;
+		if(this.featureLayerControls){
+			MainApplication.Map.removeControl(this.featureLayerControls);
+		}
+		this.layerMaps = {};
+		_.each(BootstrapVars.areaStats, function(area){ 
+			if(area.visible){
+				dc.layerMaps[area.abbrev] = area.layerGroup;
+			}
+		});
+		this.featureLayerControls = L.control.layers(null, this.layerMaps, {position: 'bottomleft'}).addTo(MainApplication.Map);
+		return false;
+		//return this.featureLayerControls;
 	},
 	showMapsSlide : function(){
 		console.log("Slide Data");
