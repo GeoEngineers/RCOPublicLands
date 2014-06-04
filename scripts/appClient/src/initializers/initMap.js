@@ -22,10 +22,10 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
 		}
 
 		MainApplication.boundaries = [];
-		var counties = {
+		var countiesBoundary = {
 			Id: 1,
 			Name: "Counties",
-			jsonLayer: L.geoJson(boundary, { 
+			jsonLayer: L.geoJson(counties, { 
 				style: 
 				{
 					color: "#00cccc",
@@ -33,10 +33,10 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
     				opacity: 1.0
     			}})
 		};
-		var wrias = {
+		var wriasBoundary = {
 			Id: 2,
 			Name: "WRIAs",
-			jsonLayer: L.geoJson(boundary, { 
+			jsonLayer: L.geoJson(wrias, { 
 				style: 
 				{
 					color: "#0000cc",
@@ -44,10 +44,10 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
     				opacity: 1.0
     			}})
 		};
-		var congressionalDisticts = {
+		var congressionalDistictsBoundary = {
 			Id: 3,
 			Name: "Congressional Districts",
-			jsonLayer: L.geoJson(boundary, { 
+			jsonLayer: L.geoJson(congressionaldistricts, { 
 				style: 
 				{
 					color: "#00cc00",
@@ -55,10 +55,10 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
     				opacity: 1.0
     			}})
 		};
-		var legislativeDistricts = {
+		var legislativeDistrictsBoundary = {
 			Id: 4,
 			Name: "Legislative Districts",
-			jsonLayer: L.geoJson(boundary, { 
+			jsonLayer: L.geoJson(legislativedistricts, { 
 				style: 
 				{
 					color: "#cc0000",
@@ -66,10 +66,10 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
     				opacity: 1.0
     			}})
 		};
-		MainApplication.boundaries.push(counties);
-		MainApplication.boundaries.push(wrias);
-		MainApplication.boundaries.push(congressionalDisticts);
-		MainApplication.boundaries.push(legislativeDistricts);
+		MainApplication.boundaries.push(countiesBoundary);
+		MainApplication.boundaries.push(wriasBoundary);
+		MainApplication.boundaries.push(congressionalDistictsBoundary);
+		MainApplication.boundaries.push(legislativeDistrictsBoundary);
 
 		//continue app as normal after, might become a callback to sync queue depending on promise structure
 		MainApplication.models.todos = new Todos();
