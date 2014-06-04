@@ -71,20 +71,63 @@ var MapView = Backbone.Marionette.Layout.extend({
    			cluster: new L.MarkerClusterGroup(),
    			onEachMarker: function(geojson, marker) {
    				popupText =  "<div style='overflow:scroll; max-width:350px; max-height:260px;'>";
-						for (prop in geojson.properties) {
-							var val = geojson.properties[prop];
-							var linkId = "shapshot"+ geojson.properties.OBJECTID;
-							if(prop.replace("PRISM.DBO.SV_DMPROJECT1.", "") === "SnapshotURL"){
-								val = "<a href='" + val + "' id='shapshot"+ geojson.properties.OBJECTID +"'>" + val + "</a>";
-							}
-							if (val != 'undefined' && val != "0" && prop !="OBJECTID" && prop != "Name") {
-								popupText += "<b>" + prop.replace(" (Esri)",'').replace("PRISM.DBO.SV_DMPROJECT1.", "") + "</b>: " + val + "<br>";
-							}
-						}
-      					marker.bindPopup(popupText);
+				for (prop in geojson.properties) {
+					var val = geojson.properties[prop];
+					var linkId = "shapshot"+ geojson.properties.OBJECTID;
+					if(prop.replace("PRISM.DBO.SV_DMPROJECT1.", "") === "SnapshotURL"){
+						val = "<a href='" + val + "' id='shapshot"+ geojson.properties.OBJECTID +"'>" + val + "</a>";
+					}
+					if (val != 'undefined' && val != "0" && prop !="OBJECTID" && prop != "Name") {
+						popupText += "<b>" + prop.replace(" (Esri)",'').replace("PRISM.DBO.SV_DMPROJECT1.", "") + "</b>: " + val + "<br>";
+					}
+				}
+				marker.bindPopup(popupText);
         	}
       	});
       	
+		
+
+        //L.control.layers(MainApplication.baseLayers).addTo(this.map);
+        var MarkersControl = L.Control.extend({
+            options: {
+                position: 'bottomright'
+            },
+            onAdd: function (map) {
+                var container = L.DomUtil.create('div', 'custom-control');
+                var stop = L.DomEvent.stopPropagation;
+                L.DomEvent
+                  .on(container, 'click', stop)
+                  .on(container, 'mousedown', stop)
+                  .on(container, 'dblclick', stop)
+                  .on(container, 'click', L.DomEvent.preventDefault);
+
+                $(container).attr("id", "customLayers");
+                return container;
+            }
+        });
+        MainApplication.Map.addControl(new MarkersControl());
+        this.addRegions({ leafletControlsRegion: "#customLayers" });
+        this.layersView = new LayersView({});
+        this.leafletControlsRegion.show(dc.layersView); //show the view in question here
+        $("#gisLayerControls").on("mouseenter click", function () {
+            MainApplication.Map.scrollWheelZoom.disable();
+            $("#gisLayerControlsExpanded").css({ "display": "block" });
+            $("#gisLayerControls").css({ "display": "none" });
+        });
+        $("#gisLayerControlsExpanded").on("mouseenter", function () {
+            MainApplication.Map.scrollWheelZoom.disable();
+            $("#gisLayerControlsExpanded").css({ "display": "block" });
+            $("#gisLayerControls").css({ "display": "none" });
+        });
+        $("#gisLayerControlsExpanded").on("mouseleave", function () {
+            MainApplication.Map.scrollWheelZoom.enable();
+            $("#gisLayerControlsExpanded").css({ "display": "none" });
+            $("#gisLayerControls").css({ "display": "block" });
+        });       
+		
+		
+		
+
       	/*new L.TileLayer.d3_topoJSON("http://ec2-54-184-254-142.us-west-2.compute.amazonaws.com/tiles/tiles.py/wa_federal/{z}/{x}/{y}.topojson", {
   			class: "landuse",
   			layerName: "vectile",
@@ -376,6 +419,35 @@ var MapView = Backbone.Marionette.Layout.extend({
 });	
 
 
+var LayersView = Backbone.Marionette.ItemView.extend({
+    template: function (serialized_model) {
+        return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.LayersTemplate);
+    },
+    templateHelpers: function () {
+        //im a helper!
+    },
+    initialize: function (options) {
+		//nada
+    },
+    events: {
+        "click #lnkTopographic": "triggerBaseLayerSelected",
+        "click #lnkImagery": "triggerBaseLayerSelected",
+        "click #lnkStreets": "triggerBaseLayerSelected",
+        "click #btnCloseLayers": "paneCloseMenu"
+    },
+    paneCloseMenu: function () {
+        this.parentRegion.paneClose();
+        $("#lnkMarkersButton").removeClass("active");
+        return false;
+    },
+    triggerBaseLayerSelected: function (source) {
+        // need to throw an event here that is caught by the LandingPageView to set base map
+        //alert(source.target.name);
+        MainApplication.selectedBaseLayer = MainApplication.baseLayers[source.target.name];
+        MainApplication.vent.trigger("baseLayerSelected");
+        return false;
+    }	
+});
 
 var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
     template: function (serialized_model) {
@@ -647,6 +719,9 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			.attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; });
 
 		bar.append("rect")
+			.on('click', function(){ console.log("test"); })
+			.on('mouseover', dc.synchronizedMouseOver)
+			.on("mouseout", dc.synchronizedMouseOut)
 			.attr("y", function(d) { return y(d.value); })
 			.attr("height", function(d) { return height - y(d.value); })
       		.attr("fill", function(d) { return d.color; })

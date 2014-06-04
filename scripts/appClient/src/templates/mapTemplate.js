@@ -45,6 +45,20 @@ MainApplication.Templates.MapPaneTemplate = [
 	"</div>"
 ].join("\n");
 
+MainApplication.Templates.LayersTemplate = [
+    "<div id='gisLayerControls'>",
+        "<span class='fa-stack'>",
+          "<i class='fa fa-check-square-o fa-stack-2x top'></i>",
+        "</span>",
+    "</div>",
+    "<div class=\"slide-body\" id='gisLayerControlsExpanded'>",
+        "<div class='markerLayers'>",
+            "<div id='treeviewdiv' style='color: white; border: 0px; font-size: 8pt; text-align: left; width: 240px' >",
+            "</div>",
+		"</div>",
+	"</div>"
+].join("\n");
+
 MainApplication.Templates.MapNewMarkerTipTemplate = [
     "<div class='unboundNewMarkerMsg'>",
 		"<b>{{Description}}</b><br />",

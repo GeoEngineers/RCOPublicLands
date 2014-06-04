@@ -48,6 +48,35 @@ path.building { stroke: #f00; stroke-width: 0; fill: #f00; }
     color: #dddddd;
 }
 
+#gisLayerControls {
+    border:1px solid #444444;
+    background-color: #101010;
+    border-radius: 4px;
+    height: 36px;
+    position: absolute;
+    right: 0;
+    width: 36px;
+    z-index: 1028;
+}
+#gisLayerControls .top {
+    color: #555555;
+    margin-left: 6px;
+    margin-top: 5px;
+}
+#gisLayerControls i {
+    color: #CCCCCC !important;
+}
+#gisLayerControlsExpanded {
+    background-color: #222222;
+    border-radius: 10px;
+    display: none;
+    height: 200px;
+    margin: 0 0 -35px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 1040;
+}
+
 .custom-cluster{
     display:inline-block;
     height: 40px;
