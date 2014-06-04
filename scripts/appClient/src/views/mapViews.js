@@ -606,17 +606,33 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		//});		
 		return false;
 	},
-	loadD3BarLayerComparison: function(){	
+	loadD3BarLayerComparison: function(){
+		var dc=this;
 		var width = 205,
 			height = 170;
 
 		var y = d3.scale.linear()
 			.range([height, 0]);
-
 		var chart = d3.select(".chart")
 			.attr("width", width)
 			.attr("height", height);
-
+		var selectedAreas = _.filter(BootstrapVars.areaStats, function(area){ 
+			return $.inArray(area.abbrev, dc.activeLayers) > -1; 
+		});
+		var data = [];
+		_.each(selectedAreas, function(area){
+			data.push({
+				"name" : area.agency,
+				"value" : area.total_acres
+			});
+			//console.log(area);
+		});
+		
+		
+		
+		console.log(data);
+console.log(data);		
+		/*	
 		var data = [	
 			{
 				"name" : "DFW",
@@ -639,8 +655,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				"value" : 15727892.11
 			}
 		];
-
-		console.log(data);
+		*/
 		
 		y.domain([0, d3.max(data, function(d) { return d.value; })]);
 		var barWidth = width / data.length;
