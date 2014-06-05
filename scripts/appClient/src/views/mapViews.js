@@ -132,27 +132,27 @@ var MapView = Backbone.Marionette.Layout.extend({
 		console.log(selectedVal);
 		var boundary = MainApplication.selectedBoundary;
 		_.each(boundary.json.features, function(feature){
-				if(selectedVal.toString() === feature.properties[boundary.NameField].toString())
-				{
-					var maxX = -1000, maxY = -1000, minX = 1000, minY = 1000;
-					_.each(feature.geometry.coordinates, function(ring){
-						_.each(ring, function(coords){
-							if(maxX < coords[0])
-								maxX = coords[0];
-							if(maxY < coords[1])
-								maxY = coords[1];
-							if(minX > coords[0])
-								minX = coords[0];
-							if(minY > coords[1])
-								minY = coords[1];
-						});
+			if(selectedVal.toString() === feature.properties[boundary.NameField].toString())
+			{
+				var maxX = -1000, maxY = -1000, minX = 1000, minY = 1000;
+				_.each(feature.geometry.coordinates, function(ring){
+					_.each(ring, function(coords){
+						if(maxX < coords[0])
+							maxX = coords[0];
+						if(maxY < coords[1])
+							maxY = coords[1];
+						if(minX > coords[0])
+							minX = coords[0];
+						if(minY > coords[1])
+							minY = coords[1];
 					});
-					var southWest = L.latLng(minY, minX),
-    					northEast = L.latLng(maxY, maxX),
-    					bounds = L.latLngBounds(southWest, northEast);
-    					console.log(bounds);
-    				MainApplication.Map.fitBounds(bounds);
-				}
+				});
+				var southWest = L.latLng(minY, minX),
+					northEast = L.latLng(maxY, maxX),
+					bounds = L.latLngBounds(southWest, northEast);
+					console.log(bounds);
+				MainApplication.Map.fitBounds(bounds);
+			}
 		});
 	},
 	addMapMarker: function(b){
@@ -278,21 +278,54 @@ var MapView = Backbone.Marionette.Layout.extend({
 	},
 	setDisplayedLayers : function(layerType){
 		var dc=this;
-console.log(1);
 		this.activeLayers = [];
-console.log(1);
 		_.each(BootstrapVars.areaStats,function(mapLayer){
+			console.log(mapLayer.layerGroupName , layerType);
 			if(mapLayer.layerGroupName === layerType){
 				mapLayer.visible = true;
 				dc.activeLayers.push(mapLayer.abbrev);
+				
+				/*
+				console.log("Adding Layer: ",mapLayer);
+				console.log(MainApplication.Map);
+				console.log(MainApplication.Map.addLayer);
+				console.log(mapLayer.layerGroup);
+				console.log(MainApplication.Map.hasLayer(mapLayer.layerGroup));
+				*/
+				
+				try{
+					MainApplication.Map.addLayer(mapLayer.layerGroup);
+				}catch(e){
+					console.log(e);
+				}
+			}else{
+				mapLayer.visible = false;
+				try{
+					MainApplication.Map.hasLayer(mapLayer.layerGroup) ? MainApplication.Map.removeLayer(mapLayer.layerGroup) : false;
+				}catch(e){
+					console.log(e);
+				}
+			}
+			return false;
+		});
+		
+		/*
+		for(var i=1;i < BootstrapVars.areaStats.length;i=i+1){
+			var mapLayer = BootstrapVars.areaStats[i];
+			console.log(mapLayer.layerGroupName , layerType);
+			if(mapLayer.layerGroupName === layerType){
+				mapLayer.visible = true;
+				dc.activeLayers.push(mapLayer.abbrev);
+				
+				console.log("Adding Layer: ",mapLayer);
 				MainApplication.Map.addLayer(mapLayer.layerGroup);
 			}else{
 				mapLayer.visible = false;
 				MainApplication.Map.hasLayer(mapLayer.layerGroup) ? MainApplication.Map.removeLayer(mapLayer.layerGroup) : false;
 			}
-			return false;
-		});
-console.log(1);
+		}		
+		*/
+		
 		//refreshes the right slide and legend
 		this.setLegendControls();			
 		this.loadRightSlide();
@@ -302,22 +335,16 @@ console.log(1);
 	setLegendControls : function(){
 		var dc=this;
 		
-console.log(1);
-		
 		if(this.featureLayerControls){
 			MainApplication.Map.removeControl(this.featureLayerControls);
 		}
-console.log(1);
 		this.layerMaps = {};
-console.log(1);
 		_.each(BootstrapVars.areaStats, function(area){
 			if(area.visible){
 				dc.layerMaps[area.abbrev] = area.layerGroup;
 			}
 		});
-console.log(1);
 		this.featureLayerControls = L.control.layers(null, this.layerMaps, {position: 'bottomleft'}).addTo(MainApplication.Map);
-console.log(1);
 		
 		//setup respones to click events
 		$(this.featureLayerControls._container).find("label").on("click", function(ev){
