@@ -99,17 +99,26 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.setLegendControls();
 	},
 	boundaryChange: function(){
+
+		if(MainApplication.selectedBoundary !== undefined)
+		{
+			if(MainApplication.Map.hasLayer(MainApplication.selectedBoundary)){
+					MainApplication.Map.removeLayer(MainApplication.selectedBoundary);	
+				}
+		}
 		var selectedVal = $('#selectStateInput').val();
 		$('#selectAreaInput').css("display", "none");
 		_.each(MainApplication.boundaries, function(boundary){
-			if(MainApplication.Map.hasLayer(boundary.jsonLayer)){
-				MainApplication.Map.removeLayer(boundary.jsonLayer);	
+			if(MainApplication.jsonLayer !== null)
+			{
+				if(MainApplication.Map.hasLayer(boundary.jsonLayer)){
+					MainApplication.Map.removeLayer(boundary.jsonLayer);	
+				}
 			}
 			if(boundary.Name === selectedVal){
 				MainApplication.selectedBoundary = boundary;
 				$('#selectAreaInput').css("display", "block");
 				$('#selectAreaInput').empty().append('<option value="">- Select Area -</option>');
-				MainApplication.Map.addLayer(boundary.jsonLayer);
 				var features = boundary.json.features;
 				features.sort(function(a,b){
 					var returnval = 0;
@@ -121,7 +130,37 @@ var MapView = Backbone.Marionette.Layout.extend({
 				});	
 				_.each(features, function(feature){
 					$("#selectAreaInput").append(new Option(boundary.SelectText + ' ' + feature.properties[boundary.NameField], feature.properties[boundary.NameField]));
+					feature.fill =true;
 				});
+				if(boundary.jsonLayer === null)
+				{
+					boundary.jsonLayer = L.geoJson(boundary.json, {
+						style: function (feature) {
+							return {
+      							fillColor: boundary.color,
+      							fillOpacity: 0.02,
+				                weight: 1,
+				                opacity: 1,
+				                color: boundary.color,
+				                dashArray: '3'
+						    };
+						},
+						fill: true,
+						onEachFeature: function (feature, layer) {
+							layer.on('click', function(e){
+								if(MainApplication.selectedBoundary !== undefined)
+								{
+									if(MainApplication.Map.hasLayer(MainApplication.selectedBoundary)){
+											MainApplication.Map.removeLayer(MainApplication.selectedBoundary);	
+										}
+								}
+								MainApplication.selectedBoundary = L.polygon(e.target._latlngs);
+								MainApplication.Map.addLayer(MainApplication.selectedBoundary);
+							});
+						}
+					});
+				}
+				MainApplication.Map.addLayer(boundary.jsonLayer);
 				//console.log(boundary.json.features);
 			}
 		})
