@@ -127,3 +127,18 @@ MainApplication.Templates.QuestionTemplate = [
 MainApplication.Templates.HeaderTemplate = [ 
 	"<h4>WASHINGTON PUBLIC LANDS INVENTORY</h4>",
 ].join("\n");
+
+
+MainApplication.Templates.LegendTemplate = [
+    "<div id='gisLegendControls'>",
+        "<span class='fa-stack'>",
+          "<i class='fa fa-list-ul  fa-stack-2x top'></i>",
+        "</span>",
+    "</div>",
+    "<div class=\"slide-body\" id='gisLegendControlsExpanded'>",
+        "<div class='legendLayers' style=\" height: 200px\">",
+            "<div id='legendContainer'>",
+            "</div>",
+        "</div>",
+	"</div>"
+].join("\n");
