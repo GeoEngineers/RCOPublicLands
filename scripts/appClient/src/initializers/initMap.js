@@ -28,13 +28,8 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
 			NameField: "COUNTY_NM",
 			SelectText: "",
 			json: counties,
-			jsonLayer: L.geoJson(counties, { 
-				style: 
-				{
-					color: "#00cccc",
-    				weight: 1,
-    				opacity: 1.0
-    			}})
+			jsonLayer: null,
+			color: "red"
 		};
 		var wriasBoundary = {
 			Id: 2,
@@ -42,13 +37,8 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
 			NameField: "WRIA_NM",
 			SelectText: "",
 			json: wrias,
-			jsonLayer: L.geoJson(wrias, { 
-				style: 
-				{
-					color: "#0000cc",
-    				weight: 1,
-    				opacity: 1.0
-    			}})
+			jsonLayer: null,
+			color: "blue"
 		};
 		var congressionalDistictsBoundary = {
 			Id: 3,
@@ -56,13 +46,8 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
 			NameField: "DISTRICT_NR",
 			SelectText: "District",
 			json: congressionaldistricts,
-			jsonLayer: L.geoJson(congressionaldistricts, { 
-				style: 
-				{
-					color: "#00cc00",
-    				weight: 1,
-    				opacity: 1.0
-    			}})
+			jsonLayer: null,
+			color: "green"
 		};
 		var legislativeDistrictsBoundary = {
 			Id: 4,
@@ -70,13 +55,8 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
 			NameField: "DISTRICT_NR",
 			SelectText: "District",
 			json: legislativedistricts,
-			jsonLayer: L.geoJson(legislativedistricts, { 
-				style: 
-				{
-					color: "#cc0000",
-    				weight: 1,
-    				opacity: 1.0
-    			}})
+			jsonLayer: null,
+			color: "orange"
 		};
 		MainApplication.boundaries.push(countiesBoundary);
 		MainApplication.boundaries.push(wriasBoundary);
