@@ -37,13 +37,13 @@ MainApplication.Templates.MapSelectorSlideTemplate = [
 MainApplication.Templates.MapPaneTemplate = [
 	"<div style=\"padding: 10px\">",
 		"<h3>Summary</h3>",		
-		"<div id='chartLayer'></div>",
+		"<div id='pieChartLayer'></div>",
 		"<div style=\"text-align: right; width: 100%\"><select id=\"ddlSummaryType\">",
 			"<option value=\"total_acres\" selected>Total Acres</option>",
 			"<option value=\"total_cost\">Total Cost</option>",
 			"<option value=\"total_revenue\">Total Revenue</option>",
 		"</select></div><br/>",
-		"<svg class='barChartLayer'></svg>",
+		"<svg id='barChartLayer'></svg>",
 		"<div id='summaryLayer'></div>",
 	"</div>"
 ].join("\n");

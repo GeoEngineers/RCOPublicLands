@@ -329,9 +329,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 			$(legendItem).prepend(legendKey);
 		});
 		
-		console.log(this.featureLayerControls);
-		
-		
 		//setup respones to click events
 		$(this.featureLayerControls._container).find("label").on("click", function(ev){
 			//kludgy fix to prevent double clicks
@@ -632,7 +629,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		}
 
 		$("#summaryLayer").html(summaryText);
-		$("#chartLayer").html("");
+		$("#pieChartLayer").html("");
 
 		var width = 200, //960
 			height = 200, //500
@@ -658,7 +655,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 						return 0;
 				}
 			});
-		var svg = d3.select("#chartLayer").append("svg")
+		var svg = d3.select("#pieChartLayer").append("svg")
 			.attr("width", width)
 			.attr("height", height)
 			.append("g")
@@ -695,6 +692,10 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 	},
 	loadD3BarLayerComparison: function(){
 		var dc=this;
+		
+		console.log("Load Bar Chart");
+		
+		/*
 		this.type = $( "#ddlSummaryType" ).val();
 		var selectedAreas = _.filter(BootstrapVars.areaStats, function(area){ 
 			return area.visible===true; 
@@ -723,13 +724,13 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			});
 		});		
 		
-		$(".barChartLayer").html("");
+		$("#barChartLayer").html("");
 		
 		var width = 205,
 			height = 170;
 		var y = d3.scale.linear()
 			.range([height, 0]);
-		var chart = d3.select(".barChartLayer")
+		var chart = d3.select("#barChartLayer")
 			.attr("width", width)
 			.attr("height", height);
 		
@@ -755,7 +756,8 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			.attr("y", function(d) { return y(d.value) + 3; })
 			.attr("dy", "-.75em")
 			.text(function(d) { return d.value; });
-			
+		*/
+		
 		return false;
 	},
 	formatCurrency: function(value)

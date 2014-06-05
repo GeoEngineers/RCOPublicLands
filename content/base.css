@@ -142,7 +142,7 @@ path.building { stroke: #f00; stroke-width: 0; fill: #f00; }
 }
 
 
-#chartLayer{
+#pieChartLayer{
 	z-index:999999;
 	top:0px; 
 	left: 0px;
