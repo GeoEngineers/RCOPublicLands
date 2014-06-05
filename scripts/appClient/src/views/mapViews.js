@@ -96,7 +96,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 			}
 		});	
 
-		this.setLegendContents();
+		this.setLegendControls();
 	},
 	boundaryChange: function(){
 		var selectedVal = $('#selectStateInput').val();
@@ -278,12 +278,9 @@ var MapView = Backbone.Marionette.Layout.extend({
 	},
 	setDisplayedLayers : function(layerType){
 		var dc=this;
-		
-		console.log("Set them layers");
-		console.log(layerType);
-		console.log(BootstrapVars.areaStats);
-
+console.log(1);
 		this.activeLayers = [];
+console.log(1);
 		_.each(BootstrapVars.areaStats,function(mapLayer){
 			if(mapLayer.layerGroupName === layerType){
 				mapLayer.visible = true;
@@ -295,26 +292,53 @@ var MapView = Backbone.Marionette.Layout.extend({
 			}
 			return false;
 		});
+console.log(1);
 		//refreshes the right slide and legend
-		this.setLegendContents();			
+		this.setLegendControls();			
 		this.loadRightSlide();
 		
 		return false;
 	},
-	setLegendContents : function(){
+	setLegendControls : function(){
 		var dc=this;
+		
+console.log(1);
+		
 		if(this.featureLayerControls){
 			MainApplication.Map.removeControl(this.featureLayerControls);
 		}
+console.log(1);
 		this.layerMaps = {};
-		_.each(BootstrapVars.areaStats, function(area){ 
+console.log(1);
+		_.each(BootstrapVars.areaStats, function(area){
 			if(area.visible){
 				dc.layerMaps[area.abbrev] = area.layerGroup;
 			}
 		});
+console.log(1);
 		this.featureLayerControls = L.control.layers(null, this.layerMaps, {position: 'bottomleft'}).addTo(MainApplication.Map);
+console.log(1);
+		
+		//setup respones to click events
+		$(this.featureLayerControls._container).find("label").on("click", function(ev){
+			//kludgy fix to prevent double clicks
+			if(ev.timeStamp !== 0){
+				var checkboxObject = $(ev.currentTarget).children("input:checked");
+				var spanObject = $(ev.currentTarget).children("span").html().trim();
+				var layerDetails = _.find(BootstrapVars.areaStats, function(area){
+					return area.abbrev === spanObject;
+				});
+				//set as inactive
+				if(checkboxObject.length === 1){
+					layerDetails.visible = false;
+				}else{
+					layerDetails.visible = true;				
+				}
+				dc.loadRightSlide();
+			}
+		});
+		
 		return false;
-		//return this.featureLayerControls;
 	},
 	showMapsSlide : function(){
 		console.log("Slide Data");
@@ -550,7 +574,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		var dc=this;
 
 		var data = _.filter(BootstrapVars.areaStats, function(area){ 
-			return $.inArray(area.abbrev, dc.activeLayers) > -1; 
+			return area.visible===true; 
 		});
 
 		var summaryText = "";
@@ -660,7 +684,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		var dc=this;
 		this.type = $( "#ddlSummaryType" ).val();
 		var selectedAreas = _.filter(BootstrapVars.areaStats, function(area){ 
-			return $.inArray(area.abbrev, dc.activeLayers) > -1; 
+			return area.visible===true; 
 		});
 		var data = [];
 		_.each(selectedAreas, function(area){
