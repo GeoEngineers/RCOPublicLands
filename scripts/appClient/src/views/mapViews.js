@@ -147,6 +147,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 						},
 						fill: true,
 						onEachFeature: function (feature, layer) {
+							layer.bindLabel(feature.properties[boundary.NameField], { noHide: true });
 							layer.on('click', function(e){
 								if(MainApplication.selectedBoundary !== undefined)
 								{
@@ -154,7 +155,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 											MainApplication.Map.removeLayer(MainApplication.selectedBoundary);	
 										}
 								}
-								MainApplication.selectedBoundary = L.polygon(e.target._latlngs);
+								MainApplication.selectedBoundary = L.polygon(e.target._latlngs).bindLabel(feature.properties[boundary.NameField], { noHide: true });
 								MainApplication.Map.addLayer(MainApplication.selectedBoundary);
 							});
 						}

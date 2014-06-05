@@ -1,0 +1,45 @@
+﻿.leaflet-label {
+    -moz-user-select: none;
+    background: none repeat scroll 0 0 padding-box rgba(235, 235, 235, 0.81);
+    color: #111111;
+    display: block;
+    font: bold 8pt/10pt "Helvetica Neue",Arial,Helvetica,sans-serif;
+    height: 12px;
+    padding: 0 3px;
+    position: absolute;
+    white-space: nowrap;
+    z-index: 6;
+}
+
+.leaflet-label.leaflet-clickable {
+	cursor: pointer;
+}
+
+.leaflet-label:before,
+.leaflet-label:after {
+	border-top: 6px solid transparent;
+	border-bottom: 6px solid transparent;
+	content: none;
+	position: absolute;
+	top: 5px;
+}
+
+.leaflet-label:before {
+    border-right-style: solid;
+    border-right-width: 6px;
+    color: #FFFFFF;
+    left: -6px;
+    opacity: 0.7;
+    top: 0;
+}
+
+.leaflet-label:after {
+	border-left: 6px solid black;
+	border-left-color: inherit;
+	right: -10px;
+}
+
+.leaflet-label-right:before,
+.leaflet-label-left:after {
+	content: "";
+}
