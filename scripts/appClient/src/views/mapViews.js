@@ -284,15 +284,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 			if(mapLayer.layerGroupName === layerType){
 				mapLayer.visible = true;
 				dc.activeLayers.push(mapLayer.abbrev);
-				
-				/*
-				console.log("Adding Layer: ",mapLayer);
-				console.log(MainApplication.Map);
-				console.log(MainApplication.Map.addLayer);
-				console.log(mapLayer.layerGroup);
-				console.log(MainApplication.Map.hasLayer(mapLayer.layerGroup));
-				*/
-				
 				try{
 					MainApplication.Map.addLayer(mapLayer.layerGroup);
 				}catch(e){
@@ -308,23 +299,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 			}
 			return false;
 		});
-		
-		/*
-		for(var i=1;i < BootstrapVars.areaStats.length;i=i+1){
-			var mapLayer = BootstrapVars.areaStats[i];
-			console.log(mapLayer.layerGroupName , layerType);
-			if(mapLayer.layerGroupName === layerType){
-				mapLayer.visible = true;
-				dc.activeLayers.push(mapLayer.abbrev);
-				
-				console.log("Adding Layer: ",mapLayer);
-				MainApplication.Map.addLayer(mapLayer.layerGroup);
-			}else{
-				mapLayer.visible = false;
-				MainApplication.Map.hasLayer(mapLayer.layerGroup) ? MainApplication.Map.removeLayer(mapLayer.layerGroup) : false;
-			}
-		}		
-		*/
 		
 		//refreshes the right slide and legend
 		this.setLegendControls();			
@@ -345,6 +319,18 @@ var MapView = Backbone.Marionette.Layout.extend({
 			}
 		});
 		this.featureLayerControls = L.control.layers(null, this.layerMaps, {position: 'bottomleft'}).addTo(MainApplication.Map);
+		_.each($(this.featureLayerControls._container).find("label"), function(legendItem){
+			var spanObject = $(legendItem).children("span").html().trim();
+			var layerDetails = _.find(BootstrapVars.areaStats, function(area){
+				return area.abbrev === spanObject;
+			});
+			
+			var legendKey = $("<div>", { class: "colorKey", style: "background-color:"+layerDetails.color+";" });
+			$(legendItem).prepend(legendKey);
+		});
+		
+		console.log(this.featureLayerControls);
+		
 		
 		//setup respones to click events
 		$(this.featureLayerControls._container).find("label").on("click", function(ev){

@@ -112,6 +112,14 @@
     color: #FFF;
 }
 
+.colorKey{
+	border:1px solid #000000; 
+	display: inline-block; 
+	height: 18px; 
+	margin: 0px 5px 4px 2px; 
+	vertical-align:middle;
+	width: 15px; 
+}
 
 #toggle-menu {
     /*background-color: #FF0000;
@@ -252,43 +260,4 @@
 .marker-description{
 	color:#000000;
 	font-size: 10pt;
-}
-
-#interestsLegend{
-	bottom: 133px;
-	position:absolute;
-	right: 10px;
-	/*border: 3px solid #FF0000;*/
-	z-index: 1030;
-}
-
-
-#interestsLegend  #interestsSelected{
-	color:#000000;
-	font-size:12pt;
-	font-weight:bold;
-}
-
-#interestsLegend .legendIconMarker {
-    background-color: #333377;
-    border: 1px solid #000000;
-    border-radius: 18px;
-    float: right;
-    height: 28px;
-	margin: 0 3px 2px 0;
-    text-align: center;
-    width: 27px;	
-	padding: 3px 0 0;	
-}
-
-#interestsLegend .legendIconInterest {
-    background-color: #111144;
-    border: 1px solid #000000;
-    border-radius: 18px;
-    float: right;
-    height: 28px;
-	margin: 0 3px 0 0;
-	padding: 3px 0 0;	
-    text-align: center;
-    width: 27px;
 }
