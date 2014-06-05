@@ -116,7 +116,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 				}
 			}
 			if(boundary.Name === selectedVal){
-				MainApplication.selectedBoundary = boundary;
+				MainApplication.boundarySelected = boundary;
 				$('#selectAreaInput').css("display", "block");
 				$('#selectAreaInput').empty().append('<option value="">- Select Area -</option>');
 				var features = boundary.json.features;
@@ -147,7 +147,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 						},
 						fill: true,
 						onEachFeature: function (feature, layer) {
-							layer.bindLabel(feature.properties[boundary.NameField], { noHide: true });
+							layer.bindLabel(boundary.SelectText + ' ' + feature.properties[boundary.NameField], { noHide: true });
 							layer.on('click', function(e){
 								if(MainApplication.selectedBoundary !== undefined)
 								{
@@ -155,7 +155,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 											MainApplication.Map.removeLayer(MainApplication.selectedBoundary);	
 										}
 								}
-								MainApplication.selectedBoundary = L.polygon(e.target._latlngs).bindLabel(feature.properties[boundary.NameField], { noHide: true });
+								MainApplication.selectedBoundary = L.polygon(e.target._latlngs).bindLabel(boundary.SelectText + ' ' + feature.properties[boundary.NameField], { noHide: true });
 								MainApplication.Map.addLayer(MainApplication.selectedBoundary);
 							});
 						}
@@ -170,7 +170,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 	{
 		var selectedVal = $('#selectAreaInput').val();
 		console.log(selectedVal);
-		var boundary = MainApplication.selectedBoundary;
+		var boundary = MainApplication.boundarySelected;
 		_.each(boundary.json.features, function(feature){
 			if(selectedVal.toString() === feature.properties[boundary.NameField].toString())
 			{
