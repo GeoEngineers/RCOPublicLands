@@ -136,10 +136,17 @@
 
 
 #pieChartLayer{
-	z-index:999999;
-	top:0px; 
+    height: 170px;
 	left: 0px;
+	top:0px; 
+    width: 205px;
+	z-index:999999;
 }
+#barChartLayer {
+    height: 170px;
+    width: 205px;
+}
+
 .info.leaflet-control {
     background-color: #000000;
     border-radius: 10px;

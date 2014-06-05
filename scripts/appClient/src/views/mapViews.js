@@ -621,7 +621,52 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 	},
 	loadD3PieLayerComparison: function(){	
 		var dc=this;
+		console.log("Load Pie Chart");
 
+		$('#pieChartLayer').highcharts({
+			chart: {
+				plotBackgroundColor: null,
+				plotBorderWidth: 0,
+				plotShadow: false
+			},
+			title: {
+				text: ''
+			},
+			tooltip: {
+				pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+			},
+			plotOptions: {
+				pie: {
+					dataLabels: {
+						enabled: false
+					},
+					startAngle: -90,
+					endAngle: 90,
+					center: ['50%', '75%']
+				}
+			},
+			series: [{
+				type: 'pie',
+				name: 'Browser share',
+				innerSize: '40%',
+				data: [
+					['Firefox',   45.0],
+					['IE',       26.8],
+					['Chrome', 12.8],
+					['Safari',    8.5],
+					['Opera',     6.2],
+					{
+						name: 'Others',
+						y: 0.7,
+						dataLabels: {
+							enabled: false
+						}
+					}
+				]
+			}]
+		});		
+		
+		/*
 		var data = _.filter(BootstrapVars.areaStats, function(area){ 
 			return area.visible===true; 
 		});
@@ -726,13 +771,41 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			.attr("dy", ".35em")
 			.style("text-anchor", "middle")
 			.text(function(d) { return d.data.abbrev; });
-		//});		
+		//});	
+		*/
 		return false;
 	},
 	loadD3BarLayerComparison: function(){
 		var dc=this;
 		
 		console.log("Load Bar Chart");
+		
+		$('#barChartLayer').highcharts({
+			chart: {
+				type: 'bar'
+			},
+			title: {
+				text: ''
+			},
+			xAxis: {
+				categories: ['Apples', 'Bananas', 'Oranges']
+			},
+			yAxis: {
+				title: {
+					text: ''
+				}
+			},
+			series: [{
+				name: 'Jane',
+				data: [1, 0, 4]
+			}, {
+				name: 'John',
+				data: [5, 7, 3]
+			}],
+			legend: {
+				enabled: false
+			}
+		});		
 		
 		/*
 		this.type = $( "#ddlSummaryType" ).val();
