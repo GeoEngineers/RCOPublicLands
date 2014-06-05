@@ -27,13 +27,6 @@
 	z-index:1050;
 }
 
-path { stroke-linejoin; round; stroke-linecap: round; fill: none}
-path.river { stroke : #24b; }
-path.road { stroke: #b42; }
-path.water { stroke: #bcf; fill: #abf; }
-path.landuse { stroke: #bb2; stroke-width: 0; fill: #cc2; opacity: 0.4 }
-path.building { stroke: #f00; stroke-width: 0; fill: #f00; }
-
 #SummaryPaneSlideOut {
     background-color:  rgba(0, 0, 0, .8);
     border-left: 1px solid #dddddd;

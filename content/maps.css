@@ -180,7 +180,8 @@
     background-color: rgb(13, 106, 132);
 }
 .leaflet-oldie .marker-cluster-large div {
-    backg
+    background-color: rgb(13, 106, 132);
+}
 
 .layerIcon {
 	border: 1px solid #333333;
