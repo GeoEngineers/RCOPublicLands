@@ -290,9 +290,12 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.mapPaneView =  new MapPaneView({
 			activeLayers : this.activeLayers
 		});
-		MainApplication.paneRegion.show(this.mapPaneView);
+		this.showRightSlide();
 		return false;
 	},	
+	showRightSlide: function(){
+		MainApplication.paneRegion.show(this.mapPaneView);
+	},
 	resetBaseMaps: function(){
 		$("#lnkOfflineButton").removeClass('btn-primary');
 		$("#lnkDefaultButton").removeClass('btn-primary');
@@ -392,7 +395,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 				}else{
 					layerDetails.visible = true;				
 				}
-				dc.loadRightSlide();
+				dc.showRightSlide();
 			}
 		});
 		
@@ -617,8 +620,8 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
     },
     initialize: function (options) {
 		this.activeLayers = options.activeLayers;
+		//this.displayMode = options.displayMode;
 		this.arcColor="#000000";
-		this.displayMode = 'pie';
     },
 	events: {
 		"click #showPieChart" : "setPieMode",
@@ -626,14 +629,23 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 	},
 	onShow: function(){
 		var dc=this;
+		//start in bar mode
 		this.loadD3PieLayerComparison();
 		this.loadD3BarLayerComparison();
 		$( "#ddlSummaryType" ).change(function() {
 			dc.loadD3PieLayerComparison();
-			dc.loadD3BarLayerComparison();
+			//dc.loadD3BarLayerComparison();
 		});
-		//start in bar mode
-		this.setBarMode();
+		
+		if(this.chartType === undefined){
+			this.setBarMode();
+		}else{
+			if(this.chartType === "bar"){
+				this.setBarMode();
+			}else{
+				this.setPieMode();
+			}
+		}
 	},
 	getVisibleAreas: function(){
 		return _.filter(BootstrapVars.areaStats, function(area){ 
@@ -828,7 +840,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		return parseFloat(value, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString();
 	},
 	setBarMode: function(){
-		this.displayMode = 'bar';
+		this.chartType = 'bar';
 		$('#barChartBlock').css({"display":"block"});
 		$('#pieChartBlock').css({"display":"none"});
 		$('#showBarChart').hasClass("btn-primary") ? false : $('#showBarChart').addClass("btn-primary");
@@ -836,7 +848,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		return false;
 	},
 	setPieMode: function(){
-		this.displayMode = 'pie';
+		this.chartType = 'pie';
 		$('#barChartBlock').css({"display":"none"});
 		$('#pieChartBlock').css({"display":"block"});
 		$('#showBarChart').removeClass("btn-primary");
