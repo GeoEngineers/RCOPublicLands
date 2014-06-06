@@ -103,8 +103,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 		if(MainApplication.selectedBoundary !== undefined)
 		{
 			if(MainApplication.Map.hasLayer(MainApplication.selectedBoundary)){
-					MainApplication.Map.removeLayer(MainApplication.selectedBoundary);	
-				}
+				MainApplication.Map.removeLayer(MainApplication.selectedBoundary);	
+			}
 		}
 		var selectedVal = $('#selectStateInput').val();
 		$('#selectAreaInput').css("display", "none");
@@ -291,7 +291,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 			activeLayers : this.activeLayers
 		});
 		this.showRightSlide();
-		return false;
 	},	
 	showRightSlide: function(){
 		MainApplication.paneRegion.show(this.mapPaneView);
@@ -353,7 +352,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		
 		//refreshes the right slide and legend
 		this.setLegendControls();			
-		this.loadRightSlide();
+		this.showRightSlide();
 		
 		return false;
 	},
@@ -382,21 +381,23 @@ var MapView = Backbone.Marionette.Layout.extend({
 		
 		//setup respones to click events
 		$(this.featureLayerControls._container).find("label").on("click", function(ev){
-			//kludgy fix to prevent double clicks
-			if(ev.timeStamp !== 0){
-				var checkboxObject = $(ev.currentTarget).children("input:checked");
-				var spanObject = $(ev.currentTarget).children("span").html().trim();
-				var layerDetails = _.find(BootstrapVars.areaStats, function(area){
-					return area.abbrev === spanObject;
-				});
-				//set as inactive
-				if(checkboxObject.length === 1){
-					layerDetails.visible = false;
-				}else{
-					layerDetails.visible = true;				
+			setTimeout(function(){
+				//kludgy fix to prevent double clicks
+				if(ev.timeStamp !== 0){
+					var checkboxObject = $(ev.currentTarget).children("input:checked");
+					var spanObject = $(ev.currentTarget).children("span").html().trim();
+					var layerDetails = _.find(BootstrapVars.areaStats, function(area){
+						return area.abbrev === spanObject;
+					});
+					//set as inactive
+					if(checkboxObject.length === 1){
+						layerDetails.visible = true;
+					}else{
+						layerDetails.visible = false;				
+					}
+					dc.showRightSlide();
 				}
-				dc.showRightSlide();
-			}
+			}, 16);
 		});
 		
 		return false;
@@ -455,13 +456,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 			MainApplication.onDeviceOffline();
 		}
 	},
-	toggleMapLayer: function(layer){
-		if(MainApplication.Map.hasLayer(layer)){
-			MainApplication.Map.removeLayer(layer);
-		}else{
-			MainApplication.Map.addLayer(layer);
-		}
-	},	
 	toggleSetButtons: function(){
 		if(MainApplication.connectionActive === true){
 			$("#lnkToggleConnection").addClass("btn-primary");
@@ -778,7 +772,6 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 	},
 	loadD3BarLayerComparison: function(){
 		var dc=this;
-		
 		this.type = "total_acres"; //$( "#ddlSummaryType" ).val();
 		this.loadSummaryText(this.type);
 		var selectedAreas = this.getVisibleAreas();

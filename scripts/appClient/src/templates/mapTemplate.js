@@ -28,7 +28,7 @@ MainApplication.Templates.MapSelectorSlideTemplate = [
 			"<button id='lnkProposed' class='btn navLayers'>Proposed</button>",
 		"</div>",
 		"<div id='mapControls'>",
-			"<div class='slide-menu'><a href='#' id='lnkSlideMenu' class='navLink' href='#SummaryPaneSlideOut'><i class='fa fa-bar-chart fa-lg'></i><div class='txt'>SUMMARY</div></a></div>",
+			"<div class='slide-menu'><a href='#' id='lnkSlideMenu' class='navLink' href='#SummaryPaneSlideOut'><i class='fa fa-bar-chart-o fa-lg'></i><div class='txt'>SUMMARY</div></a></div>",
 			"<div><a href='#' id='lnkPrismFunding' class='navLink' href='#lnkPrismFunding'><i class=\"icon\" style=\"margin:0px; width: 16px; height:16px; font-size: 15px;\">&#x2106;</i><div class='txt'>Recreation and Conservation Office Grants</div></a></div>",
 		"</div>",		
 	"</div>"
