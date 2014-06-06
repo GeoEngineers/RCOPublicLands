@@ -134,6 +134,15 @@
     display: none;
 }
 
+#summaryHeaderName{
+	display:inline-block; 
+	width:113px;
+}
+#summaryHeaderOptions{
+	text-align:right; 
+	display:inline-block; 
+	margin-right: -10px;
+}
 
 #pieChartLayer{
     height: 170px;

@@ -28,7 +28,7 @@ MainApplication.Templates.MapSelectorSlideTemplate = [
 			"<button id='lnkProposed' class='btn navLayers'>Proposed</button>",
 		"</div>",
 		"<div id='mapControls'>",
-			"<div class='slide-menu'><a href='#' id='lnkSlideMenu' class='navLink' href='#SummaryPaneSlideOut'><i class='icon-bar-chart icon-large'></i><div class='txt'>SUMMARY</div></a></div>",
+			"<div class='slide-menu'><a href='#' id='lnkSlideMenu' class='navLink' href='#SummaryPaneSlideOut'><i class='fa fa-bar-chart fa-lg'></i><div class='txt'>SUMMARY</div></a></div>",
 			"<div><a href='#' id='lnkPrismFunding' class='navLink' href='#lnkPrismFunding'><i class=\"icon\" style=\"margin:0px; width: 16px; height:16px; font-size: 15px;\">&#x2106;</i><div class='txt'>Recreation and Conservation Office Grants</div></a></div>",
 		"</div>",		
 	"</div>"
@@ -36,15 +36,25 @@ MainApplication.Templates.MapSelectorSlideTemplate = [
 
 MainApplication.Templates.MapPaneTemplate = [
 	"<div style=\"padding: 10px\">",
-		"<h3>Summary</h3>",		
-		"<div id='pieChartLayer'></div>",
-		"<div style=\"text-align: right; width: 100%\"><select id=\"ddlSummaryType\">",
-			"<option value=\"total_acres\" selected>Total Acres</option>",
-			"<option value=\"total_cost\">Total Cost</option>",
-			"<option value=\"total_revenue\">Total Revenue</option>",
-		"</select></div><br/>",
-		"<div id='barChartLayer'></div>", //svg
-		"<div id='summaryLayer'></div>",
+		"<h3 id='summaryHeaderName'>Summary</h3>",	
+		"<div id='summaryHeaderOptions'>",
+			"<div id='chartSelector' class='btn-group'>",
+				"<button href='#' id='showBarChart' class='btn'><i id='barChartIcon' class='fa fa-bar-chart-o fa-lg'></i></button>",
+				"<button href='#' id='showPieChart' class='btn'><i id='pieChartIcon' class='fa fa-circle-o fa-lg'></i></button>",
+			"</div>",
+		"</div>",
+		"<div id='pieChartBlock'>",
+			"<div id='pieChartLayer'></div>",
+			"<div><select id=\"ddlSummaryType\">",
+				"<option value=\"total_acres\" selected>Total Acres</option>",
+				"<option value=\"total_cost\">Total Cost</option>",
+				"<option value=\"total_revenue\">Total Revenue</option>",
+			"</select></div>",
+		"</div>",
+		"<div id='barChartBlock'>",
+			"<div id='barChartLayer'></div>", //svg
+			"<div id='summaryLayer'></div>",
+		"</div>",
 	"</div>"
 ].join("\n");
 

@@ -610,7 +610,12 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
     initialize: function (options) {
 		this.activeLayers = options.activeLayers;
 		this.arcColor="#000000";
+		this.displayMode = 'pie';
     },
+	events: {
+		"click #showPieChart" : "setPieMode",
+		"click #showBarChart" : "setBarMode"
+	},
 	onShow: function(){
 		var dc=this;
 		this.loadD3PieLayerComparison();
@@ -619,11 +624,89 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			dc.loadD3PieLayerComparison();
 			dc.loadD3BarLayerComparison();
 		});
+		//start in bar mode
+		this.setBarMode();
+	},
+	getVisibleAreas: function(){
+		return _.filter(BootstrapVars.areaStats, function(area){ 
+			return area.visible===true; 
+		});
+	},
+	loadSummaryText: function(typeView){
+		var dc=this;
+		var summaryText = "";
+		var total = 0;
+		var data = this.getVisibleAreas();
+		var isCurrency = typeView === "total_acres" ? "" : "$";
+		_.each(data, function(area){
+			var val = 0;
+			switch(typeView)
+			{
+				case "total_acres":
+					val = area.total_acres;
+					break;
+				case "total_cost":
+					val = area.total_cost;
+					break;
+				case "total_revenue":
+					val =  area.total_revenue;
+					break;
+				default:
+					break;
+			}
+			summaryText += "- "+area.abbrev + ": " + isCurrency + dc.formatCurrency(val)+ "<br/>";
+			total += val;
+		});
+		switch(typeView) {
+			case "total_acres":
+				summaryText = "Total " + this.type.replace("total_", "")  + ": " + isCurrency  + dc.formatCurrency(total)+ " <br/>" + summaryText + "";
+				break;
+			case "total_cost":
+				summaryText = "(Available Soon)";
+				break;
+			case "total_revenue":
+				summaryText = "(Available Soon)";
+				break;
+			default:
+				break;
+		}
+		$("#summaryLayer").html(summaryText);
+		return false;
 	},
 	loadD3PieLayerComparison: function(){	
 		var dc=this;
-		console.log("Load Pie Chart");
+		var data = this.getVisibleAreas();
+		var colorRange = [];
+		this.type = $( "#ddlSummaryType" ).val();
 
+		var pieChartSeries = [];
+		_.each(data, function(area){
+			var val = 0;
+			switch(dc.type)
+			{
+				case "total_acres":
+					val = area.total_acres;
+					break;
+				case "total_cost":
+					val = area.total_cost;
+					break;
+				case "total_revenue":
+					val =  area.total_revenue;
+					break;
+				default:
+					break;
+			}
+			pieChartSeries.push([area.abbrev, val]);
+			colorRange.push(area.color);
+		});
+
+		$("#pieChartLayer").html("");
+		this.loadSummaryText(this.type);
+		
+		//['#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
+		Highcharts.setOptions({
+			colors: colorRange
+		});
 		$('#pieChartLayer').highcharts({
 			chart: {
 				plotBackgroundColor: null,
@@ -648,116 +731,13 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			},
 			series: [{
 				type: 'pie',
-				name: 'Browser share',
+				name: this.type,
 				innerSize: '40%',
-				data: [
-					['Firefox',   45.0],
-					['IE',       26.8],
-					['Chrome', 12.8],
-					['Safari',    8.5],
-					['Opera',     6.2],
-					{
-						name: 'Others',
-						y: 0.7,
-						dataLabels: {
-							enabled: false
-						}
-					}
-				]
+				data: pieChartSeries
 			}]
-		});		
+		});
 		
 		/*
-		var data = _.filter(BootstrapVars.areaStats, function(area){ 
-			return area.visible===true; 
-		});
-
-		var summaryText = "";
-		var total = 0;
-		var colorRange = [];
-		this.type = $( "#ddlSummaryType" ).val();
-
-		var isCurrency = this.type === "total_acres" ? "" : "$";
-		_.each(data, function(area){
-			var val = 0;
-			switch(dc.type)
-			{
-				case "total_acres":
-					val = area.total_acres;
-					break;
-				case "total_cost":
-					val = area.total_cost;
-					break;
-				case "total_revenue":
-					val =  area.total_revenue;
-					break;
-				default:
-					break;
-			}
-			summaryText += "- "+area.abbrev + ": " + isCurrency + dc.formatCurrency(val)+ "<br/>";
-			total += val;
-			colorRange.push(area.color);
-		});
-
-		switch(dc.type) {
-			case "total_acres":
-				summaryText = "Total " + this.type.replace("total_", "")  + ": " + isCurrency  + dc.formatCurrency(total)+ " <br/>" + summaryText + "";
-				break;
-			case "total_cost":
-				summaryText = "(Available Soon)";
-				break;
-			case "total_revenue":
-				summaryText = "(Available Soon)";
-				break;
-			default:
-				break;
-		}
-
-		$("#summaryLayer").html(summaryText);
-		$("#pieChartLayer").html("");
-
-		var width = 200, //960
-			height = 200, //500
-			radius = Math.min(width, height) / 2;
-		var color = d3.scale.ordinal()
-			.range(colorRange);
-		var arc = d3.svg.arc()
-			.outerRadius(radius - 10)
-			.innerRadius(0);
-		var pie = d3.layout.pie()
-			.sort(null)
-			.value(function(d) {
-				var val = 0;
-				switch(dc.type)
-				{
-					case "total_acres":
-						return d.total_acres;
-					case "total_cost":
-						return d.total_cost;
-					case "total_revenue":
-						return d.total_revenue;
-					default:
-						return 0;
-				}
-			});
-		var svg = d3.select("#pieChartLayer").append("svg")
-			.attr("width", width)
-			.attr("height", height)
-			.append("g")
-			.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-		//d3.csv("/scripts/appClient/src/extensions/data.csv", function(error, data) {
-			//data.forEach(function(d) {
-			//	d.population = +d.population;
-			//});
-		//var data = BootstrapVars.areaStats;
-		
-
-		var g = svg.selectAll(".arc")
-			.data(pie(data))
-			.enter().append("g")
-			.attr("class", "arc");
-
 		g.append("path")
 		.on('click', function(){ console.log("test"); })
 			.on('mouseover', dc.synchronizedMouseOver)
@@ -779,8 +759,20 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 	loadD3BarLayerComparison: function(){
 		var dc=this;
 		
-		console.log("Load Bar Chart");
+		this.type = "total_acres"; //$( "#ddlSummaryType" ).val();
+		this.loadSummaryText(this.type);
+		var selectedAreas = this.getVisibleAreas();
+		var barChartSeries = [];
+		_.each(selectedAreas, function(area){
+			var val = 0;
+			barChartSeries.push({
+				"name" : area.agency,
+				"data" : [area.total_acres, area.total_cost, area.total_revenue],
+				"color" : area.color
+			});
+		});		
 		
+		$("#barChartLayer").html("");
 		$('#barChartLayer').highcharts({
 			chart: {
 				type: 'bar'
@@ -789,72 +781,20 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				text: ''
 			},
 			xAxis: {
-				categories: ['Apples', 'Bananas', 'Oranges']
+				categories: ['Total Acres', 'Total Cost', 'Total Revenue']
 			},
 			yAxis: {
 				title: {
 					text: ''
 				}
 			},
-			series: [{
-				name: 'Jane',
-				data: [1, 0, 4]
-			}, {
-				name: 'John',
-				data: [5, 7, 3]
-			}],
+			series: barChartSeries,
 			legend: {
 				enabled: false
 			}
 		});		
-		
-		/*
-		this.type = $( "#ddlSummaryType" ).val();
-		var selectedAreas = _.filter(BootstrapVars.areaStats, function(area){ 
-			return area.visible===true; 
-		});
-		var data = [];
-		_.each(selectedAreas, function(area){
-			var val = 0;
-			switch(dc.type)
-			{
-				case "total_acres":
-					val = area.total_acres;
-					break;
-				case "total_cost":
-					val = area.total_cost;
-					break;
-				case "total_revenue":
-					val =  area.total_revenue;
-					break;
-				default:
-					break;
-			}
-			data.push({
-				"name" : area.agency,
-				"value" : val,
-				"color" : area.color
-			});
-		});		
-		
-		$("#barChartLayer").html("");
-		
-		var width = 205,
-			height = 170;
-		var y = d3.scale.linear()
-			.range([height, 0]);
-		var chart = d3.select("#barChartLayer")
-			.attr("width", width)
-			.attr("height", height);
-		
-		y.domain([0, d3.max(data, function(d) { return d.value; })]);
-		var barWidth = width / data.length;
 
-		var bar = chart.selectAll("g")
-			.data(data)
-			.enter().append("g")
-			.attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; });
-
+		/*		
 		bar.append("rect")
 			.on('click', function(){ console.log("test"); })
 			.on('mouseover', dc.synchronizedMouseOver)
@@ -864,6 +804,8 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
       		.attr("fill", function(d) { return d.color; })
 			.attr("width", barWidth - 1);
 
+			
+			
 		bar.append("text")
 			.attr("x", barWidth / 2)
 			.attr("y", function(d) { return y(d.value) + 3; })
@@ -876,6 +818,22 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 	formatCurrency: function(value)
 	{
 		return parseFloat(value, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString();
+	},
+	setBarMode: function(){
+		this.displayMode = 'bar';
+		$('#barChartBlock').css({"display":"block"});
+		$('#pieChartBlock').css({"display":"none"});
+		$('#showBarChart').hasClass("btn-primary") ? false : $('#showBarChart').addClass("btn-primary");
+		$('#showPieChart').removeClass("btn-primary");
+		return false;
+	},
+	setPieMode: function(){
+		this.displayMode = 'pie';
+		$('#barChartBlock').css({"display":"none"});
+		$('#pieChartBlock').css({"display":"block"});
+		$('#showBarChart').removeClass("btn-primary");
+		$('#showPieChart').hasClass("btn-primary") ? false : $('#showPieChart').addClass("btn-primary");
+		return false;
 	},
 	synchronizedMouseOver: function(ev){
 		var arc = d3.select(this);
