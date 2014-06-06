@@ -202,6 +202,11 @@ var MapView = Backbone.Marionette.Layout.extend({
 				MainApplication.Map.addLayer(MainApplication.selectedBoundary);
 			}
 		});
+
+		//Get Data from Lookup Tables
+		//Update Bootstrap vars
+		//Reload Charts and Totals
+
 	},
 	addMapMarker: function(b){
 		var bounds = b;
