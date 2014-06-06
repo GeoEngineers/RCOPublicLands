@@ -99,7 +99,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.setLegendControls();
 	},
 	boundaryChange: function(){
-
+		var dc = this;
 		if(MainApplication.selectedBoundary !== undefined)
 		{
 			if(MainApplication.Map.hasLayer(MainApplication.selectedBoundary)){
@@ -149,14 +149,16 @@ var MapView = Backbone.Marionette.Layout.extend({
 						onEachFeature: function (feature, layer) {
 							layer.bindLabel(boundary.SelectText + ' ' + feature.properties[boundary.NameField], { noHide: true });
 							layer.on('click', function(e){
-								if(MainApplication.selectedBoundary !== undefined)
+								$('#selectAreaInput').val(feature.properties[boundary.NameField]);
+								dc.areaChange(false);
+								/*if(MainApplication.selectedBoundary !== undefined)
 								{
 									if(MainApplication.Map.hasLayer(MainApplication.selectedBoundary)){
 											MainApplication.Map.removeLayer(MainApplication.selectedBoundary);	
 										}
 								}
 								MainApplication.selectedBoundary = L.polygon(e.target._latlngs).bindLabel(boundary.SelectText + ' ' + feature.properties[boundary.NameField], { noHide: true });
-								MainApplication.Map.addLayer(MainApplication.selectedBoundary);
+								MainApplication.Map.addLayer(MainApplication.selectedBoundary);*/
 							});
 						}
 					});
@@ -166,32 +168,38 @@ var MapView = Backbone.Marionette.Layout.extend({
 			}
 		})
 	},
-	areaChange: function()
+	areaChange: function(zoom)
 	{
+		if(MainApplication.selectedBoundary !== undefined)
+		{
+			if(MainApplication.Map.hasLayer(MainApplication.selectedBoundary)){
+					MainApplication.Map.removeLayer(MainApplication.selectedBoundary);	
+				}
+		}
 		var selectedVal = $('#selectAreaInput').val();
-		console.log(selectedVal);
 		var boundary = MainApplication.boundarySelected;
-		_.each(boundary.json.features, function(feature){
-			if(selectedVal.toString() === feature.properties[boundary.NameField].toString())
+		_.each(boundary.jsonLayer._layers, function(shape){
+			if(selectedVal.toString() === shape.feature.properties[boundary.NameField].toString())
 			{
 				var maxX = -1000, maxY = -1000, minX = 1000, minY = 1000;
-				_.each(feature.geometry.coordinates, function(ring){
-					_.each(ring, function(coords){
-						if(maxX < coords[0])
-							maxX = coords[0];
-						if(maxY < coords[1])
-							maxY = coords[1];
-						if(minX > coords[0])
-							minX = coords[0];
-						if(minY > coords[1])
-							minY = coords[1];
-					});
+				_.each(shape._latlngs, function(coords){
+						if(maxX < coords.lng)
+							maxX = coords.lng;
+						if(maxY < coords.lat)
+							maxY = coords.lat;
+						if(minX > coords.lng)
+							minX = coords.lng;
+						if(minY > coords.lat)
+							minY = coords.lat;
 				});
 				var southWest = L.latLng(minY, minX),
 					northEast = L.latLng(maxY, maxX),
 					bounds = L.latLngBounds(southWest, northEast);
-					console.log(bounds);
-				MainApplication.Map.fitBounds(bounds);
+				if(zoom !== false){
+					MainApplication.Map.fitBounds(bounds);
+				}
+				MainApplication.selectedBoundary = L.polygon(shape._latlngs, {fillOpacity: 0.08}).bindLabel(boundary.SelectText + ' ' + shape.feature.properties[boundary.NameField].toString(), { noHide: true });
+				MainApplication.Map.addLayer(MainApplication.selectedBoundary);
 			}
 		});
 	},
