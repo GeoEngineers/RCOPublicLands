@@ -150,7 +150,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 							layer.bindLabel(boundary.SelectText + ' ' + feature.properties[boundary.NameField], { noHide: true });
 							layer.on('click', function(e){
 								$('#selectAreaInput').val(feature.properties[boundary.NameField]);
-								dc.areaChange();
+								dc.areaChange(false);
 								/*if(MainApplication.selectedBoundary !== undefined)
 								{
 									if(MainApplication.Map.hasLayer(MainApplication.selectedBoundary)){
@@ -168,7 +168,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 			}
 		})
 	},
-	areaChange: function()
+	areaChange: function(zoom)
 	{
 		if(MainApplication.selectedBoundary !== undefined)
 		{
@@ -195,7 +195,9 @@ var MapView = Backbone.Marionette.Layout.extend({
 				var southWest = L.latLng(minY, minX),
 					northEast = L.latLng(maxY, maxX),
 					bounds = L.latLngBounds(southWest, northEast);
-				MainApplication.Map.fitBounds(bounds);
+				if(zoom !== false){
+					MainApplication.Map.fitBounds(bounds);
+				}
 				MainApplication.selectedBoundary = L.polygon(shape._latlngs).bindLabel(boundary.SelectText + ' ' + shape.feature.properties[boundary.NameField].toString(), { noHide: true });
 				MainApplication.Map.addLayer(MainApplication.selectedBoundary);
 			}
