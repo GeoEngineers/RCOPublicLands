@@ -4,6 +4,9 @@ BootstrapVars.areaStats = [
 	{
 		abbrev: "DFW",
 		agency: "Department of Fish and Wildlife",
+		starting_total_acres : 995329.78,
+		starting_total_cost: 1.00,
+		starting_total_revenue: 1.00,
 		total_acres : 995329.78,
 		total_cost: 1.00,
 		total_revenue: 1.00,
@@ -18,6 +21,9 @@ BootstrapVars.areaStats = [
 	{
 		abbrev: "PARKS",
 		agency: "Washington Parks Department",
+		starting_total_acres : 397973.62,
+		starting_total_cost: 1.00,
+		starting_total_revenue: 1.00,
 		total_acres : 397973.62,
 		total_cost: 1,
 		total_revenue: 1,
@@ -31,6 +37,9 @@ BootstrapVars.areaStats = [
 	{
 		abbrev: "DNR",
 		agency: "Department of Natural Resources",
+		starting_total_acres : 392340.89,
+		starting_total_cost: 1.00,
+		starting_total_revenue: 1.00,
 		total_acres : 392340.89,
 		total_cost: 1.00,
 		total_revenue: 1.00,
@@ -44,6 +53,9 @@ BootstrapVars.areaStats = [
 	{
 		abbrev: "TRIBAL",
 		agency: "tribal",
+		starting_total_acres : 24098.61,
+		starting_total_cost: 1.00,
+		starting_total_revenue: 1.00,
 		total_acres : 24098.61,
 		total_cost: 1.00,
 		total_revenue: 1.00,
@@ -57,6 +69,9 @@ BootstrapVars.areaStats = [
 	{
 		abbrev: "FEDERAL",
 		agency: "federal",
+		starting_total_acres : 15727892.11,
+		starting_total_cost: 1.00,
+		starting_total_revenue: 1.00,
 		total_acres : 15727892.11,
 		total_cost: 1.00,
 		total_revenue: 1.00,
@@ -70,6 +85,9 @@ BootstrapVars.areaStats = [
 	{
 		abbrev: "AQ-DFW",
 		agency: "Department of Fish and Wildlife",
+		starting_total_acres :1,
+		starting_total_cost: 1.00,
+		starting_total_revenue: 1.00,
 		total_acres : 1,
 		total_cost: 1.00,
 		total_revenue: 1.00,
@@ -84,6 +102,9 @@ BootstrapVars.areaStats = [
 	{
 		abbrev: "AQ-PARKS",
 		agency: "Washington Parks Department",
+		starting_total_acres : 1,
+		starting_total_cost: 1.00,
+		starting_total_revenue: 1.00,
 		total_acres : 1,
 		total_cost: 1,
 		total_revenue: 1,
@@ -97,6 +118,9 @@ BootstrapVars.areaStats = [
 	{
 		abbrev: "AQ-RCO",
 		agency: "Recreation and Conservation Office",
+		starting_total_acres : 1,
+		starting_total_cost: 1.00,
+		starting_total_revenue: 1.00,
 		total_acres : 1,
 		total_cost: 1.00,
 		total_revenue: 1.00,
@@ -110,6 +134,9 @@ BootstrapVars.areaStats = [
 	{
 		abbrev: "AQ-DNR",
 		agency: "Department of Natural Resources",
+		starting_total_acres : 1,
+		starting_total_cost: 1.00,
+		starting_total_revenue: 1.00,
 		total_acres : 1,
 		total_cost: 1.00,
 		total_revenue: 1.00,
@@ -123,6 +150,9 @@ BootstrapVars.areaStats = [
 	{
 		abbrev: "REVENUE",
 		agency: "revenue",
+		starting_total_acres : 0,
+		starting_total_cost: 0,
+		starting_total_revenue: 0,
 		total_acres : 0,
 		total_cost: 0,
 		total_revenue: 0,
@@ -136,6 +166,9 @@ BootstrapVars.areaStats = [
 	{
 		abbrev: "HABITAT",
 		agency: "habitat",
+		starting_total_acres : 845671.68,
+		starting_total_cost: 1.00,
+		starting_total_revenue: 1.00,
 		total_acres : 845671.68,
 		total_cost: 1.00,
 		total_revenue: 1.00,
@@ -149,6 +182,9 @@ BootstrapVars.areaStats = [
 	{
 		abbrev: "RECREATION",
 		agency: "recreation",
+		starting_total_acres : 1,
+		starting_total_cost: 1.00,
+		starting_total_revenue: 1.00,
 		total_acres : 183428.78,
 		total_cost: 1.00,
 		total_revenue: 1.00,
@@ -162,6 +198,9 @@ BootstrapVars.areaStats = [
 	{
 		abbrev: "CONSERVATION",
 		agency: "conservation",
+		starting_total_acres : 1,
+		starting_total_cost: 1.00,
+		starting_total_revenue: 1.00,
 		total_acres : 159789.33,
 		total_cost: 1.00,
 		total_revenue: 1.00,
@@ -175,6 +214,9 @@ BootstrapVars.areaStats = [
 	{
 		abbrev: "PROP-RCO",
 		agency: "Recreation and Conservation Office",
+		starting_total_acres : 1,
+		starting_total_cost: 1.00,
+		starting_total_revenue: 1.00,
 		total_acres : 1,
 		total_cost: 1.00,
 		total_revenue: 1.00,

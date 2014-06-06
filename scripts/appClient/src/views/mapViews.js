@@ -198,13 +198,36 @@ var MapView = Backbone.Marionette.Layout.extend({
 				if(zoom !== false){
 					MainApplication.Map.fitBounds(bounds);
 				}
+				console.log(boundary.sums);
 				MainApplication.selectedBoundary = L.polygon(shape._latlngs, {fillOpacity: 0.08}).bindLabel(boundary.SelectText + ' ' + shape.feature.properties[boundary.NameField].toString(), { noHide: true });
 				MainApplication.Map.addLayer(MainApplication.selectedBoundary);
 			}
 		});
 
 		//Get Data from Lookup Tables
+		var summaryValues = boundary.sums;
+		//reset areaStats
+
+		_.each(BootstrapVars.areaStats, function(area){
+				area.total_acres = area.starting_total_acres;
+				area.total_cost = area.starting_total_cost;
+				area.total_revenue = area.starting_total_revenue;
+		});
 		//Update Bootstrap vars
+
+		_.each(BootstrapVars.areaStats, function(area)
+		{
+			var totalacres = 0;
+			var totalcost = 0;
+			_.each(summaryValues, function(summary){
+				if(area.abbrev === summary.agency && selectedVal === summary.name)
+				{
+					area.total_acres = summary.acres;
+					area.total_cost = summary.acquisitioncost;
+				}
+			});
+		});
+		this.loadRightSlide();
 		//Reload Charts and Totals
 
 	},

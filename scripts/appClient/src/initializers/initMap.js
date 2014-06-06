@@ -27,6 +27,7 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
 			Name: "Counties",
 			NameField: "COUNTY_NM",
 			SelectText: "",
+			sums: sums_counties,
 			json: counties,
 			jsonLayer: null,
 			color: "red"
@@ -36,6 +37,7 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
 			Name: "WRIAs",
 			NameField: "WRIA_NM",
 			SelectText: "",
+			sums: sums_wria,
 			json: wrias,
 			jsonLayer: null,
 			color: "blue"
@@ -45,6 +47,7 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
 			Name: "Congressional Districts",
 			NameField: "DISTRICT_NR",
 			SelectText: "District",
+			sums: sums_congressional_districts,
 			json: congressionaldistricts,
 			jsonLayer: null,
 			color: "green"
@@ -54,6 +57,7 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
 			Name: "Legislative Districts",
 			NameField: "DISTRICT_NR",
 			SelectText: "District",
+			sums: sums_legdistricts,
 			json: legislativedistricts,
 			jsonLayer: null,
 			color: "orange"

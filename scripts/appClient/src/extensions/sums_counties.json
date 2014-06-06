@@ -1,4 +1,4 @@
-sums_counties = [ { "acres": 10043.95,
+var sums_counties = [ { "acres": 10043.95,
     "acquisitioncost": 427800,
     "name": "Adams",
     "agency": "DFW" },
