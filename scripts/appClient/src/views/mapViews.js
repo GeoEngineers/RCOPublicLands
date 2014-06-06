@@ -214,17 +214,21 @@ var MapView = Backbone.Marionette.Layout.extend({
 				area.total_revenue = area.starting_total_revenue;
 		});
 		//Update Bootstrap vars
-
+		if(selectedVal.toString().length < 2)
+			selectedVal = "0" + selectedVal;
 		_.each(BootstrapVars.areaStats, function(area)
 		{
 			var totalacres = 0;
 			var totalcost = 0;
 			_.each(summaryValues, function(summary){
-				if(area.abbrev === summary.agency && selectedVal === summary.name)
+				if(area.abbrev === summary.agency)
 				{
-					area.total_acres = summary.acres;
-					area.total_cost = summary.acquisitioncost;
-				}
+					if(selectedVal.toString().trim() === summary.name.toString().trim())
+					{
+						area.total_acres = summary.acres;
+						area.total_cost = summary.acquisitioncost;
+					}
+				} 
 			});
 		});
 		this.loadRightSlide();
