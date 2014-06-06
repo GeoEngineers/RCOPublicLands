@@ -198,7 +198,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 				if(zoom !== false){
 					MainApplication.Map.fitBounds(bounds);
 				}
-				MainApplication.selectedBoundary = L.polygon(shape._latlngs).bindLabel(boundary.SelectText + ' ' + shape.feature.properties[boundary.NameField].toString(), { noHide: true });
+				MainApplication.selectedBoundary = L.polygon(shape._latlngs, {fillOpacity: 0.08}).bindLabel(boundary.SelectText + ' ' + shape.feature.properties[boundary.NameField].toString(), { noHide: true });
 				MainApplication.Map.addLayer(MainApplication.selectedBoundary);
 			}
 		});
