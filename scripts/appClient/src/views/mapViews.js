@@ -651,7 +651,8 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
     },
 	events: {
 		"click #showPieChart" : "setPieMode",
-		"click #showBarChart" : "setBarMode"
+		"click #showBarChart" : "setBarMode",
+		"click #expandSummaryButton" : "setSummarySize"
 	},
 	onShow: function(){
 		var dc=this;
@@ -673,51 +674,13 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			}
 		}
 	},
+	formatCurrency: function(value){
+		return parseFloat(value, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString();
+	},	
 	getVisibleAreas: function(){
 		return _.filter(BootstrapVars.areaStats, function(area){ 
 			return area.visible===true; 
 		});
-	},
-	loadSummaryText: function(typeView){
-		var dc=this;
-		var summaryText = "";
-		var total = 0;
-		var data = this.getVisibleAreas();
-		var isCurrency = typeView === "total_acres" ? "" : "$";
-		_.each(data, function(area){
-			var val = 0;
-			switch(typeView)
-			{
-				case "total_acres":
-					val = area.total_acres;
-					break;
-				case "total_cost":
-					val = area.total_cost;
-					break;
-				case "total_revenue":
-					val =  area.total_revenue;
-					break;
-				default:
-					break;
-			}
-			summaryText += "- "+area.abbrev + ": " + isCurrency + dc.formatCurrency(val)+ "<br/>";
-			total += val;
-		});
-		switch(typeView) {
-			case "total_acres":
-				summaryText = "Total " + this.type.replace("total_", "")  + ": " + isCurrency  + dc.formatCurrency(total)+ " <br/>" + summaryText + "";
-				break;
-			case "total_cost":
-				summaryText = "(Available Soon)";
-				break;
-			case "total_revenue":
-				summaryText = "(Available Soon)";
-				break;
-			default:
-				break;
-		}
-		$("#summaryLayer").html(summaryText);
-		return false;
 	},
 	loadD3PieLayerComparison: function(){	
 		var dc=this;
@@ -805,7 +768,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 	loadD3BarLayerComparison: function(){
 		var dc=this;
 		this.type = "total_acres"; //$( "#ddlSummaryType" ).val();
-		this.loadSummaryText(this.type);
+		this.loadSummaryText("total_acres");
 		var selectedAreas = this.getVisibleAreas();
 		var barChartSeries = [];
 		_.each(selectedAreas, function(area){
@@ -860,10 +823,47 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		
 		return false;
 	},
-	formatCurrency: function(value)
-	{
-		return parseFloat(value, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString();
-	},
+	loadSummaryText: function(typeView){
+		var dc=this;
+		var summaryText = "";
+		var total = 0;
+		var data = this.getVisibleAreas();
+		var isCurrency = typeView === "total_acres" ? "" : "$";
+		_.each(data, function(area){
+			var val = 0;
+			switch(typeView)
+			{
+				case "total_acres":
+					val = area.total_acres;
+					break;
+				case "total_cost":
+					val = area.total_cost;
+					break;
+				case "total_revenue":
+					val =  area.total_revenue;
+					break;
+				default:
+					break;
+			}
+			summaryText += "- "+area.abbrev + ": " + isCurrency + dc.formatCurrency(val)+ "<br/>";
+			total += val;
+		});
+		switch(typeView) {
+			case "total_acres":
+				summaryText = "Total " + this.type.replace("total_", "")  + ": " + isCurrency  + dc.formatCurrency(total)+ " <br/>" + summaryText + "";
+				break;
+			case "total_cost":
+				summaryText = "(Available Soon)";
+				break;
+			case "total_revenue":
+				summaryText = "(Available Soon)";
+				break;
+			default:
+				break;
+		}
+		$("#summaryLayer").html(summaryText);
+		return false;
+	},	
 	setBarMode: function(){
 		this.chartType = 'bar';
 		$('#barChartBlock').css({"display":"block"});
@@ -878,6 +878,21 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		$('#pieChartBlock').css({"display":"block"});
 		$('#showBarChart').removeClass("btn-primary");
 		$('#showPieChart').hasClass("btn-primary") ? false : $('#showPieChart').addClass("btn-primary");
+		return false;
+	},
+	setSummarySize: function(ev){
+		if($(ev.currentTarget).hasClass("expandable")){
+			$(ev.currentTarget).addClass("collapsable");
+			$(ev.currentTarget).removeClass("expandable");
+			$("#expandSummaryButton a").html("Collapse &gt;&gt;&gt;");
+			$(MainApplication.paneRegion.el).animate({"width":"100%"});
+		}else{
+			$(ev.currentTarget).removeClass("collapsable");
+			$(ev.currentTarget).addClass("expandable");
+			$("#expandSummaryButton a").html("&lt;&lt;&lt; Expand");
+			$(MainApplication.paneRegion.el).animate({"width":"15.6em"});		
+		}
+
 		return false;
 	},
 	synchronizedMouseOver: function(ev){

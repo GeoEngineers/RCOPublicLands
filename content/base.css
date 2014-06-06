@@ -29,12 +29,13 @@
 
 #SummaryPaneSlideOut {
     background-color:  rgba(0, 0, 0, .8);
-    border-left: 1px solid #dddddd;
+    border-left: 1px solid #DDDDDD;
+	border-top: 1px solid #DDDDDD;
     border-radius: 0px;
     margin: 0;
     right: 0px;
     padding: 0px;
-    color: #dddddd;
+    color: #DDDDDD;
     display: none;
 }
 #SummaryPaneSlideOut a{
