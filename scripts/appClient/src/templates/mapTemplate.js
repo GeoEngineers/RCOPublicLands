@@ -20,7 +20,7 @@ MainApplication.Templates.MapTemplate = [
 
 MainApplication.Templates.MapSelectorSlideTemplate = [
 	"<div>",
-		"<a href='#' id='lnkMapsSlideToggle'>Maps</a><img id='smartmineLogo' src='content/images/smartmine-logo.png'/>",
+		"<a href='#' id='lnkMapsSlideToggle'>Inventory Maps</a><a href='http://www.geoengineers.com/smartmine' target='_blank'><img id='smartmineLogo' src='content/images/smartmine-logo.png'/><a>",
 		"<div id='mapLayers'>",
 			"<button id='lnkAgency' class='btn btn-primary navLayers'>Agency</button>",
 			"<button id='lnkLandTypes' class='btn navLayers'>Land Types</button>",
@@ -88,17 +88,17 @@ MainApplication.Templates.WelcomeTemplate = [
 	"<div class=\"modal-dialog\">",
 		"<div class=\"modal-content\">",
 			"<div class=\"modal-header\">",
-				"<h4 id=\"mySlideLabel\">Welcome to the Public Lands Inventory</h4>",
+				"<h4 id=\"mySlideLabel\">The Recreation and Conservation Office Welcomes you to the first Web-based Public Lands Inventory of Washington State</h4>",
 			"</div>",
 			"<div class=\"modal-body\">",
-				"<p>The Washington Public Lands Inventory was developed by a partnership of federal and state agencies. ", 
-				"Data is provided by WA State Parks and the Washington State Parks and Recreation Commission and Washington State Recreation and Conservation Office.</p>", 
+				"<p>The inventory shows publicly-owned lands by owner and identifies the location, acreage, and principal use of each parcel. For state-owned land acquired between 2003 and 2013, the date and cost of acquisition is also included.  For public land acquisition funded by the Recreation and Conservation Office or its predecessor since 1964, the inventory also includes a link to all grant information.</p>", 
+				"<p>Data comes from University of Washington’s School of Environmental and Forest Sciences and the following state agencies: Department of Fish and Wildlife, Department of Natural Resources, State Parks and Recreation Commission, and the Recreation and Conservation Office.</p>", 
+				"<p>The Recreation and Conservation Office is a state agency that manages grant programs to create outdoor recreation opportunities, protect the best of the state's wildlife habitat and farmland, and help return salmon from near extinction. The legislature provided funding to the Recreation and Conservation Office to complete this public lands inventory in the 2013-15 Capital Budget, Chapter 19, Section 3174.</p>", 
 				"<br/><div style='text-align:center;'><a href='http://www.rco.wa.gov'><img src='./content/images/logos/LogoWARCO-sm.jpg' style='padding: 0px 4px 4px 0px;background-color:#FFFFFF;margin-bottom:4px;' /></a></div>",
 				"<div class='aboutLogos'>",
 					"<div><a href='http://www.fws.gov'><img src='./content/images/logos/LogoUSFWS-sm.jpg' /></a></div>",
 					"<div><a href='http://www.wdfw.wa.gov'><img src='./content/images/logos/LogoWADFW-sm.jpg' /></a></div>",
 					"<div><a href='http://www.parks.wa.gov'><img src='./content/images/logos/WSPLogo_200.png' /></a></div>",
-					"<div class='padout'><a href='http://www.geoengineers.com/smartmine'><img src='./content/images/smartmine-logo.png' /></a></div>",
 				"</div>",
 			"</div>",
 			"<div class=\"modal-footer\" style=\"text-align: center\">",
@@ -114,7 +114,7 @@ MainApplication.Templates.MapTipTemplate = [
 		"Total Area (Acres): {{TotalArea}}<br />",
 		"Acquisition Date: <span style=\" color: #FFFF00\">{{AquisitionDate}}</span><br />",
 		"Cost: <span style=\" color: #FFFF00\">{{Cost}}</span><br /><br/>",
-		"<button class=\"btn btn-primary\" type=\"button\" id=\"btnQuestionPost\">Post a Question</button>",	
+		"<button class=\"btn btn-primary\" type=\"button\" id=\"btnQuestionPost\" style='display: none'>Post a Question</button>",	
 ].join("\n");
 
 MainApplication.Templates.QuestionTemplate = [
