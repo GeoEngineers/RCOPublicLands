@@ -20,7 +20,7 @@ MainApplication.Templates.MapTemplate = [
 
 MainApplication.Templates.MapSelectorSlideTemplate = [
 	"<div>",
-		"<a href='#' id='lnkMapsSlideToggle'>Maps</a>",
+		"<a href='#' id='lnkMapsSlideToggle'>Maps</a><img id='smartmineLogo' src='content/images/smartmine-logo.png'/>",
 		"<div id='mapLayers'>",
 			"<button id='lnkAgency' class='btn btn-primary navLayers'>Agency</button>",
 			"<button id='lnkLandTypes' class='btn navLayers'>Land Types</button>",
@@ -138,7 +138,7 @@ MainApplication.Templates.QuestionTemplate = [
 ].join("\n");
 
 MainApplication.Templates.HeaderTemplate = [ 
-	"<h4>WASHINGTON PUBLIC LANDS INVENTORY</h4>",
+	"<h4><img src='./content/images/rco_logo.png' style='height: 35px'/>&nbsp;WASHINGTON PUBLIC LANDS INVENTORY</h4>",
 ].join("\n");
 
 

@@ -5,12 +5,12 @@
 	font-size: 14px;
 	/*line-height: 20px;*/
 	color: #bcbcbc;
-	background-color: #23446D;
-	background-image: -moz-linear-gradient(top, #23446D, #23446D);
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#23446D),to(#23446D));
-	background-image: -webkit-linear-gradient(top, #23446D, #23446D);
-	background-image: -o-linear-gradient(top, #23446D, #23446D);
-	background-image: linear-gradient(to bottom, #23446D, #23446D);
+	background-color: #222222;
+	background-image: -moz-linear-gradient(top, ##222222, #222222);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#222222),to(#222222));
+	background-image: -webkit-linear-gradient(top, #222222, #222222);
+	background-image: -o-linear-gradient(top, #222222, #222222);
+	background-image: linear-gradient(to bottom, #222222, #222222);
 	background-repeat: repeat-x;
 }
 .navLink{
@@ -40,6 +40,13 @@
 }
 #SummaryPaneSlideOut a{
     color: #dddddd;
+}
+
+#smartmineLogo{
+    height: 20px;
+    position: absolute;
+    right: 20px;
+    bottom: 5px;
 }
 
 #gisLayerControls {
@@ -1210,7 +1217,8 @@ svg {
     height: 28px;
     left: 0;
     margin: 0 0 4px;
-    padding: 9px 0 36px 10px;
+    height: 35px;
+    padding: 3px 3px 36px 0px;
     position: relative;
     top: -0.8em;
 }

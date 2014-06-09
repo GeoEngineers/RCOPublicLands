@@ -150,6 +150,9 @@ var MapView = Backbone.Marionette.Layout.extend({
 							layer.bindLabel(boundary.SelectText + ' ' + feature.properties[boundary.NameField], { noHide: true });
 							layer.on('click', function(e){
 								$('#selectAreaInput').val(feature.properties[boundary.NameField]);
+
+								MainApplication.Map.closePopup();
+
 								dc.areaChange(false);
 								/*if(MainApplication.selectedBoundary !== undefined)
 								{
@@ -981,7 +984,6 @@ var HeaderView = Backbone.Marionette.ItemView.extend({
     template: function (serialized_model) {
 		return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.HeaderTemplate);
     },
-	className: "container",
 	initialize: function(options){
 	}
 });
