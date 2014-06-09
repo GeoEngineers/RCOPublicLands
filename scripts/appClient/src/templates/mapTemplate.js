@@ -20,7 +20,7 @@ MainApplication.Templates.MapTemplate = [
 
 MainApplication.Templates.MapSelectorSlideTemplate = [
 	"<div>",
-		"<a href='#' id='lnkMapsSlideToggle'>Maps</a><img id='smartmineLogo' src='content/images/smartmine-logo.png'/>",
+		"<a href='#' id='lnkMapsSlideToggle'>Inventory Maps</a><a href='http://www.geoengineers.com/smartmine' target='_blank'><img id='smartmineLogo' src='content/images/smartmine-logo.png'/><a>",
 		"<div id='mapLayers'>",
 			"<button id='lnkAgency' class='btn btn-primary navLayers'>Agency</button>",
 			"<button id='lnkLandTypes' class='btn navLayers'>Land Types</button>",
@@ -99,7 +99,6 @@ MainApplication.Templates.WelcomeTemplate = [
 					"<div><a href='http://www.fws.gov'><img src='./content/images/logos/LogoUSFWS-sm.jpg' /></a></div>",
 					"<div><a href='http://www.wdfw.wa.gov'><img src='./content/images/logos/LogoWADFW-sm.jpg' /></a></div>",
 					"<div><a href='http://www.parks.wa.gov'><img src='./content/images/logos/WSPLogo_200.png' /></a></div>",
-					"<div class='padout'><a href='http://www.geoengineers.com/smartmine'><img src='./content/images/smartmine-logo.png' /></a></div>",
 				"</div>",
 			"</div>",
 			"<div class=\"modal-footer\" style=\"text-align: center\">",
@@ -115,7 +114,7 @@ MainApplication.Templates.MapTipTemplate = [
 		"Total Area (Acres): {{TotalArea}}<br />",
 		"Acquisition Date: <span style=\" color: #FFFF00\">{{AquisitionDate}}</span><br />",
 		"Cost: <span style=\" color: #FFFF00\">{{Cost}}</span><br /><br/>",
-		"<button class=\"btn btn-primary\" type=\"button\" id=\"btnQuestionPost\">Post a Question</button>",	
+		"<button class=\"btn btn-primary\" type=\"button\" id=\"btnQuestionPost\" style='display: none'>Post a Question</button>",	
 ].join("\n");
 
 MainApplication.Templates.QuestionTemplate = [
