@@ -712,12 +712,22 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		$("#pieChartLayer").html("");
 		this.loadSummaryText(this.type);
 		
+		/*
+#barChartLayer {
+    height: 170px;
+    width: 205px;
+}		
+		*/
+		
 		//['#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
 		Highcharts.setOptions({
 			colors: colorRange
 		});
-		$('#pieChartLayer').highcharts({
+		this.pieChartObject = new Highcharts.Chart({
 			chart: {
+				height: 170,
+				width: 205,
+				renderTo: "pieChartLayer",
 				plotBackgroundColor: null,
 				plotBorderWidth: 0,
 				plotShadow: false
@@ -781,9 +791,13 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		});		
 		
 		$("#barChartLayer").html("");
-		$('#barChartLayer').highcharts({
+		this.barChartObject = new Highcharts.Chart({
+			// $('#barChartLayer').highcharts({
 			chart: {
-				type: 'bar'
+				height: 170,
+				width: 205,
+				type: 'bar',
+				renderTo: 'barChartLayer'
 			},
 			title: {
 				text: ''
@@ -886,11 +900,29 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			$(ev.currentTarget).removeClass("expandable");
 			$("#expandSummaryButton a").html("Collapse &gt;&gt;&gt;");
 			$(MainApplication.paneRegion.el).animate({"width":"100%"});
+
+			//the 170 in the new height alg is a coincidence, it's the total of the header, footer, and misc text
+var newHeight = $(window).height()-170;
+var scale = newHeight / 170;
+
+console.log("Scale and Adjusted: ", scale, parseInt(scale * 208)); 
+
+//var newHeight = 170;
+//var newWidth = 208;
+			
+//$('#barChartLayer').animate({"width":250, "height":200});
+	
+//			this.barChartObject.setSize(width, height);
+//			this.pieChartObject.setSize(width, height);
+
+
 		}else{
 			$(ev.currentTarget).removeClass("collapsable");
 			$(ev.currentTarget).addClass("expandable");
 			$("#expandSummaryButton a").html("&lt;&lt;&lt; Expand");
 			$(MainApplication.paneRegion.el).animate({"width":"15.6em"});		
+			this.barChartObject.setSize(205, 170);
+			this.pieChartObject.setSize(205, 170);
 		}
 
 		return false;

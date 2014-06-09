@@ -146,15 +146,9 @@
 }
 
 #pieChartLayer{
-    height: 170px;
 	left: 0px;
 	top:0px; 
-    width: 205px;
 	z-index:999999;
-}
-#barChartLayer {
-    height: 170px;
-    width: 205px;
 }
 
 .info.leaflet-control {
