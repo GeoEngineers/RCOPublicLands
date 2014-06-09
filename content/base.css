@@ -42,6 +42,14 @@
     color: #dddddd;
 }
 
+#expandSummaryButton {
+    display: inline-block;
+    width: 85px;
+}
+#summaryTypeSelector {
+    display: inline-block;
+}
+
 #smartmineLogo{
     height: 20px;
     position: absolute;
@@ -150,16 +158,23 @@
     display: none;
 }
 
-#summaryHeaderName{
-	display:inline-block; 
-	width:113px;
+#summaryMainHead{
+	width: 265px;
 }
-#summaryHeaderOptions{
-	text-align:right; 
-	display:inline-block; 
-	margin-right: -10px;
+#summarySelectors {
+    clear: both;
+    margin-bottom: 5px;
+    width: 265px;
 }
-
+#summaryHeaderName {
+    display: inline;
+    margin-left: 116px;
+}
+#summaryHeaderOptions {
+    display: inline;
+    margin-left: 55px;
+    text-align: right;
+}
 #pieChartLayer{
 	left: 0px;
 	top:0px; 

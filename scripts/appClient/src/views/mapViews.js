@@ -650,6 +650,8 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		this.activeLayers = options.activeLayers;
 		//this.displayMode = options.displayMode;
 		this.arcColor="#000000";
+		this.chartDefaultHeight = 170;
+		this.chartDefaultWidth = 265;
     },
 	events: {
 		"click #showPieChart" : "setPieMode",
@@ -657,7 +659,10 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		"click #expandSummaryButton" : "setSummarySize"
 	},
 	onShow: function(){
-		this.slide = $('.slide-menu').bigSlide({ side:"right", menu:"#SummaryPaneSlideOut" }).css({ "z-index":"1030", "top":"35px", "right":"0px"});
+		this.slide = $('.slide-menu').bigSlide({ 
+			side:"right", 
+			menu:"#SummaryPaneSlideOut", 
+			menuWidth : "20.6em" }).css({ "z-index":"1030", "top":"35px", "right":"0px"});
 		this.slide._state = "open";
 
 		var dc=this;
@@ -723,8 +728,8 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		});
 		this.pieChartObject = new Highcharts.Chart({
 			chart: {
-				height: 170,
-				width: 205,
+				height: this.chartDefaultHeight,
+				width: this.chartDefaultWidth,
 				renderTo: "pieChartLayer",
 				plotBackgroundColor: null,
 				plotBorderWidth: 0,
@@ -792,8 +797,8 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		$("#barChartLayer").html("");
 		this.barChartObject = new Highcharts.Chart({
 			chart: {
-				height: 170,
-				width: 205,
+				height: this.chartDefaultHeight,
+				width: this.chartDefaultWidth,
 				type: 'bar',
 				renderTo: 'barChartLayer'
 			},
@@ -898,17 +903,17 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			$(ev.currentTarget).removeClass("expandable");
 			$("#expandSummaryButton a").html("Collapse &gt;&gt;&gt;");
 			$(MainApplication.paneRegion.el).animate({"width":"100%"});
-			//the 170 in the new height alg is a coincidence, it's the total of the header, footer, and misc text
+			//the 170 removed from the new height is a coincidence, it's the total of the header, footer, and misc text
 			var newHeight = $(window).height()-170;
-			newHeight = newHeight < 170 ? 170 : newHeight; 
-			var scale = newHeight / 170;
-			this.setChartSizes(parseInt(scale * 205), newHeight);
+			newHeight = newHeight < this.chartDefaultHeight ? this.chartDefaultHeight : newHeight; 
+			var scale = newHeight / this.chartDefaultHeight;
+			this.setChartSizes(parseInt(scale * this.chartDefaultWidth), newHeight);
 		}else{
 			$(ev.currentTarget).removeClass("collapsable");
 			$(ev.currentTarget).addClass("expandable");
 			$("#expandSummaryButton a").html("&lt;&lt;&lt; Expand");
-			$(MainApplication.paneRegion.el).animate({"width":"15.6em"});		
-			this.setChartSizes(205, 170);
+			$(MainApplication.paneRegion.el).animate({"width":"20.6em"});		
+			this.setChartSizes(this.chartDefaultWidth, this.chartDefaultHeight);
 		}
 
 		return false;
