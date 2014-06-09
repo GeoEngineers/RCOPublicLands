@@ -45,9 +45,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 			}
 		});
 		
-		var welcomeView = new WelcomeView({});
-		MainApplication.modalRegion.show(welcomeView);
-
 		this.bounds = false;
 		//set buttons according to internet settings
 		this.toggleSetButtons();
@@ -57,6 +54,11 @@ var MapView = Backbone.Marionette.Layout.extend({
 		MainApplication.Map.on("dragstart",function(){
 			dc.loadCurrentMap();
 		});
+		
+		//load summary and welcome view
+		this.loadRightSlide();
+		var welcomeView = new WelcomeView({});
+		MainApplication.modalRegion.show(welcomeView);
 		
 		_.each(BootstrapVars.areaStats, function(area){ 
 			var tileLayer = new L.mapbox.tileLayer(area.mapTarget, { zIndex: 5 });
@@ -83,8 +85,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 				marker.bindPopup(popupText);
         	}
       	});
-      	
-		this.loadRightSlide();
 
 		MainApplication.Map.setView([47,-120], 7);
 
@@ -552,8 +552,7 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 		"click #lnkPrismFunding" : "loadPrismFunding"
 	},
 	onShow : function(){
-		this.slide = $('.slide-menu').bigSlide({ side:"right", menu:"#SummaryPaneSlideOut" }).css({ "z-index":"1030", "top":"35px", "right":"0px"});
-		this.slide._state = "open";
+		//nada
 	},
 	loadPrismFunding : function(ev){
 		MainApplication.views.mapView.loadPrismFunding(ev);
@@ -658,6 +657,9 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		"click #expandSummaryButton" : "setSummarySize"
 	},
 	onShow: function(){
+		this.slide = $('.slide-menu').bigSlide({ side:"right", menu:"#SummaryPaneSlideOut" }).css({ "z-index":"1030", "top":"35px", "right":"0px"});
+		this.slide._state = "open";
+
 		var dc=this;
 		//start in bar mode
 		this.loadD3PieLayerComparison();
@@ -944,7 +946,8 @@ var WelcomeView = Backbone.Marionette.ItemView.extend({
 	closeModal: function () {			 
 		MainApplication.modalRegion.hideModal();
 		$("#SummaryPaneSlideOut").css("display","block");
-		MainApplication.views.mapSelectorSlideView.slide.open();
+		MainApplication.views.mapView.mapPaneView.slide.open();
+		MainApplication.views.mapSelectorSlideView.toggleSlide();
 		return false;
 	}	
 });
