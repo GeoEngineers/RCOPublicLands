@@ -903,32 +903,24 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			$(ev.currentTarget).removeClass("expandable");
 			$("#expandSummaryButton a").html("Collapse &gt;&gt;&gt;");
 			$(MainApplication.paneRegion.el).animate({"width":"100%"});
-
 			//the 170 in the new height alg is a coincidence, it's the total of the header, footer, and misc text
-var newHeight = $(window).height()-170;
-var scale = newHeight / 170;
-
-console.log("Scale and Adjusted: ", scale, parseInt(scale * 208)); 
-
-//var newHeight = 170;
-//var newWidth = 208;
-			
-//$('#barChartLayer').animate({"width":250, "height":200});
-	
-//			this.barChartObject.setSize(width, height);
-//			this.pieChartObject.setSize(width, height);
-
-
+			var newHeight = $(window).height()-170;
+			newHeight = newHeight < 170 ? 170 : newHeight; 
+			var scale = newHeight / 170;
+			this.setChartSizes(parseInt(scale * 205), newHeight);
 		}else{
 			$(ev.currentTarget).removeClass("collapsable");
 			$(ev.currentTarget).addClass("expandable");
 			$("#expandSummaryButton a").html("&lt;&lt;&lt; Expand");
 			$(MainApplication.paneRegion.el).animate({"width":"15.6em"});		
-			this.barChartObject.setSize(205, 170);
-			this.pieChartObject.setSize(205, 170);
+			this.setChartSizes(205, 170);
 		}
 
 		return false;
+	},
+	setChartSizes: function(width, height){
+		this.barChartObject.setSize(width, height);
+		this.pieChartObject.setSize(width, height);	
 	},
 	synchronizedMouseOver: function(ev){
 		var arc = d3.select(this);
