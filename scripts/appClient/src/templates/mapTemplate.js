@@ -138,7 +138,7 @@ MainApplication.Templates.QuestionTemplate = [
 ].join("\n");
 
 MainApplication.Templates.HeaderTemplate = [ 
-	"<h4>WASHINGTON PUBLIC LANDS INVENTORY</h4>",
+	"<h4><img src='./content/images/rco_logo.jpg' style='height: 30px'/>&nbsp;WASHINGTON PUBLIC LANDS INVENTORY</h4>",
 ].join("\n");
 
 
