@@ -20,7 +20,7 @@ MainApplication.Templates.MapTemplate = [
 
 MainApplication.Templates.MapSelectorSlideTemplate = [
 	"<div>",
-		"<a href='#' id='lnkMapsSlideToggle'>Maps</a>",
+		"<a href='#' id='lnkMapsSlideToggle'>Maps</a><img id='smartmineLogo' src='content/images/smartmine-logo.png'/>",
 		"<div id='mapLayers'>",
 			"<button id='lnkAgency' class='btn btn-primary navLayers'>Agency</button>",
 			"<button id='lnkLandTypes' class='btn navLayers'>Land Types</button>",

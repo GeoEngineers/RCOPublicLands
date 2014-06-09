@@ -42,6 +42,13 @@
     color: #dddddd;
 }
 
+#smartmineLogo{
+    height: 20px;
+    position: absolute;
+    right: 20px;
+    bottom: 5px;
+}
+
 #gisLayerControls {
     border:1px solid #444444;
     background-color: #101010;
