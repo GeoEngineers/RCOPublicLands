@@ -28,7 +28,7 @@ MainApplication.Templates.MapSelectorSlideTemplate = [
 			"<button id='lnkProposed' class='btn navLayers'>Proposed</button>",
 		"</div>",
 		"<div id='mapControls'>",
-			"<div class='slide-menu'><a href='#' id='lnkSlideMenu' class='navLink' href='#SummaryPaneSlideOut'><i class='fa fa-bar-chart-o fa-lg'></i><div class='txt'>SUMMARY</div></a></div>",
+			"<div class='slide-menu'><a href='#' id='lnkSlideMenu' class='navLink' href='#SummaryPaneSlideOut' style='display: none'><i class='fa fa-bar-chart-o fa-lg'></i><div class='txt'>SUMMARY</div></a></div>",
 			"<div><a href='#' id='lnkPrismFunding' class='navLink' href='#lnkPrismFunding'><i class=\"icon\" style=\"margin:0px; width: 16px; height:16px; font-size: 15px;\">&#x2106;</i><div class='txt'>Recreation and Conservation Office Grants</div></a></div>",
 		"</div>",
 	"</div>"
@@ -157,5 +157,10 @@ MainApplication.Templates.LegendTemplate = [
             "<div id='legendContainer'>",
             "</div>",
         "</div>",
+	"</div>"
+].join("\n");
+
+MainApplication.Templates.GuidedHelpTemplate = [
+    "<div class='mask' style='width: 100%; height: 100%; position: absolute; left: 0px; top: 0px; background-color: #000000; opacity:0.4; filter:alpha(opacity=40); '>",
 	"</div>"
 ].join("\n");

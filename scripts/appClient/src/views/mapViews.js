@@ -95,9 +95,29 @@ var MapView = Backbone.Marionette.Layout.extend({
 				MainApplication.Map.addLayer(area.layerGroup);	
 			}
 		});	
-
 		this.setLegendControls();
 	},
+	loadGuidedHelp: function () {
+        this.landingPageGuideView = new GuidedHelpView({
+        });
+        MainApplication.maskRegion.show(this.landingPageGuideView);
+        return false;
+    },
+    loadToolTips: function () {
+    	$('#selectState').qtip({ // Grab some elements to apply the tooltip to
+		    content: {
+		        text: 'My common piece of text here'
+		    }
+		});
+        //Add Qtips - if never loaded before
+        $('#selectState').qtip("show");
+        var loadedview = $.cookie('loadedView');
+        loadedview = null;
+        if (loadedview === undefined || loadedview === null) {
+            $.cookie('loadedView', "loaded", { path: '/' });
+            //this.loadGuidedHelp();
+        }
+    },
 	boundaryChange: function(){
 		var dc = this;
 		if(MainApplication.selectedBoundary !== undefined)
@@ -953,6 +973,7 @@ var WelcomeView = Backbone.Marionette.ItemView.extend({
 		$("#SummaryPaneSlideOut").css("display","block");
 		MainApplication.views.mapView.mapPaneView.slide.open();
 		MainApplication.views.mapSelectorSlideView.toggleSlide();
+		MainApplication.views.mapView.loadToolTips();
 		return false;
 	}	
 });
@@ -1010,5 +1031,32 @@ var MapTipView = Backbone.Marionette.ItemView.extend({
 
 		var questionView = new QuestionView({});
 		MainApplication.modalRegion.show(questionView);
+    }
+});
+
+
+var GuidedHelpView = Backbone.Marionette.ItemView.extend({
+    template: function (serialized_model) {
+        return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.GuidedHelpTemplate);
+    },
+    templateHelpers: function () {
+        return {
+            guideElementOptions: this.guideElements
+        };
+    },
+    initialize: function (options) {
+        this.guideElements = false;
+        //json object with pages of guide
+        //page 1 object
+        //page 2 object
+    },
+    events: {
+    },
+    onShow: function () {
+        //$('.leaflet-control-layers-toggle').qtip("show");
+        $('#selectState').qtip("show");
+
+    	console.log("Showing Tip 2");
+        return false;
     }
 });
