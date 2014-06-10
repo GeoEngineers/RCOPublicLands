@@ -157,22 +157,28 @@
     z-index: 1030;
     display: none;
 }
-
+#barChartBlock svg > text, #pieChartBlock svg > text {
+    display: none;
+}
+#summaryPanelBlock{
+	padding: 10px; 
+	overflow-y: scroll;
+}
 #summaryMainHead{
-	width: 265px;
+	width: 260px;
 }
 #summarySelectors {
     clear: both;
     margin-bottom: 5px;
-    width: 265px;
+    width: 260px;
 }
 #summaryHeaderName {
     display: inline;
-    margin-left: 116px;
+    margin-left: 111px;
 }
 #summaryHeaderOptions {
     display: inline;
-    margin-left: 55px;
+    margin-left: 50px;
     text-align: right;
 }
 #pieChartLayer{

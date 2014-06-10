@@ -28,14 +28,24 @@ MainApplication.Templates.MapSelectorSlideTemplate = [
 			"<button id='lnkProposed' class='btn navLayers'>Proposed</button>",
 		"</div>",
 		"<div id='mapControls'>",
-			"<div class='slide-menu'><a href='#' id='lnkSlideMenu' class='navLink' href='#SummaryPaneSlideOut'><i class='fa fa-bar-chart-o fa-lg'></i><div class='txt'>SUMMARY</div></a></div>",
-			"<div><a href='#' id='lnkPrismFunding' class='navLink' href='#lnkPrismFunding'><i class=\"icon\" style=\"margin:0px; width: 16px; height:16px; font-size: 15px;\">&#x2106;</i><div class='txt'>Recreation and Conservation Office Grants</div></a></div>",
+			"<div>",
+				"<a href='#' id='lnkSlideMenu' class='navLink slide-menu' href='#SummaryPaneSlideOut'>",
+					"<i class='fa fa-bar-chart-o fa-lg'></i>",
+					"<div class='txt'>SUMMARY</div>",
+				"</a>",
+			"</div>",
+			"<div>",
+				"<a href='#' id='lnkPrismFunding' class='navLink' href='#lnkPrismFunding'>",
+					"<i class=\"icon\" style=\"margin:0px; width: 16px; height:16px; font-size: 15px;\">&#x2106;</i>",
+					"<div class='txt'>Recreation and Conservation Office Grants</div>",
+				"</a>",
+			"</div>",
 		"</div>",
 	"</div>"
 ].join("\n");
 
 MainApplication.Templates.MapPaneTemplate = [
-	"<div style=\"padding: 10px\">",
+	"<div id='summaryPanelBlock'>",
 		"<div id='summaryMainHead'>",
 			"<div id='expandSummaryButton' class='expandable'><a href='#'>&lt;&lt;&lt; Expand</a></div>",
 			"<div id='summaryHeaderName'>Summary</div>",
@@ -60,8 +70,8 @@ MainApplication.Templates.MapPaneTemplate = [
 		"</div>",
 		"<div id='barChartBlock'>",
 			"<div id='barChartLayer'></div>",
-			"<div id='summaryLayer'></div>",
 		"</div>",
+		"<div id='summaryLayer'></div>",
 	"</div>"
 ].join("\n");
 
@@ -118,7 +128,7 @@ MainApplication.Templates.MapTipTemplate = [
 		"Total Area (Acres): {{TotalArea}}<br />",
 		"Acquisition Date: <span style=\" color: #FFFF00\">{{AquisitionDate}}</span><br />",
 		"Cost: <span style=\" color: #FFFF00\">{{Cost}}</span><br /><br/>",
-		"<button class=\"btn btn-primary\" type=\"button\" id=\"btnQuestionPost\" style='display: none'>Post a Question</button>",	
+		//"<button class=\"btn btn-primary\" type=\"button\" id=\"btnQuestionPost\" style='display: none'>Post a Question</button>",	
 ].join("\n");
 
 MainApplication.Templates.QuestionTemplate = [

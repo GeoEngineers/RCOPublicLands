@@ -549,7 +549,8 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 		"click #lnkAquisitions" : "showAquisitions",
 		"click #lnkLandTypes" : "showLandOptions",
 		"click #lnkProposed" : "showProposed",
-		"click #lnkPrismFunding" : "loadPrismFunding"
+		"click #lnkPrismFunding" : "loadPrismFunding",
+		"click #lnkSlideMenu" : "toggleRightMenu"
 	},
 	onShow : function(){
 		//nada
@@ -573,6 +574,21 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 	showProposed : function(ev){
 		MainApplication.views.mapView.showProposed(ev);	
 		return false;	
+	},
+	toggleRightMenu : function(ev){
+		console.log(ev);
+		console.log(MainApplication.views.mapView.mapPaneView.slide._state);
+		if(MainApplication.views.mapView.mapPaneView.slide._state === "closed"){
+			MainApplication.views.mapView.mapPaneView.slide.open();
+		}else{
+			MainApplication.views.mapView.mapPaneView.slide.close();
+			$(MainApplication.paneRegion.el).css({"width":"21em"});
+			$('#expandSummaryButton').removeClass("collapsable");
+			$('#expandSummaryButton').hasClass("expandable") ? false : $('#expandSummaryButton').addClass("expandable");
+			$("#expandSummaryButton a").html("&lt;&lt;&lt; Expand");			
+			MainApplication.views.mapView.mapPaneView.setChartSizes(MainApplication.views.mapView.mapPaneView.chartDefaultWidth, MainApplication.views.mapView.mapPaneView.chartDefaultHeight);
+		}
+		return false;
 	},
 	toggleSlide: function(){
 		if(MainApplication.slideRegion.slideOpen === true){
@@ -651,7 +667,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		//this.displayMode = options.displayMode;
 		this.arcColor="#000000";
 		this.chartDefaultHeight = 170;
-		this.chartDefaultWidth = 265;
+		this.chartDefaultWidth = 260;
     },
 	events: {
 		"click #showPieChart" : "setPieMode",
@@ -659,12 +675,17 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		"click #expandSummaryButton" : "setSummarySize"
 	},
 	onShow: function(){
+		$( window ).resize(function() {
+			MainApplication.views.mapView.showRightSlide();
+		});
 		this.slide = $('.slide-menu').bigSlide({ 
 			side:"right", 
 			menu:"#SummaryPaneSlideOut", 
-			menuWidth : "20.6em" }).css({ "z-index":"1030", "top":"35px", "right":"0px"});
+			menuWidth : "21em" }).css({ "z-index":"1030", "top":"35px", "right":"0px"});
 		this.slide._state = "open";
-
+		var summaryHeight = $(window).height()-67;
+		$("#summaryPanelBlock").css({"height":summaryHeight});
+		
 		var dc=this;
 		//start in bar mode
 		this.loadD3PieLayerComparison();
@@ -912,7 +933,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			$(ev.currentTarget).removeClass("collapsable");
 			$(ev.currentTarget).addClass("expandable");
 			$("#expandSummaryButton a").html("&lt;&lt;&lt; Expand");
-			$(MainApplication.paneRegion.el).animate({"width":"20.6em"});		
+			$(MainApplication.paneRegion.el).animate({"width":"21em"});		
 			this.setChartSizes(this.chartDefaultWidth, this.chartDefaultHeight);
 		}
 
