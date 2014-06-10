@@ -18,6 +18,7 @@
         <link rel="stylesheet" type='text/css' href="./content/symbola/css/symbola.css">
 		<link rel="stylesheet" type='text/css' href="./content/base.css">
 		<link rel="stylesheet" type='text/css' href="./content/maps.css">
+        <link rel="stylesheet" type="text/css" href="./bower_components/qtip2/jquery.qtip.css" >
         <link href="content/leaflet.label.css" type="text/css" rel="stylesheet">
         <!--[if lte IE 8]>
 		<link rel="stylesheet" type='text/css' href='http://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.ie.css' >
@@ -32,7 +33,9 @@
             <div class="container">                <!--
 				Disabled proper templating while map is being developed this should be turned on and the map rendered when this app is done -->
 				<div id="ApplicationContainer"></div>
-                <div id="localModalBlock" class="modal" data-backdrop="static"></div>				
+                <div id="localModalBlock" class="modal" data-backdrop="static"></div>	
+                <div id="localMaskBlock" class="mask modal" style="overflow:hidden; display: none"></div>                  
+
 			</div>
         </div>
 		<div id='SummaryPaneSlideOut' class='panel' role='navigation'></div>
@@ -53,6 +56,8 @@
         <script type="text/javascript" src="./bower_components/jquery-ui/ui/jquery-ui.js"></script>
 		
         <script type="text/javascript" src="./bower_components/highcharts/js/highcharts.src.js"></script>
+        
+        <script type="text/javascript" src="./bower_components/qtip2/jquery.qtip.js"></script>        
 		
         <script type="text/javascript" src="./bower_components/jquery.cookie/jquery.cookie.js"></script>
 		<script type="text/javascript" src="./bower_components/bigSlide/dist/bigSlide.js"></script>
@@ -77,7 +82,6 @@
         <script type="text/javascript" src="./bower_components/es5-basic-shim/src/shim.js"></script>
         <script type="text/javascript" src="./bower_components/requirejs/require.js"></script>
 
-
         <script type="text/javascript" src="./scripts/appClient/src/extensions/TileLayer.d3_topoJson.js"></script>
         <script type="text/javascript" src="./scripts/appClient/lib/phonegap/TileLayer.OfflineMBTiles.js"></script>
 
@@ -95,11 +99,12 @@
         <script type="text/javascript" src="./scripts/appClient/src/regions/applicationRegions.js"></script>
         <script type="text/javascript" src="./scripts/appClient/src/models/applicationModels.js"></script>
         <script type="text/javascript" src="./scripts/appClient/src/pageLoader.js"></script>
+
+
         <script type="text/javascript" src="./scripts/appClient/src/extensions/counties.geojson"></script>
         <script type="text/javascript" src="./scripts/appClient/src/extensions/wrias.geojson"></script>
         <script type="text/javascript" src="./scripts/appClient/src/extensions/congressionaldistricts.geojson"></script>
         <script type="text/javascript" src="./scripts/appClient/src/extensions/legislativedistricts.geojson"></script>
-
 
         <script type="text/javascript" src="./scripts/appClient/src/extensions/sums_counties.json"></script>
         <script type="text/javascript" src="./scripts/appClient/src/extensions/sums_wria.json"></script>

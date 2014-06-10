@@ -86,6 +86,34 @@ MainApplication.ModalRegion = Backbone.Marionette.Region.extend({
     }
 });
 
+MainApplication.MaskRegion = Backbone.Marionette.Region.extend({
+    el: "#localMaskBlock",
+    constructor: function () {
+        _.bindAll(this, "getEl", "showMask", "hideMask");
+        Backbone.Marionette.Region.prototype.constructor.apply(this, arguments);
+        this.maskOpen = false;
+        this.on("show", this.showMask, this);
+    },
+    getEl: function (selector) {
+        var $el = $(selector);
+        $el.on("hidden", this.close);
+        return $el;
+    },
+    showMask: function (view) {
+        var dc = this;
+        $("#localMaskBlock").css("display", "block");
+        $("#localMaskBlock").one("click", function () {
+            dc.hideMask();
+        });
+        this.maskOpen = true;
+    },
+    hideMask: function () {
+        $("#localMaskBlock").css("display", "none");
+        $('div.qtip:visible').qtip('hide');
+        this.maskOpen = false;
+    }
+});
+
 MainApplication.addRegions({
     titleRegion: "#ApplicationSection",
     mainRegion: "#ApplicationContainer",
@@ -93,5 +121,6 @@ MainApplication.addRegions({
 	headerRegion: "#HeaderNavContainer",
 	slideRegion: MainApplication.SlideRegion,
     modalRegion: MainApplication.ModalRegion,
-	paneRegion: MainApplication.PaneRegion
+	paneRegion: MainApplication.PaneRegion,
+    maskRegion: MainApplication.MaskRegion
 });

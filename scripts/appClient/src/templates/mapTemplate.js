@@ -169,3 +169,8 @@ MainApplication.Templates.LegendTemplate = [
         "</div>",
 	"</div>"
 ].join("\n");
+
+MainApplication.Templates.GuidedHelpTemplate = [
+    "<div class='mask' style='width: 100%; height: 100%; position: absolute; left: 0px; top: 0px; background-color: #000000; opacity:0.4; filter:alpha(opacity=40); '>",
+	"</div>"
+].join("\n");
