@@ -18,6 +18,8 @@
 			$('#FooterNavSlideOut').animate({"height":"150px"});
             $(".leaflet-bottom").animate({"margin-bottom": "150px"});
             $("#smartmineLogo").animate({"margin-bottom": "120px"});
+            $("#toggleQuestionButton").animate({"margin-bottom": "120px"});
+
             smartmineLogo
 			this.slideOpen = true;
 		}
@@ -25,7 +27,8 @@
     slideIn: function (view) {
 		$('#FooterNavSlideOut').animate({"height":"30px"});
         $(".leaflet-bottom").animate({"margin-bottom": "30px"});
-            $("#smartmineLogo").animate({"margin-bottom": "0px"});
+        $("#smartmineLogo").animate({"margin-bottom": "0px"});
+        $("#toggleQuestionButton").animate({"margin-bottom": "0px"});
 		this.slideOpen = false;
     }
 });

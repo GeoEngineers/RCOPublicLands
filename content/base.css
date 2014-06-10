@@ -115,6 +115,23 @@
 	z-index:1039;
 }
 
+#toggleQuestionButton {
+    background-color: white;
+    border:1px solid #999999;
+    color: #444444;
+    height: 36px;
+    position: absolute;
+    right: 10px;
+    bottom: 40px;  
+    width: 36px;
+    z-index: 1000;
+    border-radius: 0;
+}
+#toggleQuestionButton i {
+    margin-left: 0px; 
+    margin-top:-3px;
+}
+
 #FooterNavSlideOut a{
 	color:#FFFFFF;
 }
