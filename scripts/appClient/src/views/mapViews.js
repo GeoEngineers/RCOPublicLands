@@ -674,8 +674,7 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 		MainApplication.views.mapView.showProposed(ev);	
 		return false;	
 	},
-	toggleRightMenu : function(ev){
-	
+	toggleRightMenu : function(ev){	
 		console.log("Toggling Panel");
 		console.log(MainApplication.views.mapView.mapPaneView.slide);
 		console.log(MainApplication.views.mapView.mapPaneView.slide._state);
@@ -690,6 +689,8 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 			$("#expandSummaryButton a").html("&lt;&lt;&lt; Expand");			
 			MainApplication.views.mapView.mapPaneView.setChartSizes(MainApplication.views.mapView.mapPaneView.chartDefaultWidth, MainApplication.views.mapView.mapPaneView.chartDefaultHeight);
 		}
+		console.log(MainApplication.views.mapView.mapPaneView.slide._state);
+
 		return false;
 	},
 	toggleSlide: function(){
@@ -1002,20 +1003,26 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		return false;
 	},
 	setSummaryLayer: function(ev){
+		var originalElement = ev.originalEvent.srcElement || ev.originalEvent.originalTarget;
+		var originalObject = $(originalElement).attr !== undefined ? $(originalElement) : {};
+		
+console.log(originalObject);
+console.log(originalObject.attr("data-abbr"));
+		
 		//this checks the layer switcher and uses its functionality then runs then updates the map layers
-		if(ev.timeStamp !== 0 && $(ev.originalEvent.originalTarget).attr("data-abbr") !== undefined){
+		if(ev.timeStamp !== 0 && originalObject.attr !== undefined){
 			var layerGroup = _.find(BootstrapVars.areaStats, function(area){
-				return area.abbrev === $(ev.originalEvent.originalTarget).attr("data-abbr");
+				return area.abbrev === originalObject.attr("data-abbr");
 			});
 			_.each($(MainApplication.views.mapView.featureLayerControls._form).children('.leaflet-control-layers-overlays')[0].childNodes,function(node){
-				if($(node).attr("data-abbrev") === $(ev.originalEvent.originalTarget).attr("data-abbr")){
+				if($(node).attr("data-abbrev") === originalObject.attr("data-abbr")){
 					$(node).children("input").trigger("click");
 					layerGroup.visible = !layerGroup.visible;
 					MainApplication.views.mapView.showRightSlide();
 				}
 			});
 			return true;
-		}else if($(ev.originalEvent.originalTarget).attr("data-abbr") === undefined){
+		}else if(originalObject.attr("data-abbr") === undefined){
 			//return false if it's not one of the inputs
 			return false
 		}
