@@ -1006,9 +1006,6 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		var originalElement = ev.originalEvent.srcElement || ev.originalEvent.originalTarget;
 		var originalObject = $(originalElement).attr !== undefined ? $(originalElement) : {};
 		
-console.log(originalObject);
-console.log(originalObject.attr("data-abbr"));
-		
 		//this checks the layer switcher and uses its functionality then runs then updates the map layers
 		if(ev.timeStamp !== 0 && originalObject.attr !== undefined){
 			var layerGroup = _.find(BootstrapVars.areaStats, function(area){
