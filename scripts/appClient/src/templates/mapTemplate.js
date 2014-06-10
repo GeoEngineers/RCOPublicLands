@@ -72,6 +72,8 @@ MainApplication.Templates.MapPaneTemplate = [
 			"<div id='barChartLayer'></div>",
 		"</div>",
 		"<div id='summaryLayer'></div>",
+		"<div>Data last updated between YYYY and YYYY</div>",
+		"<div class='usePointer' style='font-size:26pt;text-align:right;'><a href='#' id='lnkHelpMenu' style='text-decoration:none;'>?</a></div>",
 	"</div>"
 ].join("\n");
 

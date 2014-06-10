@@ -688,11 +688,14 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		this.arcColor="#000000";
 		this.chartDefaultHeight = 170;
 		this.chartDefaultWidth = 260;
+		this.currentChartHeight = this.chartDefaultHeight;				
+		this.currentChartWidth = this.chartDefaultWidth;
     },
 	events: {
 		"click #showPieChart" : "setPieMode",
 		"click #showBarChart" : "setBarMode",
-		"click #expandSummaryButton" : "setSummarySize"
+		"click #expandSummaryButton" : "setSummarySize",
+		"click #lnkHelpMenu" : "showHelpMenu"
 	},
 	onShow: function(){
 		$( window ).resize(function() {
@@ -708,11 +711,11 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		
 		var dc=this;
 		//start in bar mode
-		this.loadD3PieLayerComparison();
 		this.loadD3BarLayerComparison();
+		this.loadD3PieLayerComparison();
 		$( "#ddlSummaryType" ).change(function() {
-			dc.chartType === "pie" ? dc.loadD3PieLayerComparison() : false;
-			dc.chartType === "bar" ? dc.loadD3BarLayerComparison() : false;
+			dc.loadD3BarLayerComparison();
+			dc.loadD3PieLayerComparison();
 		});
 		
 		if(this.chartType === undefined){
@@ -732,6 +735,52 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		return _.filter(BootstrapVars.areaStats, function(area){ 
 			return area.visible===true; 
 		});
+	},
+	loadD3BarLayerComparison: function(){
+		var dc=this;
+		this.type = $( "#ddlSummaryType" ).val(); //"total_acres"; 
+		this.loadSummaryText(this.type);
+		var selectedAreas = this.getVisibleAreas();
+		var barChartSeries = [];
+
+		console.log(this);
+		
+		_.each(selectedAreas, function(area){
+			var val = 0;
+			barChartSeries.push({
+				"name" : area.agency,
+				"data" : [area[dc.type]], //, area.total_cost, area.total_revenue
+				"color" : area.color
+			});
+			console.log(area);
+		});
+		
+		$("#barChartLayer").html("");
+		this.barChartObject = new Highcharts.Chart({
+			chart: {
+				height: this.currentChartHeight,
+				width: this.currentChartWidth,
+				type: 'bar',
+				renderTo: 'barChartLayer'
+			},
+			title: {
+				text: ''
+			},
+			xAxis: {
+				categories: [dc.type]  // ['Total Acres'] // , 'Total Cost', 'Total Revenue'
+			},
+			yAxis: {
+				title: {
+					text: ''
+				}
+			},
+			series: barChartSeries,
+			legend: {
+				enabled: false
+			}
+		});		
+
+		return false;
 	},
 	loadD3PieLayerComparison: function(){	
 		var dc=this;
@@ -769,8 +818,8 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		});
 		this.pieChartObject = new Highcharts.Chart({
 			chart: {
-				height: this.chartDefaultHeight,
-				width: this.chartDefaultWidth,
+				height: this.currentChartHeight,
+				width: this.currentChartWidth,
 				renderTo: "pieChartLayer",
 				plotBackgroundColor: null,
 				plotBorderWidth: 0,
@@ -800,87 +849,8 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			}]
 		});
 		
-		/*
-		g.append("path")
-		.on('click', function(){ console.log("test"); })
-			.on('mouseover', dc.synchronizedMouseOver)
-			.on("mouseout", dc.synchronizedMouseOut)
-			.attr("d", arc)
-			.style("fill", function(d) { return color(d.data.agency); });
-
-		g.append("text")
-			.on('mouseover', function(ev){ console.log(ev); return false; })
-			.on("mouseout", function(ev){ console.log(ev); return false; })
-			.attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-			.attr("dy", ".35em")
-			.style("text-anchor", "middle")
-			.text(function(d) { return d.data.abbrev; });
-		//});	
-		*/
 		return false;
-	},
-	loadD3BarLayerComparison: function(){
-		var dc=this;
-		this.type = $( "#ddlSummaryType" ).val(); //"total_acres"; 
-		this.loadSummaryText(this.type);
-		var selectedAreas = this.getVisibleAreas();
-		var barChartSeries = [];
-
-		_.each(selectedAreas, function(area){
-			var val = 0;
-			barChartSeries.push({
-				"name" : area.agency,
-				"data" : [area[dc.type]], //, area.total_cost, area.total_revenue
-				"color" : area.color
-			});
-		});
-		
-		$("#barChartLayer").html("");
-		this.barChartObject = new Highcharts.Chart({
-			chart: {
-				height: this.chartDefaultHeight,
-				width: this.chartDefaultWidth,
-				type: 'bar',
-				renderTo: 'barChartLayer'
-			},
-			title: {
-				text: ''
-			},
-			xAxis: {
-				categories: ['Total Acres'] // , 'Total Cost', 'Total Revenue'
-			},
-			yAxis: {
-				title: {
-					text: ''
-				}
-			},
-			series: barChartSeries,
-			legend: {
-				enabled: false
-			}
-		});		
-
-		/*		
-		bar.append("rect")
-			.on('click', function(){ console.log("test"); })
-			.on('mouseover', dc.synchronizedMouseOver)
-			.on("mouseout", dc.synchronizedMouseOut)
-			.attr("y", function(d) { return y(d.value); })
-			.attr("height", function(d) { return height - y(d.value); })
-      		.attr("fill", function(d) { return d.color; })
-			.attr("width", barWidth - 1);
-
-			
-			
-		bar.append("text")
-			.attr("x", barWidth / 2)
-			.attr("y", function(d) { return y(d.value) + 3; })
-			.attr("dy", "-.75em")
-			.text(function(d) { return d.value; });
-		*/
-		
-		return false;
-	},
+	},	
 	loadSummaryText: function(typeView){
 		var dc=this;
 		var summaryText = "";
@@ -949,12 +919,18 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			newHeight = newHeight < this.chartDefaultHeight ? this.chartDefaultHeight : newHeight; 
 			var scale = newHeight / this.chartDefaultHeight;
 			this.setChartSizes(parseInt(scale * this.chartDefaultWidth), newHeight);
+			
+			this.currentChartWidth = parseInt(scale * this.chartDefaultWidth);
+			this.currentChartHeight = newHeight;
 		}else{
 			$(ev.currentTarget).removeClass("collapsable");
 			$(ev.currentTarget).addClass("expandable");
 			$("#expandSummaryButton a").html("&lt;&lt;&lt; Expand");
 			$(MainApplication.paneRegion.el).animate({"width":"21em"});		
 			this.setChartSizes(this.chartDefaultWidth, this.chartDefaultHeight);
+			
+			this.currentChartWidth = this.chartDefaultWidth;
+			this.currentChartHeight = this.chartDefaultHeight;			
 		}
 
 		return false;
@@ -963,6 +939,12 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		this.barChartObject.setSize(width, height);
 		this.pieChartObject.setSize(width, height);	
 	},
+	showHelpMenu : function(ev){
+		console.log("Help Text here");
+		//alert("Help Text Here");
+		//MainApplication.views.mapView.showLandOptions(ev);	
+		return false;
+	},	
 	synchronizedMouseOver: function(ev){
 		var arc = d3.select(this);
 		//console.log(arc); 		

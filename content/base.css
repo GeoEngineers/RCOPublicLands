@@ -1,7 +1,7 @@
 ﻿body {
 	margin: 0;
 	padding: 0;
-	font-family: Arial,Helvetica,sans-serif;
+	font-family: Open Sans;
 	font-size: 14px;
 	/*line-height: 20px;*/
 	color: #bcbcbc;
@@ -160,6 +160,9 @@
 #barChartBlock svg > text, #pieChartBlock svg > text {
     display: none;
 }
+#helpMenu {
+    text-align: right;
+}
 #summaryPanelBlock{
 	padding: 10px; 
 	overflow-y: scroll;
@@ -169,17 +172,18 @@
 }
 #summarySelectors {
     clear: both;
-    margin-bottom: 5px;
+    margin: 5px 0 15px;
+    vertical-align: middle;
     width: 260px;
 }
 #summaryHeaderName {
     display: inline;
-    margin-left: 111px;
+    float:right;
 }
 #summaryHeaderOptions {
     display: inline;
     margin-left: 50px;
-    text-align: right;
+    float: right;
 }
 #pieChartLayer{
 	left: 0px;
@@ -860,7 +864,7 @@ a .genericHomeButton{
 
 .modal-header{
 	color: #333333;
-	font-family: Arial,Helvetica,sans-serif;
+	font-family: Open Sans;
 	font-size: 24pt;
 	margin-left: 0px;
 }
@@ -879,7 +883,7 @@ background-color: #dbeeff;
 .modal-body{
     clear:both;
 	color: #333333;
-	font-family: Arial,Helvetica,sans-serif;
+	font-family: Open Sans;
 	font-size: 10pt;
 	max-height: 325px;
 	overflow-y:auto;
