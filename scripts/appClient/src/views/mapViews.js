@@ -109,6 +109,8 @@ var MapView = Backbone.Marionette.Layout.extend({
                 content: {
                     text: ''
                 },
+                hide: false,
+                show: false,
                 style: {
                     classes: 'qtip-dark',
                 }
@@ -123,6 +125,8 @@ var MapView = Backbone.Marionette.Layout.extend({
                     my: 'right middle',
                     at: 'middle left'
                 },
+                hide: false,
+                show: false,
                 style: {
                     classes: 'qtip-dark',
                     tip: {
@@ -136,6 +140,8 @@ var MapView = Backbone.Marionette.Layout.extend({
                 content: {
                     text: ''
                 },
+                hide: false,
+                show: false,
                 position: {
                     my: 'top',
                     at: 'top middle'
