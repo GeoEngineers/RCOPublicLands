@@ -34,7 +34,8 @@
 	"bootstrap-datepicker": "*",
 	"requirejs": "*",
 	"ydn-db": "*",
-  "qTip2": "*",
+  "qtip2": "*",
+  "font-awesome": "*",
 	"highcharts" :"https://github.com/highslide-software/highcharts.com.git",
   "Leaflet.utfgrid": "https://github.com/danzel/Leaflet.utfgrid.git"
   }

@@ -106,21 +106,93 @@ var MapView = Backbone.Marionette.Layout.extend({
         return false;
     },
     loadToolTips: function () {
-    	$('#selectState').qtip({ // Grab some elements to apply the tooltip to
-		    content: {
-		        text: 'My common piece of text here'
-		    }
-		});
+		var ToolTipClass1 = function () {
+            return {
+                content: {
+                    text: ''
+                },
+                hide: false,
+                show: false,
+                style: {
+                    classes: 'qtip-dark',
+                }
+            }
+        };
+		var ToolTipClass2 = function () {
+            return {
+                content: {
+                    text: ''
+                },
+                position: {
+                    my: 'right middle',
+                    at: 'middle left'
+                },
+                hide: false,
+                show: false,
+                style: {
+                    classes: 'qtip-dark',
+                    tip: {
+                        corner: 'middle right'
+                    }
+                }
+            }
+        };
+        var ToolTipClass3 = function () {
+            return {
+                content: {
+                    text: ''
+                },
+                hide: false,
+                show: false,
+                position: {
+                    my: 'top',
+                    at: 'top middle'
+                },
+                style: {
+                    classes: 'qtip-dark',
+                    tip: {
+                        corner: 'middle'
+                    }
+                }
+            }
+        };
+        var myToolTip1 = new ToolTipClass1();
+        var myToolTip2 = new ToolTipClass2();
+        var myToolTip3 = new ToolTipClass1();
+        var myToolTip4 = new ToolTipClass1();
+        var myToolTip5= new ToolTipClass3();
+        myToolTip1.content.text = "Lookup Land Use by Boundary";
+        myToolTip2.content.text = "Summary Statistics.";
+        myToolTip3.content.text = "Change base map type.";
+        myToolTip4.content.text = "Map Navigation Tools";
+        myToolTip5.content.text = "Access Public Lands Maps";
+
+        $('#selectStateInput').qtip(myToolTip1);
+        $('#summaryPanelBlock').qtip(myToolTip2);
+        $('.leaflet-control-layers').qtip(myToolTip3);
+        $('.leaflet-control-zoom-out').qtip(myToolTip4);
+        $('#lnkMapsSlideToggle').qtip(myToolTip5);
+
+
         //Add Qtips - if never loaded before
-        $('#selectState').qtip("show");
         var loadedview = $.cookie('loadedView');
-        loadedview = null;
+        //loadedview = null;
         if (loadedview === undefined || loadedview === null) {
             $.cookie('loadedView', "loaded", { path: '/' });
-            //this.loadGuidedHelp();
+            $(".leaflet-bottom").css({"margin-bottom": "150px"});
+
+           this.loadGuidedHelp();
         }
     },
 	boundaryChange: function(){
+		_.each(BootstrapVars.areaStats, function(area){
+				area.total_acres = area.starting_total_acres;
+				area.total_cost = area.starting_total_cost;
+				area.total_revenue = area.starting_total_revenue;
+		});
+
+		this.loadRightSlide();
+
 		var dc = this;
 		if(MainApplication.selectedBoundary !== undefined)
 		{
@@ -980,9 +1052,9 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		this.pieChartObject.setSize(width, height);	
 	},
 	showHelpMenu : function(ev){
-		console.log("Help Text here");
+		//console.log("Help Text here");
 		//alert("Help Text Here");
-		//MainApplication.views.mapView.showLandOptions(ev);	
+		MainApplication.views.mapView.loadGuidedHelp();	
 		return false;
 	},	
 	synchronizedMouseOver: function(ev){
@@ -1097,7 +1169,11 @@ var GuidedHelpView = Backbone.Marionette.ItemView.extend({
     },
     onShow: function () {
         //$('.leaflet-control-layers-toggle').qtip("show");
-        $('#selectState').qtip("show");
+        $('#selectStateInput').qtip("show");
+        $('#summaryPanelBlock').qtip("show");
+        $('.leaflet-control-layers').qtip("show");
+        $('.leaflet-control-zoom-out').qtip("show");
+        $('#lnkMapsSlideToggle').qtip("show");
 
     	console.log("Showing Tip 2");
         return false;
