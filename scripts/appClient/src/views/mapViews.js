@@ -183,6 +183,14 @@ var MapView = Backbone.Marionette.Layout.extend({
         }
     },
 	boundaryChange: function(){
+		_.each(BootstrapVars.areaStats, function(area){
+				area.total_acres = area.starting_total_acres;
+				area.total_cost = area.starting_total_cost;
+				area.total_revenue = area.starting_total_revenue;
+		});
+
+		this.loadRightSlide();
+
 		var dc = this;
 		if(MainApplication.selectedBoundary !== undefined)
 		{
