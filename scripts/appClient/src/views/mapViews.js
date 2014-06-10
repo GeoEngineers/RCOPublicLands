@@ -104,18 +104,51 @@ var MapView = Backbone.Marionette.Layout.extend({
         return false;
     },
     loadToolTips: function () {
-    	$('#selectState').qtip({ // Grab some elements to apply the tooltip to
-		    content: {
-		        text: 'My common piece of text here'
-		    }
-		});
+		var ToolTipClass1 = function () {
+            return {
+                content: {
+                    text: ''
+                },
+                style: {
+                    classes: 'qtip-dark',
+                }
+            }
+        };
+		var ToolTipClass2 = function () {
+            return {
+                content: {
+                    text: ''
+                },
+                position: {
+                    my: 'right middle',
+                    at: 'middle left'
+                },
+                style: {
+                    classes: 'qtip-dark',
+                    tip: {
+                        corner: 'middle right'
+                    }
+                }
+            }
+        };
+        var myToolTip1 = new ToolTipClass1();
+        var myToolTip2 = new ToolTipClass2();
+        var myToolTip3 = new ToolTipClass1();
+        myToolTip1.content.text = "Select a boundary type here.";
+        myToolTip2.content.text = "Summary Data displayed here.";
+        myToolTip3.content.text = "Change base map type.";
+        $('#selectStateInput').qtip(myToolTip1);
+        $('#summaryPanelBlock').qtip(myToolTip2);
+        $('.leaflet-control-layers').qtip(myToolTip3);
+
+
         //Add Qtips - if never loaded before
-        $('#selectState').qtip("show");
         var loadedview = $.cookie('loadedView');
         loadedview = null;
         if (loadedview === undefined || loadedview === null) {
             $.cookie('loadedView', "loaded", { path: '/' });
-            //this.loadGuidedHelp();
+            $(".leaflet-bottom").css({"margin-bottom": "150px"});
+           this.loadGuidedHelp();
         }
     },
 	boundaryChange: function(){
@@ -1057,7 +1090,9 @@ var GuidedHelpView = Backbone.Marionette.ItemView.extend({
     },
     onShow: function () {
         //$('.leaflet-control-layers-toggle').qtip("show");
-        $('#selectState').qtip("show");
+        $('#selectStateInput').qtip("show");
+        $('#summaryPanelBlock').qtip("show");
+        $('.leaflet-control-layers').qtip("show");
 
     	console.log("Showing Tip 2");
         return false;

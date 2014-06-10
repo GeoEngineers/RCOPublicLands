@@ -849,7 +849,7 @@ a .genericHomeButton{
 
 .mask {
     background-color: #000000;
-    opacity: 0.75;
+    opacity: 0.25;
 }
 
 .qtip-wwc, .qtip-wwc *{
