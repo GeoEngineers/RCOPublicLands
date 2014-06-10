@@ -44,7 +44,7 @@
 
 #expandSummaryButton {
     display: inline-block;
-    width: 85px;
+    width: 98px;
 }
 #summaryTypeSelector {
     display: inline-block;
@@ -171,6 +171,7 @@
 	overflow-y: scroll;
 }
 #summaryMainHead{
+	font-weight: bold;
 	width: 260px;
 }
 #summarySelectors {
@@ -185,7 +186,6 @@
 }
 #summaryHeaderOptions {
     display: inline;
-    margin-left: 50px;
     float: right;
 }
 #pieChartLayer{

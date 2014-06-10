@@ -675,10 +675,6 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 		return false;	
 	},
 	toggleRightMenu : function(ev){	
-		console.log("Toggling Panel");
-		console.log(MainApplication.views.mapView.mapPaneView.slide);
-		console.log(MainApplication.views.mapView.mapPaneView.slide._state);
-	
 		if(MainApplication.views.mapView.mapPaneView.slide._state === "closed"){
 			MainApplication.views.mapView.mapPaneView.slide.open();
 		}else{
@@ -689,7 +685,6 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 			$("#expandSummaryButton a").html("&lt;&lt;&lt; Expand");			
 			MainApplication.views.mapView.mapPaneView.setChartSizes(MainApplication.views.mapView.mapPaneView.chartDefaultWidth, MainApplication.views.mapView.mapPaneView.chartDefaultHeight);
 		}
-		console.log(MainApplication.views.mapView.mapPaneView.slide._state);
 
 		return false;
 	},
@@ -782,14 +777,18 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		"click #summaryLayer" : "setSummaryLayer"
 	},
 	onShow: function(){
-		$( window ).resize(function() {
+		$( window ).smartresize(function() {
 			MainApplication.views.mapView.showRightSlide();
 		});
-		this.slide = $('.slide-menu').bigSlide({ 
-			side:"right", 
-			menu:"#SummaryPaneSlideOut", 
-			menuWidth : "21em" }).css({ "z-index":"1030", "top":"35px", "right":"0px"});
-		this.slide._state = "open";
+		
+		if(this.slide === undefined){
+			this.slide = $('.slide-menu').bigSlide({ 
+				side:"right", 
+				menu:"#SummaryPaneSlideOut", 
+				menuWidth : "21em" }).css({ "z-index":"1030", "top":"35px", "right":"0px"});
+			this.slide._state = "open";
+		}
+		
 		var summaryHeight = $(window).height()-67;
 		$("#summaryPanelBlock").css({"height":summaryHeight});
 		
