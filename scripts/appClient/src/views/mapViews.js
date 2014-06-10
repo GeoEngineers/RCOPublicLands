@@ -33,6 +33,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		"click #lnkDefaultButton" : "setBaseMapDefault",
 		"click #lnkSyncQueueData" : "syncLiveData",
 		"click #lnkToggleConnection" : "toggleConnection",
+		"click #toggleQuestionButton" : "loadGuidedHelp",
 		"change #selectStateInput" : "boundaryChange",
 		"change #selectAreaInput" : "areaChange",
 		"click #lnkMapsSlide" : "showMapsSlide"
@@ -677,8 +678,10 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 	toggleRightMenu : function(ev){	
 		if(MainApplication.views.mapView.mapPaneView.slide._state === "closed"){
 			MainApplication.views.mapView.mapPaneView.slide.open();
+            $("#toggleQuestionButton").animate({"margin-right": "300px"});
 		}else{
 			MainApplication.views.mapView.mapPaneView.slide.close();
+            $("#toggleQuestionButton").animate({"margin-right": "0px"});
 			$(MainApplication.paneRegion.el).css({"width":"21em"});
 			$('#expandSummaryButton').removeClass("collapsable");
 			$('#expandSummaryButton').hasClass("expandable") ? false : $('#expandSummaryButton').addClass("expandable");
@@ -1089,6 +1092,7 @@ var WelcomeView = Backbone.Marionette.ItemView.extend({
 	closeModal: function () {			 
 		MainApplication.modalRegion.hideModal();
 		$("#SummaryPaneSlideOut").css("display","block");
+            $("#toggleQuestionButton").css({"margin-right": "300px"});
 		MainApplication.views.mapView.mapPaneView.slide.open();
 		MainApplication.views.mapSelectorSlideView.toggleSlide();
 		MainApplication.views.mapView.loadToolTips();
