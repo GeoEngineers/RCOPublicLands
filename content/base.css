@@ -49,6 +49,9 @@
 #summaryTypeSelector {
     display: inline-block;
 }
+#summaryLayer label {
+    font-weight: normal;
+}
 
 #smartmineLogo{
     height: 20px;

@@ -21,9 +21,11 @@ var MapView = Backbone.Marionette.Layout.extend({
 			"Streets": this.streetsMap,
 			"Open Street Map" : this.openMap,
 			"Imagery": this.imageryMap
-         };
+        };
 
 		this.mapFirstView = true;
+		this.currentLayersType = 'agency';
+
         _.bindAll(this, 'onShow');
     },
     events: {
@@ -88,7 +90,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 
 		MainApplication.Map.setView([47,-120], 7);
 
-		L.control.layers(this.baseMaps, null, {position: 'bottomleft'}).addTo(MainApplication.Map);
+		//this.baseMapControl = L.control.layers(this.baseMaps, null, {position: 'bottomleft'}).addTo(MainApplication.Map);
 		this.mapFirstView=false;
 		_.each(BootstrapVars.areaStats, function(area){ 
 			if(area.visible){
@@ -383,6 +385,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 	},
 	setDisplayedLayers : function(layerType){
 		var dc=this;
+		this.currentLayersType = layerType;
 		this.activeLayers = [];
 		_.each(BootstrapVars.areaStats,function(mapLayer){
 			console.log(mapLayer.layerGroupName , layerType);
@@ -417,21 +420,26 @@ var MapView = Backbone.Marionette.Layout.extend({
 		if(this.featureLayerControls){
 			MainApplication.Map.removeControl(this.featureLayerControls);
 		}
+		
 		this.layerMaps = {};
 		_.each(BootstrapVars.areaStats, function(area){
 			if(area.visible){
 				dc.layerMaps[area.abbrev] = area.layerGroup;
 			}
 		});
-		this.featureLayerControls = L.control.layers(null, this.layerMaps, {position: 'bottomleft'}).addTo(MainApplication.Map);
+				
+		this.featureLayerControls = L.control.layers(this.baseMaps, this.layerMaps, {position: 'bottomleft'}).addTo(MainApplication.Map);
 		_.each($(this.featureLayerControls._container).find("label"), function(legendItem){
 			var spanObject = $(legendItem).children("span").html().trim();
 			var layerDetails = _.find(BootstrapVars.areaStats, function(area){
 				return area.abbrev === spanObject;
 			});
-			
-			var legendKey = $("<div>", { class: "colorKey", style: "background-color:"+layerDetails.color+";" });
-			$(legendItem).prepend(legendKey);
+			//if it's found in the base areas array
+			if(layerDetails){
+				var legendKey = $("<div>", { class: "colorKey", style: "background-color:"+layerDetails.color+";" });
+				$(legendItem).attr("data-abbrev",layerDetails.abbrev);
+				$(legendItem).prepend(legendKey);
+			}
 		});
 		
 		//setup respones to click events
@@ -454,7 +462,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 				}
 			}, 16);
 		});
-		
 		return false;
 	},
 	showMapsSlide : function(){
@@ -596,8 +603,11 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 		return false;	
 	},
 	toggleRightMenu : function(ev){
-		console.log(ev);
+	
+		console.log("Toggling Panel");
+		console.log(MainApplication.views.mapView.mapPaneView.slide);
 		console.log(MainApplication.views.mapView.mapPaneView.slide._state);
+	
 		if(MainApplication.views.mapView.mapPaneView.slide._state === "closed"){
 			MainApplication.views.mapView.mapPaneView.slide.open();
 		}else{
@@ -695,7 +705,8 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		"click #showPieChart" : "setPieMode",
 		"click #showBarChart" : "setBarMode",
 		"click #expandSummaryButton" : "setSummarySize",
-		"click #lnkHelpMenu" : "showHelpMenu"
+		"click #lnkHelpMenu" : "showHelpMenu",
+		"click #summaryLayer" : "setSummaryLayer"
 	},
 	onShow: function(){
 		$( window ).resize(function() {
@@ -743,8 +754,6 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		var selectedAreas = this.getVisibleAreas();
 		var barChartSeries = [];
 
-		console.log(this);
-		
 		_.each(selectedAreas, function(area){
 			var val = 0;
 			barChartSeries.push({
@@ -752,7 +761,6 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				"data" : [area[dc.type]], //, area.total_cost, area.total_revenue
 				"color" : area.color
 			});
-			console.log(area);
 		});
 		
 		$("#barChartLayer").html("");
@@ -855,43 +863,56 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		var dc=this;
 		var summaryText = "";
 		var total = 0;
-		var data = this.getVisibleAreas();
+		//var data = this.getVisibleAreas();
 		var isCurrency = typeView === "total_acres" ? "" : "$";
-		_.each(data, function(area){
-			var val = 0;
-			switch(typeView)
-			{
-				case "total_acres":
-					val = area.total_acres;
-					break;
-				case "total_cost":
-					val = area.total_cost;
-					break;
-				case "total_revenue":
-					val =  area.total_revenue;
-					break;
-				default:
-					break;
+		
+		_.each(BootstrapVars.areaStats, function(area){
+			if(area.layerGroupName===MainApplication.views.mapView.currentLayersType){
+				var areaSummary = "";
+				var val = 0;
+				switch(typeView)
+				{
+					case "total_acres":
+						val = area.total_acres;
+						break;
+					case "total_cost":
+						val = area.total_cost;
+						break;
+					case "total_revenue":
+						val =  area.total_revenue;
+						break;
+					default:
+						break;
+				}
+				var legendKey = $("<div>", { class: "colorKey", style: "background-color:"+area.color+";" });
+				var checkedStatus = area.visible ? " checked='true'" : "";
+				
+				areaSummary += "<div>" + legendKey[0].outerHTML + "<input type='checkbox' name='inputSummaryItem-" + area.abbrev + "' id='inputSummaryItem-"+ area.abbrev + "' data-abbr='" + area.abbrev + "' class='usePointer'"+checkedStatus+" /> <label class='usePointer' data-abbr='" + area.abbrev + "' for='inputSummaryItem-" + area.abbrev + "' >" + area.abbrev + ": " + isCurrency + dc.formatCurrency(val)+ "</label></div>";
+				
+				legendKey.prependTo(areaSummary);
+				summaryText = summaryText + areaSummary;
+				total += val;
 			}
-			summaryText += "- "+area.abbrev + ": " + isCurrency + dc.formatCurrency(val)+ "<br/>";
-			total += val;
 		});
 		switch(typeView) {
 			case "total_acres":
-				summaryText = "Total " + this.type.replace("total_", "")  + ": " + isCurrency  + dc.formatCurrency(total)+ " <br/>" + summaryText + "";
+				prefixText = "Total " + this.type.replace("total_", "")  + ": " + isCurrency  + dc.formatCurrency(total)+ " ";
+				//summaryText = summaryText;
 				break;
 			case "total_cost":
+				prefixText = "";
 				summaryText = "(Available Soon)";
 				break;
 			case "total_revenue":
+				prefixText = "";
 				summaryText = "(Available Soon)";
 				break;
 			default:
 				break;
 		}
-		$("#summaryLayer").html(summaryText);
+		$("#summaryLayer").html(prefixText + summaryText);
 		return false;
-	},	
+	},
 	setBarMode: function(){
 		this.chartType = 'bar';
 		$('#barChartBlock').css({"display":"block"});
@@ -907,6 +928,25 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		$('#showBarChart').removeClass("btn-primary");
 		$('#showPieChart').hasClass("btn-primary") ? false : $('#showPieChart').addClass("btn-primary");
 		return false;
+	},
+	setSummaryLayer: function(ev){
+		//this checks the layer switcher and uses its functionality then runs then updates the map layers
+		if(ev.timeStamp !== 0 && $(ev.originalEvent.originalTarget).attr("data-abbr") !== undefined){
+			var layerGroup = _.find(BootstrapVars.areaStats, function(area){
+				return area.abbrev === $(ev.originalEvent.originalTarget).attr("data-abbr");
+			});
+			_.each($(MainApplication.views.mapView.featureLayerControls._form).children('.leaflet-control-layers-overlays')[0].childNodes,function(node){
+				if($(node).attr("data-abbrev") === $(ev.originalEvent.originalTarget).attr("data-abbr")){
+					$(node).children("input").trigger("click");
+					layerGroup.visible = !layerGroup.visible;
+					MainApplication.views.mapView.showRightSlide();
+				}
+			});
+			return true;
+		}else if($(ev.originalEvent.originalTarget).attr("data-abbr") === undefined){
+			//return false if it's not one of the inputs
+			return false
+		}
 	},
 	setSummarySize: function(ev){
 		if($(ev.currentTarget).hasClass("expandable")){
