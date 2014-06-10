@@ -168,7 +168,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 
         //Add Qtips - if never loaded before
         var loadedview = $.cookie('loadedView');
-        loadedview = null;
+        //loadedview = null;
         if (loadedview === undefined || loadedview === null) {
             $.cookie('loadedView', "loaded", { path: '/' });
             $(".leaflet-bottom").css({"margin-bottom": "150px"});
@@ -998,9 +998,9 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		this.pieChartObject.setSize(width, height);	
 	},
 	showHelpMenu : function(ev){
-		console.log("Help Text here");
+		//console.log("Help Text here");
 		//alert("Help Text Here");
-		//MainApplication.views.mapView.showLandOptions(ev);	
+		MainApplication.views.mapView.loadGuidedHelp();	
 		return false;
 	},	
 	synchronizedMouseOver: function(ev){
