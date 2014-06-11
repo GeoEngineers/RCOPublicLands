@@ -860,7 +860,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		this.loadSummaryText(this.type);
 		var selectedAreas = this.getVisibleAreas();
 		var barChartSeries = [];
-		var xAxisTitle = "Total " + this.type.replace("total_", "");
+		var xAxisTitle = GeoAppBase.capitaliseEach("Total " + this.type.replace("total_", ""));
 
 		_.each(selectedAreas, function(area){
 			var val = 0;
@@ -880,7 +880,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				renderTo: 'barChartLayer'
 			},
 			title: {
-				text: "LayerType Category Compared",
+				text: GeoAppBase.capitaliseEach(MainApplication.views.mapView.currentLayersType + " " + xAxisTitle +" Compared"),
 				style: { "font-size" : "9.5pt" },
 				align: "center",
 				margin: 5,
@@ -909,7 +909,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		var data = this.getVisibleAreas();
 		var colorRange = [];
 		this.type = $( "#ddlSummaryType" ).val();
-		var xAxisTitle = "Total " + this.type.replace("total_", "");
+		var xAxisTitle = GeoAppBase.capitaliseEach("Total " + this.type.replace("total_", ""));
 		var pieChartSeries = [];
 		
 		_.each(data, function(area){
@@ -949,7 +949,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				plotShadow: false
 			},
 			title: {
-				text: "LayerType Category Compared",
+				text: GeoAppBase.capitaliseEach(MainApplication.views.mapView.currentLayersType + " " + xAxisTitle +" Compared"),
 				style: { "font-size" : "9.5pt" },
 				align: "center",
 				margin: 5,
@@ -1029,8 +1029,8 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				//summaryText = summaryText;
 				break;
 			case "total_cost":
-				prefixText = "";
-				summaryText = "(Available Soon)";
+				prefixText = "Total " + this.type.replace("total_", "");
+				//summaryText = "(Available Soon)";
 				break;
 			case "total_revenue":
 				prefixText = "";

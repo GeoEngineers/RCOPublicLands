@@ -67,6 +67,17 @@ _.extend(GeoAppBase, {
 		alert("There was an unknown error in the application");
 		return false;
 	},
+	capitalise : function(stringText){
+		return stringText.charAt(0).toUpperCase() + stringText.slice(1);
+	},
+	capitaliseEach : function(stringText){
+		var dc=this;
+		var strArray = stringText.split(" ");		
+		for(var i=0;i < strArray.length;i=i+1){
+			strArray[i] =  GeoAppBase.capitalise(strArray[i]);
+		}
+		return strArray.join(" ");
+	},	
 	closeApp: function (){
 		navigator.app.exitApp();
 	},
