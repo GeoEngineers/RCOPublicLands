@@ -846,7 +846,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		});
 		
 		if(this.chartType === undefined){
-			this.setBarMode();
+			this.setPieMode();
 		}else{
 			if(this.chartType === "bar"){
 				this.setBarMode();
@@ -886,14 +886,16 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				height: this.currentChartHeight,
 				width: this.currentChartWidth,
 				type: 'bar',
-				renderTo: 'barChartLayer'
+				renderTo: 'barChartLayer',
+				margin: [30,35,35,55]
 			},
 			title: {
 				text: GeoAppBase.capitaliseEach(MainApplication.views.mapView.currentLayersType + " " + xAxisTitle +" Compared"),
 				style: { "font-size" : "9.5pt" },
 				align: "center",
 				margin: 5,
-				x: -20 
+				x: -20,
+				y: 10
 			},
 			xAxis: {
 				categories: [xAxisTitle]  // ['Total Acres'] // , 'Total Cost', 'Total Revenue'
@@ -908,7 +910,12 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				enabled: false
 			},
 			exporting: {
-                enabled: true
+                enabled: true,
+				buttons: {
+					contextButton: {
+						y : -5
+					}
+				}
             },
 			credits: {
                 enabled: false
@@ -958,7 +965,8 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				renderTo: "pieChartLayer",
 				plotBackgroundColor: null,
 				plotBorderWidth: 0,
-				plotShadow: false
+				plotShadow: false,
+				margin: [-20, -50, -55, -50]
 			},
 			title: {
 				text: GeoAppBase.capitaliseEach(MainApplication.views.mapView.currentLayersType + " " + xAxisTitle +" Compared"),
@@ -987,7 +995,12 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				data: pieChartSeries
 			}],
 			exporting: {
-                enabled: true
+                enabled: true,
+				buttons: {
+					contextButton: {
+						//y : -10
+					}
+				}
             },
 			credits: {
                 enabled: false
