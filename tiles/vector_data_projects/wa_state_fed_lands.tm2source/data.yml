@@ -1,0 +1,57 @@
+_prefs: 
+  disabled: []
+  inspector: false
+  saveCenter: true
+attribution: Washington Federal Lands
+center: 
+  - -120.56396484375
+  - 47.26059219342468
+  - 7
+description: Washington State Federal Lands v1
+Layer: 
+  - id: test
+    Datasource: 
+      file: /Users/blairdeaver/Downloads/state_plane/publiclands_federal_simple.shp
+      type: shape
+    description: Washington Federal Lands
+    fields: 
+      Abbreviati: String
+      AcquiredDa: String
+      Acquisit_1: Number
+      Acquisitio: String
+      DataProv_1: Number
+      DataProvid: Number
+      Descriptio: String
+      Fund: String
+      FundingAcr: Number
+      FundingAmo: Number
+      FundingS_1: String
+      FundingSou: String
+      FundingTyp: Number
+      GeneralDes: String
+      GISAcres: Number
+      Integrated: String
+      IntendedUs: String
+      Investment: String
+      LandUse: Number
+      LandUseAcr: Number
+      LandUseDes: String
+      LandUseTyp: Number
+      Name: String
+      OBJECTID: Number
+      OwnerName: String
+      OwnershipA: Number
+      OwnershipT: Number
+      OwnerType: Number
+      PolyID: Number
+      PrimaryDat: Number
+      PrimaryLan: Number
+      PseudoParc: Number
+      Shape_ST_1: Number
+      Shape_ST_2: Number
+    properties: 
+      "buffer-size": 8
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+maxzoom: 14
+minzoom: 7
+name: Washington State Federal Lands
