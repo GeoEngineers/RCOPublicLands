@@ -204,7 +204,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		var selectedVal = $('#selectStateInput').val();
 		$('#selectAreaInput').css("display", "none");
 		_.each(MainApplication.boundaries, function(boundary){
-			if(MainApplication.jsonLayer !== null)
+			if(MainApplication.jsonLayer !== null && boundary.jsonLayer !== null)
 			{
 				if(MainApplication.Map.hasLayer(boundary.jsonLayer)){
 					MainApplication.Map.removeLayer(boundary.jsonLayer);	
@@ -214,54 +214,68 @@ var MapView = Backbone.Marionette.Layout.extend({
 				MainApplication.boundarySelected = boundary;
 				$('#selectAreaInput').css("display", "block");
 				$('#selectAreaInput').empty().append('<option value="">- Select Area -</option>');
-				var features = boundary.json.features;
-				features.sort(function(a,b){
-					var returnval = 0;
-					if(a.properties[boundary.NameField] < b.properties[boundary.NameField])
-						returnval = -1;
-					if(a.properties[boundary.NameField] > b.properties[boundary.NameField])
-						returnval = 1;
-					return returnval;
-				});	
-				_.each(features, function(feature){
-					$("#selectAreaInput").append(new Option(boundary.SelectText + ' ' + feature.properties[boundary.NameField], feature.properties[boundary.NameField]));
-					feature.fill =true;
-				});
+				
 				if(boundary.jsonLayer === null)
 				{
-					boundary.jsonLayer = L.geoJson(boundary.json, {
-						style: function (feature) {
-							return {
-      							fillColor: boundary.color,
-      							fillOpacity: 0.02,
-				                weight: 1,
-				                opacity: 1,
-				                color: boundary.color,
-				                dashArray: '3'
-						    };
-						},
-						fill: true,
-						onEachFeature: function (feature, layer) {
-							layer.bindLabel(boundary.SelectText + ' ' + feature.properties[boundary.NameField], { noHide: true });
-							layer.on('click', function(e){
-								$('#selectAreaInput').val(feature.properties[boundary.NameField]);
+					$.getJSON(boundary.jsonUrl, function(data) {
+						boundary.json = data;
+						var features = boundary.json.features;
+						console.log(features);
+						features.sort(function(a,b){
+							var returnval = 0;
+							if(a.properties[boundary.NameField] < b.properties[boundary.NameField])
+								returnval = -1;
+							if(a.properties[boundary.NameField] > b.properties[boundary.NameField])
+								returnval = 1;
+							return returnval;
+						});	
+						_.each(features, function(feature){
+							$("#selectAreaInput").append(new Option(boundary.SelectText + ' ' + feature.properties[boundary.NameField], feature.properties[boundary.NameField]));
+							feature.fill =true;
+						});
 
-								MainApplication.Map.closePopup();
+						boundary.jsonLayer = L.geoJson(boundary.json, {
+							style: function (feature) {
+								return {
+	      							fillColor: boundary.color,
+	      							fillOpacity: 0.02,
+					                weight: 1,
+					                opacity: 1,
+					                color: boundary.color,
+					                dashArray: '3'
+							    };
+							},
+							fill: true,
+							onEachFeature: function (feature, layer) {
+								layer.bindLabel(boundary.SelectText + ' ' + feature.properties[boundary.NameField], { noHide: true });
+								layer.on('click', function(e){
+									$('#selectAreaInput').val(feature.properties[boundary.NameField]);
+									MainApplication.Map.closePopup();
+									dc.areaChange(false);
+								});
+							}
+						});
+						MainApplication.Map.addLayer(boundary.jsonLayer);
 
-								dc.areaChange(false);
-								/*if(MainApplication.selectedBoundary !== undefined)
-								{
-									if(MainApplication.Map.hasLayer(MainApplication.selectedBoundary)){
-											MainApplication.Map.removeLayer(MainApplication.selectedBoundary);	
-										}
-								}
-								MainApplication.selectedBoundary = L.polygon(e.target._latlngs).bindLabel(boundary.SelectText + ' ' + feature.properties[boundary.NameField], { noHide: true });
-								MainApplication.Map.addLayer(MainApplication.selectedBoundary);*/
-							});
-						}
 					});
 				}
-				MainApplication.Map.addLayer(boundary.jsonLayer);
+				else
+				{
+					var features = boundary.json.features;
+						features.sort(function(a,b){
+							var returnval = 0;
+							if(a.properties[boundary.NameField] < b.properties[boundary.NameField])
+								returnval = -1;
+							if(a.properties[boundary.NameField] > b.properties[boundary.NameField])
+								returnval = 1;
+							return returnval;
+						});	
+						_.each(features, function(feature){
+							$("#selectAreaInput").append(new Option(boundary.SelectText + ' ' + feature.properties[boundary.NameField], feature.properties[boundary.NameField]));
+							feature.fill =true;
+						});
+						MainApplication.Map.addLayer(boundary.jsonLayer);
+				}
 				//console.log(boundary.json.features);
 			}
 		})

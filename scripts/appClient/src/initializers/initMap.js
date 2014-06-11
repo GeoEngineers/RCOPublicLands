@@ -28,7 +28,8 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
 			NameField: "COUNTY_NM",
 			SelectText: "",
 			sums: sums_counties,
-			json: counties,
+			jsonUrl: "./scripts/appClient/src/extensions/counties.geojson",
+			json: null,
 			jsonLayer: null,
 			color: "red"
 		};
@@ -38,7 +39,8 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
 			NameField: "WRIA_NM",
 			SelectText: "",
 			sums: sums_wria,
-			json: wrias,
+			jsonUrl: "./scripts/appClient/src/extensions/wrias.geojson",
+			json: null,
 			jsonLayer: null,
 			color: "blue"
 		};
@@ -48,7 +50,8 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
 			NameField: "DISTRICT_NR",
 			SelectText: "District",
 			sums: sums_congressional_districts,
-			json: congressionaldistricts,
+			jsonUrl: "./scripts/appClient/src/extensions/congressionaldistricts.geojson",
+			json: null,
 			jsonLayer: null,
 			color: "green"
 		};
@@ -58,7 +61,8 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
 			NameField: "DISTRICT_NR",
 			SelectText: "District",
 			sums: sums_legdistricts,
-			json: legislativedistricts,
+			jsonUrl: "./scripts/appClient/src/extensions/legislativedistricts.geojson",
+			json: null,
 			jsonLayer: null,
 			color: "orange"
 		};
