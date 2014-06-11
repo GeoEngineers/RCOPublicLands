@@ -1,4 +1,5 @@
 BootstrapVars = {} || BootstrapVars;
+
 BootstrapVars.areaInformation = [
 	{
 		layerGroupName: "agency",
@@ -26,6 +27,55 @@ BootstrapVars.areaInformation = [
 	},
 
 ];
+
+
+
+BootstrapVars.boundaries = [
+ {
+			Id: 1,
+			Name: "Counties",
+			NameField: "COUNTY_NM",
+			SelectText: "",
+			sums: sums_counties,
+			jsonUrl: "./scripts/appClient/src/extensions/counties.geojson",
+			json: null,
+			jsonLayer: null,
+			color: "red"
+},
+{
+			Id: 2,
+			Name: "WRIAs",
+			NameField: "WRIA_NM",
+			SelectText: "",
+			sums: sums_wria,
+			jsonUrl: "./scripts/appClient/src/extensions/wrias.geojson",
+			json: null,
+			jsonLayer: null,
+			color: "blue"
+},
+{
+			Id: 3,
+			Name: "Congressional Districts",
+			NameField: "DISTRICT_NR",
+			SelectText: "District",
+			sums: sums_congressional_districts,
+			jsonUrl: "./scripts/appClient/src/extensions/congressionaldistricts.geojson",
+			json: null,
+			jsonLayer: null,
+			color: "green"
+},
+{
+			Id: 4,
+			Name: "Legislative Districts",
+			NameField: "DISTRICT_NR",
+			SelectText: "District",
+			sums: sums_legdistricts,
+			jsonUrl: "./scripts/appClient/src/extensions/legislativedistricts.geojson",
+			json: null,
+			jsonLayer: null,
+			color: "orange"
+}];
+
 
 BootstrapVars.areaStats = [
 	{

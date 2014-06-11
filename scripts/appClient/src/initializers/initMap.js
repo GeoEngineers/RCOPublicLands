@@ -22,50 +22,10 @@ MainApplication.pageInitializer[this_page_name].on("start", function (options) {
 		}
 
 		MainApplication.boundaries = [];
-		var countiesBoundary = {
-			Id: 1,
-			Name: "Counties",
-			NameField: "COUNTY_NM",
-			SelectText: "",
-			sums: sums_counties,
-			json: counties,
-			jsonLayer: null,
-			color: "red"
-		};
-		var wriasBoundary = {
-			Id: 2,
-			Name: "WRIAs",
-			NameField: "WRIA_NM",
-			SelectText: "",
-			sums: sums_wria,
-			json: wrias,
-			jsonLayer: null,
-			color: "blue"
-		};
-		var congressionalDistictsBoundary = {
-			Id: 3,
-			Name: "Congressional Districts",
-			NameField: "DISTRICT_NR",
-			SelectText: "District",
-			sums: sums_congressional_districts,
-			json: congressionaldistricts,
-			jsonLayer: null,
-			color: "green"
-		};
-		var legislativeDistrictsBoundary = {
-			Id: 4,
-			Name: "Legislative Districts",
-			NameField: "DISTRICT_NR",
-			SelectText: "District",
-			sums: sums_legdistricts,
-			json: legislativedistricts,
-			jsonLayer: null,
-			color: "orange"
-		};
-		MainApplication.boundaries.push(countiesBoundary);
-		MainApplication.boundaries.push(wriasBoundary);
-		MainApplication.boundaries.push(congressionalDistictsBoundary);
-		MainApplication.boundaries.push(legislativeDistrictsBoundary);
+		_.each(BootstrapVars.boundaries, function(boundary)
+		{
+			MainApplication.boundaries.push(boundary);
+		});
 
 		//continue app as normal after, might become a callback to sync queue depending on promise structure
 		MainApplication.models.todos = new Todos();
