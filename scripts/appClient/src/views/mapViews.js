@@ -711,7 +711,7 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 	toggleRightMenu : function(ev){	
 		if(MainApplication.views.mapView.mapPaneView.slide._state === "closed"){
 			MainApplication.views.mapView.mapPaneView.slide.open();
-            $("#toggleQuestionButton").animate({"margin-right": "300px"});
+            $("#toggleQuestionButton").animate({"margin-right": "358px"});
 		}else{
 			MainApplication.views.mapView.mapPaneView.slide.close();
             $("#toggleQuestionButton").animate({"margin-right": "0px"});
@@ -1169,7 +1169,7 @@ var WelcomeView = Backbone.Marionette.ItemView.extend({
 	closeModal: function () {			 
 		MainApplication.modalRegion.hideModal();
 		$("#SummaryPaneSlideOut").css("display","block");
-            $("#toggleQuestionButton").css({"margin-right": "300px"});
+        $("#toggleQuestionButton").css({"margin-right": "358px"});
 		MainApplication.views.mapView.mapPaneView.slide.open();
 		MainApplication.views.mapSelectorSlideView.toggleSlide();
 		MainApplication.views.mapView.loadToolTips();

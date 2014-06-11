@@ -1281,6 +1281,9 @@ svg {
 	font-size:13pt;
 }
 
+#lnkHelpMenu{
+	color:#FFFFFF;
+}
 #lnkMapsSlideToggle {
     border: 1px solid #DDDDDD;
     display: block;
