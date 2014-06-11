@@ -866,8 +866,19 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			}
 		}
 	},
+	formatCommas: function(nStr){
+		nStr += '';
+		x = nStr.split('.');
+		x1 = x[0];
+		x2 = x.length > 1 ? '.' + x[1] : '';
+		var rgx = /(\d+)(\d{3})/;
+		while (rgx.test(x1)) {
+			x1 = x1.replace(rgx, '$1' + ',' + '$2');
+		}
+		return x1 + x2;
+	},
 	formatNumber: function(value, currency){
-		return parseFloat(value, 10).toFixed(currency ? 2 : 0).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString();
+		return this.formatCommas(parseFloat(value, 10).toFixed(currency ? 2 : 0).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
 	},	
 	getVisibleAreas: function(){
 		return _.filter(BootstrapVars.areaStats, function(area){ 
