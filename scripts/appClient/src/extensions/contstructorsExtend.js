@@ -189,6 +189,12 @@ _.extend(GeoAppBase, {
 		this.localDatabaseCollectionClear("todoItems");
 		this.localDatabaseCollectionClear("todoItemQueue");
 	},
+	showAppLoadingStart: function(){
+		$("#loadingDiv").css({"display":"block"});
+	},
+	showAppLoadingEnd: function(){
+		$("#loadingDiv").css({"display":"none"});
+	},
 	storageGet: function(cookie){
 		var returnVal;
 		if(window.localStorage){

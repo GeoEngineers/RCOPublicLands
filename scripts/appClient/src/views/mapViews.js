@@ -186,6 +186,7 @@ var MapView = Backbone.Marionette.Layout.extend({
         }
     },
 	boundaryChange: function(){
+		GeoAppBase.showAppLoadingStart();
 		_.each(BootstrapVars.areaStats, function(area){
 				area.total_acres = area.starting_total_acres;
 				area.total_cost = area.starting_total_cost;
@@ -202,6 +203,9 @@ var MapView = Backbone.Marionette.Layout.extend({
 			}
 		}
 		var selectedVal = $('#selectStateInput').val();
+		if(selectedVal === ""){
+			GeoAppBase.showAppLoadingEnd();
+		}
 		$('#selectAreaInput').css("display", "none");
 		_.each(MainApplication.boundaries, function(boundary){
 			if(MainApplication.jsonLayer !== null && boundary.jsonLayer !== null)
@@ -256,7 +260,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 							}
 						});
 						MainApplication.Map.addLayer(boundary.jsonLayer);
-
+						GeoAppBase.showAppLoadingEnd();
 					});
 				}
 				else
@@ -275,10 +279,11 @@ var MapView = Backbone.Marionette.Layout.extend({
 							feature.fill =true;
 						});
 						MainApplication.Map.addLayer(boundary.jsonLayer);
+						GeoAppBase.showAppLoadingEnd();
 				}
 				//console.log(boundary.json.features);
 			}
-		})
+		});
 	},
 	areaChange: function(zoom)
 	{

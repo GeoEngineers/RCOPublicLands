@@ -6,6 +6,7 @@ MainApplication.Templates.MapTemplate = [
 		"<div id='connectionStatus'><img src='./content/images/38-1.gif'><span class='txt'> Re-connecting...</span></div>",
 		"<select name='selectState' id='selectStateInput' class='form-control'>",
 			"<option value=''>- Select Boundary -</option>",
+			"<option value=''>No Boundary</option>",
 			"<option value='Counties'>Counties</option>",
 			"<option value='Legislative Districts'>Legislative Districts</option>",
 			"<option value='WRIAs'>WRIAs</option>",
