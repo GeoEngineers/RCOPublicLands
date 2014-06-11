@@ -860,6 +860,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		this.loadSummaryText(this.type);
 		var selectedAreas = this.getVisibleAreas();
 		var barChartSeries = [];
+		var xAxisTitle = "Total " + this.type.replace("total_", "");
 
 		_.each(selectedAreas, function(area){
 			var val = 0;
@@ -880,11 +881,13 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			},
 			title: {
 				text: "LayerType Category Compared",
-				style: { "font-size" : "9pt" },
-				align: "left"
+				style: { "font-size" : "9.5pt" },
+				align: "center",
+				margin: 5,
+				x: -20 
 			},
 			xAxis: {
-				categories: [dc.type]  // ['Total Acres'] // , 'Total Cost', 'Total Revenue'
+				categories: [xAxisTitle]  // ['Total Acres'] // , 'Total Cost', 'Total Revenue'
 			},
 			yAxis: {
 				title: {
@@ -894,9 +897,11 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			series: barChartSeries,
 			legend: {
 				enabled: false
-			}
-		});		
-
+			},
+			exporting: {
+                enabled: true
+            }
+		});
 		return false;
 	},
 	loadD3PieLayerComparison: function(){	
@@ -904,8 +909,9 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		var data = this.getVisibleAreas();
 		var colorRange = [];
 		this.type = $( "#ddlSummaryType" ).val();
-
+		var xAxisTitle = "Total " + this.type.replace("total_", "");
 		var pieChartSeries = [];
+		
 		_.each(data, function(area){
 			var val = 0;
 			switch(dc.type)
@@ -944,8 +950,10 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			},
 			title: {
 				text: "LayerType Category Compared",
-				style: { "font-size" : "10pt" },
-				align: "left"
+				style: { "font-size" : "9.5pt" },
+				align: "center",
+				margin: 5,
+				x: -20 
 			},
 			tooltip: {
 				pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -965,7 +973,10 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				name: this.type,
 				innerSize: '40%',
 				data: pieChartSeries
-			}]
+			}],
+			exporting: {
+                enabled: true
+            }	
 		});
 		
 		return false;
