@@ -304,8 +304,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 						if(minY > coords.lat)
 							minY = coords.lat;
 				});
-				var southWest = L.latLng(minY, minX),
-					northEast = L.latLng(maxY, maxX),
+				var southWest = L.latLng(minY - 0.2, minX),
+					northEast = L.latLng(maxY, maxX + 0.2),
 					bounds = L.latLngBounds(southWest, northEast);
 				if(zoom !== false){
 					MainApplication.Map.fitBounds(bounds);
