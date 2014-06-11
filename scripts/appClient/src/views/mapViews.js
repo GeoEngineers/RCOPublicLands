@@ -880,7 +880,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				renderTo: 'barChartLayer'
 			},
 			title: {
-				text: "LayerType Category Compared",
+				text: MainApplication.views.mapView.currentLayersType.toUpperCase(),
 				style: { "font-size" : "9.5pt" },
 				align: "center",
 				margin: 5,
@@ -949,7 +949,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				plotShadow: false
 			},
 			title: {
-				text: "LayerType Category Compared",
+				text: MainApplication.views.mapView.currentLayersType.toUpperCase(),
 				style: { "font-size" : "9.5pt" },
 				align: "center",
 				margin: 5,
