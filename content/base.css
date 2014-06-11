@@ -177,9 +177,6 @@
     z-index: 1030;
     display: none;
 }
-/*#barChartBlock svg > text:last, #pieChartBlock svg > text:last {
-    display: none;
-}*/
 #helpMenu {
     text-align: right;
 }

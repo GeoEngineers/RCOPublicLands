@@ -900,6 +900,9 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			},
 			exporting: {
                 enabled: true
+            },
+			credits: {
+                enabled: false
             }
 		});
 		return false;
@@ -976,7 +979,10 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			}],
 			exporting: {
                 enabled: true
-            }	
+            },
+			credits: {
+                enabled: false
+            }
 		});
 		
 		return false;
