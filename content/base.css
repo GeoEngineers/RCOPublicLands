@@ -178,7 +178,7 @@
     display: none;
 }
 #barChartBlock svg > text, #pieChartBlock svg > text {
-    display: none;
+    /*display: none;*/
 }
 #helpMenu {
     text-align: right;

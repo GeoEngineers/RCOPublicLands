@@ -865,7 +865,9 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				renderTo: 'barChartLayer'
 			},
 			title: {
-				text: ''
+				text: "LayerType Category Compared",
+				style: { "font-size" : "9pt" },
+				align: "left"
 			},
 			xAxis: {
 				categories: [dc.type]  // ['Total Acres'] // , 'Total Cost', 'Total Revenue'
@@ -927,7 +929,9 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				plotShadow: false
 			},
 			title: {
-				text: ''
+				text: "LayerType Category Compared",
+				style: { "font-size" : "10pt" },
+				align: "left"
 			},
 			tooltip: {
 				pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
