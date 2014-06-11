@@ -40,7 +40,7 @@
 }
 #SummaryPaneSlideOut button{
     color: #000000;
-	margin-bottom:5px;
+	margin-bottom:10px;
 }
 
 #expandSummaryButton {
@@ -52,6 +52,11 @@
 }
 #summaryLayer label {
     font-weight: normal;
+}
+#summaryHelpMenu{
+	font-size:10pt;
+	margin-top:10px;
+	text-align:right;
 }
 
 #smartmineLogo{
@@ -191,7 +196,7 @@
 }
 #summarySelectors {
     clear: both;
-    margin: 5px 0 15px;
+    margin: 10px 0 15px;
     vertical-align: middle;
     width: 308px;
 }
