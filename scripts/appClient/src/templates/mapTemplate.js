@@ -16,7 +16,7 @@ MainApplication.Templates.MapTemplate = [
 			"<option value=''>- Select Area -</option>",
 		"</select>",
     	"<div id='toggleQuestionButton' class='btn'><i class='fa fa-info fa-2x'></i></div>",
-		"<div id='map' style=\"top: 35px\"></div>",
+		"<div id='map' style=\"top: 35px;\"></div>",
 	"</div>"
 ].join("\n");
 
