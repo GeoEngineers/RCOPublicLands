@@ -880,14 +880,21 @@ a .genericHomeButton{
     opacity: 0.25;
 }
 
-.qtip-wwc, .qtip-wwc *{
-    background: none !important;
-    color: #FFFFFF;
-	border-style:none;
-	font-size:13pt;
+.qtip{
+	border-radius: 6px;
 }
-.qtip-default{
-	border-style:none !important;
+.qtip-dark {
+	background-color: #222222;
+}
+.qtip-content {
+    border: 1px solid #999999;
+	border-radius: 6px;
+    font-size: 13pt;
+    overflow: hidden;
+    padding: 7px 12px 10px;
+    position: relative;
+    text-align: left;
+    word-wrap: break-word;
 }
 
 .modal-header{

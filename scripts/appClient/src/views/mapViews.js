@@ -115,8 +115,13 @@ var MapView = Backbone.Marionette.Layout.extend({
                 hide: false,
                 show: false,
                 style: {
-                    classes: 'qtip-dark',
-                }
+					classes: 'qtip-dark',
+					tip: {
+						width: 20,
+						height: 20,
+						color: '#222222'
+					}
+				}
             }
         };
 		var ToolTipClass2 = function () {
@@ -133,7 +138,10 @@ var MapView = Backbone.Marionette.Layout.extend({
                 style: {
                     classes: 'qtip-dark',
                     tip: {
-                        corner: 'middle right'
+						width: 20,
+						height: 20,
+                        corner: 'middle right',
+						color: '#222222'
                     }
                 }
             }
@@ -152,7 +160,10 @@ var MapView = Backbone.Marionette.Layout.extend({
                 style: {
                     classes: 'qtip-dark',
                     tip: {
-                        corner: 'middle'
+						width: 20,
+						height: 20,
+                        corner: 'middle',
+						color: '#222222'
                     }
                 }
             }
