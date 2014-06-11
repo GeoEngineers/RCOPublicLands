@@ -1060,7 +1060,9 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 	showHelpMenu : function(ev){
 		//console.log("Help Text here");
 		//alert("Help Text Here");
-		MainApplication.views.mapView.loadGuidedHelp();	
+
+		var areaInformationView = new AreaInformationView({});
+		MainApplication.modalRegion.show(areaInformationView);
 		return false;
 	},	
 	synchronizedMouseOver: function(ev){
@@ -1096,6 +1098,21 @@ var WelcomeView = Backbone.Marionette.ItemView.extend({
 		MainApplication.views.mapView.mapPaneView.slide.open();
 		MainApplication.views.mapSelectorSlideView.toggleSlide();
 		MainApplication.views.mapView.loadToolTips();
+		return false;
+	}	
+});
+
+var AreaInformationView = Backbone.Marionette.ItemView.extend({
+    template: function (serialized_model) {
+		return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.AreaInformationTemplate);
+    },
+	initialize: function(options){
+	},
+    events: {
+		"click #btnCancelInfo": "closeModal",
+    },
+	closeModal: function () {			 
+		MainApplication.modalRegion.hideModal();
 		return false;
 	}	
 });

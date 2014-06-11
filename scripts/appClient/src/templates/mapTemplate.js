@@ -177,3 +177,19 @@ MainApplication.Templates.GuidedHelpTemplate = [
     "<div class='mask' style='width: 100%; height: 100%; position: absolute; left: 0px; top: 0px; background-color: #000000; opacity:0.4; filter:alpha(opacity=40); '>",
 	"</div>"
 ].join("\n");
+
+MainApplication.Templates.AreaInformationTemplate = [
+	"<div class=\"modal-dialog\">",
+		"<div class=\"modal-content\">",
+			"<div class=\"modal-header\">",
+				"<h4 id=\"mySlideLabel\">About This Data</h4>",
+			"</div>",
+			"<div class=\"modal-body\">",
+				"<div id='areaInfoDiv'></div>",
+			"</div>",
+			"<div class=\"modal-footer\">",
+				"<button class=\"btn btn-primary\" type=\"button\" id=\"btnCancelInfo\">Close</button>",
+			"</div>",
+		"</div>",
+	"</div>",
+].join("\n");
