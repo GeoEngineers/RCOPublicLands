@@ -49,7 +49,7 @@ MainApplication.Templates.MapSelectorSlideTemplate = [
 MainApplication.Templates.MapPaneTemplate = [
 	"<div id='summaryPanelBlock'>",
 		"<div id='summaryMainHead'>",
-			"<div id='expandSummaryButton' class='expandable'><a href='#'>&lt;&lt;&lt; Expand</a></div>",
+			"<div id='expandSummaryButton' class='expandable'><button class='btn'>&lt;&lt;&lt; Expand</button></div>",
 			"<div id='summaryHeaderName'>{{SummaryTitle}}</div>",
 		"</div>",
 		"<div id='pieChartBlock'>",
@@ -60,7 +60,7 @@ MainApplication.Templates.MapPaneTemplate = [
 		"</div>",
 		"<div id='summarySelectors'>",
 			"<div id='summaryTypeSelector'>",
-				"<select id=\"ddlSummaryType\">",
+				"<select id=\"ddlSummaryType\" class='form-control'>",
 					"<option value=\"total_acres\" selected>Total Acres</option>",
 					"<option value=\"total_cost\">Total Cost</option>",
 					"<option value=\"total_revenue\">Total Revenue</option>",

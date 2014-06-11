@@ -28,7 +28,7 @@
 }
 
 #SummaryPaneSlideOut {
-    background-color:  rgba(0, 0, 0, .8);
+    background-color:  rgba(13, 106, 132, .8);
     border-left: 1px solid #DDDDDD;
 	border-top: 1px solid #DDDDDD;
     border-radius: 0px;
@@ -38,8 +38,9 @@
     color: #DDDDDD;
     display: none;
 }
-#SummaryPaneSlideOut a{
-    color: #dddddd;
+#SummaryPaneSlideOut button{
+    color: #000000;
+	margin-bottom:5px;
 }
 
 #expandSummaryButton {
@@ -186,17 +187,19 @@
 }
 #summaryMainHead{
 	font-weight: bold;
-	width: 260px;
+	width: 308px;
 }
 #summarySelectors {
     clear: both;
     margin: 5px 0 15px;
     vertical-align: middle;
-    width: 260px;
+    width: 308px;
 }
 #summaryHeaderName {
     display: inline;
     float:right;
+	font-size:13pt;
+	vertical-align:middle;
 }
 #summaryHeaderOptions {
     display: inline;
