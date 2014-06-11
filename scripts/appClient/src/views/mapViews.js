@@ -812,6 +812,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		"click #summaryLayer" : "setSummaryLayer"
 	},
 	onShow: function(){
+		//initially hide date range
 		$( window ).smartresize(function() {
 			MainApplication.views.mapView.showRightSlide();
 		});
@@ -994,12 +995,16 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		//var data = this.getVisibleAreas();
 		var isCurrency = typeView === "total_acres" ? "" : "$";
 		
-
-		_.each(BootstrapVars.areaInformation, function(area){
-			if(area.layerGroupName===MainApplication.views.mapView.currentLayersType){
-				$("#summaryDateRange").html("Data last updated between "+area.startDate+" and " +area.endDate);
-			}
-		});
+		if(MainApplication.views.mapView.currentLayersType==="aquisitions"){
+			$("#summaryDateRange").css({"display":"block"});
+			_.each(BootstrapVars.areaInformation, function(area){
+				if(area.layerGroupName===MainApplication.views.mapView.currentLayersType){
+					$("#summaryDateRange").html("Data last updated between "+area.startDate+" and " +area.endDate);
+				}
+			});
+		}else{
+			$("#summaryDateRange").css({"display":"none"});
+		}
 
 		_.each(BootstrapVars.areaStats, function(area){
 			if(area.layerGroupName===MainApplication.views.mapView.currentLayersType){
