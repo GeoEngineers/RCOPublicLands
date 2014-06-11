@@ -1,4 +1,31 @@
 BootstrapVars = {} || BootstrapVars;
+BootstrapVars.areaInformation = [
+	{
+		layerGroupName: "agency",
+		htmlInfo: "Agency Information goes here...",
+		startDate: '1/1/2004',
+		endDate: '1/1/2014'
+	},
+	{
+		layerGroupName: "landtypes",
+		htmlInfo: "Land types Information goes here...",
+		startDate: '1/1/2004',
+		endDate: '1/1/2014'
+	},
+	{
+		layerGroupName: "aquisitions",
+		htmlInfo: "Acquisitions Information goes here...",
+		startDate: '1/1/2004',
+		endDate: '1/1/2014'
+	},
+	{
+		layerGroupName: "proposed",
+		htmlInfo: "Proposed Information goes here...",
+		startDate: '1/1/2004',
+		endDate: '1/1/2014'
+	},
+
+];
 
 BootstrapVars.areaStats = [
 	{

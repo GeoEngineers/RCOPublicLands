@@ -941,6 +941,13 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		//var data = this.getVisibleAreas();
 		var isCurrency = typeView === "total_acres" ? "" : "$";
 		
+
+		_.each(BootstrapVars.areaInformation, function(area){
+			if(area.layerGroupName===MainApplication.views.mapView.currentLayersType){
+				$("#summaryDateRange").html("Data last updated between "+area.startDate+" and " +area.endDate);
+			}
+		});
+
 		_.each(BootstrapVars.areaStats, function(area){
 			if(area.layerGroupName===MainApplication.views.mapView.currentLayersType){
 				var areaSummary = "";
@@ -1061,7 +1068,9 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		//console.log("Help Text here");
 		//alert("Help Text Here");
 
-		var areaInformationView = new AreaInformationView({});
+		var selectedAreas = this.getVisibleAreas();
+		var layerGroup = selectedAreas[0].layerGroupName;
+		var areaInformationView = new AreaInformationView({layerGroupName: layerGroup});
 		MainApplication.modalRegion.show(areaInformationView);
 		return false;
 	},	
@@ -1107,9 +1116,22 @@ var AreaInformationView = Backbone.Marionette.ItemView.extend({
 		return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.AreaInformationTemplate);
     },
 	initialize: function(options){
+		this.layerGroupName = options.layerGroupName;
 	},
     events: {
 		"click #btnCancelInfo": "closeModal",
+    },
+    onShow: function()
+    {
+    	var dc = this;
+    	var htmlInfo = "";
+		_.each(BootstrapVars.areaInformation, function(areaInformation){
+			if(dc.layerGroupName === areaInformation.layerGroupName)
+			{
+				htmlInfo = areaInformation.htmlInfo;
+			}
+		});
+		$("#areaInfoDiv").html(htmlInfo);
     },
 	closeModal: function () {			 
 		MainApplication.modalRegion.hideModal();
