@@ -1011,6 +1011,15 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 					contextButton: {
 						//y : -10
 					}
+				},
+				chartOptions: {
+					backgroundColor: {
+						linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+						stops: [
+							[0, 'rgba(13, 106, 132, 1)'],
+							[1, 'rgba(13, 106, 132, 1)']
+						]
+					}		
 				}
             },
 			credits: {
