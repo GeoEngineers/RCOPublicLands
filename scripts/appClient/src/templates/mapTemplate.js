@@ -5,8 +5,7 @@ MainApplication.Templates.MapTemplate = [
 		"This is the landing page area, you can place any content here.",
 		"<div id='connectionStatus'><img src='./content/images/38-1.gif'><span class='txt'> Re-connecting...</span></div>",
 		"<select name='selectState' id='selectStateInput' class='form-control'>",
-			"<option value=''>- Select Boundary -</option>",
-			"<option value=''>No Boundary</option>",
+			"<option value=''>- No Boundaries -</option>",
 			"<option value='Counties'>Counties</option>",
 			"<option value='Legislative Districts'>Legislative Districts</option>",
 			"<option value='WRIAs'>WRIAs</option>",
@@ -156,7 +155,7 @@ MainApplication.Templates.QuestionTemplate = [
 ].join("\n");
 
 MainApplication.Templates.HeaderTemplate = [ 
-	"<h4><img id='rcoLogo' src='./content/images/rco_logo.png' />&nbsp;WASHINGTON PUBLIC LANDS INVENTORY</h4>",
+	"<h4><img id='rcoLogo' src='./content/images/rco-logo-white.png' />&nbsp;WASHINGTON PUBLIC LANDS INVENTORY</h4>",
 ].join("\n");
 
 
