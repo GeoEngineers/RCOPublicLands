@@ -49,7 +49,7 @@ MainApplication.Templates.MapPaneTemplate = [
 	"<div id='summaryPanelBlock'>",
 		"<div id='summaryMainHead'>",
 			"<div id='expandSummaryButton' class='expandable'><a href='#'>&lt;&lt;&lt; Expand</a></div>",
-			"<div id='summaryHeaderName'>Summary</div>",
+			"<div id='summaryHeaderName'>{{SummaryTitle}}</div>",
 		"</div>",
 		"<div id='summarySelectors'>",
 			"<div id='summaryTypeSelector'>",

@@ -191,7 +191,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 				area.total_cost = area.starting_total_cost;
 				area.total_revenue = area.starting_total_revenue;
 		});
-
+		$('#selectAreaInput').val('');
 		this.loadRightSlide();
 
 		var dc = this;
@@ -417,8 +417,19 @@ var MapView = Backbone.Marionette.Layout.extend({
 		return false;
 	},	
 	loadRightSlide: function(){
+		var selectedVal = $('#selectAreaInput').val();
+		if(selectedVal === '')
+		{
+			selectedVal = "State Summary";
+		}
+		else
+		{
+			selectedVal = MainApplication.boundarySelected.SelectText + " " + selectedVal;
+		}
+
 		this.mapPaneView =  new MapPaneView({
-			activeLayers : this.activeLayers
+			activeLayers : this.activeLayers,
+			summaryText: selectedVal
 		});
 		this.showRightSlide();
 	},	
@@ -763,6 +774,12 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
     template: function (serialized_model) {
         return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.MapPaneTemplate);
     },
+    templateHelpers: function()
+    {
+    	return{
+			SummaryTitle: this.summaryText
+    	};
+    },
     initialize: function (options) {
 		this.activeLayers = options.activeLayers;
 		//this.displayMode = options.displayMode;
@@ -771,6 +788,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		this.chartDefaultWidth = 260;
 		this.currentChartHeight = this.chartDefaultHeight;				
 		this.currentChartWidth = this.chartDefaultWidth;
+		this.summaryText = options.summaryText;
     },
 	events: {
 		"click #showPieChart" : "setPieMode",
