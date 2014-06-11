@@ -866,8 +866,8 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			}
 		}
 	},
-	formatCurrency: function(value){
-		return parseFloat(value, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString();
+	formatNumber: function(value, currency){
+		return parseFloat(value, 10).toFixed(currency ? 2 : 0).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString();
 	},	
 	getVisibleAreas: function(){
 		return _.filter(BootstrapVars.areaStats, function(area){ 
@@ -1034,7 +1034,8 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		var summaryText = "";
 		var total = 0;
 		//var data = this.getVisibleAreas();
-		var isCurrency = typeView === "total_acres" ? "" : "$";
+		var isCurrency = typeView === "total_acres" ? false : true;
+		var currencyPrefix = typeView === "total_acres" ? "" : "$";
 		
 		if(MainApplication.views.mapView.currentLayersType==="aquisitions"){
 			$("#summaryDateRange").css({"display":"block"});
@@ -1068,7 +1069,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				var legendKey = $("<div>", { class: "colorKey", style: "background-color:"+area.color+";" });
 				var checkedStatus = area.visible ? " checked='true'" : "";
 				
-				areaSummary += "<div>" + legendKey[0].outerHTML + "<input type='checkbox' name='inputSummaryItem-" + area.abbrev + "' id='inputSummaryItem-"+ area.abbrev + "' data-abbr='" + area.abbrev + "' class='usePointer'"+checkedStatus+" /> <label class='usePointer' data-abbr='" + area.abbrev + "' for='inputSummaryItem-" + area.abbrev + "' >" + area.abbrev + ": " + isCurrency + dc.formatCurrency(val)+ "</label></div>";
+				areaSummary += "<div>" + legendKey[0].outerHTML + "<input type='checkbox' name='inputSummaryItem-" + area.abbrev + "' id='inputSummaryItem-"+ area.abbrev + "' data-abbr='" + area.abbrev + "' class='usePointer'"+checkedStatus+" /> <label class='usePointer' data-abbr='" + area.abbrev + "' for='inputSummaryItem-" + area.abbrev + "' >" + area.abbrev + ": " + currencyPrefix + dc.formatNumber(val, isCurrency)+ "</label></div>";
 				
 				legendKey.prependTo(areaSummary);
 				summaryText = summaryText + areaSummary;
@@ -1077,7 +1078,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		});
 		switch(typeView) {
 			case "total_acres":
-				prefixText = "Total " + this.type.replace("total_", "")  + ": " + isCurrency  + dc.formatCurrency(total)+ " ";
+				prefixText = "Total " + this.type.replace("total_", "")  + ": " + currencyPrefix  + dc.formatNumber(total, isCurrency)+ " ";
 				//summaryText = summaryText;
 				break;
 			case "total_cost":
