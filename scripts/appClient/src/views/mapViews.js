@@ -355,7 +355,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 				if(zoom !== false){
 					MainApplication.Map.fitBounds(bounds);
 				}
-				console.log(boundary.sums);
+				//console.log(boundary.sums);
 				MainApplication.selectedBoundary = L.polygon(shape._latlngs, {fillOpacity: 0.08}).bindLabel(boundary.SelectText + ' ' + shape.feature.properties[boundary.NameField].toString(), { noHide: true });
 				MainApplication.Map.addLayer(MainApplication.selectedBoundary);
 			}
@@ -424,14 +424,20 @@ var MapView = Backbone.Marionette.Layout.extend({
 		})
 		gridLayer.on('click', function(props){
 			if(props.data){
+				console.log(props.data);
+				var aqDate = props.data.Acquisitio + ' ' + props.data.Acquisit_1;
+				if(aqDate === 'undefined undefined')
+				{
+					aqDate = "N/A";
+				}
 				var markerToolTip = new MapTipView({
             		ParcelName: "Parcel",
-            		Owner: area.agency,
+            		Owner: "Unknown",
             		OwnershipType: area.agency,
             		TotalArea: props.data.GISAcres,
-            		LandUse: props.data.GISAcres,
-            		AquisitionDate: '(Available Soon)',
-            		Cost: '(Available Soon)'
+            		LandUse: area.agency,
+            		AquisitionDate: aqDate,
+            		Cost: props.data.Acquisit_2
         		});
 
 
@@ -534,7 +540,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.currentLayersType = layerType;
 		this.activeLayers = [];
 		_.each(BootstrapVars.areaStats,function(mapLayer){
-			console.log(mapLayer.layerGroupName , layerType);
+			//console.log(mapLayer.layerGroupName , layerType);
 			if(mapLayer.layerGroupName === layerType){
 				mapLayer.visible = true;
 				dc.activeLayers.push(mapLayer.abbrev);
@@ -590,9 +596,9 @@ var MapView = Backbone.Marionette.Layout.extend({
 		
 		//setup respones to click events
 		$(this.featureLayerControls._container).find("label").on("click", function(ev){
-			console.log(ev);
-			console.log($(ev.currentTarget));
-			console.log($(ev.currentTarget).children("input"));
+			//console.log(ev);
+			//console.log($(ev.currentTarget));
+			//console.log($(ev.currentTarget).children("input"));
 			setTimeout(function(){
 				//kludgy fix to prevent double clicks
 				if(ev.timeStamp !== 0){
