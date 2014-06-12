@@ -104,7 +104,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.setLegendControls();
 	},
 	resetAreaSums: function(){
-		console.log("Reseting Area Sums");
 		var summaryValues = sums_statewide;
 		//Update Bootstrap vars
 		_.each(BootstrapVars.areaStats, function(area)
@@ -112,11 +111,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 				var totalacres = 0;
 				var totalcost = 0;
 				_.each(summaryValues, function(summary){
-					
 					if(area.abbrev === summary.agency)
 					{
-							console.log(summary);
-							console.log("Updated Area!");
 							area.total_acres = summary.acres;
 							area.starting_total_acres = summary.acres;
 							area.total_cost = summary.acquisitioncost;
@@ -266,7 +262,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 					$.getJSON(boundary.jsonUrl, function(data) {
 						boundary.json = data;
 						var features = boundary.json.features;
-						console.log(features);
 						features.sort(function(a,b){
 							var returnval = 0;
 							if(a.properties[boundary.NameField] < b.properties[boundary.NameField])
@@ -284,11 +279,10 @@ var MapView = Backbone.Marionette.Layout.extend({
 							style: function (feature) {
 								return {
 	      							fillColor: boundary.color,
-	      							fillOpacity: 0.02,
+	      							fillOpacity: 0.01,
 					                weight: 1,
 					                opacity: 1,
 					                color: boundary.color,
-					                dashArray: '3'
 							    };
 							},
 							fill: true,
@@ -433,7 +427,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 				var markerToolTip = new MapTipView({
             		ParcelName: "Parcel",
             		Owner: area.agency,
-            		TotalArea: props.data.gisacres,
+            		TotalArea: props.data.GISAcres,
             		AquisitionDate: '(Available Soon)',
             		Cost: '(Available Soon)'
         		});
