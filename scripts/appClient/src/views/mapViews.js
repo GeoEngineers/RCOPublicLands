@@ -4,6 +4,9 @@ var MapView = Backbone.Marionette.Layout.extend({
     },
     initialize: function (options) {
     	var dc = this;
+
+    	this.resetAreaSums();
+
 		this.todos = options.todos;
 		this.dnrResources = options.dnrResources;
 		//examples.map-y7l23tes
@@ -100,6 +103,28 @@ var MapView = Backbone.Marionette.Layout.extend({
 		});	
 		this.setLegendControls();
 	},
+	resetAreaSums: function(){
+		console.log("Reseting Area Sums");
+		var summaryValues = sums_statewide;
+		//Update Bootstrap vars
+		_.each(BootstrapVars.areaStats, function(area)
+			{
+				var totalacres = 0;
+				var totalcost = 0;
+				_.each(summaryValues, function(summary){
+					
+					if(area.abbrev === summary.agency)
+					{
+							console.log(summary);
+							console.log("Updated Area!");
+							area.total_acres = summary.acres;
+							area.starting_total_acres = summary.acres;
+							area.total_cost = summary.acquisitioncost;
+							area.starting_total_cost = summary.acquisitioncost;
+					} 
+				});
+			});
+	},
 	loadGuidedHelp: function () {
         this.landingPageGuideView = new GuidedHelpView({
         });
@@ -186,6 +211,8 @@ var MapView = Backbone.Marionette.Layout.extend({
         $('#lnkMapsSlideToggle').qtip(myToolTip5);
 
 
+
+
         //Add Qtips - if never loaded before
         var loadedview = $.cookie('loadedView');
         //loadedview = null;
@@ -199,9 +226,9 @@ var MapView = Backbone.Marionette.Layout.extend({
 	boundaryChange: function(){
 		GeoAppBase.showAppLoadingStart();
 		_.each(BootstrapVars.areaStats, function(area){
-				area.total_acres = area.starting_total_acres;
-				area.total_cost = area.starting_total_cost;
-				area.total_revenue = area.starting_total_revenue;
+				area.total_acres = 0;
+				area.total_cost = 0;
+				area.total_revenue = 0;
 		});
 		$('#selectAreaInput').val('');
 		this.loadRightSlide();
@@ -215,8 +242,12 @@ var MapView = Backbone.Marionette.Layout.extend({
 		}
 		var selectedVal = $('#selectStateInput').val();
 		if(selectedVal === ""){
+
+    		this.resetAreaSums();
+			this.loadRightSlide();
 			GeoAppBase.showAppLoadingEnd();
 		}
+
 		$('#selectAreaInput').css("display", "none");
 		_.each(MainApplication.boundaries, function(boundary){
 			if(MainApplication.jsonLayer !== null && boundary.jsonLayer !== null)
@@ -270,6 +301,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 								});
 							}
 						});
+    					dc.resetAreaSums();
+						dc.loadRightSlide();
 						MainApplication.Map.addLayer(boundary.jsonLayer);
 						GeoAppBase.showAppLoadingEnd();
 					});
@@ -290,6 +323,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 							feature.fill =true;
 						});
 						MainApplication.Map.addLayer(boundary.jsonLayer);
+    					dc.resetAreaSums();
+						dc.loadRightSlide();
 						GeoAppBase.showAppLoadingEnd();
 				}
 				//console.log(boundary.json.features);

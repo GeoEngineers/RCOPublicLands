@@ -59,7 +59,7 @@ MainApplication.Templates.MapPaneTemplate = [
 		"</div>",
 		"<div id='summarySelectors'>",
 			"<div id='summaryTypeSelector'>",
-				"<select id=\"ddlSummaryType\" class='form-control'>",
+				"<select id=\"ddlSummaryType\" class='form-control' style='display: none'>",
 					"<option value=\"total_acres\" selected>Total Acres</option>",
 					"<option value=\"total_cost\">Total Cost</option>",
 					"<option value=\"total_revenue\">Total Revenue</option>",

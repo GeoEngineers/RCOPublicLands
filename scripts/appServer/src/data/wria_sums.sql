@@ -36,6 +36,10 @@ SELECT Sum(a.acres) as Acres, sum(a.acquisition_cost) as AcquisitionCost, b.wria
   FROM vw_rco_publiclands_dnr_aquatic a Join publiclands_wira_bnd b on
   ST_Intersects(a.geom, b.geom) Group by b.wria_nm
 Union
+SELECT Sum(a.acres) as Acres, sum(a.acquisition_cost) as AcquisitionCost, b.wria_nm as areaname, 'AQ-PARKS' as agency
+  FROM vw_rco_publiclands_acq_parks a Join publiclands_wira_bnd b on
+  ST_Intersects(a.geom, b.geom) Group by b.wria_nm
+Union
 SELECT Sum(a.acres) as Acres, sum(a.acquisition_cost) as AcquisitionCost, b.wria_nm as areaname, 'HABITAT AND PASSIVE RECREATION' as agency
   FROM vw_rco_publiclands_habitat_passive_recreation a Join publiclands_wira_bnd b on
   ST_Intersects(a.geom, b.geom) Group by b.wria_nm
