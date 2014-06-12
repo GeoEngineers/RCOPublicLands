@@ -152,7 +152,7 @@ BootstrapVars.areaStats = [
 		total_acres : 15727892.11,
 		total_cost: 1.00,
 		total_revenue: 1.00,
-		mapTarget: "smartmine.2rrltyb9",
+		mapTarget: "smartmine.r1he61or",
 		visible: true,
 		layerGroupName: "agency",
 		layerGroup: null,
