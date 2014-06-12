@@ -37,7 +37,7 @@ BootstrapVars.boundaries = [
 			NameField: "COUNTY_NM",
 			SelectText: "",
 			sums: sums_counties,
-			jsonUrl: "./scripts/appClient/src/extensions/counties.geojson",
+			jsonUrl: "./scripts/appClient/src/extensions/counties_simplified.geojson",
 			json: null,
 			jsonLayer: null,
 			color: "red"
@@ -48,7 +48,7 @@ BootstrapVars.boundaries = [
 			NameField: "WRIA_NM",
 			SelectText: "",
 			sums: sums_wria,
-			jsonUrl: "./scripts/appClient/src/extensions/wrias.geojson",
+			jsonUrl: "./scripts/appClient/src/extensions/wrias_simplified.geojson",
 			json: null,
 			jsonLayer: null,
 			color: "blue"
@@ -59,7 +59,7 @@ BootstrapVars.boundaries = [
 			NameField: "DISTRICT_NR",
 			SelectText: "District",
 			sums: sums_congressional_districts,
-			jsonUrl: "./scripts/appClient/src/extensions/congressionaldistricts.geojson",
+			jsonUrl: "./scripts/appClient/src/extensions/congressionaldistricts_simplified.geojson",
 			json: null,
 			jsonLayer: null,
 			color: "green"
@@ -70,7 +70,7 @@ BootstrapVars.boundaries = [
 			NameField: "DISTRICT_NR",
 			SelectText: "District",
 			sums: sums_legdistricts,
-			jsonUrl: "./scripts/appClient/src/extensions/legislativedistricts.geojson",
+			jsonUrl: "./scripts/appClient/src/extensions/legislativedistricts_simplified.geojson",
 			json: null,
 			jsonLayer: null,
 			color: "orange"
