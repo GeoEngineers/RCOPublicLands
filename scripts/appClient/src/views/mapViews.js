@@ -416,7 +416,12 @@ var MapView = Backbone.Marionette.Layout.extend({
 		};
 		return false;
 	},
+	 formatJSONDate: function(jsonDate) {
+		  var newDate = new Date(parseInt(jsonDate));
+		  return newDate;
+	},
 	createGrid: function(gridLayer, area){	
+		var dc = this;
 		gridLayer.on('mouseover', function(e){ 
 			if(e.data){ info.update(e); }
 		}).on('mouseout', function(e){ 
@@ -425,14 +430,18 @@ var MapView = Backbone.Marionette.Layout.extend({
 		gridLayer.on('click', function(props){
 			if(props.data){
 				console.log(props.data);
-				var aqDate = props.data.Acquisitio + ' ' + props.data.Acquisit_1;
-				if(aqDate === 'undefined undefined')
+				var aqDate = props.data.Acquisit_1;
+				if(aqDate === undefined || aqDate === 0)
 				{
-					aqDate = "N/A";
+					aqDate = "";
+				}
+				else
+				{
+					aqDate =props.data.Acquisit_1;
 				}
 				var markerToolTip = new MapTipView({
-            		ParcelName: "Parcel",
-            		Owner: "Unknown",
+            		ParcelName: props.data.Parcel,
+            		Owner:  props.data.OwnerName,
             		OwnershipType: area.agency,
             		TotalArea: props.data.GISAcres,
             		LandUse: area.agency,
