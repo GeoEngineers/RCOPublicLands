@@ -171,12 +171,12 @@ BootstrapVars.areaStats = [
 		total_acres : 15727892.11,
 		total_cost: 1.00,
 		total_revenue: 1.00,
-		mapTarget: "smartmine.r1he61or",
+		mapTarget: "smartmine.q17qr529",
 		visible: true,
 		layerGroupName: "agency",
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#C3FDB8'
+		color: '#73B273'
 	},	
 	{
 		abbrev: "AQ-DFW",
