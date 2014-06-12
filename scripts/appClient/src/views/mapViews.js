@@ -427,10 +427,13 @@ var MapView = Backbone.Marionette.Layout.extend({
 				var markerToolTip = new MapTipView({
             		ParcelName: "Parcel",
             		Owner: area.agency,
+            		OwnershipType: area.agency,
             		TotalArea: props.data.GISAcres,
+            		LandUse: props.data.GISAcres,
             		AquisitionDate: '(Available Soon)',
             		Cost: '(Available Soon)'
         		});
+
 
         		markerToolTip.render();
 				var popup = L.popup()
@@ -1313,17 +1316,21 @@ var MapTipView = Backbone.Marionette.ItemView.extend({
     	return {
     		ParcelName: this.ParcelName,
 			Owner: this.Owner,
+			OwnershipType: this.OwnershipType,
 			TotalArea: this.TotalArea,
 			AquisitionDate: this.AquisitionDate,
+			LandUse: this.LandUse,
 			Cost: this.Cost
     	}
     },
     initialize: function (options) {
-		this.ParcelName = options.ParcelName;
-		this.Owner = options.Owner;
-		this.TotalArea = options.TotalArea;
-		this.AquisitionDate = options.AquisitionDate;
-		this.Cost = options.Cost;
+        this.ParcelName = options.ParcelName;
+        this.Owner = options.Owner;
+        this.OwnershipType = options.OwnershipType;
+        this.TotalArea = options.TotalArea;
+        this.LandUse = options.LandUse;
+        this.AquisitionDate = options.AquisitionDate;
+        this.Cost = options.Cost;
     },
     events: {
 		"click #btnQuestionPost": "postQuestion",
