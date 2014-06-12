@@ -127,7 +127,7 @@ BootstrapVars.areaStats = [
 		symbol: '#x214a;',
 		color: '#428BCA'
 	},
-	{
+/*	{
 		abbrev: "STATE",
 		agency: "State Lands",
 		starting_total_acres : 24098.61,
@@ -142,7 +142,8 @@ BootstrapVars.areaStats = [
 		layerGroup: null,
 		symbol: '#C9F2D0;',
 		color: '#FFFF00'
-	},	
+	},
+*/  
 	{
 		abbrev: "FEDERAL",
 		agency: "federal",
