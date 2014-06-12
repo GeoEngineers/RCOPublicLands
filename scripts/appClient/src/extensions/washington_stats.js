@@ -87,7 +87,7 @@ BootstrapVars.areaStats = [
 		total_acres : 995329.78,
 		total_cost: 1.00,
 		total_revenue: 1.00,
-		mapTarget: "smartmine.izm5nrk9",
+		mapTarget: "smartmine.fwzpk3xr",
 		visible: true,
 		layerGroupName: "agency",
 		layerGroup: null,
@@ -128,19 +128,19 @@ BootstrapVars.areaStats = [
 		color: '#428BCA'
 	},
 	{
-		abbrev: "TRIBAL",
-		agency: "tribal",
+		abbrev: "STATE",
+		agency: "State Lands",
 		starting_total_acres : 24098.61,
 		starting_total_cost: 1.00,
 		starting_total_revenue: 1.00,
 		total_acres : 24098.61,
 		total_cost: 1.00,
 		total_revenue: 1.00,
-		mapTarget: "smartmine.0eyx2yb9",
+		mapTarget: "smartmine.tzpsnhfr",
 		visible: true,
 		layerGroupName: "agency",
 		layerGroup: null,
-		symbol: '#x2190;',
+		symbol: '#C9F2D0;',
 		color: '#FFFF00'
 	},	
 	{
