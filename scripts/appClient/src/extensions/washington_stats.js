@@ -257,10 +257,10 @@ BootstrapVars.areaStats = [
 		layerGroupName: "landtypes",
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#B4D79E'
+		color: '#B2B2B2'
 	},	
 	{
-		abbrev: "RECREATION",
+		abbrev: "DEVELOPED RECREATION",
 		agency: "recreation",
 		starting_total_acres : 1,
 		starting_total_cost: 1.00,
@@ -268,7 +268,7 @@ BootstrapVars.areaStats = [
 		total_acres : 183428.78,
 		total_cost: 1.00,
 		total_revenue: 1.00,
-		mapTarget: "smartmine.nxwrvn29",
+		mapTarget: "smartmine.z2fvquxr",
 		visible: false,
 		layerGroupName: "landtypes",
 		layerGroup: null,
