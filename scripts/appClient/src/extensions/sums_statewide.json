@@ -1,1 +1,15 @@
-var sums_statewide = [{"acres":223185.66,"acquisitioncost":244779432,"agency":"AQ-DFW"},{"acres":2568731.53,"acquisitioncost":2662946,"agency":"AQ-DNR-AQUATIC"},{"acres":3197677.62,"acquisitioncost":755528212.43,"agency":"AQ-DNR-UPLANDS"},{"acres":6177.26,"acquisitioncost":74192958.49,"agency":"AQ-PARKS"},{"acres":6177.26,"acquisitioncost":74192958.49,"agency":"AQ-STATE"},{"acres":248470.37,"acquisitioncost":328937015.81,"agency":"CONSERVATION"},{"acres":86990.9199999999,"acquisitioncost":159762597.79,"agency":"DEVELOPED RECREATION"},{"acres":711650.010000001,"acquisitioncost":286865960,"agency":"DFW"},{"acres":2568731.53,"acquisitioncost":2662946,"agency":"DNR AQUATIC"},{"acres":3197677.62,"acquisitioncost":755528212.43,"agency":"DNR UPLANDS"},{"acres":16835295.9200002,"acquisitioncost":0,"agency":"FEDERAL"},{"acres":157.22,"acquisitioncost":915075,"agency":"HABITAT AND PASSIVE RECREATION"},{"acres":2973019.58,"acquisitioncost":468522767.62,"agency":"REVENUE"},{"acres":6660914.93,"acquisitioncost":1444246116.55,"agency":"STATE"}];
+var sums_statewide = [
+{"acres":223185.66,"acquisitioncost":244779432,"agency":"AQ-DFW"},
+{"acres":2568731.53,"acquisitioncost":2662946,"agency":"AQ-DNR-AQUATIC"},
+{"acres":3197677.62,"acquisitioncost":755528212.43,"agency":"AQ-DNR-UPLANDS"},
+{"acres":6177.26,"acquisitioncost":74192958.49,"agency":"AQ-PARKS"},
+{"acres":6177.26,"acquisitioncost":74192958.49,"agency":"AQ-STATE"},
+{"acres":248470.37,"acquisitioncost":328937015.81,"agency":"CONSERVATION"},
+{"acres":86990.9199999999,"acquisitioncost":159762597.79,"agency":"DEVELOPED RECREATION"},
+{"acres":711650.010000001,"acquisitioncost":286865960,"agency":"DFW"},
+{"acres":2568731.53,"acquisitioncost":2662946,"agency":"DNR AQUATIC"},
+{"acres":3197677.62,"acquisitioncost":755528212.43,"agency":"DNR UPLANDS"},
+{"acres":16835295.9200002,"acquisitioncost":0,"agency":"FEDERAL"},
+{"acres":157.22,"acquisitioncost":915075,"agency":"HABITAT AND PASSIVE RECREATION"},
+{"acres":2973019.58,"acquisitioncost":468522767.62,"agency":"REVENUE"},
+{"acres":6660914.93,"acquisitioncost":1444246116.55,"agency":"STATE"}];

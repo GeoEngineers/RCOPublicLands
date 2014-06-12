@@ -131,7 +131,7 @@ MainApplication.Templates.MapTipTemplate = [
 		"Ownership Type: {{OwnershipType}} <br />",
 		"Total Area (Acres): {{TotalArea}}<br />",
 		"Principal Land Use: {{LandUse}}<br />",
-		"Acquisition Date: <span style=\" color: #FFFF00\">{{AquisitionDate}}</span><br />",
+		"Acquisition Year: <span style=\" color: #FFFF00\">{{AquisitionDate}}</span><br />",
 		"Acquisition Cost: <span style=\" color: #FFFF00\">{{Cost}}</span><br /><br/>"
 		//"<button class=\"btn btn-primary\" type=\"button\" id=\"btnQuestionPost\" style='display: none'>Post a Question</button>",	
 ].join("\n");
