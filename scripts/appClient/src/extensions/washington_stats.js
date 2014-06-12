@@ -112,15 +112,15 @@ BootstrapVars.areaStats = [
 		color: '#FFCC00'
 	},
 	{
-		abbrev: "DNR",
-		agency: "Department of Natural Resources",
+		abbrev: "DNR UPLANDS",
+		agency: "DNR Uplands",
 		starting_total_acres : 392340.89,
 		starting_total_cost: 1.00,
 		starting_total_revenue: 1.00,
 		total_acres : 392340.89,
 		total_cost: 1.00,
 		total_revenue: 1.00,
-		mapTarget: "smartmine.to36usor",
+		mapTarget: "smartmine.evp1fw29",
 		visible: true,
 		layerGroupName: "agency",
 		layerGroup: null,
