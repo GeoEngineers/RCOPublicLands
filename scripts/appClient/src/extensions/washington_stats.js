@@ -244,7 +244,7 @@ BootstrapVars.areaStats = [
 		color: '#FF7F7F'
 	},	
 	{
-		abbrev: "HABITAT",
+		abbrev: "HABITAT AND PASSIVE RECREATION",
 		agency: "habitat",
 		starting_total_acres : 845671.68,
 		starting_total_cost: 1.00,
@@ -252,12 +252,12 @@ BootstrapVars.areaStats = [
 		total_acres : 845671.68,
 		total_cost: 1.00,
 		total_revenue: 1.00,
-		mapTarget: "smartmine.u6wxko6r",
+		mapTarget: "smartmine.yv1mj9k9",
 		visible: false,
 		layerGroupName: "landtypes",
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#CC9900'
+		color: '#B4D79E'
 	},	
 	{
 		abbrev: "RECREATION",
