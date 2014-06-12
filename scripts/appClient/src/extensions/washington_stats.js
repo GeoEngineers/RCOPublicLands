@@ -125,8 +125,26 @@ BootstrapVars.areaStats = [
 		layerGroupName: "agency",
 		layerGroup: null,
 		symbol: '#x214a;',
-		color: '#428BCA'
+		color: '#FF7F7F'
 	},
+
+{
+		abbrev: "DNR AQUATIC",
+		agency: "DNR Acquatic",
+		starting_total_acres : 392340.89,
+		starting_total_cost: 1.00,
+		starting_total_revenue: 1.00,
+		total_acres : 392340.89,
+		total_cost: 1.00,
+		total_revenue: 1.00,
+		mapTarget: "smartmine.48g58kt9",
+		visible: true,
+		layerGroupName: "agency",
+		layerGroup: null,
+		symbol: '#x214a;',
+		color: '#97DBF2'
+	},
+
 /*	{
 		abbrev: "STATE",
 		agency: "State Lands",
