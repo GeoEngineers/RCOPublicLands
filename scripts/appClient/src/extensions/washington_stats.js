@@ -130,7 +130,7 @@ BootstrapVars.areaStats = [
 
 {
 		abbrev: "DNR AQUATIC",
-		agency: "DNR Acquatic",
+		agency: "DNR Aquatic",
 		starting_total_acres : 392340.89,
 		starting_total_cost: 1.00,
 		starting_total_revenue: 1.00,
