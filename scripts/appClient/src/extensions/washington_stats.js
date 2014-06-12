@@ -212,22 +212,6 @@ BootstrapVars.areaStats = [
 		color: '#756BB1'
 	},
 	{
-		abbrev: "AQ-RCO",
-		agency: "Recreation and Conservation Office",
-		starting_total_acres : 1,
-		starting_total_cost: 1.00,
-		starting_total_revenue: 1.00,
-		total_acres : 1,
-		total_cost: 1.00,
-		total_revenue: 1.00,
-		mapTarget: "smartmine.yyb3ayvi",
-		visible: false,
-		layerGroupName: "aquisitions",
-		layerGroup: null,
-		symbol: '#x219a;',
-		color: '#229900'
-	},
-	{
 		abbrev: "AQ-DNR",
 		agency: "Department of Natural Resources",
 		starting_total_acres : 1,
@@ -252,12 +236,12 @@ BootstrapVars.areaStats = [
 		total_acres : 0,
 		total_cost: 0,
 		total_revenue: 0,
-		mapTarget: "smartmine.izm5nrk9",
+		mapTarget: "smartmine.orgdgqfr",
 		visible: false,
 		layerGroupName: "landtypes",
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#ECC92E'
+		color: '#FF7F7F'
 	},	
 	{
 		abbrev: "HABITAT",
@@ -300,12 +284,12 @@ BootstrapVars.areaStats = [
 		total_acres : 159789.33,
 		total_cost: 1.00,
 		total_revenue: 1.00,
-		mapTarget: "smartmine.tpwopqfr",
+		mapTarget: "smartmine.9cvgf1or",
 		visible: false,
 		layerGroupName: "landtypes",
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#00FFFF'
+		color: '#38A800'
 	},
 	{
 		abbrev: "PROP-RCO",
