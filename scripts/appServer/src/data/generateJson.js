@@ -3,10 +3,9 @@ var fs = require("fs");
 var data = [];
 function generateJson(){
     
-	fs.readFile('./statewide_sums.csv', 'utf8', function (err,dataset) {
+	fs.readFile('./cong_sums.csv', 'utf8', function (err,dataset) {
 	  	if (err) {
 	    	console.log(err);
-	    	res.send(err);
 	  	}
 	  	data = dataset;
 	  	var remaining = '';
@@ -30,7 +29,7 @@ function generateJson(){
 	      if(count > 0)
 	      {
 	      	var splitData = line.split('|');
-	      	var value = {"acres": parseFloat(splitData[0]), "acquisitioncost": parseFloat(splitData[1]), "agency": splitData[2].replace('\r', '').replace('"', '').replace('"', '')};
+	      	var value = {"acres": parseFloat(splitData[0]), "acquisitioncost": parseFloat(splitData[1]),"name": splitData[2].replace('\r', '').replace('"', '').replace('"', ''), "agency": splitData[3].replace('\r', '').replace('"', '').replace('"', '')};
 	      	values.push(value);
 	  	  }
 	  	  else
