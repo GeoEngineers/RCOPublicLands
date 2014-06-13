@@ -1110,7 +1110,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			$("#summaryDateRange").css({"display":"block"});
 			_.each(BootstrapVars.areaInformation, function(area){
 				if(area.layerGroupName===MainApplication.views.mapView.currentLayersType){
-					$("#summaryDateRange").html("Data last updated between "+area.startDate+" and " +area.endDate);
+					$("#summaryDateRange").html("Acquisition data compiled between "+area.startDate+" and " +area.endDate);
 				}
 			});
 		}else{
