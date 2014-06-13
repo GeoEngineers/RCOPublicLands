@@ -1,4 +1,4 @@
-Select * from 
+﻿Select * from 
 (
 SELECT Sum(a.acres) as Acres, sum(a.acquisition_cost) as AcquisitionCost, b.district_n as areaname, 'DFW' as agency
   FROM vw_rco_publiclands_wdfw a Join publiclands_2012_congressional_bnd b on
@@ -14,6 +14,10 @@ SELECT Sum(a.acres) as Acres, sum(a.acquisition_cost) as AcquisitionCost, b.dist
 Union
 SELECT Sum(a.acres) as Acres, sum(a.acquisition_cost) as AcquisitionCost, b.district_n as areaname, 'DNR UPLANDS' as agency
   FROM vw_rco_publiclands_dnr_uplands a Join publiclands_2012_congressional_bnd b on
+  ST_Intersects(a.geom, b.geom) Group by b.district_n
+Union
+SELECT Sum(a.acres) as Acres, sum(a.acquisition_cost) as AcquisitionCost, b.district_n as areaname, 'PARKS' as agency
+  FROM vw_rco_publiclands_park a Join publiclands_2012_congressional_bnd b on
   ST_Intersects(a.geom, b.geom) Group by b.district_n
 Union
 SELECT Sum(a.acres) as Acres, sum(a.acquisition_cost) as AcquisitionCost, b.district_n as areaname, 'FEDERAL' as agency
