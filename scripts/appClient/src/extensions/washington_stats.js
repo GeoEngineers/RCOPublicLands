@@ -92,7 +92,7 @@ BootstrapVars.areaStats = [
 		layerGroupName: "agency",
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#FFEBCD'
+		color: '#E69800'
 
 	},
 	{
@@ -104,12 +104,12 @@ BootstrapVars.areaStats = [
 		total_acres : 397973.62,
 		total_cost: 1,
 		total_revenue: 1,
-		mapTarget: "smartmine.zypq4cxr",
+		mapTarget: "smartmine.m8b5u3di",
 		visible: true,
 		layerGroupName: "agency",
 		layerGroup: null,
 		symbol: '#x21f4;',
-		color: '#FFCC00'
+		color: '#B4D79E'
 	},
 	{
 		abbrev: "DNR UPLANDS",
@@ -187,12 +187,12 @@ BootstrapVars.areaStats = [
 		total_acres : 1,
 		total_cost: 1.00,
 		total_revenue: 1.00,
-		mapTarget: "smartmine.izm5nrk9",
+		mapTarget: "smartmine.1b5wxw29",
 		visible: false,
 		layerGroupName: "aquisitions",
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#ECC92E'
+		color: '#E69800'
 
 	},
 	{
@@ -204,12 +204,12 @@ BootstrapVars.areaStats = [
 		total_acres : 1,
 		total_cost: 1,
 		total_revenue: 1,
-		mapTarget: "smartmine.yyb3ayvi",
+		mapTarget: "smartmine.p661dcxr",
 		visible: false,
 		layerGroupName: "aquisitions",
 		layerGroup: null,
 		symbol: '#x21f4;',
-		color: '#756BB1'
+		color: '#B4D79E'
 	},
 	{
 		abbrev: "AQ-DNR",
@@ -220,12 +220,12 @@ BootstrapVars.areaStats = [
 		total_acres : 1,
 		total_cost: 1.00,
 		total_revenue: 1.00,
-		mapTarget: "smartmine.yyb3ayvi",
+		mapTarget: "smartmine.wbvp9zfr",
 		visible: false,
 		layerGroupName: "aquisitions",
 		layerGroup: null,
 		symbol: '#x214a;',
-		color: '#347235'
+		color: '#FF7F7F'
 	},
 	{
 		abbrev: "REVENUE",
