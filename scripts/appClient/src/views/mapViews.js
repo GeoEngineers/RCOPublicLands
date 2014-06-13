@@ -4,7 +4,7 @@ var MapView = Backbone.Marionette.Layout.extend({
     },
     initialize: function (options) {
     	var dc = this;
-
+    	this.clearAreaSums();
     	this.resetAreaSums();
 
 		this.todos = options.todos;
@@ -102,6 +102,17 @@ var MapView = Backbone.Marionette.Layout.extend({
 			}
 		});	
 		this.setLegendControls();
+	},
+	clearAreaSums: function(){
+		var summaryValues = sums_statewide;
+		//Update Bootstrap vars
+		_.each(BootstrapVars.areaStats, function(area)
+			{
+				area.total_acres = 0;
+				area.starting_total_acres = 0;
+				area.total_cost = 0;
+				area.starting_total_cost = 0;
+			});
 	},
 	resetAreaSums: function(){
 		var summaryValues = sums_statewide;
