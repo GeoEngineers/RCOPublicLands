@@ -10,7 +10,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.todos = options.todos;
 		this.dnrResources = options.dnrResources;
 		//examples.map-y7l23tes
-		this.streetsMap = L.tileLayer.provider('MapBox.smartmine.erz77gb9', { minZoom:4, zIndex: 4, attribution:"" });		
+		this.streetsMap = L.tileLayer.provider('MapBox.smartmine.igcmocio', { minZoom:4, zIndex: 4, attribution:"" });		
 		this.openMap = L.tileLayer('http://b.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
     		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
     			maxZoom: 18

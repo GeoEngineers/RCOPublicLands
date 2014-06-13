@@ -57,3 +57,10 @@ SELECT Sum(a.acres) as Acres, sum(a.acquisition_cost) as AcquisitionCost, 'REVEN
   FROM vw_rco_publiclands_revenue a 
   
 ) as Agencies Order by agency
+
+Union
+
+SELECT Sum(a.acres) as Acres, sum(a.acquisition_cost) as AcquisitionCost, 'PARK' as agency
+  FROM vw_rco_publiclands_park a 
+  
+) as Agencies Order by agency
