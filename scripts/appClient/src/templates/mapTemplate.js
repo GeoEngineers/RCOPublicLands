@@ -38,7 +38,7 @@ MainApplication.Templates.MapSelectorSlideTemplate = [
 			"<div>",
 				"<a href='#' id='lnkPrismFunding' class='navLink' href='#lnkPrismFunding'>",
 					"<i class=\"icon\" style=\"margin:0px; width: 16px; height:16px; font-size: 15px;\">&#x2106;</i>",
-					"<div class='txt'>Recreation and Conservation Office Grants</div>",
+					"<div class='txt'>RCO Grants</div>",
 				"</a>",
 			"</div>",
 		"</div>",
