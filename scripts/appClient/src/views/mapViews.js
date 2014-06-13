@@ -375,12 +375,22 @@ var MapView = Backbone.Marionette.Layout.extend({
 		//Get Data from Lookup Tables
 		var summaryValues = boundary.sums;
 		//reset areaStats
-
-		_.each(BootstrapVars.areaStats, function(area){
-				area.total_acres = area.starting_total_acres;
-				area.total_cost = area.starting_total_cost;
-				area.total_revenue = area.starting_total_revenue;
-		});
+		if(selectedVal === '')
+		{
+			_.each(BootstrapVars.areaStats, function(area){
+					area.total_acres = area.starting_total_acres;
+					area.total_cost = area.starting_total_cost;
+					area.total_revenue = area.starting_total_revenue;
+			});
+		}
+		else
+		{
+			_.each(BootstrapVars.areaStats, function(area){
+					area.total_acres = 0;
+					area.total_cost = 0;
+					area.total_revenue = 0;
+			});
+		}
 		//Update Bootstrap vars
 		if(selectedVal.toString().length < 2)
 			selectedVal = "0" + selectedVal;
