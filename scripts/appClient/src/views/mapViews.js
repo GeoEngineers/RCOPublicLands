@@ -21,8 +21,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 		//	position: "front"
 		//});
 		this.baseMaps = {
-			"Streets": this.streetsMap,
-			"Open Street Map" : this.openMap,
+			"Terrain": this.streetsMap,
+			"Streets" : this.openMap,
 			"Imagery": this.imageryMap
         };
 
