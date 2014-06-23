@@ -507,10 +507,10 @@ var MapView = Backbone.Marionette.Layout.extend({
 	},
 	loadPrismFunding: function(){
 		if(MainApplication.Map.hasLayer(MainApplication.views.mapView.esriMap)){
-			$('#lnkPrismFunding').css("color","#999999");
+			$('#lnkPrismFunding').css("color","#000000");
 			MainApplication.Map.removeLayer(MainApplication.views.mapView.esriMap);	
 		}else{
-			$('#lnkPrismFunding').css("color","#FFFFFF");
+			$('#lnkPrismFunding').css("color","#9999FF");
 			MainApplication.views.mapView.esriMap.addTo(MainApplication.Map);
 		}
 		return false;
