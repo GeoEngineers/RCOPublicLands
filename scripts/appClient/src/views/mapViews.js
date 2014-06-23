@@ -74,7 +74,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 				dc.createGrid(utfGrid, area)
 			]);
 		});		
-		this.esriMap =  L.esri.clusteredFeatureLayer("http://gismanagerweb.rco.wa.gov/arcgis/rest/services/public_lands/WA_RCO_Public_Lands_Inventory_PRISM/MapServer/0/", {
+		this.esriMap =  L.esri.clusteredFeatureLayer("http://gismanagerweb.rco.wa.gov/arcgis/rest/services/public_lands/WA_RCO_Public_Lands_Inventory_PRISM_v2/MapServer/0/", {
    			cluster: new L.MarkerClusterGroup(),
    			onEachMarker: function(geojson, marker) {
    				popupText =  "<div style='overflow:scroll; max-width:350px; max-height:260px;'>";
