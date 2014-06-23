@@ -15,10 +15,10 @@
 		if(view && view.openMinimized !== undefined && view.openMinimized===true){
 			this.slideIn();
 		}else{
-			$('#FooterNavSlideOut').animate({"height":"150px"});
-            $(".leaflet-bottom").animate({"margin-bottom": "150px"});
-            $("#smartmineLogo").animate({"margin-bottom": "120px"});
-            $("#toggleQuestionButton").animate({"margin-bottom": "120px"});
+			$('#FooterNavSlideOut').animate({"height":"90px"});
+            $(".leaflet-bottom").animate({"margin-bottom": "90px"});
+            $("#smartmineLogo").animate({"margin-bottom": "60px"});
+            $("#toggleQuestionButton").animate({"margin-bottom": "60px"});
 
             smartmineLogo
 			this.slideOpen = true;

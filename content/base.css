@@ -26,7 +26,6 @@
 .navbar-fixed-top, .navbar-fixed-bottom{
 	z-index:1050;
 }
-
 #SummaryPaneSlideOut {
     background-color:  rgba(13, 106, 132, .8);
     border-left: 1px solid #DDDDDD;

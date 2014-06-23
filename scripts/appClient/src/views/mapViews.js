@@ -91,8 +91,9 @@ var MapView = Backbone.Marionette.Layout.extend({
 				marker.bindPopup(popupText);
         	}
       	});
-
+		
 		MainApplication.Map.setView([47,-120], 7);
+		L.control.navbar().addTo(MainApplication.Map);
 
 		//this.baseMapControl = L.control.layers(this.baseMaps, null, {position: 'bottomleft'}).addTo(MainApplication.Map);
 		this.mapFirstView=false;
@@ -225,7 +226,7 @@ var MapView = Backbone.Marionette.Layout.extend({
         //loadedview = null;
         if (loadedview === undefined || loadedview === null) {
             $.cookie('loadedView', "loaded", { path: '/' });
-            $(".leaflet-bottom").css({"margin-bottom": "150px"});
+            $(".leaflet-bottom").css({"margin-bottom": "90px"});
 
            this.loadGuidedHelp();
         }
