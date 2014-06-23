@@ -39,7 +39,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 		"click #toggleQuestionButton" : "loadGuidedHelp",
 		"change #selectStateInput" : "boundaryChange",
 		"change #selectAreaInput" : "areaChange",
-		"click #lnkMapsSlide" : "showMapsSlide"
+		"click #lnkMapsSlide" : "showMapsSlide",
+		"click #toggleSummaryButton" : "toggleRightMenuPane"		
 	},	
 	onShow: function(){
 		var dc=this;
@@ -517,12 +518,9 @@ var MapView = Backbone.Marionette.Layout.extend({
 	},	
 	loadRightSlide: function(){
 		var selectedVal = $('#selectAreaInput').val();
-		if(selectedVal === '')
-		{
+		if(selectedVal === '') {
 			selectedVal = "State Summary";
-		}
-		else
-		{
+		} else {
 			selectedVal = MainApplication.boundarySelected.SelectText + " " + selectedVal;
 		}
 
@@ -704,6 +702,10 @@ var MapView = Backbone.Marionette.Layout.extend({
 			MainApplication.onDeviceOffline();
 		}
 	},
+	toggleRightMenuPane: function(){
+		MainApplication.views.mapSelectorSlideView.toggleRightMenu();
+		return false;
+	},
 	toggleSetButtons: function(){
 		if(MainApplication.connectionActive === true){
 			$("#lnkToggleConnection").addClass("btn-primary");
@@ -762,8 +764,7 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 		"click #lnkAquisitions" : "showAquisitions",
 		"click #lnkLandTypes" : "showLandOptions",
 		"click #lnkProposed" : "showProposed",
-		"click #lnkPrismFunding" : "loadPrismFunding",
-		"click #lnkSlideMenu" : "toggleRightMenu"
+		"click #lnkPrismFunding" : "loadPrismFunding"
 	},
 	onShow : function(){
 		//nada
@@ -896,8 +897,9 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		"click #showPieChart" : "setPieMode",
 		"click #showBarChart" : "setBarMode",
 		"click #expandSummaryButton" : "setSummarySize",
+		"click #closeSummaryButton" : "closeSummaryPanel",
 		"click #lnkHelpMenu" : "showHelpMenu",
-		"click #summaryLayer" : "setSummaryLayer"
+		"click #summaryLayer" : "setSummaryLayer",
 	},
 	onShow: function(){
 		//initially hide date range
@@ -934,6 +936,10 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				this.setPieMode();
 			}
 		}
+	},
+	closeSummaryPanel: function(){
+		MainApplication.views.mapSelectorSlideView.toggleRightMenu();
+		return false;
 	},
 	formatCommas: function(nStr){
 		nStr += '';

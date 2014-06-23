@@ -120,6 +120,22 @@
 	z-index:1039;
 }
 
+#closeSummaryBlock {
+    float: right;
+    padding: 0 0 0 5px;
+    text-align: right;
+}
+#closeSummaryButton {
+    background-color: #222222;
+    border: 1px solid #ffffff;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14pt;
+    font-weight: bold;
+    text-align: center;
+    width: 30px;
+}
+
 #toggleQuestionButton {
     background-color: white;
     border:1px solid #999999;
@@ -133,6 +149,24 @@
     border-radius: 0;
 }
 #toggleQuestionButton i {
+    margin-left: 0px; 
+    margin-top:-3px;
+}
+
+#toggleSummaryButton {
+    background-color: white;
+    border:1px solid #999999;
+    border-radius: 0;
+    color: #444444;
+    height: 36px;
+	padding: 7px 0;
+    position: absolute;
+    right: 10px;
+    top: 55px;  
+    width: 36px;
+    z-index: 1000;
+}
+#toggleSummaryButton i {
     margin-left: 0px; 
     margin-top:-3px;
 }

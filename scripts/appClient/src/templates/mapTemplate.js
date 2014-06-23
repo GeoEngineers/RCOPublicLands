@@ -14,6 +14,8 @@ MainApplication.Templates.MapTemplate = [
 		"<select name='selectArea' id='selectAreaInput' class='form-control'>",
 			"<option value=''>- Select Area -</option>",
 		"</select>",
+		"<a href='#' id='lnkSlideMenu' class='navLink slide-menu' href='#SummaryPaneSlideOut'></a>",
+		"<div id='toggleSummaryButton' class='btn'><i class='fa fa-bar-chart-o fa-lg'></i></div>",
     	"<div id='toggleQuestionButton' class='btn'><i class='fa fa-info fa-2x'></i></div>",
 		"<div id='map' style=\"top: 35px;\"></div>",
 	"</div>"
@@ -35,10 +37,10 @@ MainApplication.Templates.MapSelectorSlideTemplate = [
 		"</div>",
 		"<div id='mapControls'>",
 			"<div>",
-				"<a href='#' id='lnkSlideMenu' class='navLink slide-menu' href='#SummaryPaneSlideOut'>",
-					"<i class='fa fa-bar-chart-o fa-lg'></i>",
-					"<div class='txt'>SUMMARY</div>",
-				"</a>",
+				//"<a href='#' id='lnkSlideMenu' class='navLink slide-menu' href='#SummaryPaneSlideOut'>",
+				//	"<i class='fa fa-bar-chart-o fa-lg'></i>",
+				//	"<div class='txt'>SUMMARY</div>",
+				//"</a>",
 			"</div>",
 		"</div>",
 	"</div>"
@@ -46,6 +48,7 @@ MainApplication.Templates.MapSelectorSlideTemplate = [
 
 MainApplication.Templates.MapPaneTemplate = [
 	"<div id='summaryPanelBlock'>",
+		"<div id='closeSummaryBlock'><div id='closeSummaryButton'>X</div></div>",
 		"<div id='summaryMainHead'>",
 			"<div id='expandSummaryButton' class='expandable'><button class='btn'>&lt;&lt;&lt; Expand</button></div>",
 			"<div id='summaryHeaderName'>{{SummaryTitle}}</div>",

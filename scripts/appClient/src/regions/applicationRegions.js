@@ -19,8 +19,6 @@
             $(".leaflet-bottom").animate({"margin-bottom": "90px"});
             $("#smartmineLogo").animate({"margin-bottom": "60px"});
             $("#toggleQuestionButton").animate({"margin-bottom": "60px"});
-
-            smartmineLogo
 			this.slideOpen = true;
 		}
     },
