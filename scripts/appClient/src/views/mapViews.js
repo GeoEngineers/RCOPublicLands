@@ -3,20 +3,20 @@ var MapView = Backbone.Marionette.Layout.extend({
         return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.MapTemplate);
     },
     initialize: function (options) {
-    	var dc = this;
-    	this.clearAreaSums();
-    	this.resetAreaSums();
+		var dc = this;
+		this.clearAreaSums();
+		this.resetAreaSums();
 
 		this.todos = options.todos;
 		this.dnrResources = options.dnrResources;
 		//examples.map-y7l23tes
 		this.streetsMap = L.tileLayer.provider('MapBox.smartmine.igcmocio', { minZoom:4, zIndex: 4, attribution:"" });		
 		this.openMap = L.tileLayer('http://b.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-    		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
-    			maxZoom: 18
+			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
+			maxZoom: 18
 		});
 		this.imageryMap = L.tileLayer.provider('MapBox.smartmine.map-nco5bdjp', { minZoom:4, zIndex: 4, attribution:"" });
-		
+
 		//this.esriMap = L.esri.dynamicMapLayer("http://gismanagerweb.rco.wa.gov/arcgis/rest/services/public_lands/WA_RCO_Public_Lands_Inventory_PRISM/MapServer", {
 		//	position: "front"
 		//});
@@ -24,12 +24,12 @@ var MapView = Backbone.Marionette.Layout.extend({
 			"Terrain": this.streetsMap,
 			"Streets" : this.openMap,
 			"Imagery": this.imageryMap
-        };
+		};
 
 		this.mapFirstView = true;
 		this.currentLayersType = 'agency';
 
-        _.bindAll(this, 'onShow');
+		_.bindAll(this, 'onShow');
     },
     events: {
 		"click #lnkOfflineButton" : "setBaseMapOffline",
@@ -57,11 +57,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.toggleSetButtons();
 
 		MainApplication.Map === undefined ? MainApplication.Map = L.mapbox.map('map',{ minZoom:4, attribution:"" }) : false;
-		this.loadCurrentMap();
-		MainApplication.Map.on("dragstart",function(){
-			dc.loadCurrentMap();
-		});
-		
+		this.setBaseMapDefault()
+
 		//load summary and welcome view
 		this.loadRightSlide();
 		var welcomeView = new WelcomeView({});
@@ -498,14 +495,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 		
 		return gridLayer;
 	},	
-	loadCurrentMap: function(){
-		if(GeoAppBase.connectionAvailable()){
-			MainApplication.Map.hasLayer(this.streetsMap)===false ? this.setBaseMapDefault() : false;
-		}else{
-			MainApplication.Map.hasLayer(this.offlineMap)===false ? this.setBaseMapOffline() : false;
-		}
-		return false;
-	},
 	loadPrismFunding: function(){
 		if(MainApplication.Map.hasLayer(MainApplication.views.mapView.esriMap)){
 			$('#lnkPrismFunding').css("color","#000000");
@@ -650,10 +639,23 @@ var MapView = Backbone.Marionette.Layout.extend({
 						}else{
 							layerDetails.visible = false;				
 						}
+					}else{
+						//console.log(ev);
 					}
 					dc.showRightSlide();
 				}
 			}, 16);
+		});
+		
+		console.log(this.featureLayerControls);
+		//extra layer clean up, just to be safe
+		MainApplication.Map.on("baselayerchange", function(ev){
+			console.log(ev, "Layer Changed");
+			for(mapLayer in MainApplication.views.mapView.baseMaps){
+				if(mapLayer !== ev.name && MainApplication.Map.hasLayer(MainApplication.views.mapView.baseMaps[mapLayer])){
+					MainApplication.Map.removeLayer(MainApplication.views.mapView.baseMaps[mapLayer]);
+				}
+			}
 		});
 		return false;
 	},
