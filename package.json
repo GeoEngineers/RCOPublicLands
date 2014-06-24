@@ -30,7 +30,8 @@
     "util": "~0.10.3",
     "password-hash": "~1.2.1",
     "newrelic": "~1.4.0",
-    "handlebars": "~2.0.0-alpha.2"
+    "handlebars": "~2.0.0-alpha.2",
+	"Leaflet.NavBar" : "https://github.com/davidchouse/Leaflet.NavBar.git"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
