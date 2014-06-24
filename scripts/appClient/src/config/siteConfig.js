@@ -53,7 +53,7 @@ var schema = {
 		}
 	]
 };
-MainApplication.demoDB = new ydn.db.Storage('backbone-sync-1', schema);
+//MainApplication.demoDB = new ydn.db.Storage('backbone-sync-1', schema);
 //var objectStore = db.createObjectStore('Dat', { keyPath:'id',autoIncrement: false});
 
 //debug override

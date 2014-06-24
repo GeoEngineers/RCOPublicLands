@@ -27,16 +27,18 @@
     "jquery.cookie": "*",
     "backbone.localStorage": "*",
 	"backbone-notifications":"https://github.com/fatiherikli/backbone-notifications.git",
-	"marionette": "*",
+	"marionette": "1.8.8",
 	"momentjs": "*",
 	"handlebars": "*",
 	"leaflet-providers": "*",
 	"bootstrap-datepicker": "*",
 	"requirejs": "*",
 	"ydn-db": "*",
-  "qtip2": "*",
-  "font-awesome": "*",
+	"qtip2": "*",
+	"font-awesome": "*",
 	"highcharts" :"https://github.com/highslide-software/highcharts.com.git",
-  "Leaflet.utfgrid": "https://github.com/danzel/Leaflet.utfgrid.git"
+	"Leaflet.utfgrid": "https://github.com/danzel/Leaflet.utfgrid.git",
+	"Leaflet.NavBar" : "https://github.com/davidchouse/Leaflet.NavBar.git",
+	"bigSlide" : "*"
   }
 }

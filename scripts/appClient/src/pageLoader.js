@@ -13,7 +13,7 @@
             page_options = options;
 			
             //kill the region display
-            if (MainApplication.mainRegion !== undefined) { MainApplication.mainRegion.close(); }
+            if (MainApplication.mainRegion !== undefined && MainApplication.mainRegion.close !== undefined) { MainApplication.mainRegion.close(); }
             if (MainApplication.pageInitializer !== undefined && MainApplication.pageInitializer[page_options.path] !== undefined) { MainApplication.pageInitializer[page_options.path].stop(); }
             if (MainApplication.views !== undefined) {
                 for (var viewToDelete in MainApplication.views) {
