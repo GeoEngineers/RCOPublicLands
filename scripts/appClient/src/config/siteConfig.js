@@ -22,6 +22,7 @@ MainApplication.jasmineEnv.specFilter = function(spec) {
 };
 var currentWindowOnload = window.onload;
 
+///////////////////////////////////////////////////////////////
 /*
 ///Sample Test - run in console or create a spec file below///
 describe("A todo", function() {
