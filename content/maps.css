@@ -29,6 +29,32 @@
 .leaflet-control-zoom {
     margin-bottom: 10px !important;
 }
+.leaflet-control-navbar-home {
+    background-image: url("../bower_components/Leaflet.NavBar/src/img/home_000000_14.png");
+    background-position: 10px center;
+}
+.leaflet-control-navbar-home-disabled {
+    background-image: url("../bower_components/Leaflet.NavBar/src/img/home_bbbbbb_14.png");
+    background-position: 10px center;
+}
+
+.leaflet-control-navbar-fwd {
+    background-image: url("../bower_components/Leaflet.NavBar/src/img/arrow-right_000000_14.png");
+    background-position: 10px center;
+}
+.leaflet-control-navbar-fwd-disabled {
+    background-image: url("../bower_components/Leaflet.NavBar/src/img/arrow-right_bbbbbb_14.png");
+    background-position: 10px center;
+}
+
+.leaflet-control-navbar-back {
+    background-image: url("../bower_components/Leaflet.NavBar/src/img/arrow-left_000000_14.png");
+    background-position: 10px center;
+}
+.leaflet-control-navbar-back-disabled {
+    background-image: url("../bower_components/Leaflet.NavBar/src/img/arrow-left_bbbbbb_14.png");
+    background-position: 10px center;
+}
 
 #connectionStatus{
     bottom: 73px;
