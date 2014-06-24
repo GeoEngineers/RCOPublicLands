@@ -283,8 +283,20 @@
 	color:#333333;
 	font-size: 12pt;		
 }
-
 .marker-description{
 	color:#000000;
 	font-size: 10pt;
+}
+.leaflet-popup-close-button {
+    background-color: #000000;
+    background-image: url("http://api.tiles.mapbox.com/mapbox.js/v1.6.3/images/icons-ffffff.png");
+	background-position: -9px -70px;
+    height: 16px !important;
+    margin: 10px 10px 0 0;
+    width: 16px !important;
+}
+.leaflet-popup-close-button:hover {
+	background-color: #111111;
+	background-image: url('http://api.tiles.mapbox.com/mapbox.js/v1.6.3/images/icons-ffffff.png');
+	border-radius: 20px;
 }
