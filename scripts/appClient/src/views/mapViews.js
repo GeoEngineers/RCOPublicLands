@@ -569,7 +569,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.currentLayersType = layerType;
 		this.activeLayers = [];
 		_.each(BootstrapVars.areaStats,function(mapLayer){
-			//console.log(mapLayer.layerGroupName , layerType);
 			if(mapLayer.layerGroupName === layerType){
 				mapLayer.visible = true;
 				dc.activeLayers.push(mapLayer.abbrev);
@@ -597,19 +596,29 @@ var MapView = Backbone.Marionette.Layout.extend({
 	},
 	setLegendControls : function(){
 		var dc=this;
-		
-		if(this.featureLayerControls){
-			MainApplication.Map.removeControl(this.featureLayerControls);
-		}
+
+		//if(this.featureLayerControls){
+			//this.featureLayerControls.removeFrom(MainApplication.Map)
+			//MainApplication.Map.removeControl();
+		//}
 		
 		this.layerMaps = {};
 		_.each(BootstrapVars.areaStats, function(area){
 			if(area.visible){
 				dc.layerMaps[area.abbrev] = area.layerGroup;
+			}else if(dc.featureLayerControls !== undefined){
+				dc.featureLayerControls.removeLayer(area.layerGroup);
 			}
 		});
-				
-		this.featureLayerControls = L.control.layers(this.baseMaps, this.layerMaps, {position: 'bottomleft'}).addTo(MainApplication.Map);
+		
+		if(this.featureLayerControls === undefined)	{
+			this.featureLayerControls = L.control.layers(this.baseMaps, this.layerMaps, {position: 'bottomleft'});
+			this.featureLayerControls.addTo(MainApplication.Map);
+		}else{
+			for(overlayMap in this.layerMaps){
+				dc.featureLayerControls.addOverlay(this.layerMaps[overlayMap], overlayMap);
+			}
+		}
 		_.each($(this.featureLayerControls._container).find("label"), function(legendItem){
 			var spanObject = $(legendItem).children("span").html().trim();
 			var layerDetails = _.find(BootstrapVars.areaStats, function(area){
@@ -626,8 +635,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 		//setup respones to click events
 		$(this.featureLayerControls._container).find("label").on("click", function(ev){
 			//console.log(ev);
-			//console.log($(ev.currentTarget));
-			//console.log($(ev.currentTarget).children("input"));
 			setTimeout(function(){
 				//kludgy fix to prevent double clicks
 				if(ev.timeStamp !== 0){
@@ -636,11 +643,13 @@ var MapView = Backbone.Marionette.Layout.extend({
 					var layerDetails = _.find(BootstrapVars.areaStats, function(area){
 						return area.abbrev === spanObject;
 					});
-					//set as inactive
-					if(checkboxObject.length === 1){
-						layerDetails.visible = true;
-					}else{
-						layerDetails.visible = false;				
+					if(layerDetails){
+						//set as inactive
+						if(checkboxObject.length === 1){
+							layerDetails.visible = true;
+						}else{
+							layerDetails.visible = false;				
+						}
 					}
 					dc.showRightSlide();
 				}
