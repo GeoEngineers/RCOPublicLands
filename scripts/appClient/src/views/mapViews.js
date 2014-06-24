@@ -13,6 +13,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.streetsMap = L.tileLayer.provider('MapBox.smartmine.igcmocio', { minZoom:4, zIndex: 4, attribution:"" });		
 		this.openMap = L.tileLayer('http://b.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
 			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
+			minZoom: 4, 
 			maxZoom: 18
 		});
 		this.imageryMap = L.tileLayer.provider('MapBox.smartmine.map-nco5bdjp', { minZoom:4, zIndex: 4, attribution:"" });
@@ -56,8 +57,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 		//set buttons according to internet settings
 		this.toggleSetButtons();
 
-		MainApplication.Map === undefined ? MainApplication.Map = L.mapbox.map('map',{ minZoom:4, attribution:"" }) : false;
-		this.setBaseMapDefault()
+		MainApplication.Map === undefined ? MainApplication.Map = L.mapbox.map('map', null, { minZoom:4, attribution:"" }) : false;
+		this.setBaseMapDefault();
 
 		//load summary and welcome view
 		this.loadRightSlide();
@@ -65,7 +66,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		MainApplication.modalRegion.show(welcomeView);
 		
 		_.each(BootstrapVars.areaStats, function(area){ 
-			var tileLayer = new L.mapbox.tileLayer(area.mapTarget, { zIndex: 5 });
+			var tileLayer = new L.mapbox.tileLayer(area.mapTarget, { minZoom:4, zIndex: 5 });
 			var utfGrid = new L.UtfGrid('http://{s}.tiles.mapbox.com/v3/'+area.mapTarget+'/{z}/{x}/{y}.grid.json?callback={cb}', { zIndex: 5 });
 			area.layerGroup =  L.layerGroup([
 				tileLayer,
@@ -74,6 +75,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		});		
 		this.esriMap =  L.esri.clusteredFeatureLayer("http://gismanagerweb.rco.wa.gov/arcgis/rest/services/public_lands/WA_RCO_Public_Lands_Inventory_PRISM_v2/MapServer/0/", {
    			cluster: new L.MarkerClusterGroup(),
+			minZoom:4,
    			onEachMarker: function(geojson, marker) {
    				popupText =  "<div style='overflow:scroll; max-width:350px; max-height:260px;'>";
 				for (prop in geojson.properties) {
