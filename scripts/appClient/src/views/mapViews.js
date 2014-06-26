@@ -55,7 +55,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 
 		MainApplication.Map === undefined ? MainApplication.Map = L.mapbox.map('map', null, { minZoom:4, attribution:"" }) : false;
 		this.setBaseMapDefault();
-
+		this.createOverlayMask();
+		
 		//load summary and welcome view
 		this.loadRightSlide();
 		var welcomeView = new WelcomeView({});
@@ -110,6 +111,11 @@ var MapView = Backbone.Marionette.Layout.extend({
 				area.total_cost = 0;
 				area.starting_total_cost = 0;
 			});
+	},
+	createOverlayMask : function(){
+		var overlayMask = L.tileLayer('http://a.tiles.mapbox.com/v3/smartmine.ni4o0f6r/{z}/{x}/{y}.png');
+		overlayMask.setZIndex(6);
+		MainApplication.Map.addLayer(overlayMask);
 	},
 	resetAreaSums: function(){
 		var summaryValues = sums_statewide;
@@ -1004,12 +1010,32 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 					contextButton: {
 						y : -5
 					}
+				},
+				chartOptions: {
+					chart: {
+						width: 800,
+						height: 600,
+						type: 'bar',
+						margin: [60,35,80,55]
+					},
+					title: {
+						style: { "font-size" : "9.5pt" },
+						align: "center",
+						margin: 5,
+						x: 0,
+						y: 30
+					},					
+					legend: {
+						enabled: true
+					}
 				}
             },
 			credits: {
                 enabled: false
             }
 		});
+		
+		//on save override and set legend to true, 
 		return false;
 	},
 	loadPieLayerComparison: function(){	
@@ -1068,6 +1094,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			},
 			plotOptions: {
 				pie: {
+					showInLegend: true,
 					dataLabels: {
 						enabled: false
 					},
@@ -1081,7 +1108,10 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				name: this.type,
 				innerSize: '40%',
 				data: pieChartSeries
-			}],
+			}],	
+			legend:{
+				enabled:false
+			},			
 			exporting: {
                 enabled: true,
 				chartOptions: {
@@ -1091,7 +1121,23 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 							[0, 'rgba(13, 106, 132, 1)'],
 							[1, 'rgba(13, 106, 132, 1)']
 						]
-					}		
+					},
+					chart: {
+						width: 800,
+						height: 600,
+						type: 'pie',
+						margin: [-10,-10,-10,-10]
+					},
+					title: {
+						style: { "font-size" : "9.5pt" },
+						align: "center",
+						margin: 5,
+						x: 0,
+						y: 30
+					},	
+			        legend:{
+						enabled:true
+					}				
 				}
             },
 			credits: {
