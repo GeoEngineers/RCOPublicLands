@@ -22,41 +22,6 @@ MainApplication.jasmineEnv.specFilter = function(spec) {
 };
 var currentWindowOnload = window.onload;
 
-///////////////////////////////////////////////////////////////
-/*
-///Sample Test - run in console or create a spec file below///
-describe("A todo", function() {
-	it("should exist", function() {
-		expect(this).toBeDefined();
-	});
-	it("should have attributes", function() {
-		expect(this.attributes).toBeDefined();
-	});
-	it("should be able to resolve an id", function() {
-		expect(this.get("Id")).toBeDefined();
-	});
-});
-
-MainApplication.jasmineEnv.execute();
-*/
-///////////////////////////////////////////////////////////////
-
-var schema = {
-  stores: [
-		{
-		  name: 'todoItems',
-		  keyPath: 'Id',
-		  type: 'TEXT'
-		},{
-		  name: 'todoItemQueue',
-		  keyPath: 'Uid',
-		  type: 'TEXT'
-		}
-	]
-};
-//MainApplication.demoDB = new ydn.db.Storage('backbone-sync-1', schema);
-//var objectStore = db.createObjectStore('Dat', { keyPath:'id',autoIncrement: false});
-
 //debug override
 MainApplication.connectionActive = true;
 MainApplication.activeSynchQueue = [];
@@ -74,16 +39,12 @@ Backbone.sync = function(method, model, options) {
 Backbone.Marionette.TemplateCache.prototype.compileTemplate = function (rawTemplate) {
     return Handlebars.compile(rawTemplate);
 };
-//Backbone.Marionette.View.prototype.on("show",function(){
-//	$.placeholder.shim();
-//},this);
 ///////////////////////////////////////////////////////////////
  
 
 ////////////////////Application Details//////////////////////////
 MainApplication.LandingPage = "Map";
 MainApplication.hostURL = window.location.protocol + "//" + window.location.host;
-//MainApplication.hostURL = "http://smboilerplate-env.elasticbeanstalk.com";
 //path ID 1 is our libraries we bring into the app (as opposed to getting them with bower, this can be for shims, fixes, overrides, whatever, the rest of the paths are arbitrary, and as such as completely flexible, that being said, we store our files in source)
 MainApplication.pathsConfig = [
     { "id": "1", "path": "./scripts/appClient", "name": "library", "setName": "lib" },
@@ -100,12 +61,6 @@ MainApplication.ConfigFiles = {
         "Id": 1,
         "hashPath": "*actions",
         "containerClass": "node-outline",
-		//we require these libraries because the modules need to be loaded with the session
-		//"lib": [
-		//	{ "library" : "./lodash/lodash.underscore.js" },
-		//	{ "library" : "./knex/knex.js" },
-		//	{ "library" : "./bookshelf/bookshelf.js" }
-		//],
         "models": [
             { "model" : "toDoModels.js" }
         ],

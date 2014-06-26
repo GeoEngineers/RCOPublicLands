@@ -82,25 +82,6 @@
     //notification loader
     MainApplication.ApplicationNotificationLoader = {};
     MainApplication.ApplicationNotificationLoader.runNotifications = function (options) {
-		//options.path === "AppNavigation" && 
-		/*if(GeoAppBase.storageGet('siteFirstLoad')==='true' && (GeoAppBase.storageGet('firstLoadModalDisplayed')===undefined || GeoAppBase.storageGet('firstLoadModalDisplayed')===null || GeoAppBase.storageGet('firstLoadModalDisplayed')===false)){
-			this.intrusiveNotification = new GeoAppBase.GenericModalInterface({
-				modalTitle: "Welcome",
-				contentTemplate: "Welcome to the RCO application interface.  From here you may select available applications and contact support.",
-				okText: "OK",
-				okCallback: function() {
-					GeoAppBase.storageSet('firstLoadModalDisplayed',true);
-					window[ApplicationName].modalRegion.hideModal();
-				},
-				cancelCallback: function() {
-					GeoAppBase.storageSet('firstLoadModalDisplayed',true);
-					window[ApplicationName].modalRegion.hideModal();
-				}
-			});
-			this.intrusiveNotification.once("show", function(){
-				window[ApplicationName].modalRegion.lockModal();
-			});
-			window[ApplicationName].modalRegion.show(this.intrusiveNotification);
-		}*/
+		//nada
     };	
 })(jQuery);

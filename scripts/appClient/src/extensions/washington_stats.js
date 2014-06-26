@@ -144,24 +144,6 @@ BootstrapVars.areaStats = [
 		symbol: '#x214a;',
 		color: '#97DBF2'
 	},
-
-/*	{
-		abbrev: "STATE",
-		agency: "State Lands",
-		starting_total_acres : 24098.61,
-		starting_total_cost: 1.00,
-		starting_total_revenue: 1.00,
-		total_acres : 24098.61,
-		total_cost: 1.00,
-		total_revenue: 1.00,
-		mapTarget: "smartmine.tzpsnhfr",
-		visible: true,
-		layerGroupName: "agency",
-		layerGroup: null,
-		symbol: '#C9F2D0;',
-		color: '#FFFF00'
-	},
-*/  
 	{
 		abbrev: "FEDERAL",
 		agency: "federal",

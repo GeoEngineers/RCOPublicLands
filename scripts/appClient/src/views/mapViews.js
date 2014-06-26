@@ -9,7 +9,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 
 		this.todos = options.todos;
 		this.dnrResources = options.dnrResources;
-		//examples.map-y7l23tes
 		this.streetsMap = L.tileLayer.provider('MapBox.smartmine.igcmocio', { minZoom:4, zIndex: 4, attribution:"" });		
 		this.openMap = L.tileLayer('http://b.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
 			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
@@ -18,9 +17,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 		});
 		this.imageryMap = L.tileLayer.provider('MapBox.smartmine.map-nco5bdjp', { minZoom:4, zIndex: 4, attribution:"" });
 
-		//this.esriMap = L.esri.dynamicMapLayer("http://gismanagerweb.rco.wa.gov/arcgis/rest/services/public_lands/WA_RCO_Public_Lands_Inventory_PRISM/MapServer", {
-		//	position: "front"
-		//});
 		this.baseMaps = {
 			"Terrain": this.streetsMap,
 			"Streets" : this.openMap,
@@ -411,14 +407,11 @@ var MapView = Backbone.Marionette.Layout.extend({
 			});
 		});
 		this.loadRightSlide();
-		//Reload Charts and Totals
-
 	},
 	addMapMarker: function(b){
 		var bounds = b;
 		var unboundMarker = L.marker([bounds.lat, bounds.lng], {icon: MainApplication.defaultMarker, draggable: false});
 		unboundMarker.addTo(MainApplication.Map);
-		//MainApplication.markerLayer.add_feature(unboundMarker);
 		unboundMarker.markerToolTip = new NewMarkerToolTip({
 			todos : this.todos,
 			marker: unboundMarker
@@ -470,7 +463,6 @@ var MapView = Backbone.Marionette.Layout.extend({
             		AquisitionDate: aqDate,
             		Cost: props.data.Acquisit_2
         		});
-
 
         		markerToolTip.render();
 				var popup = L.popup()
@@ -527,9 +519,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 	resetBaseMaps: function(){
 		$("#lnkOfflineButton").removeClass('btn-primary');
 		$("#lnkDefaultButton").removeClass('btn-primary');
-		
-		//console.log(MainApplication.Map.hasLayer(this.terrainMap));
-		//console.log(MainApplication.Map.hasLayer(this.offlineMap));
 		
 		if (MainApplication.Map.hasLayer(this.streetsMap)) {
 			MainApplication.Map.removeLayer(this.streetsMap);
@@ -588,11 +577,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 	setLegendControls : function(){
 		var dc=this;
 
-		//if(this.featureLayerControls){
-			//this.featureLayerControls.removeFrom(MainApplication.Map)
-			//MainApplication.Map.removeControl();
-		//}
-		
 		this.layerMaps = {};
 		_.each(BootstrapVars.areaStats, function(area){
 			if(area.visible){
@@ -625,7 +609,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 		
 		//setup respones to click events
 		$(this.featureLayerControls._container).find("label").on("click", function(ev){
-			//console.log(ev);
 			setTimeout(function(){
 				//kludgy fix to prevent double clicks
 				if(ev.timeStamp !== 0){
@@ -642,7 +625,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 							layerDetails.visible = false;				
 						}
 					}else{
-						//console.log(ev);
+						//consoleconsole.log(ev);
 					}
 					dc.showRightSlide();
 				}
@@ -898,7 +881,6 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
     },
     initialize: function (options) {
 		this.activeLayers = options.activeLayers;
-		//this.displayMode = options.displayMode;
 		this.arcColor="#000000";
 		this.chartDefaultHeight = 170;
 		this.chartDefaultWidth = 310;
@@ -933,11 +915,11 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		
 		var dc=this;
 		//start in bar mode
-		this.loadD3BarLayerComparison();
-		this.loadD3PieLayerComparison();
+		this.loadBarLayerComparison();
+		this.loadPieLayerComparison();
 		$( "#ddlSummaryType" ).change(function() {
-			dc.loadD3BarLayerComparison();
-			dc.loadD3PieLayerComparison();
+			dc.loadBarLayerComparison();
+			dc.loadPieLayerComparison();
 		});
 		
 		if(this.chartType === undefined){
@@ -973,9 +955,9 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			return area.visible===true; 
 		});
 	},
-	loadD3BarLayerComparison: function(){
+	loadBarLayerComparison: function(){
 		var dc=this;
-		this.type = $( "#ddlSummaryType" ).val(); //"total_acres"; 
+		this.type = $( "#ddlSummaryType" ).val();
 		this.loadSummaryText(this.type);
 		var selectedAreas = this.getVisibleAreas();
 		var barChartSeries = [];
@@ -1008,7 +990,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				y: 10
 			},
 			xAxis: {
-				categories: [xAxisTitle]  // ['Total Acres'] // , 'Total Cost', 'Total Revenue'
+				categories: [xAxisTitle]
 			},
 			yAxis: {
 				title: {
@@ -1033,7 +1015,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		});
 		return false;
 	},
-	loadD3PieLayerComparison: function(){	
+	loadPieLayerComparison: function(){	
 		var dc=this;
 		var data = this.getVisibleAreas();
 		var colorRange = [];
@@ -1064,7 +1046,6 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		$("#pieChartLayer").html("");
 		this.loadSummaryText(this.type);
 		
-		//['#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
 		Highcharts.setOptions({
 			colors: colorRange
 		});
@@ -1106,11 +1087,6 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			}],
 			exporting: {
                 enabled: true,
-				buttons: {
-					contextButton: {
-						//y : -10
-					}
-				},
 				chartOptions: {
 					backgroundColor: {
 						linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
@@ -1132,7 +1108,6 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		var dc=this;
 		var summaryText = "";
 		var total = 0;
-		//var data = this.getVisibleAreas();
 		var isCurrency = typeView === "total_acres" ? false : true;
 		var currencyPrefix = typeView === "total_acres" ? "" : "$";
 		
@@ -1178,11 +1153,9 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		switch(typeView) {
 			case "total_acres":
 				prefixText = "Total " + this.type.replace("total_", "")  + ": " + currencyPrefix  + dc.formatNumber(total, isCurrency)+ " ";
-				//summaryText = summaryText;
 				break;
 			case "total_cost":
 				prefixText = "Total " + this.type.replace("total_", "");
-				//summaryText = "(Available Soon)";
 				break;
 			case "total_revenue":
 				prefixText = "";
@@ -1264,9 +1237,6 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		this.pieChartObject.setSize(width, height);	
 	},
 	showHelpMenu : function(ev){
-		//console.log("Help Text here");
-		//alert("Help Text Here");
-
 		var selectedAreas = this.getVisibleAreas();
 		var layerGroup = selectedAreas[0].layerGroupName;
 		var areaInformationView = new AreaInformationView({layerGroupName: layerGroup});
@@ -1275,7 +1245,6 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 	},	
 	synchronizedMouseOver: function(ev){
 		var arc = d3.select(this);
-		//console.log(arc); 		
 		var indexValue = arc.attr("index_value");
 		this.arcColor = arc[0][0].style.fill;
 		arc[0][0].style.fill="DarkBlue";
@@ -1283,7 +1252,6 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 	},
 	synchronizedMouseOut: function(ev){
 		var arc = d3.select(this);
-		//console.log(arc); 
 		var indexValue = arc.attr("index_value");
 		arc[0][0].style.fill=this.arcColor;
 		return false;
@@ -1294,8 +1262,6 @@ var WelcomeView = Backbone.Marionette.ItemView.extend({
     template: function (serialized_model) {
 		return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.WelcomeTemplate);
     },
-	initialize: function(options){
-	},
     events: {
 		"click #btnCloseWelcome": "closeModal",
     },
@@ -1342,8 +1308,6 @@ var QuestionView = Backbone.Marionette.ItemView.extend({
     template: function (serialized_model) {
 		return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.QuestionTemplate);
     },
-	initialize: function(options){
-	},
     events: {
 		"click #btnCloseQuestion": "closeModal",
 		"click #btnCancelQuestion": "closeModal"
@@ -1357,9 +1321,7 @@ var QuestionView = Backbone.Marionette.ItemView.extend({
 var HeaderView = Backbone.Marionette.ItemView.extend({
     template: function (serialized_model) {
 		return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.HeaderTemplate);
-    },
-	initialize: function(options){
-	}
+    }
 });
 
 
@@ -1410,21 +1372,13 @@ var GuidedHelpView = Backbone.Marionette.ItemView.extend({
     },
     initialize: function (options) {
         this.guideElements = false;
-        //json object with pages of guide
-        //page 1 object
-        //page 2 object
-    },
-    events: {
     },
     onShow: function () {
-        //$('.leaflet-control-layers-toggle').qtip("show");
         $('#selectStateInput').qtip("show");
         $('#summaryPanelBlock').qtip("show");
         $('.leaflet-control-layers').qtip("show");
         $('.leaflet-control-zoom-out').qtip("show");
         $('#lnkMapsSlideToggle').qtip("show");
-
-    	console.log("Showing Tip 2");
         return false;
     }
 });
