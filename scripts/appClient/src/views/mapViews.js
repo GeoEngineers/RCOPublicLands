@@ -183,7 +183,7 @@ var MapView = Backbone.Marionette.Layout.extend({
                 hide: false,
                 show: false,
                 position: {
-                    my: 'top',
+                    my: 'bottom middle',
                     at: 'top middle'
                 },
                 style: {
@@ -191,7 +191,7 @@ var MapView = Backbone.Marionette.Layout.extend({
                     tip: {
 						width: 20,
 						height: 20,
-                        corner: 'middle',
+                        corner: 'bottomMiddle',
 						color: '#222222'
                     }
                 }
@@ -201,7 +201,7 @@ var MapView = Backbone.Marionette.Layout.extend({
         var myToolTip2 = new ToolTipClass2();
         var myToolTip3 = new ToolTipClass1();
         var myToolTip4 = new ToolTipClass1();
-        var myToolTip5= new ToolTipClass3();
+        var myToolTip5 = new ToolTipClass3();
         myToolTip1.content.text = "Lookup Land Use by Boundary";
         myToolTip2.content.text = "Summary Statistics.";
         myToolTip3.content.text = "Change base map type.";
@@ -213,9 +213,6 @@ var MapView = Backbone.Marionette.Layout.extend({
         $('.leaflet-control-layers').qtip(myToolTip3);
         $('.leaflet-control-zoom-out').qtip(myToolTip4);
         $('#lnkMapsSlideToggle').qtip(myToolTip5);
-
-
-
 
         //Add Qtips - if never loaded before
         var loadedview = $.cookie('loadedView');
