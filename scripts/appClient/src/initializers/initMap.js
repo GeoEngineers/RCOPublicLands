@@ -1,10 +1,4 @@
-﻿//Initial View Loader
-var this_page_name = "Map";
-MainApplication.pageInitializer[this_page_name] = MainApplication.module(this_page_name+"Module", function () {
-    this.startWithParent = false;
-});
-//Initial View Loader
-MainApplication.pageInitializer[this_page_name].on("start", function (options) {
+﻿GeoAppBase.initializePage("Map", [], function(options){
 	MainApplication.defaultMarker = new Todo().getTodoLeafletMarker("teal");
 	MainApplication.models.dnrModel = new DnrModel();
 	MainApplication.boundaries = [];
