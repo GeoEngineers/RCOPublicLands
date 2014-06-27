@@ -129,19 +129,11 @@ _.extend(GeoAppBase, {
 	  return this.s4() + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' +
 			 this.s4() + '-' + this.s4() + this.s4() + this.s4();
 	},
-	initializePage: function(this_page_name, included_pages, callback){
-		//Spec Loader, uses page loader for running
-		MainApplication.pageInitializer[this_page_name] = MainApplication.module(this_page_name+"Module", function () {
-			this.startWithParent = false;
-		});
-		//Initial View Loader
-		MainApplication.pageInitializer[this_page_name].on("start", function (options) {
-			//This is a shortcut for putting files into the test, it's basically an include
-			GeoAppBase.recurseRequire(included_pages, function() {
-				callback(options);
-			});
-		});
-	},
+	s4: function () {
+		return Math.floor((1 + Math.random()) * 0x10000)
+			.toString(16)
+			.substring(1);
+	},	
 	jsArrayMove: function (thisArr, old_index, new_index) {
         if (new_index >= thisArr.length) {
             var k = new_index - thisArr.length;
@@ -155,6 +147,13 @@ _.extend(GeoAppBase, {
     left: function (str, num) {
         return str !== undefined && str !== null ? str.substr(0, num) : null;
     },
+    right: function (str, num) {
+        return str !== undefined && str !== null ? str.substr(str.length - num, str.length - 1) : null;
+    },
+	toggleConnectionVar: function(){
+		MainApplication.connectionActive=!MainApplication.connectionActive;
+		return false;
+	},
 	//delete by ID
 	localDatabaseModelDelete: function(tableName,id) {	
 		var df_db = MainApplication.demoDB.remove(tableName,id);	
@@ -190,30 +189,6 @@ _.extend(GeoAppBase, {
 		this.localDatabaseCollectionClear("todoItems");
 		this.localDatabaseCollectionClear("todoItemQueue");
 	},
-	//requires files sequentially
-	recurseRequire: function(fileList, cb){
-		if(fileList.length > 0){
-			require([fileList[0]], function() {
-				//console.log("Loaded: ", fileList[0]);
-				fileList.shift();
-				if(fileList.length > 0){
-					GeoAppBase.recurseRequire(fileList,cb);
-				}else{
-					cb();
-				}
-			});
-		}else{
-			cb();
-		}	
-	},
-    right: function (str, num) {
-        return str !== undefined && str !== null ? str.substr(str.length - num, str.length - 1) : null;
-    },
-	s4: function () {
-		return Math.floor((1 + Math.random()) * 0x10000)
-			.toString(16)
-			.substring(1);
-	},	
 	showAppLoadingStart: function(){
 		$("#loadingDiv").css({"display":"block"});
 	},
@@ -274,9 +249,5 @@ _.extend(GeoAppBase, {
 		//console.log(window.device.cordova);
 	
 		return window.device !== undefined && window.device.cordova !== null ? true : false;
-	},
-	toggleConnectionVar: function(){
-		MainApplication.connectionActive=!MainApplication.connectionActive;
-		return false;
-	}	
+	}
 });
