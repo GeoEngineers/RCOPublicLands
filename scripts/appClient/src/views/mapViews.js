@@ -457,6 +457,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 				{
 					aqDate =props.data.Acquisit_1;
 				}
+				var acqCost = props.data.Acquisit_2 !== undefined ? '$' + props.data.Acquisit_2.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : '$0.00';
 				var markerToolTip = new MapTipView({
             		ParcelName: props.data.Parcel,
             		Owner:  props.data.OwnerName,
@@ -464,7 +465,7 @@ var MapView = Backbone.Marionette.Layout.extend({
             		TotalArea: props.data.GISAcres,
             		LandUse: area.agency,
             		AcquisitionDate: aqDate,
-            		Cost: props.data.Acquisit_2
+            		Cost: acqCost
         		});
 
         		markerToolTip.render();
