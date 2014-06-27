@@ -984,24 +984,33 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			chart: {
 				height: this.currentChartHeight,
 				width: this.currentChartWidth,
+				backgroundColor:'rgba(255, 255, 255, 0)',
 				type: 'bar',
 				renderTo: 'barChartLayer',
 				margin: [30,35,35,55]
 			},
 			title: {
 				text: GeoAppBase.capitaliseEach(MainApplication.views.mapView.currentLayersType + " " + xAxisTitle +" Compared"),
-				style: { "font-size" : "9.5pt" },
+				style: { "font-size" : "9.5pt", color: 'rgba(255, 255, 255, 1)' },
 				align: "center",
 				margin: 5,
 				x: -20,
 				y: 10
 			},
 			xAxis: {
-				categories: [xAxisTitle]
+				categories: [xAxisTitle],
+				labels:
+				{
+					style: { color: 'rgba(255, 255, 255, 1)' }
+				}
 			},
 			yAxis: {
 				title: {
 					text: ''
+				},
+				labels:
+				{
+					style: { color: 'rgba(255, 255, 255, 1)' }
 				}
 			},
 			series: barChartSeries,
@@ -1084,11 +1093,12 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				plotBackgroundColor: null,
 				plotBorderWidth: 0,
 				plotShadow: false,
+				backgroundColor:'rgba(255, 255, 255, 0)',
 				margin: [-20, -50, -55, -50]
 			},
 			title: {
 				text: GeoAppBase.capitaliseEach(MainApplication.views.mapView.currentLayersType + " " + xAxisTitle +" Compared"),
-				style: { "font-size" : "9.5pt" },
+				style: { "font-size" : "9.5pt", color: 'rgba(255, 255, 255, 1)'  },
 				align: "center",
 				margin: 5,
 				x: -20 
