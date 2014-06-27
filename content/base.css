@@ -27,9 +27,9 @@
 	z-index:1050;
 }
 #SummaryPaneSlideOut {
-    background-color:  rgba(13, 106, 132, .8);
-    border-left: 1px solid #DDDDDD;
-	border-top: 1px solid #DDDDDD;
+    background-color:  rgba(40, 70, 90, .9);
+    border-left: 1px solid #555555;
+	border-top: 1px solid #555555;
     border-radius: 0px;
     margin: 0;
     right: 0px;
@@ -1630,4 +1630,11 @@ Custom config styles
   width: 16px;
   height: 16px;
   z-index: 1000;
+}
+
+.aboutHeader{
+    font-size: 16px;
+    color: #468fae;
+    font-style:italic;
+
 }

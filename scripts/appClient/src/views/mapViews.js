@@ -463,7 +463,7 @@ var MapView = Backbone.Marionette.Layout.extend({
             		OwnershipType: area.agency,
             		TotalArea: props.data.GISAcres,
             		LandUse: area.agency,
-            		AquisitionDate: aqDate,
+            		AcquisitionDate: aqDate,
             		Cost: props.data.Acquisit_2
         		});
 
@@ -549,6 +549,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 	},
 	setDisplayedLayers : function(layerType){
 		var dc=this;
+		console.log(layerType);
 		this.currentLayersType = layerType;
 		this.activeLayers = [];
 		_.each(BootstrapVars.areaStats,function(mapLayer){
@@ -658,11 +659,11 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.setDisplayedLayers("agency");
 		return false;
 	},
-	showAquisitions : function(){
+	showAcquisitions : function(){
 		this.resetNavOptions();
-		$('#lnkAquisitions').hasClass("btn-primary") ? false : $('#lnkAquisitions').addClass("btn-primary");
-		$('#aquisitionToggles').css("display","block");
-		this.setDisplayedLayers("aquisitions");
+		$('#lnkAcquisitions').hasClass("btn-primary") ? false : $('#lnkAcquisitions').addClass("btn-primary");
+		$('#AcquisitionToggles').css("display","block");
+		this.setDisplayedLayers("acquisitions");
 		return false;
 	},
 	showLandOptions : function(){
@@ -760,7 +761,7 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 		"click #lnkMapsSlideToggle" : "toggleSlide",
 		"click .baseMapLink" : "toggleMapLayer",
 		"click #lnkAgency" : "showAgencyOptions",
-		"click #lnkAquisitions" : "showAquisitions",
+		"click #lnkAcquisitions" : "showAcquisitions",
 		"click #lnkLandTypes" : "showLandOptions",
 		"click #lnkProposed" : "showProposed",
 		"click #lnkPrismFunding" : "loadPrismFunding"
@@ -776,8 +777,8 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 		MainApplication.views.mapView.showAgencyOptions(ev);	
 		return false;
 	},
-	showAquisitions : function(ev){
-		MainApplication.views.mapView.showAquisitions(ev);	
+	showAcquisitions : function(ev){
+		MainApplication.views.mapView.showAcquisitions(ev);	
 		return false;
 	},
 	showLandOptions : function(ev){
@@ -1156,7 +1157,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		var isCurrency = typeView === "total_acres" ? false : true;
 		var currencyPrefix = typeView === "total_acres" ? "" : "$";
 		
-		if(MainApplication.views.mapView.currentLayersType==="aquisitions"){
+		if(MainApplication.views.mapView.currentLayersType==="acquisitions"){
 			$("#summaryDateRange").css({"display":"block"});
 			_.each(BootstrapVars.areaInformation, function(area){
 				if(area.layerGroupName===MainApplication.views.mapView.currentLayersType){
@@ -1335,7 +1336,8 @@ var AreaInformationView = Backbone.Marionette.ItemView.extend({
     },
     onShow: function()
     {
-    	var dc = this;
+    	return false;
+    	/*var dc = this;
     	var htmlInfo = "";
 		_.each(BootstrapVars.areaInformation, function(areaInformation){
 			if(dc.layerGroupName === areaInformation.layerGroupName)
@@ -1343,7 +1345,7 @@ var AreaInformationView = Backbone.Marionette.ItemView.extend({
 				htmlInfo = areaInformation.htmlInfo;
 			}
 		});
-		$("#areaInfoDiv").html(htmlInfo);
+		$("#areaInfoDiv").html(htmlInfo);*/
     },
 	closeModal: function () {			 
 		MainApplication.modalRegion.hideModal();
@@ -1383,7 +1385,7 @@ var MapTipView = Backbone.Marionette.ItemView.extend({
 			Owner: this.Owner,
 			OwnershipType: this.OwnershipType,
 			TotalArea: this.TotalArea,
-			AquisitionDate: this.AquisitionDate,
+			AcquisitionDate: this.AcquisitionDate,
 			LandUse: this.LandUse,
 			Cost: this.Cost
     	}
@@ -1394,7 +1396,7 @@ var MapTipView = Backbone.Marionette.ItemView.extend({
         this.OwnershipType = options.OwnershipType;
         this.TotalArea = options.TotalArea;
         this.LandUse = options.LandUse;
-        this.AquisitionDate = options.AquisitionDate;
+        this.AcquisitionDate = options.AcquisitionDate;
         this.Cost = options.Cost;
     },
     events: {

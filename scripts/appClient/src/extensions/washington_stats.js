@@ -4,26 +4,26 @@ BootstrapVars.areaInformation = [
 	{
 		layerGroupName: "agency",
 		htmlInfo: "Agency Information goes here...",
-		startDate: '1/1/2004',
-		endDate: '1/1/2014'
+		startDate: '2003',
+		endDate: '2013'
 	},
 	{
 		layerGroupName: "landtypes",
 		htmlInfo: "Land types Information goes here...",
-		startDate: '1/1/2004',
-		endDate: '1/1/2014'
+		startDate: '2003',
+		endDate: '2013'
 	},
 	{
-		layerGroupName: "aquisitions",
+		layerGroupName: "acquisitions",
 		htmlInfo: "Acquisitions Information goes here...",
-		startDate: '1/1/2004',
-		endDate: '1/1/2014'
+		startDate: '2003',
+		endDate: '2013'
 	},
 	{
 		layerGroupName: "proposed",
 		htmlInfo: "Proposed Information goes here...",
-		startDate: '1/1/2004',
-		endDate: '1/1/2014'
+		startDate: '2003',
+		endDate: '2013'
 	},
 
 ];
@@ -171,7 +171,7 @@ BootstrapVars.areaStats = [
 		total_revenue: 0,
 		mapTarget: "smartmine.1b5wxw29",
 		visible: false,
-		layerGroupName: "aquisitions",
+		layerGroupName: "acquisitions",
 		layerGroup: null,
 		symbol: '#x2190;',
 		color: '#E69800'
@@ -188,7 +188,7 @@ BootstrapVars.areaStats = [
 		total_revenue: 0,
 		mapTarget: "smartmine.p661dcxr",
 		visible: false,
-		layerGroupName: "aquisitions",
+		layerGroupName: "acquisitions",
 		layerGroup: null,
 		symbol: '#x21f4;',
 		color: '#B4D79E'
@@ -204,7 +204,7 @@ BootstrapVars.areaStats = [
 		total_revenue: 0,
 		mapTarget: "smartmine.wbvp9zfr",
 		visible: false,
-		layerGroupName: "aquisitions",
+		layerGroupName: "acquisitions",
 		layerGroup: null,
 		symbol: '#x214a;',
 		color: '#FF7F7F'
