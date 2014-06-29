@@ -100,7 +100,7 @@ MainApplication.Templates.WelcomeTemplate = [
 			"<div class=\"modal-body\">",
 				"<p>The inventory shows publicly-owned lands by owner and identifies the location, acreage, and principal use of each parcel. For state-owned land acquired between 2003 and 2013, the date and cost of acquisition is also included.  For public land acquisition funded by the Recreation and Conservation Office since 1964, the inventory also includes a link to all grant information.</p>",
  				"<p>Data comes from University of Washington’s School of Environmental and Forest Sciences and the following state agencies: Department of Fish and Wildlife, Department of Natural Resources, State Parks and Recreation Commission, and the Recreation and Conservation Office.</p>",
- 				"<p>The legislature provided funding to the Recreation and Conservation Office to complete this public lands inventory in the <a href='http://leap.leg.wa.gov/leap/budget/lbns/1315Cap5035-S.SL.pdf' target='_blank' style='text-decoration: underline'>2013-15 Capital Budget, Chapter 19</a>, Section 3174.</p><br/>",
+ 				"<p>The Legislature provided funding to the Recreation and Conservation Office to complete this public lands inventory in the <a href='http://leap.leg.wa.gov/leap/budget/lbns/1315Cap5035-S.SL.pdf' target='_blank' style='text-decoration: underline'>2013-15 Capital Budget, Chapter 19</a>, Section 3174.</p><br/>",
 				"<div class='aboutLogos'>",
 					"<div><a href='http://www.fws.gov'><img src='./content/images/logos/LogoUSFWS-sm.jpg' /></a></div>",
 					"<div><a href='http://www.wdfw.wa.gov'><img src='./content/images/logos/LogoWADFW-sm.jpg' /></a></div>",

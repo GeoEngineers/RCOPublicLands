@@ -5,25 +5,25 @@ BootstrapVars.areaInformation = [
 		layerGroupName: "agency",
 		htmlInfo: "Agency Information goes here...",
 		startDate: '2003',
-		endDate: '2013'
+		endDate: '2014'
 	},
 	{
 		layerGroupName: "landtypes",
 		htmlInfo: "Land types Information goes here...",
 		startDate: '2003',
-		endDate: '2013'
+		endDate: '2014'
 	},
 	{
 		layerGroupName: "acquisitions",
 		htmlInfo: "Acquisitions Information goes here...",
 		startDate: '2003',
-		endDate: '2013'
+		endDate: '2014'
 	},
 	{
 		layerGroupName: "proposed",
 		htmlInfo: "Proposed Information goes here...",
 		startDate: '2003',
-		endDate: '2013'
+		endDate: '2014'
 	},
 
 ];
@@ -95,40 +95,7 @@ BootstrapVars.areaStats = [
 		color: '#E69800'
 
 	},
-	{
-		abbrev: "STATE",
-		agency: "State Lands",
-		starting_total_acres : 0,
-		starting_total_cost: 0,
-		starting_total_revenue: 0,
-		total_acres : 0,
-		total_cost: 0,
-		total_revenue: 0,
-		mapTarget: "smartmine.9no5stt9",
-		visible: true,
-		layerGroupName: "agency",
-		layerGroup: null,
-		symbol: '#x2190;',
-		color: '#C9F2D0'
-
-	},
-	{
-		abbrev: "COUNTY-CITY",
-		agency: "City and County Lands",
-		starting_total_acres : 0,
-		starting_total_cost: 0,
-		starting_total_revenue: 0,
-		total_acres : 0,
-		total_cost: 0,
-		total_revenue: 0,
-		mapTarget: "smartmine.q65pzaor",
-		visible: true,
-		layerGroupName: "agency",
-		layerGroup: null,
-		symbol: '#x2190;',
-		color: '#FFBEBE'
-
-	},
+	
 	{
 		abbrev: "PARKS",
 		agency: "Washington Parks Department",
@@ -194,6 +161,23 @@ BootstrapVars.areaStats = [
 		symbol: '#x2190;',
 		color: '#73B273'
 	},	
+	{
+		abbrev: "COUNTY-CITY",
+		agency: "City and County Lands",
+		starting_total_acres : 0,
+		starting_total_cost: 0,
+		starting_total_revenue: 0,
+		total_acres : 0,
+		total_cost: 0,
+		total_revenue: 0,
+		mapTarget: "smartmine.q65pzaor",
+		visible: true,
+		layerGroupName: "agency",
+		layerGroup: null,
+		symbol: '#x2190;',
+		color: '#FFBEBE'
+
+	},
 	{
 		abbrev: "AQ-DFW",
 		agency: "Department of Fish and Wildlife",
