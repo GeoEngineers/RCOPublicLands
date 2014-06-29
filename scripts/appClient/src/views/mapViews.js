@@ -457,14 +457,15 @@ var MapView = Backbone.Marionette.Layout.extend({
 				{
 					aqDate =props.data.Acquisit_1;
 				}
-				var acqCost = props.data.Acquisit_2 !== undefined ? '$' + props.data.Acquisit_2.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : '$0.00';
+				var acqCost = props.data.ACQCOST !== undefined ? '$' + props.data.ACQCOST.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : '$0.00';
 				var markerToolTip = new MapTipView({
-            		ParcelName: props.data.Parcel,
-            		Owner:  props.data.OwnerName,
+            		ParcelName: props.data.TAXID,
+            		Owner:  props.data.OWNER,
             		OwnershipType: area.agency,
-            		TotalArea: props.data.GISAcres,
-            		LandUse: area.agency,
-            		AcquisitionDate: aqDate,
+            		TotalArea: props.data.ACRES,
+            		LandUse: props.data.PLAND,
+            		UnitName: props.data.UNITNAME,
+            		AcquisitionDate: props.data.ACQYEAR,
             		Cost: acqCost
         		});
 

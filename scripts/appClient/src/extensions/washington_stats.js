@@ -307,22 +307,7 @@ BootstrapVars.areaStats = [
 		symbol: '#x2190;',
 		color: '#38A800'
 	},
-	{
-		abbrev: "UNKNOWN",
-		agency: "unknown",
-		starting_total_acres : 0,
-		starting_total_cost: 0,
-		starting_total_revenue: 0,
-		total_acres : 0,
-		total_cost: 0,
-		total_revenue: 0,
-		mapTarget: "smartmine.o3q2rzfr",
-		visible: false,
-		layerGroupName: "landtypes",
-		layerGroup: null,
-		symbol: '#x2190;',
-		color: '#C9F2D0'
-	},
+	
 		{
 		abbrev: "OTHER USE",
 		agency: "other",
