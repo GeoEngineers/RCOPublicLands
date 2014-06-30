@@ -345,6 +345,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 				}
 		}
 		var selectedVal = $('#selectAreaInput').val();
+		var selectedTypeVal = $('#selectStateInput').val();
 		var boundary = MainApplication.boundarySelected;
 		_.each(boundary.jsonLayer._layers, function(shape){
 			if(selectedVal.toString() === shape.feature.properties[boundary.NameField].toString())
@@ -392,7 +393,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 			});
 		}
 		//Update Bootstrap vars
-		if(selectedVal.toString().length < 2)
+		if(selectedVal.toString().length < 2 && selectedTypeVal === "Legislative Districts")
 			selectedVal = "0" + selectedVal;
 		_.each(BootstrapVars.areaStats, function(area)
 		{
@@ -1032,17 +1033,35 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 						width: 800,
 						height: 600,
 						type: 'bar',
+						backgroundColor:'rgba(40, 40, 40, 1)',
 						margin: [60,35,80,55]
 					},
 					title: {
-						style: { "font-size" : "9.5pt" },
+						style: { "font-size" : "9.5pt", color: 'rgba(255, 255, 255, 1)' },
 						align: "center",
 						margin: 5,
 						x: 0,
 						y: 30
 					},					
 					legend: {
+			        	itemStyle:{ color: 'rgba(255, 255, 255, 1)'  },
 						enabled: true
+					},
+					xAxis: {
+						categories: [xAxisTitle],
+						labels:
+						{
+							style: { color: 'rgba(255, 255, 255, 1)' }
+						}
+					},
+					yAxis: {
+						title: {
+							text: ''
+						},
+						labels:
+						{
+							style: { color: 'rgba(255, 255, 255, 1)' }
+						}
 					}
 				}
             },
@@ -1132,29 +1151,24 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			exporting: {
                 enabled: true,
 				chartOptions: {
-					backgroundColor: {
-						linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
-						stops: [
-							[0, 'rgba(13, 106, 132, 1)'],
-							[1, 'rgba(13, 106, 132, 1)']
-						]
-					},
 					chart: {
 						width: 800,
 						height: 600,
+						backgroundColor:'rgba(40, 40, 40, 1)',
 						type: 'pie',
 						margin: [-10,-10,-10,-10]
 					},
 					title: {
-						style: { "font-size" : "9.5pt" },
+						style: { "font-size" : "9.5pt",color: 'rgba(255, 255, 255, 1)'  },
 						align: "center",
 						margin: 5,
 						x: 0,
 						y: 30
 					},	
 			        legend:{
+			        	itemStyle:{ color: 'rgba(255, 255, 255, 1)'  },
 						enabled:true
-					}				
+					}			
 				}
             },
 			credits: {
@@ -1212,10 +1226,10 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		});
 		switch(typeView) {
 			case "total_acres":
-				prefixText = "<div style='margin-bottom: 10px'>Total " + this.type.replace("total_", "")  + ": " + currencyPrefix  + dc.formatNumber(total, isCurrency)+ "</div>";
+				prefixText = "<div style='margin-bottom: 10px; margin-top: 30px'>Total " + this.type.replace("total_", "")  + ": " + currencyPrefix  + dc.formatNumber(total, isCurrency)+ "</div>";
 				break;
 			case "total_cost":
-				prefixText = "<div style='margin-bottom: 10px'>Total " + this.type.replace("total_", "")+ "</div>";
+				prefixText = "<div style='margin-bottom: 10px; margin-top: 30px'>Total " + this.type.replace("total_", "")+ "</div>";
 				break;
 			case "total_revenue":
 				prefixText = "";

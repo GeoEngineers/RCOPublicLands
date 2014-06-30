@@ -44,7 +44,7 @@
 
 #expandSummaryButton {
     display: inline-block;
-    width: 60px;
+    width: 40px;
 }
 #expandSummaryButton button{
     color: #dddddd;
@@ -242,8 +242,11 @@
 #summaryHeaderName {
     display: inline;
     float:right;
-	font-size:13pt;
+	font-size:14pt;
 	vertical-align:middle;
+    margin-right: 10px;
+    margin-top: 2px;
+    color: #dddddd;
 }
 #summaryHeaderOptions {
     display: inline;
@@ -1645,12 +1648,15 @@ Custom config styles
 
 }
 
-#summaryHeaderName {
-    margin-right: 5px;
-    margin-top: 5px;
-}
 
 .tipLabel{
     color: #d1f1F4;
     font-size: 13px;
+}
+
+#pieChartBlock{
+    margin-top: 10px;
+}
+#barChartBlock{
+    margin-top: 10px;
 }
