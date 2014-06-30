@@ -1212,10 +1212,10 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		});
 		switch(typeView) {
 			case "total_acres":
-				prefixText = "Total " + this.type.replace("total_", "")  + ": " + currencyPrefix  + dc.formatNumber(total, isCurrency)+ " ";
+				prefixText = "<div style='margin-bottom: 10px'>Total " + this.type.replace("total_", "")  + ": " + currencyPrefix  + dc.formatNumber(total, isCurrency)+ "</div>";
 				break;
 			case "total_cost":
-				prefixText = "Total " + this.type.replace("total_", "");
+				prefixText = "<div style='margin-bottom: 10px'>Total " + this.type.replace("total_", "")+ "</div>";
 				break;
 			case "total_revenue":
 				prefixText = "";

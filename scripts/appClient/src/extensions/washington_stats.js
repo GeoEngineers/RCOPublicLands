@@ -40,7 +40,7 @@ BootstrapVars.boundaries = [
 			jsonUrl: "./scripts/appClient/src/extensions/counties_simplified.geojson",
 			json: null,
 			jsonLayer: null,
-			color: "red"
+			color: "white"
 },
 {
 			Id: 2,
@@ -51,7 +51,7 @@ BootstrapVars.boundaries = [
 			jsonUrl: "./scripts/appClient/src/extensions/wrias_simplified.geojson",
 			json: null,
 			jsonLayer: null,
-			color: "blue"
+			color: "white"
 },
 {
 			Id: 3,
@@ -62,7 +62,7 @@ BootstrapVars.boundaries = [
 			jsonUrl: "./scripts/appClient/src/extensions/congressionaldistricts_simplified.geojson",
 			json: null,
 			jsonLayer: null,
-			color: "green"
+			color: "white"
 },
 {
 			Id: 4,
@@ -73,7 +73,7 @@ BootstrapVars.boundaries = [
 			jsonUrl: "./scripts/appClient/src/extensions/legislativedistricts_simplified.geojson",
 			json: null,
 			jsonLayer: null,
-			color: "orange"
+			color: "white"
 }];
 
 

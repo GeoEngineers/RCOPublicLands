@@ -47,9 +47,9 @@
     width: 60px;
 }
 #expandSummaryButton button{
-    color: #ffffff;
-    background-color: #000000;
-    border-color: #ffffff;
+    color: #dddddd;
+    background-color: #222222;
+    border-color: #dddddd;
     padding: 4px;
 }
 #summaryTypeSelector {
@@ -266,7 +266,7 @@
     padding: 10px;
 }
 .leaflet-popup-content-wrapper {
-    background-color: rgba(40, 70, 90, 1);
+    background-color: rgba(40, 40, 40, 1);
     border-radius: 20px;
     color: #FFFFFF;
     opacity: 0.9;
