@@ -257,7 +257,7 @@ BootstrapVars.areaStats = [
 		layerGroupName: "landtypes",
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#B2B2B2'
+		color: '#B4D79E'
 	},	
 	{
 		abbrev: "DEVELOPED RECREATION",
