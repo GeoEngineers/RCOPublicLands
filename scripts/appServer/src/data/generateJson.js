@@ -4,7 +4,7 @@ var data = [];
 function generateJson(){
     
 
-	fs.readFile('./county_sums.csv', 'utf8', function (err,dataset) {
+	fs.readFile('./leg_districts_sums.csv', 'utf8', function (err,dataset) {
 	//fs.readFile('./county_sums.csv', 'utf8', function (err,dataset) {
 	//fs.readFile('./leg_districts_sums.csv', 'utf8', function (err,dataset) {
 	//fs.readFile('./wria_sums.csv', 'utf8', function (err,dataset) {
