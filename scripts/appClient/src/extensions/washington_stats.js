@@ -308,6 +308,56 @@ BootstrapVars.areaStats = [
 		symbol: '#x2190;',
 		color: '#BEFFE8'
 	},
+	{
+		abbrev: "PROPOSED PARKS",
+		agency: "Proposed Park Acquisitions",
+		starting_total_acres : 0,
+		starting_total_cost: 0,
+		starting_total_revenue: 0,
+		total_acres : 0,
+		total_cost: 0,
+		total_revenue: 0,
+		mapTarget: "smartmine.uovcmcxr",
+		visible: false,
+		layerGroupName: "proposed",
+		layerGroup: null,
+		symbol: '#x2190;',
+		color: '#E6E600'
+	},	
+	{
+		abbrev: "PROPOSED DNR",
+		agency: "Proposed DNR Acquisitions",
+		starting_total_acres : 0,
+		starting_total_cost: 0,
+		starting_total_revenue: 0,
+		total_acres : 0,
+		total_cost: 0,
+		total_revenue: 0,
+		mapTarget: "smartmine.3kk5ipb9",
+		visible: false,
+		layerGroupName: "proposed",
+		layerGroup: null,
+		symbol: '#x2190;',
+		color: '#FF7F7F'
+	},
+	
+		{
+		abbrev: "PROPOSED DFW",
+		agency: "Proposed DNR Acquisitions",
+		starting_total_acres : 0,
+		starting_total_cost: 0,
+		starting_total_revenue: 0,
+		total_acres : 0,
+		total_cost: 0,
+		total_revenue: 0,
+		mapTarget: "smartmine.yhxmkj4i",
+		visible: false,
+		layerGroupName: "proposed",
+		layerGroup: null,
+		symbol: '#x2190;',
+		color: '#E69800'
+	},
+
 
 
 ];
