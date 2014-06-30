@@ -458,14 +458,15 @@ var MapView = Backbone.Marionette.Layout.extend({
 					aqDate =props.data.Acquisit_1;
 				}
 				var acqCost = props.data.ACQCOST !== undefined ? '$' + props.data.ACQCOST.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : '$0.00';
+				var acqYear = props.data.ACQYEAR !== undefined && props.data.ACQYEAR !== 0 ? props.data.ACQYEAR : 'N/A';
 				var markerToolTip = new MapTipView({
-            		ParcelName: props.data.TAXID,
+            		ParcelName: "Parcel ID: " + props.data.TAXID,
             		Owner:  props.data.OWNER,
             		OwnershipType: area.agency,
             		TotalArea: props.data.ACRES,
             		LandUse: props.data.PLAND,
             		UnitName: props.data.UNITNAME,
-            		AcquisitionDate: props.data.ACQYEAR,
+            		AcquisitionDate: acqYear,
             		Cost: acqCost
         		});
 
@@ -496,10 +497,10 @@ var MapView = Backbone.Marionette.Layout.extend({
 	},	
 	loadPrismFunding: function(){
 		if(MainApplication.Map.hasLayer(MainApplication.views.mapView.esriMap)){
-			$('#lnkPrismFunding').css("color","#000000");
+			$('#lnkPrismFunding').css("background-color","");
 			MainApplication.Map.removeLayer(MainApplication.views.mapView.esriMap);	
 		}else{
-			$('#lnkPrismFunding').css("color","#9999FF");
+			$('#lnkPrismFunding').css("background-color","#b8f6F9");
 			MainApplication.views.mapView.esriMap.addTo(MainApplication.Map);
 		}
 		return false;
@@ -801,7 +802,7 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 			$(MainApplication.paneRegion.el).css({"width":"25em"});
 			$('#expandSummaryButton').removeClass("collapsable");
 			$('#expandSummaryButton').hasClass("expandable") ? false : $('#expandSummaryButton').addClass("expandable");
-			$("#expandSummaryButton button").html("&lt;&lt;&lt; Expand");
+			$("#expandSummaryButton button").html("&lt;&lt;&lt;");
 			$("#summarySelectors").width(90);
 
 			MainApplication.views.mapView.mapPaneView.setChartSizes(MainApplication.views.mapView.mapPaneView.chartDefaultWidth, MainApplication.views.mapView.mapPaneView.chartDefaultHeight);
@@ -1267,7 +1268,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		if($(ev.currentTarget).hasClass("expandable")){
 			$(ev.currentTarget).addClass("collapsable");
 			$(ev.currentTarget).removeClass("expandable");
-			$("#expandSummaryButton button").html("Collapse &gt;&gt;&gt;");
+			$("#expandSummaryButton button").html("&gt;&gt;&gt;");
 			$(MainApplication.paneRegion.el).animate({"width":"100%"});
 			$("#summarySelectors").css({"width":"90px"});
 			//the 170 removed from the new height is a coincidence, it's the total of the header, footer, and misc text
@@ -1281,7 +1282,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		}else{
 			$(ev.currentTarget).removeClass("collapsable");
 			$(ev.currentTarget).addClass("expandable");
-			$("#expandSummaryButton button").html("&lt;&lt;&lt; Expand");
+			$("#expandSummaryButton button").html("&lt;&lt;&lt;");
 			$(MainApplication.paneRegion.el).animate({"width":"25em"});		
 			$("#summarySelectors").css({"width":"308px"});
 			this.setChartSizes(this.chartDefaultWidth, this.chartDefaultHeight);

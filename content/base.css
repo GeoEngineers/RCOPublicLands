@@ -44,7 +44,13 @@
 
 #expandSummaryButton {
     display: inline-block;
-    width: 98px;
+    width: 60px;
+}
+#expandSummaryButton button{
+    color: #ffffff;
+    background-color: #000000;
+    border-color: #ffffff;
+    padding: 4px;
 }
 #summaryTypeSelector {
     display: inline-block;
@@ -1637,4 +1643,9 @@ Custom config styles
     color: #468fae;
     font-style:italic;
 
+}
+
+#summaryHeaderName {
+    margin-right: 5px;
+    margin-top: 5px;
 }
