@@ -80,7 +80,7 @@ BootstrapVars.boundaries = [
 BootstrapVars.areaStats = [
 	{
 		abbrev: "DFW",
-		agency: "Department of Fish and Wildlife",
+		agency: "Dept. of Fish and Wildlife",
 		starting_total_acres : 0,
 		starting_total_cost: 0,
 		starting_total_revenue: 0,
@@ -98,7 +98,7 @@ BootstrapVars.areaStats = [
 	
 	{
 		abbrev: "PARKS",
-		agency: "Washington Parks Department",
+		agency: "Washington Parks Dept.",
 		starting_total_acres : 0,
 		starting_total_cost: 0,
 		starting_total_revenue: 0,
@@ -147,7 +147,7 @@ BootstrapVars.areaStats = [
 	},
 	{
 		abbrev: "FEDERAL",
-		agency: "federal",
+		agency: "Federal",
 		starting_total_acres : 0,
 		starting_total_cost: 0,
 		starting_total_revenue: 0,
@@ -162,7 +162,7 @@ BootstrapVars.areaStats = [
 		color: '#73B273'
 	},	
 	{
-		abbrev: "COUNTY-CITY",
+		abbrev: "CITY-COUNTY",
 		agency: "City and County Lands",
 		starting_total_acres : 0,
 		starting_total_cost: 0,
@@ -180,7 +180,7 @@ BootstrapVars.areaStats = [
 	},
 	{
 		abbrev: "AQ-DFW",
-		agency: "Department of Fish and Wildlife",
+		agency: "Dept. of Fish and Wildlife",
 		starting_total_acres :0,
 		starting_total_cost: 0,
 		starting_total_revenue: 0,
@@ -197,7 +197,7 @@ BootstrapVars.areaStats = [
 	},
 	{
 		abbrev: "AQ-PARKS",
-		agency: "Washington Parks Department",
+		agency: "Washington Parks Dept.",
 		starting_total_acres : 0,
 		starting_total_cost: 0,
 		starting_total_revenue: 0,
@@ -213,7 +213,7 @@ BootstrapVars.areaStats = [
 	},
 	{
 		abbrev: "AQ-DNR",
-		agency: "Department of Natural Resources",
+		agency: "Dept. of Natural Resources",
 		starting_total_acres : 0,
 		starting_total_cost: 0,
 		starting_total_revenue: 0,
@@ -229,7 +229,7 @@ BootstrapVars.areaStats = [
 	},
 	{
 		abbrev: "REVENUE",
-		agency: "revenue",
+		agency: "Revenue",
 		starting_total_acres : 0,
 		starting_total_cost: 0,
 		starting_total_revenue: 0,
@@ -245,7 +245,7 @@ BootstrapVars.areaStats = [
 	},	
 	{
 		abbrev: "HABITAT AND PASSIVE RECREATION",
-		agency: "habitat",
+		agency: "Habitat and Passive Habitat",
 		starting_total_acres : 0,
 		starting_total_cost: 0,
 		starting_total_revenue: 0,
@@ -261,7 +261,7 @@ BootstrapVars.areaStats = [
 	},	
 	{
 		abbrev: "DEVELOPED RECREATION",
-		agency: "recreation",
+		agency: "Developed Recreation",
 		starting_total_acres : 0,
 		starting_total_cost: 0,
 		starting_total_revenue: 0,
@@ -277,7 +277,7 @@ BootstrapVars.areaStats = [
 	},	
 	{
 		abbrev: "CONSERVATION",
-		agency: "conservation",
+		agency: "Conservation",
 		starting_total_acres : 0,
 		starting_total_cost: 0,
 		starting_total_revenue: 0,
@@ -293,8 +293,8 @@ BootstrapVars.areaStats = [
 	},
 	
 		{
-		abbrev: "OTHER USE",
-		agency: "other",
+		abbrev: "OTHER PUBLIC",
+		agency: "Other",
 		starting_total_acres : 0,
 		starting_total_cost: 0,
 		starting_total_revenue: 0,

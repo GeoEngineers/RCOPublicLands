@@ -1,15 +1,1 @@
-var sums_statewide = [
-{"acres":223185.66,"acquisitioncost":244779432,"agency":"AQ-DFW"},
-{"acres":2568731.53,"acquisitioncost":2662946,"agency":"AQ-DNR-AQUATIC"},
-{"acres":3197677.62,"acquisitioncost":755528212.43,"agency":"AQ-DNR-UPLANDS"},
-{"acres":6177.26,"acquisitioncost":74192958.49,"agency":"AQ-PARKS"},
-{"acres":6177.26,"acquisitioncost":74192958.49,"agency":"AQ-STATE"},
-{"acres":248470.37,"acquisitioncost":328937015.81,"agency":"CONSERVATION"},
-{"acres":86990.9199999999,"acquisitioncost":159762597.79,"agency":"DEVELOPED RECREATION"},
-{"acres":711650.010000001,"acquisitioncost":286865960,"agency":"DFW"},
-{"acres":2568731.53,"acquisitioncost":2662946,"agency":"DNR AQUATIC"},
-{"acres":3197677.62,"acquisitioncost":755528212.43,"agency":"DNR UPLANDS"},
-{"acres":16835295.9200002,"acquisitioncost":0,"agency":"FEDERAL"},
-{"acres":157.22,"acquisitioncost":915075,"agency":"HABITAT AND PASSIVE RECREATION"},
-{"acres":182855.77,"acquisitioncost":399188998.12,"agency":"PARKS"},
-{"acres":2973019.58,"acquisitioncost":468522767.62,"agency":"REVENUE"}];
+var sums_statewide = [{"acres":130929.13,"acquisitioncost":141014281,"agency":"AQ-DFW"},{"acres":603582.36,"acquisitioncost":0,"agency":"PARKS"},{"acres":2569118.69,"acquisitioncost":2662946,"agency":"AQ-DNR"},{"acres":4919.49,"acquisitioncost":51845963.19,"agency":"AQ-PARKS"},{"acres":631060.36,"acquisitioncost":0,"agency":"CITY-COUNTY"},{"acres":157166.27,"acquisitioncost":222319300,"agency":"CONSERVATION"},{"acres":50273.38,"acquisitioncost":88851109.83,"agency":"DEVELOPED RECREATION"},{"acres":6412115.83,"acquisitioncost":167954459,"agency":"DFW"},{"acres":2569118.69,"acquisitioncost":2662946,"agency":"DNR AQUATIC"},{"acres":3126964.77,"acquisitioncost":652970996.62,"agency":"DNR UPLANDS"},{"acres":13242474.09,"acquisitioncost":0,"agency":"FEDERAL"},{"acres":3223566.04,"acquisitioncost":323540597.67,"agency":"HABITAT AND PASSIVE RECREATION"},{"acres":10412.61,"acquisitioncost":4870039,"agency":"OTHER PUBLIC"},{"acres":2970931.88,"acquisitioncost":435926867.62,"agency":"REVENUE"},{"acres":6412115.83,"acquisitioncost":1084166583.27,"agency":"STATE"},{"acres":17716531.59,"acquisitioncost":1081503637.27,"agency":"UNKNOWN"}];

@@ -26,6 +26,19 @@ function generateJson(){
 	  	console.log("---------------------------------------------------------------------");
 	  	console.log("---------------------------------------------------------------------");
 	  	console.log("---------------------------------------------------------------------");
+	  	console.log("---------------------------------------------------------------------");
+	  	console.log("---------------------------------------------------------------------");
+	  	console.log("---------------------------------------------------------------------");
+	  	console.log("---------------------------------------------------------------------");
+	  	console.log("---------------------------------------------------------------------");
+	  	console.log("---------------------------------------------------------------------");
+	  	console.log("---------------------------------------------------------------------");
+	  	console.log("---------------------------------------------------------------------");
+	  	console.log("---------------------------------------------------------------------");
+	  	console.log("---------------------------------------------------------------------");
+	  	console.log("---------------------------------------------------------------------");
+	  	console.log("---------------------------------------------------------------------");
+	  	
 	  	var values = [];
 		while (index > -1) {
 	      var line = remaining.substring(0, index);
@@ -36,7 +49,7 @@ function generateJson(){
 	      	var splitData = line.split('|');
 	      	var value = {"acres": parseFloat(splitData[0]), "acquisitioncost": parseFloat(splitData[1]),"name": splitData[2].replace('\r', '').replace('"', '').replace('"', ''), "agency": splitData[3].replace('\r', '').replace('"', '').replace('"', '')};
 	      	//Use this line if generating statewide totals
-	      	//var value = {"acres": parseFloat(splitData[0]), "acquisitioncost": parseFloat(splitData[1]), "agency": splitData[3].replace('\r', '').replace('"', '').replace('"', '')};
+	      	//var value = {"acres": parseFloat(splitData[0]), "acquisitioncost": parseFloat(splitData[1]), "agency": splitData[2].replace('\r', '').replace('"', '').replace('"', '')};
 	      	
 	      	values.push(value);
 	  	  }
