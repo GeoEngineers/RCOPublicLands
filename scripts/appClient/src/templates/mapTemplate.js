@@ -105,7 +105,7 @@ MainApplication.Templates.WelcomeTemplate = [
 					"<div><a href='http://www.fws.gov' target='_blank'><img src='./content/images/logos/LogoUSFWS-sm.jpg' /></a></div>",
 					"<div><a href='http://www.wdfw.wa.gov' target='_blank'><img src='./content/images/logos/LogoWADFW-sm.jpg' /></a></div>",
 					"<div><a href='http://www.parks.wa.gov' target='_blank'><img src='./content/images/logos/WSPLogo_200.png' /></a></div>",
-					"<div><a href='http://www.dnr.wa.gov' target='_blank'><img src='./content/images/logoWADNR.gif' /></a></div>",
+					"<div><a href='http://www.dnr.wa.gov' target='_blank'><img src='./content/images/logoWADNR.jpg' style='width: 200px'/></a></div>",
 				"</div>",
 			"</div>",
 			"<div class=\"modal-footer\" style=\"text-align: center\">",
