@@ -266,7 +266,7 @@
     padding: 10px;
 }
 .leaflet-popup-content-wrapper {
-    background-color: rgba(40, 70, 90, 1);
+    background-color: rgba(40, 40, 40, 1);
     border-radius: 20px;
     color: #FFFFFF;
     opacity: 0.9;
