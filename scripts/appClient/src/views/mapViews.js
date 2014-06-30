@@ -498,9 +498,11 @@ var MapView = Backbone.Marionette.Layout.extend({
 	loadPrismFunding: function(){
 		if(MainApplication.Map.hasLayer(MainApplication.views.mapView.esriMap)){
 			$('#lnkPrismFunding').css("background-color","");
+			$('#lnkPrismFunding').css("color","#000000");
 			MainApplication.Map.removeLayer(MainApplication.views.mapView.esriMap);	
 		}else{
-			$('#lnkPrismFunding').css("background-color","#b8f6F9");
+			$('#lnkPrismFunding').css("background-color","#a7cBF2;");
+			$('#lnkPrismFunding').css("color","#0000FF");
 			MainApplication.views.mapView.esriMap.addTo(MainApplication.Map);
 		}
 		return false;
