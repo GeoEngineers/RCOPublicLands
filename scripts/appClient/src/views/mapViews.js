@@ -804,7 +804,7 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 			$(MainApplication.paneRegion.el).css({"width":"25em"});
 			$('#expandSummaryButton').removeClass("collapsable");
 			$('#expandSummaryButton').hasClass("expandable") ? false : $('#expandSummaryButton').addClass("expandable");
-			$("#expandSummaryButton button").html("&lt;&lt;&lt;");
+			$("#expandSummaryButton button").html("<i class='fa fa-arrow-circle-o-left fa-lg'></i>");
 			$("#summarySelectors").width(90);
 
 			MainApplication.views.mapView.mapPaneView.setChartSizes(MainApplication.views.mapView.mapPaneView.chartDefaultWidth, MainApplication.views.mapView.mapPaneView.chartDefaultHeight);
@@ -1283,7 +1283,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		if($(ev.currentTarget).hasClass("expandable")){
 			$(ev.currentTarget).addClass("collapsable");
 			$(ev.currentTarget).removeClass("expandable");
-			$("#expandSummaryButton button").html("&gt;&gt;&gt;");
+			$("#expandSummaryButton button").html("<i class='fa fa-arrow-circle-o-right fa-lg'></i>");
 			$(MainApplication.paneRegion.el).animate({"width":"100%"});
 			$("#summarySelectors").css({"width":"90px"});
 			//the 170 removed from the new height is a coincidence, it's the total of the header, footer, and misc text
@@ -1297,7 +1297,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		}else{
 			$(ev.currentTarget).removeClass("collapsable");
 			$(ev.currentTarget).addClass("expandable");
-			$("#expandSummaryButton button").html("&lt;&lt;&lt;");
+			$("#expandSummaryButton button").html("<i class='fa fa-arrow-circle-o-left fa-lg'></i>");
 			$(MainApplication.paneRegion.el).animate({"width":"25em"});		
 			$("#summarySelectors").css({"width":"308px"});
 			this.setChartSizes(this.chartDefaultWidth, this.chartDefaultHeight);

@@ -36,9 +36,9 @@ MainApplication.Templates.MapSelectorSlideTemplate = [
 
 MainApplication.Templates.MapPaneTemplate = [
 	"<div id='summaryPanelBlock'>",
-		"<div id='closeSummaryBlock'><div id='closeSummaryButton'>X</div></div>",
+		"<div id='closeSummaryBlock'><div id='closeSummaryButton'><i class='fa fa-times fa-lg'></i></div></div>",
 		"<div id='summaryMainHead'>",
-			"<div id='expandSummaryButton' class='expandable'><button class='btn'>&lt;&lt;&lt;</button></div>",
+			"<div id='expandSummaryButton' class='expandable'><button class='btn'><i class='fa fa-arrow-circle-o-left fa-lg'></i></button></div>",
 			"<div id='summaryHeaderName'>{{SummaryTitle}}</div>",
 		"</div>",
 		"<div id='pieChartBlock'>",
@@ -64,7 +64,7 @@ MainApplication.Templates.MapPaneTemplate = [
 		"</div>",		
 		"<div id='summaryLayer'></div>",
 		"<div id='summaryDateRange' style='font-size:8pt;text-align:left;'></div>",
-		"<div id='summaryHelpMenu' class='usePointer' style='margin-top: 20px'><a href='#' id='lnkHelpMenu' style='text-decoration:underline;'>More about this data?</a></div><br /><br /><br /><br />",
+		"<div id='summaryHelpMenu' class='usePointer' style='margin-top: 20px'><a href='#' id='lnkHelpMenu' style='text-decoration:underline; color: #FFFF00'>More about this data?</a></div><br /><br /><br /><br />",
 	"</div>"
 ].join("\n");
 

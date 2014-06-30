@@ -48,8 +48,9 @@
 }
 #expandSummaryButton button{
     color: #dddddd;
-    background-color: #222222;
-    border-color: #dddddd;
+    background-color: transparent;
+    font-size: 20px;
+    border: 0px;
     padding: 4px;
 }
 #summaryTypeSelector {
@@ -132,14 +133,17 @@
     text-align: right;
 }
 #closeSummaryButton {
-    background-color: #222222;
-    border: 1px solid #ffffff;
+    background-color: transparent;
+    border: 3px solid #dddddd;
     border-radius: 20px;
     cursor: pointer;
-    font-size: 14pt;
+    font-size: 12px;
     font-weight: bold;
     text-align: center;
-    width: 30px;
+    width: 24px;
+    margin-top: 5px;
+    padding-bottom: 2px;
+    padding-right: 0px;
 }
 
 #toggleQuestionButton {
@@ -245,7 +249,8 @@
 	font-size:14pt;
 	vertical-align:middle;
     margin-right: 10px;
-    margin-top: 2px;
+    margin-top: 5px;
+    text-shadow: 3px 3px #222222;
     color: #dddddd;
 }
 #summaryHeaderOptions {
