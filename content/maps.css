@@ -11,6 +11,7 @@
 }
 .leaflet-popup-close-button {
     z-index: 1050;
+    background-color: rgba(40, 70, 90, .9);
 }
 .leaflet-popup-close-button:hover {
 	background-color: none !important;
@@ -288,7 +289,7 @@
 	font-size: 10pt;
 }
 .leaflet-popup-close-button {
-    background-color: #000000;
+    background-color: rgba(40, 70, 90, .9);
     background-image: url("http://api.tiles.mapbox.com/mapbox.js/v1.6.3/images/icons-ffffff.png");
 	background-position: -9px -70px;
     height: 16px !important;
@@ -296,7 +297,7 @@
     width: 16px !important;
 }
 .leaflet-popup-close-button:hover {
-	background-color: #111111;
+    background-color: rgba(40, 70, 90, .9);
 	background-image: url('http://api.tiles.mapbox.com/mapbox.js/v1.6.3/images/icons-ffffff.png');
 	border-radius: 20px;
 }

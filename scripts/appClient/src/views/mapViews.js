@@ -79,10 +79,10 @@ var MapView = Backbone.Marionette.Layout.extend({
 					var val = geojson.properties[prop];
 					var linkId = "shapshot"+ geojson.properties.OBJECTID;
 					if(prop.replace("PRISM.DBO.SV_DMPROJECT1.", "") === "SnapshotURL"){
-						val = "<a href='" + val + "' id='shapshot"+ geojson.properties.OBJECTID +"'>" + val + "</a>";
+						val = "<a href='" + val + "' id='shapshot"+ geojson.properties.OBJECTID +"' style='color: white; text-decoration: underline'>" + val + "</a>";
 					}
 					if (val != 'undefined' && val != "0" && prop !="OBJECTID" && prop != "Name") {
-						popupText += "<b>" + prop.replace(" (Esri)",'').replace("PRISM.DBO.SV_DMPROJECT1.", "") + "</b>: " + val + "<br>";
+						popupText += "<span class='tipLabel'>" + prop.replace(" (Esri)",'').replace("PRISM.DBO.SV_DMPROJECT1.", "") + "</span>: " + val + "<br>";
 					}
 				}
 				marker.bindPopup(popupText);

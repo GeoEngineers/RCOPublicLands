@@ -266,7 +266,7 @@
     padding: 10px;
 }
 .leaflet-popup-content-wrapper {
-    background-color: #000000;
+    background-color: rgba(40, 70, 90, 1);
     border-radius: 20px;
     color: #FFFFFF;
     opacity: 0.9;
@@ -1648,4 +1648,9 @@ Custom config styles
 #summaryHeaderName {
     margin-right: 5px;
     margin-top: 5px;
+}
+
+.tipLabel{
+    color: #d1f1F4;
+    font-size: 13px;
 }
