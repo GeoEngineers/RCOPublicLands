@@ -47,9 +47,9 @@
     width: 60px;
 }
 #expandSummaryButton button{
-    color: #ffffff;
-    background-color: #000000;
-    border-color: #ffffff;
+    color: #dddddd;
+    background-color: #222222;
+    border-color: #dddddd;
     padding: 4px;
 }
 #summaryTypeSelector {
