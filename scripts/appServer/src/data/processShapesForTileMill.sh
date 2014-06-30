@@ -125,7 +125,7 @@ sudo rm $HOME/downloads/wa_pli_habitat_passive_rec_gen.*
 echo "Temporary Files Removed"
 
 # Export Revenue from Postgres
-sudo pgsql2shp -f $HOME/downloads/wa_pli_revenue.shp -h localhost -p 5432 -u postgres -P P%ssword37 rco_publiclands 'SELECT gid, geom, taxid, acqyear, prov1, landuse, landuses, owntype, acres, unitname, owner, pland, acqcost, provide_type as provtype, aquatic FROM vw_rco_publiclands_otherlanduse WHERE gid > 0'
+sudo pgsql2shp -f $HOME/downloads/wa_pli_revenue.shp -h localhost -p 5432 -u postgres -P P%ssword37 rco_publiclands 'SELECT gid, geom, taxid, acqyear, prov1, landuse, landuses, owntype, acres, unitname, owner, pland, acqcost, provide_type as provtype, aquatic FROM vw_rco_publiclands_revenue WHERE gid > 0'
 echo "Exported Revenue"
 # Simplify the data by 10 meters
 sudo ogr2ogr $HOME/downloads/wa_pli_revenue_gen_10.shp $HOME/downloads/wa_pli_revenue.shp -simplify 10
