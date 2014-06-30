@@ -345,6 +345,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 				}
 		}
 		var selectedVal = $('#selectAreaInput').val();
+		var selectedTypeVal = $('#selectStateInput').val();
 		var boundary = MainApplication.boundarySelected;
 		_.each(boundary.jsonLayer._layers, function(shape){
 			if(selectedVal.toString() === shape.feature.properties[boundary.NameField].toString())
@@ -392,7 +393,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 			});
 		}
 		//Update Bootstrap vars
-		if(selectedVal.toString().length < 2)
+		if(selectedVal.toString().length < 2 && selectedTypeVal === "Legislative Districts")
 			selectedVal = "0" + selectedVal;
 		_.each(BootstrapVars.areaStats, function(area)
 		{
@@ -803,7 +804,7 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 			$(MainApplication.paneRegion.el).css({"width":"25em"});
 			$('#expandSummaryButton').removeClass("collapsable");
 			$('#expandSummaryButton').hasClass("expandable") ? false : $('#expandSummaryButton').addClass("expandable");
-			$("#expandSummaryButton button").html("&lt;&lt;&lt;");
+			$("#expandSummaryButton button").html("<i class='fa fa-arrow-circle-o-left fa-lg'></i>");
 			$("#summarySelectors").width(90);
 
 			MainApplication.views.mapView.mapPaneView.setChartSizes(MainApplication.views.mapView.mapPaneView.chartDefaultWidth, MainApplication.views.mapView.mapPaneView.chartDefaultHeight);
@@ -987,14 +988,14 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			chart: {
 				height: this.currentChartHeight,
 				width: this.currentChartWidth,
-				backgroundColor:'rgba(255, 255, 255, 0)',
+				backgroundColor:'rgba(238, 238, 238, 0)',
 				type: 'bar',
 				renderTo: 'barChartLayer',
 				margin: [30,35,35,55]
 			},
 			title: {
 				text: GeoAppBase.capitaliseEach(MainApplication.views.mapView.currentLayersType + " " + xAxisTitle +" Compared"),
-				style: { "font-size" : "9.5pt", color: 'rgba(255, 255, 255, 1)' },
+				style: { "font-size" : "9.5pt", color: 'rgba(238, 238, 238, 1)' },
 				align: "center",
 				margin: 5,
 				x: -20,
@@ -1004,7 +1005,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				categories: [xAxisTitle],
 				labels:
 				{
-					style: { color: 'rgba(255, 255, 255, 1)' }
+					style: { color: 'rgba(238, 238, 238, 1)' }
 				}
 			},
 			yAxis: {
@@ -1013,7 +1014,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				},
 				labels:
 				{
-					style: { color: 'rgba(255, 255, 255, 1)' }
+					style: { color: 'rgba(238, 238, 238, 1)' }
 				}
 			},
 			series: barChartSeries,
@@ -1032,17 +1033,35 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 						width: 800,
 						height: 600,
 						type: 'bar',
+						backgroundColor:'rgba(40, 40, 40, 1)',
 						margin: [60,35,80,55]
 					},
 					title: {
-						style: { "font-size" : "9.5pt" },
+						style: { "font-size" : "9.5pt", color: 'rgba(255, 255, 255, 1)' },
 						align: "center",
 						margin: 5,
 						x: 0,
 						y: 30
 					},					
 					legend: {
+			        	itemStyle:{ color: 'rgba(238, 238, 238, 1)'  },
 						enabled: true
+					},
+					xAxis: {
+						categories: [xAxisTitle],
+						labels:
+						{
+							style: { color: 'rgba(238, 238, 238, 1)' }
+						}
+					},
+					yAxis: {
+						title: {
+							text: ''
+						},
+						labels:
+						{
+							style: { color: 'rgba(238, 238, 238, 1)' }
+						}
 					}
 				}
             },
@@ -1096,12 +1115,12 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				plotBackgroundColor: null,
 				plotBorderWidth: 0,
 				plotShadow: false,
-				backgroundColor:'rgba(255, 255, 255, 0)',
+				backgroundColor:'rgba(238, 238, 238, 0)',
 				margin: [-20, -50, -55, -50]
 			},
 			title: {
 				text: GeoAppBase.capitaliseEach(MainApplication.views.mapView.currentLayersType + " " + xAxisTitle +" Compared"),
-				style: { "font-size" : "9.5pt", color: 'rgba(255, 255, 255, 1)'  },
+				style: { "font-size" : "9.5pt", color: 'rgba(238, 238, 238, 1)'  },
 				align: "center",
 				margin: 5,
 				x: -20 
@@ -1132,29 +1151,24 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			exporting: {
                 enabled: true,
 				chartOptions: {
-					backgroundColor: {
-						linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
-						stops: [
-							[0, 'rgba(13, 106, 132, 1)'],
-							[1, 'rgba(13, 106, 132, 1)']
-						]
-					},
 					chart: {
 						width: 800,
 						height: 600,
+						backgroundColor:'rgba(40, 40, 40, 1)',
 						type: 'pie',
 						margin: [-10,-10,-10,-10]
 					},
 					title: {
-						style: { "font-size" : "9.5pt" },
+						style: { "font-size" : "9.5pt",color: 'rgba(238, 238, 238, 1)'  },
 						align: "center",
 						margin: 5,
 						x: 0,
 						y: 30
 					},	
 			        legend:{
+			        	itemStyle:{ color: 'rgba(238, 238, 238, 1)'  },
 						enabled:true
-					}				
+					}			
 				}
             },
 			credits: {
@@ -1212,10 +1226,10 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		});
 		switch(typeView) {
 			case "total_acres":
-				prefixText = "<div style='margin-bottom: 10px'>Total " + this.type.replace("total_", "")  + ": " + currencyPrefix  + dc.formatNumber(total, isCurrency)+ "</div>";
+				prefixText = "<div style='margin-bottom: 10px; margin-top: 30px'>Total " + this.type.replace("total_", "")  + ": " + currencyPrefix  + dc.formatNumber(total, isCurrency)+ "</div>";
 				break;
 			case "total_cost":
-				prefixText = "<div style='margin-bottom: 10px'>Total " + this.type.replace("total_", "")+ "</div>";
+				prefixText = "<div style='margin-bottom: 10px; margin-top: 30px'>Total " + this.type.replace("total_", "")+ "</div>";
 				break;
 			case "total_revenue":
 				prefixText = "";
@@ -1269,7 +1283,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		if($(ev.currentTarget).hasClass("expandable")){
 			$(ev.currentTarget).addClass("collapsable");
 			$(ev.currentTarget).removeClass("expandable");
-			$("#expandSummaryButton button").html("&gt;&gt;&gt;");
+			$("#expandSummaryButton button").html("<i class='fa fa-arrow-circle-o-right fa-lg'></i>");
 			$(MainApplication.paneRegion.el).animate({"width":"100%"});
 			$("#summarySelectors").css({"width":"90px"});
 			//the 170 removed from the new height is a coincidence, it's the total of the header, footer, and misc text
@@ -1283,7 +1297,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		}else{
 			$(ev.currentTarget).removeClass("collapsable");
 			$(ev.currentTarget).addClass("expandable");
-			$("#expandSummaryButton button").html("&lt;&lt;&lt;");
+			$("#expandSummaryButton button").html("<i class='fa fa-arrow-circle-o-left fa-lg'></i>");
 			$(MainApplication.paneRegion.el).animate({"width":"25em"});		
 			$("#summarySelectors").css({"width":"308px"});
 			this.setChartSizes(this.chartDefaultWidth, this.chartDefaultHeight);
