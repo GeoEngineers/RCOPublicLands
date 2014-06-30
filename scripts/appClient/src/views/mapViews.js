@@ -461,7 +461,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 				var markerToolTip = new MapTipView({
             		ParcelName: props.data.TAXID,
             		Owner:  props.data.OWNER,
-            		OwnershipType: area.agency,
+            		OwnershipType: props.data.OWNTYPE,
             		TotalArea: props.data.ACRES,
             		LandUse: props.data.PLAND,
             		UnitName: props.data.UNITNAME,
