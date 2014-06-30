@@ -59,7 +59,7 @@ SELECT Sum(a.acres) as Acres, sum(a.acquisition_cost) as AcquisitionCost, b.sldu
   FROM vw_rco_publiclands_unknown a Join publiclands_2012_leg_districts b on
   ST_Intersects(a.geom, b.geom) Group by b.sldust12
 Union
-SELECT Sum(a.acres) as Acres, sum(a.acquisition_cost) as AcquisitionCost, b.sldust12 as areaname, 'OTHER' as agency
+SELECT Sum(a.acres) as Acres, sum(a.acquisition_cost) as AcquisitionCost, b.sldust12 as areaname, 'OTHER PUBLIC' as agency
   FROM vw_rco_publiclands_otherlanduse a Join publiclands_2012_leg_districts b on
   ST_Intersects(a.geom, b.geom) Group by b.sldust12
 Union
