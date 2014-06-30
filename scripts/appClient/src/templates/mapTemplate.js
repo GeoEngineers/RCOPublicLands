@@ -25,11 +25,11 @@ MainApplication.Templates.MapSelectorSlideTemplate = [
 	"<div>",
 		"<a href='#' id='lnkMapsSlideToggle'>Inventory Maps</a><a href='http://www.geoengineers.com/smartmine' target='_blank'><img id='smartmineLogo' src='content/images/smartmine-logo.png'/><a>",
 		"<div id='mapLayers'>",
-			"<button id='lnkPrismFunding' class='btn'><i class='fa fa-institution'></i>&nbsp;&nbsp;RCO Grants</button>",
 			"<button id='lnkAgency' class='btn btn-primary navLayers'><i class='fa fa-building'></i>&nbsp;&nbsp;Owner</button>",
 			"<button id='lnkLandTypes' class='btn navLayers'><i class='fa fa-tree'></i>&nbsp;&nbsp;Land Types</button>",
 			"<button id='lnkAcquisitions' class='btn navLayers'><i class='fa fa-flag'></i>&nbsp;&nbsp;Acquisitions</button>",
 			"<button id='lnkProposed' class='btn navLayers'><i class='fa fa-map-marker'></i>&nbsp;&nbsp;Proposed</button>",
+			"<button id='lnkPrismFunding' class='btn'><i class='fa fa-institution'></i>&nbsp;&nbsp;RCO Grants</button>",
 		"</div>",
 	"</div>"
 ].join("\n");
