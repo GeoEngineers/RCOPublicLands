@@ -18,7 +18,7 @@ SELECT Sum(a.acres) as Acres, sum(a.acquisition_cost) as AcquisitionCost, b.dist
 Union
 SELECT Sum(a.acres) as Acres, sum(a.acquisition_cost) as AcquisitionCost, b.district_n as areaname, 'PARKS' as agency
   FROM vw_rco_publiclands_parks a Join publiclands_2012_congressional_bnd b on
-  ST_Intersects(a.geom, b.geom) Group by b.district_n order by areaname
+  ST_Intersects(a.geom, b.geom) Group by b.district_n
 Union
 SELECT Sum(a.acres) as Acres, sum(a.acquisition_cost) as AcquisitionCost, b.district_n as areaname, 'FEDERAL' as agency
   FROM vw_rco_publiclands_federal a Join publiclands_2012_congressional_bnd b on
@@ -28,13 +28,10 @@ SELECT Sum(a.acres) as Acres, sum(a.acquisition_cost) as AcquisitionCost, b.dist
   FROM vw_rco_publiclands_citycounty a Join publiclands_2012_congressional_bnd b on
   ST_Intersects(a.geom, b.geom) Group by b.district_n
 Union
-
-
 SELECT Sum(a.acres) as Acres, sum(a.acquisition_cost) as AcquisitionCost, b.district_n as areaname, 'AQ-DFW' as agency
   FROM vw_rco_publiclands_acq_wdfw a Join publiclands_2012_congressional_bnd b on
   ST_Intersects(a.geom, b.geom) Group by b.district_n
 Union
-
 SELECT Sum(a.acres) as Acres, sum(a.acquisition_cost) as AcquisitionCost, b.district_n as areaname, 'AQ-DNR' as agency
   FROM vw_rco_publiclands_acq_dnr a Join publiclands_2012_congressional_bnd b on
   ST_Intersects(a.geom, b.geom) Group by b.district_n
@@ -43,7 +40,6 @@ SELECT Sum(a.acres) as Acres, sum(a.acquisition_cost) as AcquisitionCost, b.dist
   FROM vw_rco_publiclands_acq_parks a Join publiclands_2012_congressional_bnd b on
   ST_Intersects(a.geom, b.geom) Group by b.district_n
 Union
-
 SELECT Sum(a.acres) as Acres, sum(a.acquisition_cost) as AcquisitionCost, b.district_n as areaname, 'HABITAT AND PASSIVE RECREATION' as agency
   FROM vw_rco_publiclands_habitat_passive_recreation a Join publiclands_2012_congressional_bnd b on
   ST_Intersects(a.geom, b.geom) Group by b.district_n
@@ -66,5 +62,17 @@ SELECT Sum(a.acres) as Acres, sum(a.acquisition_cost) as AcquisitionCost, b.dist
 Union
 SELECT Sum(a.acres) as Acres, sum(a.acquisition_cost) as AcquisitionCost, b.district_n as areaname, 'REVENUE' as agency
   FROM vw_rco_publiclands_revenue a Join publiclands_2012_congressional_bnd b on
+  ST_Intersects(a.geom, b.geom) Group by b.district_n
+ Union
+ SELECT Sum(a.acres) as Acres, 0 as AcquisitionCost, b.district_n as areaname, 'PROPOSED PARKS' as agency
+  FROM vw_rco_publiclands_parks_proposed a Join publiclands_2012_congressional_bnd b on
+  ST_Intersects(a.geom, b.geom) Group by b.district_n
+  Union
+  SELECT Sum(a.acres) as Acres, 0 as AcquisitionCost, b.district_n as areaname, 'PROPOSED DFW' as agency
+  FROM vw_rco_publiclands_dfw_proposed a Join publiclands_2012_congressional_bnd b on
+  ST_Intersects(a.geom, b.geom) Group by b.district_n
+  Union
+  SELECT Sum(a.acres) as Acres, 0 as AcquisitionCost, b.district_n as areaname, 'PROPOSED DNR' as agency
+  FROM vw_rco_publiclands_dnr_proposed a Join publiclands_2012_congressional_bnd b on
   ST_Intersects(a.geom, b.geom) Group by b.district_n
 ) as Agencies Order by agency, areaname

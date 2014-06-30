@@ -343,7 +343,7 @@ BootstrapVars.areaStats = [
 	
 		{
 		abbrev: "PROPOSED DFW",
-		agency: "Proposed DNR Acquisitions",
+		agency: "Proposed DFW Acquisitions",
 		starting_total_acres : 0,
 		starting_total_cost: 0,
 		starting_total_revenue: 0,

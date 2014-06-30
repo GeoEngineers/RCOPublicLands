@@ -66,4 +66,17 @@ Union
 SELECT Sum(a.acres) as Acres, sum(a.acquisition_cost) as AcquisitionCost, b.sldust12 as areaname, 'REVENUE' as agency
   FROM vw_rco_publiclands_revenue a Join publiclands_2012_leg_districts b on
   ST_Intersects(a.geom, b.geom) Group by b.sldust12
+  -----
+  Union
+SELECT Sum(a.acres) as Acres, 0 as AcquisitionCost, b.sldust12 as areaname, 'PROPOSED PARKS' as agency
+  FROM vw_rco_publiclands_parks_proposed a Join publiclands_2012_leg_districts b on
+  ST_Intersects(a.geom, b.geom) Group by b.sldust12
+Union
+SELECT Sum(a.acres) as Acres, 0 as AcquisitionCost, b.sldust12 as areaname, 'PROPOSED DFW' as agency
+  FROM vw_rco_publiclands_dfw_proposed a Join publiclands_2012_leg_districts b on
+  ST_Intersects(a.geom, b.geom) Group by b.sldust12
+Union
+SELECT Sum(a.acres) as Acres, 0 as AcquisitionCost, b.sldust12 as areaname, 'PROPOSED DNR' as agency
+  FROM vw_rco_publiclands_dnr_proposed a Join publiclands_2012_leg_districts b on
+  ST_Intersects(a.geom, b.geom) Group by b.sldust12
 ) as Agencies Order by agency, areaname
