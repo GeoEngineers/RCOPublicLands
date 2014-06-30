@@ -459,6 +459,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 				}
 				var acqCost = props.data.ACQCOST !== undefined ? '$' + props.data.ACQCOST.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : '$0.00';
 				var acqYear = props.data.ACQYEAR !== undefined && props.data.ACQYEAR !== 0 ? props.data.ACQYEAR : 'N/A';
+				
 				var markerToolTip = new MapTipView({
             		ParcelName: "Parcel ID: " + props.data.TAXID,
             		Owner:  props.data.OWNER,
@@ -498,11 +499,9 @@ var MapView = Backbone.Marionette.Layout.extend({
 	loadPrismFunding: function(){
 		if(MainApplication.Map.hasLayer(MainApplication.views.mapView.esriMap)){
 			$('#lnkPrismFunding').css("background-color","");
-			$('#lnkPrismFunding').css("color","#000000");
 			MainApplication.Map.removeLayer(MainApplication.views.mapView.esriMap);	
 		}else{
-			$('#lnkPrismFunding').css("background-color","#a7cBF2;");
-			$('#lnkPrismFunding').css("color","#0000FF");
+			$('#lnkPrismFunding').css("background-color","#b7d2F2;");
 			MainApplication.views.mapView.esriMap.addTo(MainApplication.Map);
 		}
 		return false;
