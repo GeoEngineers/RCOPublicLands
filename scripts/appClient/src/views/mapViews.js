@@ -501,7 +501,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 			$('#lnkPrismFunding').css("background-color","");
 			MainApplication.Map.removeLayer(MainApplication.views.mapView.esriMap);	
 		}else{
-			$('#lnkPrismFunding').css("background-color","#b7d2F2;");
+			$('#lnkPrismFunding').css("background-color","#d1f1F4;");
 			MainApplication.views.mapView.esriMap.addTo(MainApplication.Map);
 		}
 		return false;
