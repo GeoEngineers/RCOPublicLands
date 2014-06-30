@@ -988,14 +988,14 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			chart: {
 				height: this.currentChartHeight,
 				width: this.currentChartWidth,
-				backgroundColor:'rgba(255, 255, 255, 0)',
+				backgroundColor:'rgba(238, 238, 238, 0)',
 				type: 'bar',
 				renderTo: 'barChartLayer',
 				margin: [30,35,35,55]
 			},
 			title: {
 				text: GeoAppBase.capitaliseEach(MainApplication.views.mapView.currentLayersType + " " + xAxisTitle +" Compared"),
-				style: { "font-size" : "9.5pt", color: 'rgba(255, 255, 255, 1)' },
+				style: { "font-size" : "9.5pt", color: 'rgba(238, 238, 238, 1)' },
 				align: "center",
 				margin: 5,
 				x: -20,
@@ -1005,7 +1005,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				categories: [xAxisTitle],
 				labels:
 				{
-					style: { color: 'rgba(255, 255, 255, 1)' }
+					style: { color: 'rgba(238, 238, 238, 1)' }
 				}
 			},
 			yAxis: {
@@ -1014,7 +1014,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				},
 				labels:
 				{
-					style: { color: 'rgba(255, 255, 255, 1)' }
+					style: { color: 'rgba(238, 238, 238, 1)' }
 				}
 			},
 			series: barChartSeries,
@@ -1044,14 +1044,14 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 						y: 30
 					},					
 					legend: {
-			        	itemStyle:{ color: 'rgba(255, 255, 255, 1)'  },
+			        	itemStyle:{ color: 'rgba(238, 238, 238, 1)'  },
 						enabled: true
 					},
 					xAxis: {
 						categories: [xAxisTitle],
 						labels:
 						{
-							style: { color: 'rgba(255, 255, 255, 1)' }
+							style: { color: 'rgba(238, 238, 238, 1)' }
 						}
 					},
 					yAxis: {
@@ -1060,7 +1060,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 						},
 						labels:
 						{
-							style: { color: 'rgba(255, 255, 255, 1)' }
+							style: { color: 'rgba(238, 238, 238, 1)' }
 						}
 					}
 				}
@@ -1115,12 +1115,12 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				plotBackgroundColor: null,
 				plotBorderWidth: 0,
 				plotShadow: false,
-				backgroundColor:'rgba(255, 255, 255, 0)',
+				backgroundColor:'rgba(238, 238, 238, 0)',
 				margin: [-20, -50, -55, -50]
 			},
 			title: {
 				text: GeoAppBase.capitaliseEach(MainApplication.views.mapView.currentLayersType + " " + xAxisTitle +" Compared"),
-				style: { "font-size" : "9.5pt", color: 'rgba(255, 255, 255, 1)'  },
+				style: { "font-size" : "9.5pt", color: 'rgba(238, 238, 238, 1)'  },
 				align: "center",
 				margin: 5,
 				x: -20 
@@ -1159,14 +1159,14 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 						margin: [-10,-10,-10,-10]
 					},
 					title: {
-						style: { "font-size" : "9.5pt",color: 'rgba(255, 255, 255, 1)'  },
+						style: { "font-size" : "9.5pt",color: 'rgba(238, 238, 238, 1)'  },
 						align: "center",
 						margin: 5,
 						x: 0,
 						y: 30
 					},	
 			        legend:{
-			        	itemStyle:{ color: 'rgba(255, 255, 255, 1)'  },
+			        	itemStyle:{ color: 'rgba(238, 238, 238, 1)'  },
 						enabled:true
 					}			
 				}
