@@ -106,7 +106,7 @@ L.esri.Mixins.featureGrid = {
   },
   _makeRequest: function(cell, cells, bounds){
     this._activeRequests++;
-    console.log(JSON.stringify(L.esri.Util.boundsToExtent(cell.bounds)));
+    //console.log(JSON.stringify(L.esri.Util.boundsToExtent(cell.bounds)));
     var requestOptions = {
       geometryType: "esriGeometryEnvelope",
       geometry: JSON.stringify(L.esri.Util.boundsToExtent(cell.bounds)),

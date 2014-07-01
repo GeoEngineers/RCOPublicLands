@@ -80,9 +80,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 			]);
 		});		
 		
-		this.esriMap = this.streetsMap;
-		/*
-		=  L.esri.clusteredFeatureLayer("http://gismanagerweb.rco.wa.gov/arcgis/rest/services/public_lands/WA_RCO_Public_Lands_Inventory_PRISM_v2/MapServer/0/", {
+		this.esriMap = L.esri.clusteredFeatureLayer("http://gismanagerweb.rco.wa.gov/arcgis/rest/services/public_lands/WA_RCO_Public_Lands_Inventory_PRISM_v2/MapServer/0/", {
    			cluster: new L.MarkerClusterGroup(),
 			minZoom:4,
    			onEachMarker: function(geojson, marker) {
@@ -100,17 +98,18 @@ var MapView = Backbone.Marionette.Layout.extend({
 				marker.bindPopup(popupText);
         	}
       	});
-		*/
+		
 		MainApplication.Map.setView([47,-120], 7);
 		L.control.navbar().addTo(MainApplication.Map);
 
 		//this.baseMapControl = L.control.layers(this.baseMaps, null, {position: 'bottomleft'}).addTo(MainApplication.Map);
 		this.mapFirstView=false;
-		_.each(BootstrapVars.areaStats, function(area){ 
-			if(area.visible){
-				MainApplication.Map.addLayer(area.layerGroup);	
+		for(area in BootstrapVars.areaStats){
+			if(BootstrapVars.areaStats[area].visible){
+				MainApplication.Map.addLayer(BootstrapVars.areaStats[area].layerGroup);	
 			}
-		});	
+		}
+				
 		this.setLegendControls();
 	},
 	clearAreaSums: function(){
@@ -586,6 +585,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		return false;
 	},
 	setLegendControls : function(){
+		//console.log("Data");
 		var dc=this;
 
 		this.layerMaps = {};

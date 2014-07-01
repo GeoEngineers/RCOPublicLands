@@ -78,7 +78,7 @@
         if(!this._objectIdField){
           this._setObjectIdField(response);
         }
-        console.log(this._objectIdField);
+        //console.log(this._objectIdField);
         var markers = [];
         for (var i = response.features.length - 1; i >= 0; i--) {
           var feature = response.features[i];
@@ -96,7 +96,7 @@
             this._loaded.push(id);
           }
         }
-        console.log(markers);
+        //console.log(markers);
         this.cluster.addLayers(markers);
       }
     }

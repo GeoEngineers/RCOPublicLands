@@ -84,6 +84,7 @@
       var envelope = L.esri.Util.boundsToEnvelope(e.target.getBounds());
       var results = this.index.search(e.target.getBounds().toBBoxString().split(','));
       var ids = [];
+	  
       for (var i = 0; i < results.length; i++) {
         ids.push(results[i][4]);
       }
