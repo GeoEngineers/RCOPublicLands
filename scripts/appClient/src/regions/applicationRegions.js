@@ -15,18 +15,18 @@
 		if(view && view.openMinimized !== undefined && view.openMinimized===true){
 			this.slideIn();
 		}else{
-			$('#FooterNavSlideOut').animate({"height":"90px"});
-            $(".leaflet-bottom").animate({"margin-bottom": "90px"});
-            $("#smartmineLogo").animate({"margin-bottom": "60px"});
-            $("#toggleQuestionButton").animate({"margin-bottom": "60px"});
+			$('#FooterNavSlideOut').css({"height":"90px"});
+            $(".leaflet-bottom").css({"margin-bottom": "90px"});
+            $("#smartmineLogo").css({"margin-bottom": "60px"});
+            $("#toggleQuestionButton").css({"margin-bottom": "60px"});
 			this.slideOpen = true;
 		}
     },
     slideIn: function (view) {
-		$('#FooterNavSlideOut').animate({"height":"30px"});
-        $(".leaflet-bottom").animate({"margin-bottom": "30px"});
-        $("#smartmineLogo").animate({"margin-bottom": "0px"});
-        $("#toggleQuestionButton").animate({"margin-bottom": "0px"});
+		$('#FooterNavSlideOut').css({"height":"30px"});
+        $(".leaflet-bottom").css({"margin-bottom": "30px"});
+        $("#smartmineLogo").css({"margin-bottom": "0px"});
+        $("#toggleQuestionButton").css({"margin-bottom": "0px"});
 		this.slideOpen = false;
     }
 });
