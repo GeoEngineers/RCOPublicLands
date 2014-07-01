@@ -60,14 +60,26 @@ var MapView = Backbone.Marionette.Layout.extend({
 		var welcomeView = new WelcomeView({});
 		MainApplication.modalRegion.show(welcomeView);
 		
+		var southWest = L.latLng(49, -124.85),
+			northEast = L.latLng(45.33, -116.85);
+		this.stateBounds = L.latLngBounds(southWest, northEast);
+		
 		_.each(BootstrapVars.areaStats, function(area){ 
-			var tileLayer = new L.mapbox.tileLayer(area.mapTarget, { minZoom:4, zIndex: 5 });
-			var utfGrid = new L.UtfGrid('http://{s}.tiles.mapbox.com/v3/'+area.mapTarget+'/{z}/{x}/{y}.grid.json?callback={cb}', { zIndex: 5 });
+			var tileLayer = new L.mapbox.tileLayer(area.mapTarget, { 
+				bounds: this.stateBounds,
+				minZoom: 4,
+				zIndex: 5
+			});
+			var utfGrid = new L.UtfGrid('http://{s}.tiles.mapbox.com/v3/'+area.mapTarget+'/{z}/{x}/{y}.grid.json?callback={cb}', { 
+				bounds: this.stateBounds,
+				zIndex: 5 
+			});
 			area.layerGroup =  L.layerGroup([
 				tileLayer,
 				dc.createGrid(utfGrid, area)
 			]);
 		});		
+		
 		this.esriMap =  L.esri.clusteredFeatureLayer("http://gismanagerweb.rco.wa.gov/arcgis/rest/services/public_lands/WA_RCO_Public_Lands_Inventory_PRISM_v2/MapServer/0/", {
    			cluster: new L.MarkerClusterGroup(),
 			minZoom:4,
