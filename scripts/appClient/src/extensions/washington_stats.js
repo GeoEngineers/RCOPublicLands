@@ -308,7 +308,7 @@ BootstrapVars.areaStats = [
 		symbol: '#x2190;',
 		color: '#BEFFE8'
 	},
-	/*{
+	{
 		abbrev: "PROPOSED PARKS",
 		agency: "Proposed Park Acquisitions",
 		starting_total_acres : 0,
@@ -356,8 +356,8 @@ BootstrapVars.areaStats = [
 		layerGroup: null,
 		symbol: '#x2190;',
 		color: '#E69800'
-	},
+	}
 
-*/
+
 
 ];

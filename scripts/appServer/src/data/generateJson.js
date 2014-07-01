@@ -8,7 +8,7 @@ function generateJson(){
 	//fs.readFile('./sums_counties_new.csv', 'utf8', function (err,dataset) {
 	//fs.readFile('./sums_leg_districts_new.csv', 'utf8', function (err,dataset) {
 	//fs.readFile('./sums_wrias_new.csv', 'utf8', function (err,dataset) {
-	fs.readFile('./state_widesums.csv', 'utf8', function (err,dataset) {
+	fs.readFile('./sums_statewide.csv', 'utf8', function (err,dataset) {
 	  	if (err) {
 	    	console.log(err);
 	  	}
