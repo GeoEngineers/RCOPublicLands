@@ -437,7 +437,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		})
 		gridLayer.on('click', function(props){
 			if(props.data){
-				console.log(props.data);
+				//console.log(props.data);
 				var aqDate = props.data.Acquisit_1;
 				if(aqDate === undefined || aqDate === 0)
 				{
