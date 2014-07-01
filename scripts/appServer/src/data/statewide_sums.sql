@@ -47,4 +47,13 @@ SELECT SUM(st_area(a.geom) / 43560) as Acres, sum(a.acquisition_cost) as Acquisi
 Union
 SELECT SUM(st_area(a.geom) / 43560) as Acres, sum(a.acquisition_cost) as AcquisitionCost,'REVENUE' as agency
   FROM vw_rco_publiclands_revenue a 
+Union
+ SELECT SUM(st_area(a.geom) / 43560) as Acres, 0 as AcquisitionCost, 'PROPOSED PARKS' as agency
+  FROM vw_rco_publiclands_parks_proposed a 
+Union
+SELECT SUM(st_area(a.geom) / 43560) as Acres, 0 as AcquisitionCost,  'PROPOSED DFW' as agency
+FROM vw_rco_publiclands_dfw_proposed a 
+Union
+SELECT SUM(st_area(a.geom) / 43560) as Acres, 0 as AcquisitionCost,  'PROPOSED DNR' as agency
+FROM vw_rco_publiclands_dnr_proposed a
 ) as Agencies Order by agency
