@@ -92,8 +92,8 @@ BootstrapVars.areaStats = [
 		layerGroupName: "agency",
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#E69800'
-
+		color: '#E69800',
+		z: 10
 	},
 	
 	{
@@ -110,7 +110,8 @@ BootstrapVars.areaStats = [
 		layerGroupName: "agency",
 		layerGroup: null,
 		symbol: '#x21f4;',
-		color: '#E6E600'
+		color: '#E6E600',
+		z: 11
 	},
 	{
 		abbrev: "DNR UPLANDS",
@@ -126,7 +127,8 @@ BootstrapVars.areaStats = [
 		layerGroupName: "agency",
 		layerGroup: null,
 		symbol: '#x214a;',
-		color: '#FF7F7F'
+		color: '#FF7F7F',
+		z: 12
 	},
 
 {
@@ -143,7 +145,8 @@ BootstrapVars.areaStats = [
 		layerGroupName: "agency",
 		layerGroup: null,
 		symbol: '#x214a;',
-		color: '#97DBF2'
+		color: '#97DBF2',
+		z: 13
 	},
 	{
 		abbrev: "FEDERAL",
@@ -159,7 +162,8 @@ BootstrapVars.areaStats = [
 		layerGroupName: "agency",
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#73B273'
+		color: '#73B273',
+		z: 14
 	},	
 	{
 		abbrev: "CITY-COUNTY",
@@ -175,7 +179,8 @@ BootstrapVars.areaStats = [
 		layerGroupName: "agency",
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#FFBEBE'
+		color: '#FFBEBE',
+		z: 15
 
 	},
 	{
@@ -192,7 +197,8 @@ BootstrapVars.areaStats = [
 		layerGroupName: "acquisitions",
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#E69800'
+		color: '#E69800',
+		z: 16
 
 	},
 	{
@@ -209,7 +215,8 @@ BootstrapVars.areaStats = [
 		layerGroupName: "acquisitions",
 		layerGroup: null,
 		symbol: '#x21f4;',
-		color: '#B4D79E'
+		color: '#B4D79E',
+		z: 17
 	},
 	{
 		abbrev: "AQ-DNR",
@@ -225,7 +232,8 @@ BootstrapVars.areaStats = [
 		layerGroupName: "acquisitions",
 		layerGroup: null,
 		symbol: '#x214a;',
-		color: '#FF7F7F'
+		color: '#FF7F7F',
+		z: 18
 	},
 	{
 		abbrev: "REVENUE",
@@ -241,7 +249,8 @@ BootstrapVars.areaStats = [
 		layerGroupName: "landtypes",
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#FF7F7F'
+		color: '#FF7F7F',
+		z: 19
 	},	
 	{
 		abbrev: "HABITAT AND PASSIVE RECREATION",
@@ -257,7 +266,8 @@ BootstrapVars.areaStats = [
 		layerGroupName: "landtypes",
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#B4D79E'
+		color: '#B4D79E',
+		z: 20
 	},	
 	{
 		abbrev: "DEVELOPED RECREATION",
@@ -273,7 +283,8 @@ BootstrapVars.areaStats = [
 		layerGroupName: "landtypes",
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#B2B2B2'
+		color: '#B2B2B2',
+		z: 21
 	},	
 	{
 		abbrev: "CONSERVATION",
@@ -289,7 +300,8 @@ BootstrapVars.areaStats = [
 		layerGroupName: "landtypes",
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#38A800'
+		color: '#38A800',
+		z: 22
 	},
 	
 		{
@@ -306,7 +318,8 @@ BootstrapVars.areaStats = [
 		layerGroupName: "landtypes",
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#BEFFE8'
+		color: '#BEFFE8',
+		z: 23
 	},
 	{
 		abbrev: "PROPOSED PARKS",
@@ -322,7 +335,8 @@ BootstrapVars.areaStats = [
 		layerGroupName: "proposed",
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#E6E600'
+		color: '#E6E600',
+		z: 24
 	},	
 	{
 		abbrev: "PROPOSED DNR",
@@ -338,7 +352,8 @@ BootstrapVars.areaStats = [
 		layerGroupName: "proposed",
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#FF7F7F'
+		color: '#FF7F7F',
+		z: 25
 	},
 	
 		{
@@ -355,7 +370,8 @@ BootstrapVars.areaStats = [
 		layerGroupName: "proposed",
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#E69800'
+		color: '#E69800',
+		z: 26
 	}
 
 

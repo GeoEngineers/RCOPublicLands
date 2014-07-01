@@ -8,13 +8,14 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.resetAreaSums();
 
 		this.dnrResources = options.dnrResources;
-		this.streetsMap = L.tileLayer.provider('MapBox.smartmine.igcmocio', { minZoom:4, zIndex: 4, attribution:"" });		
+		this.streetsMap = L.tileLayer.provider('MapBox.smartmine.igcmocio', { minZoom:6, zIndex: 1, attribution:"" });		
 		this.openMap = L.tileLayer('http://b.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
 			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
-			minZoom: 4, 
-			maxZoom: 18
+			minZoom: 6, 
+			maxZoom: 18,
+			zIndex: 2
 		});
-		this.imageryMap = L.tileLayer.provider('MapBox.smartmine.map-nco5bdjp', { minZoom:4, zIndex: 4, attribution:"" });
+		this.imageryMap = L.tileLayer.provider('MapBox.smartmine.map-nco5bdjp', { minZoom:6, zIndex: 3, attribution:"" });
 
 		this.baseMaps = {
 			"Terrain": this.streetsMap,
@@ -58,7 +59,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 			northEast = L.latLng(45.33, -116.85);
 		this.stateBounds = L.latLngBounds(southWest, northEast);
 		
-		MainApplication.Map === undefined ? MainApplication.Map = L.mapbox.map('map', null, { minZoom:4, attribution:"" }) : false;
+		MainApplication.Map === undefined ? MainApplication.Map = L.mapbox.map('map', null, { minZoom:6, maxZoom:14, attribution:"" }) : false;
 		this.setBaseMapDefault();
 		this.createOverlayMask();
 		
@@ -70,12 +71,15 @@ var MapView = Backbone.Marionette.Layout.extend({
 		for(area in BootstrapVars.areaStats){
 			var tileLayer = new L.mapbox.tileLayer(BootstrapVars.areaStats[area].mapTarget, { 
 				bounds: this.stateBounds,
-				minZoom: 4,
-				zIndex: 5
+				minZoom: 6,
+				maxZoom: 14,
+				zIndex: BootstrapVars.areaStats[area].z
 			});
 			var utfGrid = new L.UtfGrid('http://{s}.tiles.mapbox.com/v3/'+BootstrapVars.areaStats[area].mapTarget+'/{z}/{x}/{y}.grid.json?callback={cb}', { 
 				bounds: this.stateBounds,
-				zIndex: 5 
+				minZoom: 6,
+				maxZoom: 14,
+				zIndex: BootstrapVars.areaStats[area].z
 			});
 			BootstrapVars.areaStats[area].layerGroup =  L.layerGroup([
 				tileLayer,
@@ -85,7 +89,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 		
 		this.esriMap = L.esri.clusteredFeatureLayer("http://gismanagerweb.rco.wa.gov/arcgis/rest/services/public_lands/WA_RCO_Public_Lands_Inventory_PRISM_v2/MapServer/0/", {
    			cluster: new L.MarkerClusterGroup(),
-			minZoom:4,
+			minZoom:6,
+			zIndex: 101,
    			onEachMarker: function(geojson, marker) {
    				popupText =  "<div style='overflow:scroll; max-width:350px; max-height:260px;'>";
 				for (prop in geojson.properties) {
@@ -126,7 +131,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		}
 	},
 	createOverlayMask : function(){
-		var overlayMask = L.tileLayer('http://a.tiles.mapbox.com/v3/smartmine.ni4o0f6r/{z}/{x}/{y}.png', { zIndex:6 });
+		var overlayMask = L.tileLayer('http://a.tiles.mapbox.com/v3/smartmine.ni4o0f6r/{z}/{x}/{y}.png', { zIndex: 100 });
 		//overlayMask.setZIndex(6);
 		MainApplication.Map.addLayer(overlayMask);
 	},
