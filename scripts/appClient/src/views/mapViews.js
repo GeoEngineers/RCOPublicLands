@@ -641,7 +641,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 			}, 16);
 		});
 		
-		console.log(this.featureLayerControls);
 		//extra layer clean up, just to be safe
 		MainApplication.Map.on("baselayerchange", function(ev){
 			console.log(ev, "Layer Changed");
