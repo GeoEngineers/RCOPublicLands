@@ -40,12 +40,12 @@ var MapView = Backbone.Marionette.Layout.extend({
 	onShow: function(){
 		var dc=this;
 		this.activeLayers=[];
-		_.each(BootstrapVars.areaStats, function(area){
-			if(area.visible){
+		for(area in BootstrapVars.areaStats){
+			if(BootstrapVars.areaStats[area].visible){
 				dc.activeLayers.push(area.abbrev);
-				$('#ownerToggle' + area.abbrev).css("color",area.color);
+				$('#ownerToggle' + BootstrapVars.areaStats[area].abbrev).css("color",BootstrapVars.areaStats[area].color);
 			}
-		});
+		}
 		
 		this.bounds = false;
 		//set buttons according to internet settings
@@ -67,21 +67,21 @@ var MapView = Backbone.Marionette.Layout.extend({
 		var welcomeView = new WelcomeView({});
 		MainApplication.modalRegion.show(welcomeView);
 
-		_.each(BootstrapVars.areaStats, function(area){ 
-			var tileLayer = new L.mapbox.tileLayer(area.mapTarget, { 
+		for(area in BootstrapVars.areaStats){
+			var tileLayer = new L.mapbox.tileLayer(BootstrapVars.areaStats[area].mapTarget, { 
 				bounds: this.stateBounds,
 				minZoom: 4,
 				zIndex: 5
 			});
-			var utfGrid = new L.UtfGrid('http://{s}.tiles.mapbox.com/v3/'+area.mapTarget+'/{z}/{x}/{y}.grid.json?callback={cb}', { 
+			var utfGrid = new L.UtfGrid('http://{s}.tiles.mapbox.com/v3/'+BootstrapVars.areaStats[area].mapTarget+'/{z}/{x}/{y}.grid.json?callback={cb}', { 
 				bounds: this.stateBounds,
 				zIndex: 5 
 			});
-			area.layerGroup =  L.layerGroup([
+			BootstrapVars.areaStats[area].layerGroup =  L.layerGroup([
 				tileLayer,
-				dc.createGrid(utfGrid, area)
+				dc.createGrid(utfGrid, BootstrapVars.areaStats[area])
 			]);
-		});		
+		}
 		
 		this.esriMap = L.esri.clusteredFeatureLayer("http://gismanagerweb.rco.wa.gov/arcgis/rest/services/public_lands/WA_RCO_Public_Lands_Inventory_PRISM_v2/MapServer/0/", {
    			cluster: new L.MarkerClusterGroup(),
@@ -118,12 +118,12 @@ var MapView = Backbone.Marionette.Layout.extend({
 	clearAreaSums: function(){
 		var summaryValues = sums_statewide;
 		//Update Bootstrap vars
-		_.each(BootstrapVars.areaStats, function(area){
-			area.total_acres = 0;
-			area.starting_total_acres = 0;
-			area.total_cost = 0;
-			area.starting_total_cost = 0;
-		});
+		for(area in BootstrapVars.areaStats){
+			BootstrapVars.areaStats[area].total_acres = 0;
+			BootstrapVars.areaStats[area].starting_total_acres = 0;
+			BootstrapVars.areaStats[area].total_cost = 0;
+			BootstrapVars.areaStats[area].starting_total_cost = 0;
+		}
 	},
 	createOverlayMask : function(){
 		var overlayMask = L.tileLayer('http://a.tiles.mapbox.com/v3/smartmine.ni4o0f6r/{z}/{x}/{y}.png');
@@ -133,19 +133,19 @@ var MapView = Backbone.Marionette.Layout.extend({
 	resetAreaSums: function(){
 		var summaryValues = sums_statewide;
 		//Update Bootstrap vars
-		_.each(BootstrapVars.areaStats, function(area){
+		for(area in BootstrapVars.areaStats){
 			var totalacres = 0;
 			var totalcost = 0;
-			_.each(summaryValues, function(summary){
-				if(area.abbrev === summary.agency)
+			for(summary in summaryValues){
+				if(BootstrapVars.areaStats[area].abbrev === summaryValues[summary].agency)
 				{
-						area.total_acres = summary.acres;
-						area.starting_total_acres = summary.acres;
-						area.total_cost = summary.acquisitioncost;
-						area.starting_total_cost = summary.acquisitioncost;
+						BootstrapVars.areaStats[area].total_acres = summaryValues[summary].acres;
+						BootstrapVars.areaStats[area].starting_total_acres = summaryValues[summary].acres;
+						BootstrapVars.areaStats[area].total_cost = summaryValues[summary].acquisitioncost;
+						BootstrapVars.areaStats[area].starting_total_cost = summaryValues[summary].acquisitioncost;
 				} 
-			});
-		});
+			}
+		}
 	},
 	loadGuidedHelp: function () {
         this.landingPageGuideView = new GuidedHelpView({
