@@ -7,7 +7,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.clearAreaSums();
 		this.resetAreaSums();
 
-		this.todos = options.todos;
 		this.dnrResources = options.dnrResources;
 		this.streetsMap = L.tileLayer.provider('MapBox.smartmine.igcmocio', { minZoom:4, zIndex: 4, attribution:"" });		
 		this.openMap = L.tileLayer('http://b.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
@@ -31,7 +30,6 @@ var MapView = Backbone.Marionette.Layout.extend({
     events: {
 		"click #lnkOfflineButton" : "setBaseMapOffline",
 		"click #lnkDefaultButton" : "setBaseMapDefault",
-		"click #lnkSyncQueueData" : "syncLiveData",
 		"click #lnkToggleConnection" : "toggleConnection",
 		"click #toggleQuestionButton" : "loadGuidedHelp",
 		"change #selectStateInput" : "boundaryChange",
@@ -417,7 +415,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 		var unboundMarker = L.marker([bounds.lat, bounds.lng], {icon: MainApplication.defaultMarker, draggable: false});
 		unboundMarker.addTo(MainApplication.Map);
 		unboundMarker.markerToolTip = new NewMarkerToolTip({
-			todos : this.todos,
 			marker: unboundMarker
 		});
 		unboundMarker.bindPopup(unboundMarker.markerToolTip.$el[0], { closeButton:false, closeOnClick:false });
@@ -427,19 +424,11 @@ var MapView = Backbone.Marionette.Layout.extend({
 		});
 		return unboundMarker;
 	},
-	clearMapMarkers: function(){
-		var collection = this.todos;
-		for (var x=0;x<this.todos.length;x++){
-			todo = this.todos.models[x];
-			MainApplication.Map.removeLayer(todo.marker);
-		};
-		return false;
-	},
-	 formatJSONDate: function(jsonDate) {
+	formatJSONDate: function(jsonDate) {
 		  var newDate = new Date(parseInt(jsonDate));
 		  return newDate;
 	},
-	createGrid: function(gridLayer, area){	
+	createGrid: function(gridLayer, area){
 		var dc = this;
 		gridLayer.on('mouseover', function(e){ 
 			if(e.data){ info.update(e); }
@@ -684,19 +673,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.setDisplayedLayers("proposed");
 		return false;
 	},	
-	syncLiveData: function(){
-		//clear local todos as well, we're syncing!
-		GeoAppBase.localDatabaseCollectionClear("todoItems");
-		var dc = this;
-		
-		this.clearMapMarkers();
-		this.todos.fetch({
-			success: function(){
-				dc.onShow();
-			}
-		});
-		return false;
-	},
 	toggleConnection: function(){
 		GeoAppBase.toggleConnectionVar();
 		this.toggleSetButtons();
@@ -848,33 +824,9 @@ var NewMarkerToolTip = Backbone.Marionette.ItemView.extend({
 			Description: this.Description
 		};
 	},	
-	events: {
-		"click .geoEditTodo" : "editTodo",
-		"click .geoDeleteTodo" : "deleteTodo"
-	},	
 	initialize: function(options){
-		this.todos = options.todos;
 		this.marker = options.marker;
 		this.Description = "New Todo"
-	},
-	editTodo: function(){		
-		var todoTitleModal = new TodoTitleModal({
-			todos : this.todos,
-			marker : this.marker
-		});
-		todoTitleModal.render();
-		
-		this.marker.bindPopup(todoTitleModal.$el[0], { closeButton:false, closeOnClick:false, minWidth: 300 });
-		this.marker.openPopup();
-		return false;
-	},
-	deleteTodo: function(){
-		if(confirm("Are you sure you want to delete this well site, it will not be recoverable.")){
-			var thisTodo = this.todos.get(this.Id);
-			thisTodo.destroy();
-			MainApplication.Map.removeLayer(thisTodo.marker);
-		}
-		return false;
 	}
 });
 

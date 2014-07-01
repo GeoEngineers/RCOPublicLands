@@ -238,36 +238,6 @@ _.extend(GeoAppBase, {
 		}
 		return true;
 	},
-	synchTodoQueue: function(cb){
-		$("#loadingDiv").css("display","block");
-		var queueItemsPromise=this.localDatabaseCollectionGet("todoItemQueue");
-		queueItemsPromise.done(function(data) {
-			//clear queue after sending
-			//MainApplication.models.todos = new Todos();
-			MainApplication.models.queuedTodos = new QueuedTodo();
-			var synchEventsObject = { "SynchEvents" : MainApplication.activeSynchQueue };
-			MainApplication.models.queuedTodos.save(synchEventsObject, {
-				success:function(data){
-					MainApplication.models.queuedTodos.clear();
-					MainApplication.activeSynchQueue=[];
-					GeoAppBase.localDatabaseCollectionClear("todoItemQueue");
-					$("#loadingDiv").css("display","none");
-					cb !== undefined && cb !== null ? cb() : false;
-				},
-				error: function(e){
-					console.log("There was an error posting.")
-					//console.log(e);
-				}
-			});
-		});
-		queueItemsPromise.fail(
-			function(e) {
-				console.log("fail");
-				console.log(e);
-				throw e; // db connection blocking, or schema mismatch 
-			}
-		);
-	},
 	testPhonegap: function(){
 		//console.log(window.device);
 		//console.log(window.device.cordova);
