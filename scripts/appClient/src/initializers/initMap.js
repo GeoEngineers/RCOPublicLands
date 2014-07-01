@@ -12,7 +12,7 @@
 		dnrResources: MainApplication.models.dnrModel
 	});
 
-	MainApplication.mainRegion.show(MainApplication.views.mapView);		
+	MainApplication.mainRegion.show(MainApplication.views.mapView);
 	MainApplication.views.headerView = new HeaderView();
 	MainApplication.headerRegion.show(MainApplication.views.headerView);
 
