@@ -126,8 +126,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 		}
 	},
 	createOverlayMask : function(){
-		var overlayMask = L.tileLayer('http://a.tiles.mapbox.com/v3/smartmine.ni4o0f6r/{z}/{x}/{y}.png');
-		overlayMask.setZIndex(6);
+		var overlayMask = L.tileLayer('http://a.tiles.mapbox.com/v3/smartmine.ni4o0f6r/{z}/{x}/{y}.png', { zIndex:6 });
+		//overlayMask.setZIndex(6);
 		MainApplication.Map.addLayer(overlayMask);
 	},
 	resetAreaSums: function(){

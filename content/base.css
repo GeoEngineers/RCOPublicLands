@@ -27,7 +27,7 @@
 	z-index:1050;
 }
 #SummaryPaneSlideOut {
-    background-color:  rgba(40, 70, 90, .9);
+    background-color:  rgba(40, 70, 90, 1);
     border-left: 1px solid #555555;
 	border-top: 1px solid #555555;
     border-radius: 0px;
