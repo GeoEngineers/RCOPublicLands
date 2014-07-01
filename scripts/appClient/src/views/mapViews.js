@@ -555,7 +555,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 	},
 	setDisplayedLayers : function(layerType){
 		var dc=this;
-		console.log(layerType);
 		this.currentLayersType = layerType;
 		this.activeLayers = [];
 		_.each(BootstrapVars.areaStats,function(mapLayer){
