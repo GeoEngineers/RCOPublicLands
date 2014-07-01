@@ -642,14 +642,14 @@ var MapView = Backbone.Marionette.Layout.extend({
 		});
 		
 		//extra layer clean up, just to be safe
-		MainApplication.Map.on("baselayerchange", function(ev){
+		/*MainApplication.Map.on("baselayerchange", function(ev){
 			console.log(ev, "Layer Changed");
 			for(mapLayer in MainApplication.views.mapView.baseMaps){
 				if(mapLayer !== ev.name && MainApplication.Map.hasLayer(MainApplication.views.mapView.baseMaps[mapLayer])){
 					MainApplication.Map.removeLayer(MainApplication.views.mapView.baseMaps[mapLayer]);
 				}
 			}
-		});
+		});*/
 		return false;
 	},
 	showMapsSlide : function(){
