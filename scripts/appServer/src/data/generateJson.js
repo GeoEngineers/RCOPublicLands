@@ -4,10 +4,10 @@ var data = [];
 function generateJson(){
     
 
-	fs.readFile('./sums_cong.csv', 'utf8', function (err,dataset) {
-	//fs.readFile('./sums_county.csv', 'utf8', function (err,dataset) {
-	//fs.readFile('./sums_leg_districts.csv', 'utf8', function (err,dataset) {
-	//fs.readFile('./sums_wria.csv', 'utf8', function (err,dataset) {
+	//fs.readFile('./sums_cong_new.csv', 'utf8', function (err,dataset) {
+	//fs.readFile('./sums_counties_new.csv', 'utf8', function (err,dataset) {
+	//fs.readFile('./sums_leg_districts_new.csv', 'utf8', function (err,dataset) {
+	fs.readFile('./sums_wria_new.csv', 'utf8', function (err,dataset) {
 	//fs.readFile('./sums_statewide.csv', 'utf8', function (err,dataset) {
 	  	if (err) {
 	    	console.log(err);
