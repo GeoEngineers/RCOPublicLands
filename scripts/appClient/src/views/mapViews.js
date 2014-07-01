@@ -51,6 +51,13 @@ var MapView = Backbone.Marionette.Layout.extend({
 		//set buttons according to internet settings
 		this.toggleSetButtons();
 
+		//L_PREFER_CANVAS = true;
+		//L_DISABLE_3D = true;
+		
+		var southWest = L.latLng(49.00, -123.85),
+			northEast = L.latLng(45.33, -116.85);
+		this.stateBounds = L.latLngBounds(southWest, northEast);
+		
 		MainApplication.Map === undefined ? MainApplication.Map = L.mapbox.map('map', null, { minZoom:4, attribution:"" }) : false;
 		this.setBaseMapDefault();
 		this.createOverlayMask();
@@ -59,11 +66,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.loadRightSlide();
 		var welcomeView = new WelcomeView({});
 		MainApplication.modalRegion.show(welcomeView);
-		
-		var southWest = L.latLng(49, -124.85),
-			northEast = L.latLng(45.33, -116.85);
-		this.stateBounds = L.latLngBounds(southWest, northEast);
-		
+
 		_.each(BootstrapVars.areaStats, function(area){ 
 			var tileLayer = new L.mapbox.tileLayer(area.mapTarget, { 
 				bounds: this.stateBounds,
@@ -115,13 +118,12 @@ var MapView = Backbone.Marionette.Layout.extend({
 	clearAreaSums: function(){
 		var summaryValues = sums_statewide;
 		//Update Bootstrap vars
-		_.each(BootstrapVars.areaStats, function(area)
-			{
-				area.total_acres = 0;
-				area.starting_total_acres = 0;
-				area.total_cost = 0;
-				area.starting_total_cost = 0;
-			});
+		_.each(BootstrapVars.areaStats, function(area){
+			area.total_acres = 0;
+			area.starting_total_acres = 0;
+			area.total_cost = 0;
+			area.starting_total_cost = 0;
+		});
 	},
 	createOverlayMask : function(){
 		var overlayMask = L.tileLayer('http://a.tiles.mapbox.com/v3/smartmine.ni4o0f6r/{z}/{x}/{y}.png');
@@ -131,20 +133,19 @@ var MapView = Backbone.Marionette.Layout.extend({
 	resetAreaSums: function(){
 		var summaryValues = sums_statewide;
 		//Update Bootstrap vars
-		_.each(BootstrapVars.areaStats, function(area)
-			{
-				var totalacres = 0;
-				var totalcost = 0;
-				_.each(summaryValues, function(summary){
-					if(area.abbrev === summary.agency)
-					{
-							area.total_acres = summary.acres;
-							area.starting_total_acres = summary.acres;
-							area.total_cost = summary.acquisitioncost;
-							area.starting_total_cost = summary.acquisitioncost;
-					} 
-				});
+		_.each(BootstrapVars.areaStats, function(area){
+			var totalacres = 0;
+			var totalcost = 0;
+			_.each(summaryValues, function(summary){
+				if(area.abbrev === summary.agency)
+				{
+						area.total_acres = summary.acres;
+						area.starting_total_acres = summary.acres;
+						area.total_cost = summary.acquisitioncost;
+						area.starting_total_cost = summary.acquisitioncost;
+				} 
 			});
+		});
 	},
 	loadGuidedHelp: function () {
         this.landingPageGuideView = new GuidedHelpView({
