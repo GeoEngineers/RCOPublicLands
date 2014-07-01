@@ -1336,6 +1336,7 @@ svg {
     padding: 10px 10px 36px 9px;
     position: relative;
     top: -0.8em;
+	z-index:10;
 }
 #HeaderNavContainer h4{
 	font-size:13pt;
