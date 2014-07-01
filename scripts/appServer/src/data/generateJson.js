@@ -2,8 +2,8 @@
 var fs = require("fs");
 var data = [];
 function generateJson(){
-    fs.readFile('./export_cong.csv', 'utf8', function (err,dataset) {
-	//fs.readFile('./export_counties.csv', 'utf8', function (err,dataset) {
+    //fs.readFile('./export_cong.csv', 'utf8', function (err,dataset) {
+	fs.readFile('./export_county.csv', 'utf8', function (err,dataset) {
 	//fs.readFile('./export_leg.csv', 'utf8', function (err,dataset) {
 	//fs.readFile('./export_wrias.csv', 'utf8', function (err,dataset) {
 	//fs.readFile('./sums_statewide.csv', 'utf8', function (err,dataset) {
