@@ -80,7 +80,9 @@ var MapView = Backbone.Marionette.Layout.extend({
 			]);
 		});		
 		
-		this.esriMap =  L.esri.clusteredFeatureLayer("http://gismanagerweb.rco.wa.gov/arcgis/rest/services/public_lands/WA_RCO_Public_Lands_Inventory_PRISM_v2/MapServer/0/", {
+		this.esriMap = this.streetsMap;
+		/*
+		=  L.esri.clusteredFeatureLayer("http://gismanagerweb.rco.wa.gov/arcgis/rest/services/public_lands/WA_RCO_Public_Lands_Inventory_PRISM_v2/MapServer/0/", {
    			cluster: new L.MarkerClusterGroup(),
 			minZoom:4,
    			onEachMarker: function(geojson, marker) {
@@ -98,7 +100,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 				marker.bindPopup(popupText);
         	}
       	});
-		
+		*/
 		MainApplication.Map.setView([47,-120], 7);
 		L.control.navbar().addTo(MainApplication.Map);
 
