@@ -2,7 +2,6 @@
 
 MainApplication.Templates.MapTemplate = [
 	"<div style='color:#000000;'>",
-		"This is the landing page area, you can place any content here.",
 		"<div id='connectionStatus'><img src='./content/images/38-1.gif'><span class='txt'> Re-connecting...</span></div>",
 		"<select name='selectState' id='selectStateInput' class='form-control'>",
 			"<option value=''>- No Boundaries -</option>",
