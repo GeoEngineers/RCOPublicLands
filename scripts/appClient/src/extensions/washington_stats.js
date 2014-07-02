@@ -215,7 +215,7 @@ BootstrapVars.areaStats = [
 		layerGroupName: "acquisitions",
 		layerGroup: null,
 		symbol: '#x21f4;',
-		color: '#B4D79E',
+		color: '#E6E600',
 		z: 17
 	},
 	{
@@ -237,7 +237,7 @@ BootstrapVars.areaStats = [
 	},
 	{
 		abbrev: "REVENUE",
-		agency: "Revenue",
+		agency: "Revenue Generation",
 		starting_total_acres : 0,
 		starting_total_cost: 0,
 		starting_total_revenue: 0,
