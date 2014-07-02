@@ -96,9 +96,9 @@ var MapView = Backbone.Marionette.Layout.extend({
 					{
 						provider = feature.properties.prov1;
 					});
-					area = provider == 'Washington DNR' ? 14 : area;
-					area = provider == 'Washington DFW' ? 15 : area;
-					area = provider == 'Washington Parks' ? 16 : area;
+					area = provider == 'Washington Parks' ? 14 : area;
+					area = provider == 'Washington DNR' ? 15 : area;
+					area = provider == 'Washington DFW' ? 16 : area;
 
 					var geojsonMarkerOptions = {
 					    radius: 5,
