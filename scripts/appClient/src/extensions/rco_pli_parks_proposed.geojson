@@ -1,0 +1,12 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::900913" } },
+                                                                                
+"features": [
+{ "type": "Feature", "properties": { "gid": 8, "taxid": "400000605014", "prov1": "Washington Parks", "acres": 1434125.570000, "pland": "Unknown" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -13785611.110857294872403, 5969913.909738131798804 ] ] } },
+{ "type": "Feature", "properties": { "gid": 10, "taxid": "400000605023", "prov1": "Washington Parks", "acres": 672677.940000, "pland": "Unknown" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -13700425.386738071218133, 5988943.538321703672409 ] ] } },
+{ "type": "Feature", "properties": { "gid": 12, "taxid": "400000605016", "prov1": "Washington Parks", "acres": 1399963.880000, "pland": "Unknown" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -13712478.770484523847699, 6060110.094500347971916 ] ] } },
+{ "type": "Feature", "properties": { "gid": 14, "taxid": "400000605017", "prov1": "Washington Parks", "acres": 1476858.930000, "pland": "Unknown" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -13600336.400289159268141, 6026034.221380790695548 ] ] } },
+{ "type": "Feature", "properties": { "gid": 16, "taxid": "400000605027", "prov1": "Washington Parks", "acres": 1155413.620000, "pland": "Unknown" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -13604795.894412275403738, 5947659.196259920485318 ] ] } }
+]
+}
