@@ -67,8 +67,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		MainApplication.modalRegion.show(welcomeView);
 
 		for(area in BootstrapVars.areaStats){
-
-			if(area.layerGroupName !== 'proposed')
+			if(BootstrapVars.areaStats[area].layerGroupName !== 'proposed')
 			{
 				var tileLayer = new L.mapbox.tileLayer(BootstrapVars.areaStats[area].mapTarget, { 
 					bounds: this.stateBounds,
