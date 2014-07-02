@@ -8,14 +8,15 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.resetAreaSums();
 
 		this.dnrResources = options.dnrResources;
-		this.streetsMap = L.tileLayer.provider('MapBox.smartmine.igcmocio', { minZoom:6, zIndex: 1, attribution:"" });		
+		this.streetsMap = L.tileLayer.provider('MapBox.smartmine.igcmocio', { minZoom:6, zIndex: 1, attribution:"", reuseTiles: true });		
 		this.openMap = L.tileLayer('http://b.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
 			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
 			minZoom: 6, 
 			maxZoom: 18,
-			zIndex: 2
+			zIndex: 2, 
+			reuseTiles: true
 		});
-		this.imageryMap = L.tileLayer.provider('MapBox.smartmine.map-nco5bdjp', { minZoom:6, zIndex: 3, attribution:"" });
+		this.imageryMap = L.tileLayer.provider('MapBox.smartmine.map-nco5bdjp', { minZoom:6, zIndex: 3, attribution:"", reuseTiles: true });
 
 		this.baseMaps = {
 			"Terrain": this.streetsMap,
@@ -52,9 +53,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 		//set buttons according to internet settings
 		this.toggleSetButtons();
 
-		//L_PREFER_CANVAS = true;
-		//L_DISABLE_3D = true;
-		
 		var southWest = L.latLng(49.00, -123.85),
 			northEast = L.latLng(45.33, -116.85);
 		this.stateBounds = L.latLngBounds(southWest, northEast);
@@ -73,7 +71,9 @@ var MapView = Backbone.Marionette.Layout.extend({
 				bounds: this.stateBounds,
 				minZoom: 6,
 				maxZoom: 14,
-				zIndex: BootstrapVars.areaStats[area].z
+				//maxNativeZoom: 14,
+				zIndex: BootstrapVars.areaStats[area].z,
+				opacity: 1
 			});
 			var utfGrid = new L.UtfGrid('http://{s}.tiles.mapbox.com/v3/'+BootstrapVars.areaStats[area].mapTarget+'/{z}/{x}/{y}.grid.json?callback={cb}', { 
 				bounds: this.stateBounds,
@@ -132,7 +132,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 	},
 	createOverlayMask : function(){
 		var overlayMask = L.tileLayer('http://a.tiles.mapbox.com/v3/smartmine.ni4o0f6r/{z}/{x}/{y}.png', { zIndex: 100 });
-		//overlayMask.setZIndex(6);
 		MainApplication.Map.addLayer(overlayMask);
 	},
 	resetAreaSums: function(){

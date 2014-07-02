@@ -13,6 +13,13 @@
 	background-image: linear-gradient(to bottom, #F4F4F4, #F4F4F4);
 	background-repeat: repeat-x;
 }
+
+.hardwareAnimation{
+	-webkit-transform: translate3d(0, 0, 0);
+	-webkit-backface-visibility: hidden;
+	-webkit-perspective: 1000;	
+}
+
 .navLink{
 	height:40px; 
 	width: 100px;

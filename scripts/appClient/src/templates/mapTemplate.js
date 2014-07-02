@@ -15,8 +15,8 @@ MainApplication.Templates.MapTemplate = [
 			"<option value=''>- Select Area -</option>",
 		"</select>",
 		"<a href='#' id='lnkSlideMenu' class='navLink slide-menu' href='#SummaryPaneSlideOut'></a>",
-		"<div id='toggleSummaryButton' class='btn'><i class='fa fa-bar-chart-o fa-lg'></i></div>",
-    	"<div id='toggleQuestionButton' class='btn'><i class='fa fa-info fa-2x'></i></div>",
+		"<div id='toggleSummaryButton' class='btn hardwareAnimation'><i class='fa fa-bar-chart-o fa-lg'></i></div>",
+    	"<div id='toggleQuestionButton' class='btn hardwareAnimation'><i class='fa fa-info fa-2x'></i></div>",
 		"<div id='map' style=\"top: 35px;\"></div>",
 	"</div>"
 ].join("\n");
@@ -153,13 +153,13 @@ MainApplication.Templates.HeaderTemplate = [
 
 
 MainApplication.Templates.LegendTemplate = [
-    "<div id='gisLegendControls'>",
+    "<div id='gisLegendControls' class='hardwareAnimation'>",
         "<span class='fa-stack'>",
           "<i class='fa fa-list-ul  fa-stack-2x top'></i>",
         "</span>",
     "</div>",
-    "<div class=\"slide-body\" id='gisLegendControlsExpanded'>",
-        "<div class='legendLayers' style=\" height: 200px\">",
+    "<div class='slide-body hardwareAnimation' id='gisLegendControlsExpanded'>",
+        "<div class='legendLayers' style=' height: 200px'>",
             "<div id='legendContainer'>",
             "</div>",
         "</div>",
