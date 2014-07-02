@@ -67,24 +67,54 @@ var MapView = Backbone.Marionette.Layout.extend({
 		MainApplication.modalRegion.show(welcomeView);
 
 		for(area in BootstrapVars.areaStats){
-			var tileLayer = new L.mapbox.tileLayer(BootstrapVars.areaStats[area].mapTarget, { 
-				bounds: this.stateBounds,
-				minZoom: 6,
-				maxZoom: 14,
-				//maxNativeZoom: 14,
-				zIndex: BootstrapVars.areaStats[area].z,
-				opacity: 1
-			});
-			var utfGrid = new L.UtfGrid('http://{s}.tiles.mapbox.com/v3/'+BootstrapVars.areaStats[area].mapTarget+'/{z}/{x}/{y}.grid.json?callback={cb}', { 
-				bounds: this.stateBounds,
-				minZoom: 6,
-				maxZoom: 14,
-				zIndex: BootstrapVars.areaStats[area].z
-			});
-			BootstrapVars.areaStats[area].layerGroup =  L.layerGroup([
-				tileLayer,
-				dc.createGrid(utfGrid, BootstrapVars.areaStats[area])
-			]);
+			if(BootstrapVars.areaStats[area].layerGroupName !== 'proposed')
+			{
+				var tileLayer = new L.mapbox.tileLayer(BootstrapVars.areaStats[area].mapTarget, { 
+					bounds: this.stateBounds,
+					minZoom: 6,
+					maxZoom: 14,
+					//maxNativeZoom: 14,
+					zIndex: BootstrapVars.areaStats[area].z,
+					opacity: 1
+				});
+				var utfGrid = new L.UtfGrid('http://{s}.tiles.mapbox.com/v3/'+BootstrapVars.areaStats[area].mapTarget+'/{z}/{x}/{y}.grid.json?callback={cb}', { 
+					bounds: this.stateBounds,
+					minZoom: 6,
+					maxZoom: 14,
+					zIndex: BootstrapVars.areaStats[area].z
+				});
+				BootstrapVars.areaStats[area].layerGroup =  L.layerGroup([
+					tileLayer,
+					dc.createGrid(utfGrid, BootstrapVars.areaStats[area])
+				]);
+			}
+			else
+			{
+				var geojsonMarkerOptions = {
+				    radius: 8,
+				    fillColor: area.color,
+				    color: "#000",
+				    weight: 1,
+				    opacity: 1,
+				    fillOpacity: 0.8
+				};
+
+				var jsonLayer =L.geoJson(BootstrapVars.areaStats[area].mapTarget, {
+				    pointToLayer: function (feature, latlng) {
+				        var marker =  L.circleMarker(latlng, geojsonMarkerOptions);
+				        var popupText =  "<div style='overflow:scroll; max-width:350px; max-height:260px;'>";
+						for (prop in feature.properties) {
+							var val = feature.properties[prop];
+							if (val != 'undefined' && val != "0" && prop !="OBJECTID" && prop != "Name") {
+								popupText += "<span class='tipLabel'>" + prop.replace(" (Esri)",'').replace("PRISM.DBO.SV_DMPROJECT1.", "") + "</span>: " + val + "<br>";
+							}
+						}
+						marker.bindPopup(popupText);
+						return marker;
+				    }
+				});
+				BootstrapVars.areaStats[area].layerGroup = jsonLayer;
+			}
 		}
 		
 		this.esriMap = L.esri.clusteredFeatureLayer("http://gismanagerweb.rco.wa.gov/arcgis/rest/services/public_lands/WA_RCO_Public_Lands_Inventory_PRISM_v2/MapServer/0/", {
@@ -561,6 +591,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 	},
 	setDisplayedLayers : function(layerType){
 		var dc=this;
+
 		this.currentLayersType = layerType;
 		this.activeLayers = [];
 		_.each(BootstrapVars.areaStats,function(mapLayer){
@@ -1193,6 +1224,10 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				total += val;
 			}
 		});
+
+
+		
+
 		switch(typeView) {
 			case "total_acres":
 				prefixText = "<div style='margin-bottom: 10px; margin-top: 30px'>Total " + this.type.replace("total_", "")  + ": " + currencyPrefix  + dc.formatNumber(total, isCurrency)+ "</div>";
