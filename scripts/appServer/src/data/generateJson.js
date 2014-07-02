@@ -99,7 +99,7 @@ function generateJson(){
 	      count++;
 	    }
 
-	    var newJson = "var " + variableName + "= " + JSON.stringify(values) + "; //congressional districts update!";
+	    var newJson = "var " + variableName + "= " + JSON.stringify(values) + ";";
 	    //console.log(newJson);
 
 	    fs.writeFile(filesLocation + fileName, newJson, function(err) {
