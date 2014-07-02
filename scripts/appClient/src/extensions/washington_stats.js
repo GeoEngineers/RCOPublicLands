@@ -254,7 +254,7 @@ BootstrapVars.areaStats = [
 	},	
 	{
 		abbrev: "HABITAT AND PASSIVE RECREATION",
-		agency: "Habitat and Passive Habitat",
+		agency: "Habitat and Passive Recreation",
 		starting_total_acres : 0,
 		starting_total_cost: 0,
 		starting_total_revenue: 0,
