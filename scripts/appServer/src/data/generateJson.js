@@ -45,6 +45,11 @@ var variableName = '';
 
 function generateJson(){
 
+	//get the type
+	process.argv.forEach(function (val, index, array) {
+  		targetType = val;
+	});
+
 	//Get Settings for the files
 	for(var i=0; i < targetData.length; i++)
 	{
@@ -101,7 +106,7 @@ function generateJson(){
 	    		if(err) {
 	        		console.log(err);
 	    		} else {
-	        		console.log("The file was saved!");
+	        		console.log("Updated: " + fileName);
 	    		}
 		}); 
 	});
