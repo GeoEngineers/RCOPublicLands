@@ -98,7 +98,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 				    opacity: 1,
 				    fillOpacity: 0.8
 				};
-
+				console.log(BootstrapVars.areaStats[area].mapTarget);
 				var jsonLayer =L.geoJson(BootstrapVars.areaStats[area].mapTarget, {
 				    pointToLayer: function (feature, latlng) {
 				        var marker =  L.circleMarker(latlng, geojsonMarkerOptions);
