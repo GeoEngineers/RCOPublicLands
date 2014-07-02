@@ -1,20 +1,18 @@
 {
-"type": "FeatureCollection",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-                                                                                
+"type": "FeatureCollection",                                                                  
 "features": [
-{ "type": "Feature", "properties": { "gid": 2, "taxid": "400000641029", "prov1": "Washington DFW", "acres": 1227565.950000, "pland": "Unknown" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -121.858896711495206, 48.501951079095285 ] ] } },
-{ "type": "Feature", "properties": { "gid": 3, "taxid": "400000641031", "prov1": "Washington DFW", "acres": 1405923.910000, "pland": "Unknown" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -121.7524722508211, 48.095968069852979 ] ] } },
-{ "type": "Feature", "properties": { "gid": 4, "taxid": "400000641019", "prov1": "Washington DFW", "acres": 1493007.030000, "pland": "Unknown" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -120.653947615958032, 47.121874523836155 ] ] } },
-{ "type": "Feature", "properties": { "gid": 5, "taxid": "400000641039", "prov1": "Washington DFW", "acres": 2758700.470000, "pland": "Unknown" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -120.675358105443948, 46.462514162381204 ] ] } },
-{ "type": "Feature", "properties": { "gid": 6, "taxid": "400000641020", "prov1": "Washington DFW", "acres": 1218799.410000, "pland": "Unknown" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -120.742552231752626, 45.87269158837119 ] ] } },
-{ "type": "Feature", "properties": { "gid": 7, "taxid": "400000641008", "prov1": "Washington DFW", "acres": 746441.380000, "pland": "Unknown" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -122.643117292300516, 46.190470972083027 ] ] } },
-{ "type": "Feature", "properties": { "gid": 17, "taxid": "400000641034", "prov1": "Washington DFW", "acres": 495359.000000, "pland": "Unknown" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -122.896673632692114, 47.043489533264996 ] ] } },
-{ "type": "Feature", "properties": { "gid": 19, "taxid": "400000641009", "prov1": "Washington DFW", "acres": 1183509.010000, "pland": "Unknown" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -119.69507322642383, 47.70336690189432 ] ] } },
-{ "type": "Feature", "properties": { "gid": 20, "taxid": "400000641024", "prov1": "Washington DFW", "acres": 3403643.040000, "pland": "Unknown" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -119.722000389825453, 48.576807264610231 ] ] } },
-{ "type": "Feature", "properties": { "gid": 21, "taxid": "400000641010", "prov1": "Washington DFW", "acres": 1446123.940000, "pland": "Unknown" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -118.5187914419636, 48.482477475177809 ] ] } },
-{ "type": "Feature", "properties": { "gid": 23, "taxid": "400000641032", "prov1": "Washington DFW", "acres": 1141558.590000, "pland": "Unknown" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -117.384397066706896, 47.632400625138274 ] ] } },
-{ "type": "Feature", "properties": { "gid": 24, "taxid": "400000641022", "prov1": "Washington DFW", "acres": 1497523.990000, "pland": "Unknown" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -118.449073919094417, 47.586285639089006 ] ] } },
-{ "type": "Feature", "properties": { "gid": 26, "taxid": "400000641002", "prov1": "Washington DFW", "acres": 409783.540000, "pland": "Unknown" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -117.196135423894304, 46.189445537389815 ] ] } }
+{ "type": "Feature", "properties": { "gid": 2, "taxid": "400000641029", "prov1": "Washington DFW", "acres": 1227565.950000, "pland": "Unknown" }, "geometry": { "type": "Point", "coordinates": [ -121.858896711495206, 48.501951079095285 ] } },
+{ "type": "Feature", "properties": { "gid": 3, "taxid": "400000641031", "prov1": "Washington DFW", "acres": 1405923.910000, "pland": "Unknown" }, "geometry": { "type": "Point", "coordinates": [ -121.7524722508211, 48.095968069852979 ] } },
+{ "type": "Feature", "properties": { "gid": 4, "taxid": "400000641019", "prov1": "Washington DFW", "acres": 1493007.030000, "pland": "Unknown" }, "geometry": { "type": "Point", "coordinates": [ -120.653947615958032, 47.121874523836155 ] } },
+{ "type": "Feature", "properties": { "gid": 5, "taxid": "400000641039", "prov1": "Washington DFW", "acres": 2758700.470000, "pland": "Unknown" }, "geometry": { "type": "Point", "coordinates": [ -120.675358105443948, 46.462514162381204 ] } },
+{ "type": "Feature", "properties": { "gid": 6, "taxid": "400000641020", "prov1": "Washington DFW", "acres": 1218799.410000, "pland": "Unknown" }, "geometry": { "type": "Point", "coordinates": [ -120.742552231752626, 45.87269158837119 ] } },
+{ "type": "Feature", "properties": { "gid": 7, "taxid": "400000641008", "prov1": "Washington DFW", "acres": 746441.380000, "pland": "Unknown" }, "geometry": { "type": "Point", "coordinates": [ -122.643117292300516, 46.190470972083027 ] } },
+{ "type": "Feature", "properties": { "gid": 17, "taxid": "400000641034", "prov1": "Washington DFW", "acres": 495359.000000, "pland": "Unknown" }, "geometry": { "type": "Point", "coordinates": [ -122.896673632692114, 47.043489533264996 ] } },
+{ "type": "Feature", "properties": { "gid": 19, "taxid": "400000641009", "prov1": "Washington DFW", "acres": 1183509.010000, "pland": "Unknown" }, "geometry": { "type": "Point", "coordinates": [ -119.69507322642383, 47.70336690189432 ] } },
+{ "type": "Feature", "properties": { "gid": 20, "taxid": "400000641024", "prov1": "Washington DFW", "acres": 3403643.040000, "pland": "Unknown" }, "geometry": { "type": "Point", "coordinates": [ -119.722000389825453, 48.576807264610231 ] } },
+{ "type": "Feature", "properties": { "gid": 21, "taxid": "400000641010", "prov1": "Washington DFW", "acres": 1446123.940000, "pland": "Unknown" }, "geometry": { "type": "Point", "coordinates": [ -118.5187914419636, 48.482477475177809 ] } },
+{ "type": "Feature", "properties": { "gid": 23, "taxid": "400000641032", "prov1": "Washington DFW", "acres": 1141558.590000, "pland": "Unknown" }, "geometry": { "type": "Point", "coordinates": [ -117.384397066706896, 47.632400625138274 ] } },
+{ "type": "Feature", "properties": { "gid": 24, "taxid": "400000641022", "prov1": "Washington DFW", "acres": 1497523.990000, "pland": "Unknown" }, "geometry": { "type": "Point", "coordinates": [ -118.449073919094417, 47.586285639089006 ] } },
+{ "type": "Feature", "properties": { "gid": 26, "taxid": "400000641002", "prov1": "Washington DFW", "acres": 409783.540000, "pland": "Unknown" }, "geometry": { "type": "Point", "coordinates": [ -117.196135423894304, 46.189445537389815 ] } }
 ]
 }

@@ -90,30 +90,36 @@ var MapView = Backbone.Marionette.Layout.extend({
 			}
 			else
 			{
-				var geojsonMarkerOptions = {
-				    radius: 8,
-				    fillColor: area.color,
-				    color: "#000",
-				    weight: 1,
-				    opacity: 1,
-				    fillOpacity: 0.8
-				};
-				console.log(BootstrapVars.areaStats[area].mapTarget);
-				var jsonLayer =L.geoJson(BootstrapVars.areaStats[area].mapTarget, {
-				    pointToLayer: function (feature, latlng) {
-				        var marker =  L.circleMarker(latlng, geojsonMarkerOptions);
-				        var popupText =  "<div style='overflow:scroll; max-width:350px; max-height:260px;'>";
-						for (prop in feature.properties) {
-							var val = feature.properties[prop];
-							if (val != 'undefined' && val != "0" && prop !="OBJECTID" && prop != "Name") {
-								popupText += "<span class='tipLabel'>" + prop.replace(" (Esri)",'').replace("PRISM.DBO.SV_DMPROJECT1.", "") + "</span>: " + val + "<br>";
-							}
-						}
-						marker.bindPopup(popupText);
-						return marker;
-				    }
+				$.getJSON(BootstrapVars.areaStats[area].mapTarget, function(data) {
+					var provider = "";
+					_.each(data.features, function(feature)
+					{
+						provider = feature.properties.prov1;
+					});
+					area = provider == 'Washington DNR' ? 14 : area;
+					area = provider == 'Washington DFW' ? 15 : area;
+					area = provider == 'Washington Parks' ? 16 : area;
+
+					var geojsonMarkerOptions = {
+					    radius: 5,
+					    fillColor: BootstrapVars.areaStats[area].color,
+					    color: "#000",
+					    weight: 1,
+					    opacity: 1,
+					    fillOpacity: 0.8
+					};
+					var jsonLayer =L.geoJson(data, {
+					    pointToLayer: function (feature, latlng) {
+					        var marker =  L.circleMarker(latlng, geojsonMarkerOptions);
+					        var popupText =  "<div style='overflow:scroll; max-width:350px; max-height:260px;'>";
+					        popupText += "<span class='tipLabel'>Owner</span>: " + feature.properties['prov1'] + "<br>";
+					        popupText += "<span class='tipLabel'>Acres</span>: " + feature.properties['acres'] + "<br>";
+							marker.bindPopup(popupText);
+							return marker;
+					    }
+					});
+					BootstrapVars.areaStats[area].layerGroup = jsonLayer;
 				});
-				BootstrapVars.areaStats[area].layerGroup = jsonLayer;
 			}
 		}
 		
