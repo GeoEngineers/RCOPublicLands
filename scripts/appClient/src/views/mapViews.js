@@ -81,6 +81,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 				maxZoom: 14,
 				zIndex: BootstrapVars.areaStats[area].z
 			});
+			
 			BootstrapVars.areaStats[area].layerGroup =  L.layerGroup([
 				tileLayer,
 				dc.createGrid(utfGrid, BootstrapVars.areaStats[area])
@@ -563,25 +564,25 @@ var MapView = Backbone.Marionette.Layout.extend({
 		var dc=this;
 		this.currentLayersType = layerType;
 		this.activeLayers = [];
-		_.each(BootstrapVars.areaStats,function(mapLayer){
+		for(mapLayer in BootstrapVars.areaStats){
 			if(mapLayer.layerGroupName === layerType){
-				mapLayer.visible = true;
-				dc.activeLayers.push(mapLayer.abbrev);
+				BootstrapVars.areaStats[mapLayer].visible = true;
+				dc.activeLayers.push(BootstrapVars.areaStats[mapLayer].abbrev);
 				try{
-					MainApplication.Map.addLayer(mapLayer.layerGroup);
+					MainApplication.Map.addLayer(BootstrapVars.areaStats[mapLayer].layerGroup);
 				}catch(e){
 					console.log(e);
 				}
 			}else{
-				mapLayer.visible = false;
+				BootstrapVars.areaStats[mapLayer].visible = false;
 				try{
-					MainApplication.Map.hasLayer(mapLayer.layerGroup) ? MainApplication.Map.removeLayer(mapLayer.layerGroup) : false;
+					MainApplication.Map.hasLayer(BootstrapVars.areaStats[mapLayer].layerGroup) ? MainApplication.Map.removeLayer(BootstrapVars.areaStats[mapLayer].layerGroup) : false;
 				}catch(e){
 					console.log(e);
 				}
 			}
 			return false;
-		});
+		}
 		
 		//refreshes the right slide and legend
 		this.setLegendControls();			
