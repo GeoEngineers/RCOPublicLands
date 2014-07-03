@@ -7,31 +7,31 @@ var targetType = 'statewide'; // Change this to update the specific sums json fi
 var targetData = [
 {
 	name: 'congressional',
-	csvTarget: './export_cong.csv',
+	csvTarget: './sums_cong_uw.csv',
 	fileName: 'sums_congressional_districts.json',
 	variableName: 'sums_congressional_districts'
 },
 {
 	name: 'counties',
-	csvTarget: './export_county.csv',
+	csvTarget: './sums_county_uw.csv',
 	fileName: 'sums_counties.json',
 	variableName: 'sums_counties'
 },
 {
 	name: 'legislative',
-	csvTarget: './export_leg.csv',
+	csvTarget: './sums_leg_uw.csv',
 	fileName: 'sums_legdistricts.json',
 	variableName: 'sums_legdistricts'
 },
 {
 	name: 'wrias',
-	csvTarget: './export_wria.csv',
+	csvTarget: './sums_wria_uw.csv',
 	fileName: 'sums_wrias.json',
 	variableName: 'sums_wria'
 },
 {
 	name: 'statewide',
-	csvTarget: './sums_statewide.csv',
+	csvTarget: './sums_state_uw.csv',
 	fileName: 'sums_statewide.json',
 	variableName: 'sums_statewide'
 }
@@ -80,15 +80,15 @@ function generateJson(){
 	      index = remaining.indexOf('\n');
 	      if(count > 0)
 	      {
-	      	var splitData = line.split('|');
+	      	var splitData = line.split(',');
 	      	var value = {};
 	      	if(targetType !== 'statewide')
 	      	{
-	      		value = {"acres": parseFloat(splitData[0]), "acquisitioncost": parseFloat(splitData[1]),"name": splitData[2].replace('\r', '').replace('"', '').replace('"', ''), "agency": splitData[3].replace('\r', '').replace('"', '').replace('"', '')};
+	      		value = {"acres": parseFloat(splitData[0]), "acquisitioncost": 0,"name": splitData[1].replace('\r', '').replace('"', '').replace('"', ''), "agency": splitData[2].replace('\r', '').replace('"', '').replace('"', '')};
 	      	}
 	      	else
 	      	{
-	      		value = {"acres": parseFloat(splitData[0]), "acquisitioncost": parseFloat(splitData[1]), "agency": splitData[2].replace('\r', '').replace('"', '').replace('"', '')};
+	      		value = {"acres": parseFloat(splitData[0]), "acquisitioncost": 0, "agency": splitData[2].replace('\r', '').replace('"', '').replace('"', '')};
 	      	}
 	      	values.push(value);
 	  	  }

@@ -283,6 +283,7 @@ var MapView = Backbone.Marionette.Layout.extend({
         }
     },
 	boundaryChange: function(){
+		MainApplication.totalAcres = "";
 		GeoAppBase.showAppLoadingStart();
 		_.each(BootstrapVars.areaStats, function(area){
 				area.total_acres = 0;
@@ -402,6 +403,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 		_.each(boundary.jsonLayer._layers, function(shape){
 			if(selectedVal.toString() === shape.feature.properties[boundary.NameField].toString())
 			{
+				MainApplication.totalAcres = shape.feature.properties["area"] !== undefined ? " of " + shape.feature.properties["area"] :" of 1" ;
+
 				var maxX = -1000, maxY = -1000, minX = 1000, minY = 1000;
 				_.each(shape._latlngs, function(coords){
 						if(maxX < coords.lng)
@@ -445,8 +448,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 			});
 		}
 		//Update Bootstrap vars
-		if(selectedVal.toString().length < 2 && selectedTypeVal === "Legislative Districts")
-			selectedVal = "0" + selectedVal;
+		//if(selectedVal.toString().length < 2 && selectedTypeVal === "Legislative Districts")
+		//	selectedVal = "0" + selectedVal;
 		_.each(BootstrapVars.areaStats, function(area)
 		{
 			var totalacres = 0;
@@ -1232,11 +1235,11 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		});
 
 
-		
+		var totalAcresBoundary = MainApplication.totalAcres !== undefined ? MainApplication.totalAcres : "";
 
 		switch(typeView) {
 			case "total_acres":
-				prefixText = "<div style='margin-bottom: 10px; margin-top: 30px'>Total " + this.type.replace("total_", "")  + ": " + currencyPrefix  + dc.formatNumber(total, isCurrency)+ "</div>";
+				prefixText = "<div style='margin-bottom: 10px; margin-top: 30px'>Total " + this.type.replace("total_", "")  + ": " + currencyPrefix  + dc.formatNumber(total, isCurrency)+ totalAcresBoundary + "</div>";
 				break;
 			case "total_cost":
 				prefixText = "<div style='margin-bottom: 10px; margin-top: 30px'>Total " + this.type.replace("total_", "")+ "</div>";
