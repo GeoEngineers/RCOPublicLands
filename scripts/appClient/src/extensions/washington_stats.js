@@ -98,7 +98,7 @@ BootstrapVars.areaStats = [
 	
 	{
 		abbrev: "PARKS",
-		agency: "Washington Parks Dept.",
+		agency: "State Parks",
 		starting_total_acres : 0,
 		starting_total_cost: 0,
 		starting_total_revenue: 0,
@@ -115,7 +115,7 @@ BootstrapVars.areaStats = [
 	},
 	{
 		abbrev: "DNR UPLANDS",
-		agency: "DNR Uplands",
+		agency: "DDept. of Natural Resources Uplands",
 		starting_total_acres : 0,
 		starting_total_cost: 0,
 		starting_total_revenue: 0,
@@ -133,7 +133,7 @@ BootstrapVars.areaStats = [
 
 {
 		abbrev: "DNR AQUATIC",
-		agency: "DNR Aquatic",
+		agency: "Dept. of Natural Resources Aquatic Lands",
 		starting_total_acres : 0,
 		starting_total_cost: 0,
 		starting_total_revenue: 0,
@@ -167,7 +167,7 @@ BootstrapVars.areaStats = [
 	},	
 	{
 		abbrev: "CITY-COUNTY",
-		agency: "City and County Lands",
+		agency: "City and County",
 		starting_total_acres : 0,
 		starting_total_cost: 0,
 		starting_total_revenue: 0,
@@ -266,7 +266,7 @@ BootstrapVars.areaStats = [
 		layerGroupName: "landtypes",
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#B4D79E',
+		color: '#97DBF2',
 		z: 20
 	},	
 	{
@@ -283,7 +283,7 @@ BootstrapVars.areaStats = [
 		layerGroupName: "landtypes",
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#B2B2B2',
+		color: '#E6E600',
 		z: 21
 	},	
 	{
@@ -318,7 +318,7 @@ BootstrapVars.areaStats = [
 		layerGroupName: "landtypes",
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#BEFFE8',
+		color: '#A020F0',
 		z: 23
 	},
 	{
