@@ -59,7 +59,7 @@ BootstrapVars.boundaries = [
 			NameField: "DISTRICT_NR",
 			SelectText: "District",
 			sums: sums_congressional_districts,
-			jsonUrl: "./scripts/appClient/src/extensions/congressionaldistricts_simplified.geojson",
+			jsonUrl: "./scripts/appClient/src/extensions/congressionaldistricts.geojson",
 			json: null,
 			jsonLayer: null,
 			color: "white"
