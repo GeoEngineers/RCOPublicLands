@@ -620,8 +620,14 @@ var MapView = Backbone.Marionette.Layout.extend({
 
 		this.currentLayersType = layerType;
 		this.activeLayers = [];
+		
+		console.log(BootstrapVars.areaStats);
+		
 		for(mapLayer in BootstrapVars.areaStats){
-			if(mapLayer.layerGroupName === layerType){
+		
+			console.log(mapLayer, BootstrapVars.areaStats[mapLayer]);
+		
+			if(BootstrapVars.areaStats[mapLayer].layerGroupName === layerType){
 				BootstrapVars.areaStats[mapLayer].visible = true;
 				dc.activeLayers.push(BootstrapVars.areaStats[mapLayer].abbrev);
 				try{
@@ -637,7 +643,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 					console.log(e);
 				}
 			}
-			return false;
+			//return false;
 		}
 		
 		//refreshes the right slide and legend
