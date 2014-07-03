@@ -115,7 +115,7 @@ BootstrapVars.areaStats = [
 	},
 	{
 		abbrev: "DNR UPLANDS",
-		agency: "DDept. of Natural Resources Uplands",
+		agency: "Dept. of Natural Resources Uplands",
 		starting_total_acres : 0,
 		starting_total_cost: 0,
 		starting_total_revenue: 0,
