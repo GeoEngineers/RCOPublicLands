@@ -1241,7 +1241,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				var legendKey = $("<div>", { class: "colorKey", style: "background-color:"+area.color+";" });
 				var checkedStatus = area.visible ? " checked='true'" : "";
 				
-				areaSummary += "<div>" + legendKey[0].outerHTML + "<input type='checkbox' name='inputSummaryItem-" + area.abbrev + "' id='inputSummaryItem-"+ area.abbrev + "' data-abbr='" + area.abbrev + "' class='usePointer'"+checkedStatus+" /> <label class='usePointer' data-abbr='" + area.abbrev + "' for='inputSummaryItem-" + area.abbrev + "' >" + area.agency + ": " + currencyPrefix + dc.formatNumber(val, isCurrency)+ "</label></div>";
+				areaSummary += "<div>" + legendKey[0].outerHTML + "<input type='checkbox' name='inputSummaryItem-" + area.abbrev + "' id='inputSummaryItem-"+ area.abbrev + "' data-abbr='" + area.abbrev + "' class='usePointer'"+checkedStatus+" /> <label class='usePointer' style='font-size: 12px' data-abbr='" + area.abbrev + "' for='inputSummaryItem-" + area.abbrev + "' >" + area.agency + ": " + currencyPrefix + dc.formatNumber(val, isCurrency)+ "</label></div>";
 				
 				legendKey.prependTo(areaSummary);
 				summaryText = summaryText + areaSummary;
