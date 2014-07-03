@@ -389,8 +389,23 @@ var MapView = Backbone.Marionette.Layout.extend({
 			}
 		});
 	},
+	formatCommas: function(nStr){
+		nStr += '';
+		x = nStr.split('.');
+		x1 = x[0];
+		x2 = x.length > 1 ? '.' + x[1] : '';
+		var rgx = /(\d+)(\d{3})/;
+		while (rgx.test(x1)) {
+			x1 = x1.replace(rgx, '$1' + ',' + '$2');
+		}
+		return x1 + x2;
+	},
+	formatNumber: function(value, currency){
+		return this.formatCommas(parseFloat(value, 10).toFixed(currency ? 2 : 0).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+	},
 	areaChange: function(zoom)
 	{
+		var dc = this;
 		if(MainApplication.selectedBoundary !== undefined)
 		{
 			if(MainApplication.Map.hasLayer(MainApplication.selectedBoundary)){
@@ -403,7 +418,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		_.each(boundary.jsonLayer._layers, function(shape){
 			if(selectedVal.toString() === shape.feature.properties[boundary.NameField].toString())
 			{
-				MainApplication.totalAcres = shape.feature.properties["area"] !== undefined ? " of " + shape.feature.properties["area"] :" of 1" ;
+				MainApplication.totalAcres = shape.feature.properties["SHAPE_Area"] !== undefined  && shape.feature.properties["SHAPE_Area"] !== '' ?  " of " + dc.formatNumber(shape.feature.properties["SHAPE_Area"] / 4046.85642, false)  :"" ;
 
 				var maxX = -1000, maxY = -1000, minX = 1000, minY = 1000;
 				_.each(shape._latlngs, function(coords){
@@ -834,7 +849,7 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 		}else{
 			MainApplication.views.mapView.mapPaneView.slide.close();
             $("#toggleQuestionButton").animate({"margin-right": "0px"});
-			$(MainApplication.paneRegion.el).css({"width":"25em"});
+			$(MainApplication.paneRegion.el).css({"width":"26em"});
 			$('#expandSummaryButton').removeClass("collapsable");
 			$('#expandSummaryButton').hasClass("expandable") ? false : $('#expandSummaryButton').addClass("expandable");
 			$("#expandSummaryButton button").html("<i class='fa fa-arrow-circle-o-left fa-lg'></i>");
@@ -926,7 +941,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			this.slide = $('.slide-menu').bigSlide({ 
 				side:"right", 
 				menu:"#SummaryPaneSlideOut", 
-				menuWidth : "25em" }).css({ "z-index":"1030", "top":"35px", "right":"0px"});
+				menuWidth : "26em" }).css({ "z-index":"1030", "top":"35px", "right":"0px"});
 			this.slide._state = "open";
 		}
 		
