@@ -26,6 +26,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 
 		this.mapFirstView = true;
 		this.currentLayersType = 'agency';
+		MainApplication.totalAcres = " of 45,663,000";
 
 		_.bindAll(this, 'onShow');
     },
@@ -295,7 +296,7 @@ var MapView = Backbone.Marionette.Layout.extend({
         }
     },
 	boundaryChange: function(){
-		MainApplication.totalAcres = "";
+		MainApplication.totalAcres = " of 45,663,000";
 		GeoAppBase.showAppLoadingStart();
 		_.each(BootstrapVars.areaStats, function(area){
 				area.total_acres = 0;
@@ -427,11 +428,13 @@ var MapView = Backbone.Marionette.Layout.extend({
 		var selectedVal = $('#selectAreaInput').val();
 		var selectedTypeVal = $('#selectStateInput').val();
 		var boundary = MainApplication.boundarySelected;
+
 		_.each(boundary.jsonLayer._layers, function(shape){
 			if(selectedVal.toString() === shape.feature.properties[boundary.NameField].toString())
-			{
-				MainApplication.totalAcres = shape.feature.properties["SHAPE_Area"] !== undefined  && shape.feature.properties["SHAPE_Area"] !== '' ?  " of " + dc.formatNumber(shape.feature.properties["SHAPE_Area"] / 4046.85642, false)  :"" ;
-
+			{				
+				if(shape.feature.properties["SHAPE_Area"] !== undefined  && shape.feature.properties["SHAPE_Area"] !== ''){
+					MainApplication.totalAcres = " of " + dc.formatNumber(shape.feature.properties["SHAPE_Area"] / 4046.85642, false) 
+				}
 				var maxX = -1000, maxY = -1000, minX = 1000, minY = 1000;
 				_.each(shape._latlngs, function(coords){
 						if(maxX < coords.lng)
