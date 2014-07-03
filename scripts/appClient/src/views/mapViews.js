@@ -54,8 +54,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 		//set buttons according to internet settings
 		this.toggleSetButtons();
 
-		var southWest = L.latLng(49.00, -123.85),
-			northEast = L.latLng(45.33, -116.85);
+		var southWest = L.latLng(45.33, -123.85),
+			northEast = L.latLng(49.00, -116.85);
 		this.stateBounds = L.latLngBounds(southWest, northEast);
 		
 		MainApplication.Map === undefined ? MainApplication.Map = L.mapbox.map('map', null, { minZoom:6, maxZoom:14, attribution:"" }) : false;
@@ -299,9 +299,9 @@ var MapView = Backbone.Marionette.Layout.extend({
 		MainApplication.totalAcres = " of 45,663,000";
 		GeoAppBase.showAppLoadingStart();
 		_.each(BootstrapVars.areaStats, function(area){
-				area.total_acres = 0;
-				area.total_cost = 0;
-				area.total_revenue = 0;
+			area.total_acres = 0;
+			area.total_cost = 0;
+			area.total_revenue = 0;
 		});
 		$('#selectAreaInput').val('');
 		this.loadRightSlide();
