@@ -78,6 +78,42 @@ BootstrapVars.boundaries = [
 
 
 BootstrapVars.areaStats = [
+
+	{
+		abbrev: "DNR UPLANDS",
+		agency: "Dept. of Natural Resources Uplands",
+		starting_total_acres : 0,
+		starting_total_cost: 0,
+		starting_total_revenue: 0,
+		total_acres : 0,
+		total_cost: 0,
+		total_revenue: 0,
+		mapTarget: "smartmine.inr0be29",
+		visible: true,
+		layerGroupName: "agency",
+		layerGroup: null,
+		symbol: '#x214a;',
+		color: '#FF7F7F',
+
+		z: 10
+	},
+	{
+		abbrev: "DNR AQUATIC",
+		agency: "Dept. of Natural Resources Aquatic Lands",
+		starting_total_acres : 0,
+		starting_total_cost: 0,
+		starting_total_revenue: 0,
+		total_acres : 0,
+		total_cost: 0,
+		total_revenue: 0,
+		mapTarget: "smartmine.cqj5g66r",
+		visible: true,
+		layerGroupName: "agency",
+		layerGroup: null,
+		symbol: '#x214a;',
+		color: '#97DBF2',
+		z: 11
+	},
 	{
 		abbrev: "DFW",
 		agency: "Dept. of Fish and Wildlife",
@@ -93,7 +129,8 @@ BootstrapVars.areaStats = [
 		layerGroup: null,
 		symbol: '#x2190;',
 		color: '#E69800',
-		z: 10
+
+		z: 12
 	},
 	
 	{
@@ -111,43 +148,11 @@ BootstrapVars.areaStats = [
 		layerGroup: null,
 		symbol: '#x21f4;',
 		color: '#E6E600',
-		z: 11
-	},
-	{
-		abbrev: "DNR UPLANDS",
-		agency: "Dept. of Natural Resources Uplands",
-		starting_total_acres : 0,
-		starting_total_cost: 0,
-		starting_total_revenue: 0,
-		total_acres : 0,
-		total_cost: 0,
-		total_revenue: 0,
-		mapTarget: "smartmine.inr0be29",
-		visible: true,
-		layerGroupName: "agency",
-		layerGroup: null,
-		symbol: '#x214a;',
-		color: '#FF7F7F',
-		z: 12
-	},
-
-{
-		abbrev: "DNR AQUATIC",
-		agency: "Dept. of Natural Resources Aquatic Lands",
-		starting_total_acres : 0,
-		starting_total_cost: 0,
-		starting_total_revenue: 0,
-		total_acres : 0,
-		total_cost: 0,
-		total_revenue: 0,
-		mapTarget: "smartmine.cqj5g66r",
-		visible: true,
-		layerGroupName: "agency",
-		layerGroup: null,
-		symbol: '#x214a;',
-		color: '#97DBF2',
 		z: 13
 	},
+
+
+
 	{
 		abbrev: "FEDERAL",
 		agency: "Federal",
@@ -192,7 +197,7 @@ BootstrapVars.areaStats = [
 		total_acres : 0,
 		total_cost: 0,
 		total_revenue: 0,
-		mapTarget: "smartmine.xwobhuxr",
+		mapTarget: "smartmine.7xwuq5mi",
 		visible: false,
 		layerGroupName: "acquisitions",
 		layerGroup: null,
@@ -210,7 +215,7 @@ BootstrapVars.areaStats = [
 		total_acres : 0,
 		total_cost: 0,
 		total_revenue: 0,
-		mapTarget: "smartmine.uiduc8fr",
+		mapTarget: "smartmine.6hdaq0k9",
 		visible: false,
 		layerGroupName: "acquisitions",
 		layerGroup: null,
@@ -227,7 +232,7 @@ BootstrapVars.areaStats = [
 		total_acres : 0,
 		total_cost: 0,
 		total_revenue: 0,
-		mapTarget: "smartmine.3med0a4i",
+		mapTarget: "smartmine.omb9y66r",
 		visible: false,
 		layerGroupName: "acquisitions",
 		layerGroup: null,
@@ -244,7 +249,7 @@ BootstrapVars.areaStats = [
 		total_acres : 0,
 		total_cost: 0,
 		total_revenue: 0,
-		mapTarget: "smartmine.imrevcxr",
+		mapTarget: "smartmine.sz90y66r",
 		visible: false,
 		layerGroupName: "landtypes",
 		layerGroup: null,

@@ -522,12 +522,14 @@ var MapView = Backbone.Marionette.Layout.extend({
 				var acqCost = props.data.ACQCOST !== undefined ? '$' + props.data.ACQCOST.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : '$0.00';
 				var acqYear = props.data.ACQYEAR !== undefined && props.data.ACQYEAR !== 0 ? props.data.ACQYEAR : 'N/A';
 				var ownershipType = props.data.OWNTYPE !== 'Unknown' ? props.data.OWNTYPE : 'Assumed Fee Simple';
+				var landuseType = props.data.PLAND !== 'Revenue Generation' ? props.data.PLAND : 'Revenue-generating';
+				
 				var markerToolTip = new MapTipView({
             		ParcelName: "Parcel ID: " + props.data.TAXID,
             		Owner:  props.data.OWNER,
             		OwnershipType: ownershipType,
             		TotalArea: props.data.ACRES,
-            		LandUse: props.data.PLAND,
+            		LandUse: landuseType,
             		UnitName: props.data.UNITNAME,
             		AcquisitionDate: acqYear,
             		Cost: acqCost
