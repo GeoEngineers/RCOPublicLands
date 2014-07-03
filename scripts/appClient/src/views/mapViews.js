@@ -1215,7 +1215,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			$("#summaryDateRange").css({"display":"block"});
 			_.each(BootstrapVars.areaInformation, function(area){
 				if(area.layerGroupName===MainApplication.views.mapView.currentLayersType){
-					$("#summaryDateRange").html("State acquisition from "+area.startDate+" and " +area.endDate);
+					$("#summaryDateRange").html("State acquisitions from "+area.startDate+" and " +area.endDate);
 				}
 			});
 		}else{
