@@ -123,6 +123,14 @@ var MapView = Backbone.Marionette.Layout.extend({
 			}
 		}
 		
+		var tipAliasObject = {
+			"ProjectNumber" : "Project Number",
+			"PrimarySponsor" : "Primary Sponsor",
+			"PrimaryProgramName" : "Primary Program Name",
+			"ProjectAcresAcqActual" : "Project AcresAcq Actual",
+			"FiscalYear" : "Fiscal Year",
+			"SnapshotURL" : "Snapshot URL"
+		}
 		this.esriMap = L.esri.clusteredFeatureLayer("http://gismanagerweb.rco.wa.gov/arcgis/rest/services/public_lands/WA_RCO_Public_Lands_Inventory_PRISM_v2/MapServer/0/", {
    			cluster: new L.MarkerClusterGroup(),
 			minZoom:6,
@@ -133,10 +141,14 @@ var MapView = Backbone.Marionette.Layout.extend({
 					var val = geojson.properties[prop];
 					var linkId = "shapshot"+ geojson.properties.OBJECTID;
 					if(prop.replace("PRISM.DBO.SV_DMPROJECT1.", "") === "SnapshotURL"){
-						val = "<a href='" + val + "' id='shapshot"+ geojson.properties.OBJECTID +"' style='color: white; text-decoration: underline'>" + val + "</a>";
+						val = "<a href='" + val + "' id='shapshot"+ geojson.properties.OBJECTID +"' style='color: white; text-decoration: underline' onclick='window.open(this.href, \"Prism\", \"width=995,height=420,scroll=yes,scrolling=yes,scrollbars=yes\");return false;'>" + val + "</a>";
 					}
 					if (val != 'undefined' && val != "0" && prop !="OBJECTID" && prop != "Name") {
-						popupText += "<span class='tipLabel'>" + prop.replace(" (Esri)",'').replace("PRISM.DBO.SV_DMPROJECT1.", "") + "</span>: " + val + "<br>";
+						var tipFieldLabel = prop.replace(" (Esri)",'').replace("PRISM.DBO.SV_DMPROJECT1.", "");
+						if(tipFieldLabel in tipAliasObject){
+							tipFieldLabel = tipAliasObject[tipFieldLabel];
+						}
+						popupText += "<span class='tipLabel'>" + tipFieldLabel + "</span>: " + val + "<br>";
 					}
 				}
 				marker.bindPopup(popupText);
@@ -1004,7 +1016,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			var val = 0;
 			barChartSeries.push({
 				"name" : area.agency,
-				"data" : [area[dc.type]], //, area.total_cost, area.total_revenue
+				"data" : [parseInt(area[dc.type])], //, area.total_cost, area.total_revenue
 				"color" : area.color
 			});
 		});
@@ -1210,17 +1222,8 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		var total = 0;
 		var isCurrency = typeView === "total_acres" ? false : true;
 		var currencyPrefix = typeView === "total_acres" ? "" : "$";
-		
-		if(MainApplication.views.mapView.currentLayersType==="acquisitions"){
-			$("#summaryDateRange").css({"display":"block"});
-			_.each(BootstrapVars.areaInformation, function(area){
-				if(area.layerGroupName===MainApplication.views.mapView.currentLayersType){
-					$("#summaryDateRange").html("State acquisitions from "+area.startDate+" and " +area.endDate);
-				}
-			});
-		}else{
-			$("#summaryDateRange").css({"display":"none"});
-		}
+				
+		$("#summaryDateRange").css({"display":"none"});
 
 		_.each(BootstrapVars.areaStats, function(area){
 			if(area.layerGroupName===MainApplication.views.mapView.currentLayersType){
@@ -1244,7 +1247,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				var checkedStatus = area.visible ? " checked='true'" : "";
 				
 				areaSummary += "<div>" + legendKey[0].outerHTML + "<input type='checkbox' name='inputSummaryItem-" + area.abbrev + "' id='inputSummaryItem-"+ area.abbrev + "' data-abbr='" + area.abbrev + "' class='usePointer'"+checkedStatus+" /> <label class='usePointer' style='font-size: 12px' data-abbr='" + area.abbrev + "' for='inputSummaryItem-" + area.abbrev + "' >" + area.agency + ": " + currencyPrefix + dc.formatNumber(val, isCurrency)+ "</label></div>";
-				
+
 				legendKey.prependTo(areaSummary);
 				summaryText = summaryText + areaSummary;
 				total += val;
@@ -1268,6 +1271,16 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			default:
 				break;
 		}
+		
+		if(MainApplication.views.mapView.currentLayersType==="acquisitions"){
+			$("#summaryDateRange").css({"display":"block"});
+			_.each(BootstrapVars.areaInformation, function(area){
+				if(area.layerGroupName===MainApplication.views.mapView.currentLayersType){
+					prefixText = prefixText + "<div style='font-size:9pt;'>State acquisitions from "+area.startDate+" and " +area.endDate + "</div>";
+				}
+			});
+		}
+		
 		$("#summaryLayer").html(prefixText + summaryText);
 		return false;
 	},

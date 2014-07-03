@@ -78,24 +78,23 @@ BootstrapVars.boundaries = [
 
 
 BootstrapVars.areaStats = [
-
 	{
-		abbrev: "DNR UPLANDS",
-		agency: "Dept. of Natural Resources Uplands",
+		abbrev: "CITY-COUNTY",
+		agency: "City and County",
 		starting_total_acres : 0,
 		starting_total_cost: 0,
 		starting_total_revenue: 0,
 		total_acres : 0,
 		total_cost: 0,
 		total_revenue: 0,
-		mapTarget: "smartmine.inr0be29",
+		mapTarget: "smartmine.q65pzaor",
 		visible: true,
 		layerGroupName: "agency",
 		layerGroup: null,
-		symbol: '#x214a;',
-		color: '#FF7F7F',
-
+		symbol: '#x2190;',
+		color: '#FFBEBE',
 		z: 10
+
 	},
 	{
 		abbrev: "DNR AQUATIC",
@@ -115,6 +114,24 @@ BootstrapVars.areaStats = [
 		z: 11
 	},
 	{
+		abbrev: "DNR UPLANDS",
+		agency: "Dept. of Natural Resources Uplands",
+		starting_total_acres : 0,
+		starting_total_cost: 0,
+		starting_total_revenue: 0,
+		total_acres : 0,
+		total_cost: 0,
+		total_revenue: 0,
+		mapTarget: "smartmine.inr0be29",
+		visible: true,
+		layerGroupName: "agency",
+		layerGroup: null,
+		symbol: '#x214a;',
+		color: '#FF7F7F',
+
+		z: 12
+	},	
+	{
 		abbrev: "DFW",
 		agency: "Dept. of Fish and Wildlife",
 		starting_total_acres : 0,
@@ -130,29 +147,8 @@ BootstrapVars.areaStats = [
 		symbol: '#x2190;',
 		color: '#E69800',
 
-		z: 12
-	},
-	
-	{
-		abbrev: "PARKS",
-		agency: "State Parks",
-		starting_total_acres : 0,
-		starting_total_cost: 0,
-		starting_total_revenue: 0,
-		total_acres : 0,
-		total_cost: 0,
-		total_revenue: 0,
-		mapTarget: "smartmine.fwtawcdi",
-		visible: true,
-		layerGroupName: "agency",
-		layerGroup: null,
-		symbol: '#x21f4;',
-		color: '#E6E600',
 		z: 13
 	},
-
-
-
 	{
 		abbrev: "FEDERAL",
 		agency: "Federal",
@@ -171,23 +167,23 @@ BootstrapVars.areaStats = [
 		z: 14
 	},	
 	{
-		abbrev: "CITY-COUNTY",
-		agency: "City and County",
+		abbrev: "PARKS",
+		agency: "State Parks",
 		starting_total_acres : 0,
 		starting_total_cost: 0,
 		starting_total_revenue: 0,
 		total_acres : 0,
 		total_cost: 0,
 		total_revenue: 0,
-		mapTarget: "smartmine.q65pzaor",
+		mapTarget: "smartmine.fwtawcdi",
 		visible: true,
 		layerGroupName: "agency",
 		layerGroup: null,
-		symbol: '#x2190;',
-		color: '#FFBEBE',
+		symbol: '#x21f4;',
+		color: '#E6E600',
 		z: 15
-
 	},
+	
 	{
 		abbrev: "AQ-DFW",
 		agency: "Dept. of Fish and Wildlife",
@@ -207,6 +203,23 @@ BootstrapVars.areaStats = [
 
 	},
 	{
+		abbrev: "AQ-DNR",
+		agency: "Dept. of Natural Resources",
+		starting_total_acres : 0,
+		starting_total_cost: 0,
+		starting_total_revenue: 0,
+		total_acres : 0,
+		total_cost: 0,
+		total_revenue: 0,
+		mapTarget: "smartmine.omb9y66r",
+		visible: false,
+		layerGroupName: "acquisitions",
+		layerGroup: null,
+		symbol: '#x214a;',
+		color: '#FF7F7F',
+		z: 18
+	},	
+	{
 		abbrev: "AQ-PARKS",
 		agency: "Washington Parks Dept.",
 		starting_total_acres : 0,
@@ -223,40 +236,41 @@ BootstrapVars.areaStats = [
 		color: '#E6E600',
 		z: 17
 	},
+	
 	{
-		abbrev: "AQ-DNR",
-		agency: "Dept. of Natural Resources",
+		abbrev: "CONSERVATION",
+		agency: "Conservation",
 		starting_total_acres : 0,
 		starting_total_cost: 0,
 		starting_total_revenue: 0,
 		total_acres : 0,
 		total_cost: 0,
 		total_revenue: 0,
-		mapTarget: "smartmine.omb9y66r",
-		visible: false,
-		layerGroupName: "acquisitions",
-		layerGroup: null,
-		symbol: '#x214a;',
-		color: '#FF7F7F',
-		z: 18
-	},
-	{
-		abbrev: "REVENUE",
-		agency: "Revenue Generation",
-		starting_total_acres : 0,
-		starting_total_cost: 0,
-		starting_total_revenue: 0,
-		total_acres : 0,
-		total_cost: 0,
-		total_revenue: 0,
-		mapTarget: "smartmine.sz90y66r",
+		mapTarget: "smartmine.3kk5ipb9",
 		visible: false,
 		layerGroupName: "landtypes",
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#FF7F7F',
-		z: 19
+		color: '#38A800',
+		z: 22
 	},	
+	{
+		abbrev: "DEVELOPED RECREATION",
+		agency: "Developed Recreation",
+		starting_total_acres : 0,
+		starting_total_cost: 0,
+		starting_total_revenue: 0,
+		total_acres : 0,
+		total_cost: 0,
+		total_revenue: 0,
+		mapTarget: "smartmine.xw0442t9",
+		visible: false,
+		layerGroupName: "landtypes",
+		layerGroup: null,
+		symbol: '#x2190;',
+		color: '#E6E600',
+		z: 21
+	},		
 	{
 		abbrev: "HABITAT AND PASSIVE RECREATION",
 		agency: "Habitat and Passive Recreation",
@@ -275,41 +289,6 @@ BootstrapVars.areaStats = [
 		z: 20
 	},	
 	{
-		abbrev: "DEVELOPED RECREATION",
-		agency: "Developed Recreation",
-		starting_total_acres : 0,
-		starting_total_cost: 0,
-		starting_total_revenue: 0,
-		total_acres : 0,
-		total_cost: 0,
-		total_revenue: 0,
-		mapTarget: "smartmine.xw0442t9",
-		visible: false,
-		layerGroupName: "landtypes",
-		layerGroup: null,
-		symbol: '#x2190;',
-		color: '#E6E600',
-		z: 21
-	},	
-	{
-		abbrev: "CONSERVATION",
-		agency: "Conservation",
-		starting_total_acres : 0,
-		starting_total_cost: 0,
-		starting_total_revenue: 0,
-		total_acres : 0,
-		total_cost: 0,
-		total_revenue: 0,
-		mapTarget: "smartmine.3kk5ipb9",
-		visible: false,
-		layerGroupName: "landtypes",
-		layerGroup: null,
-		symbol: '#x2190;',
-		color: '#38A800',
-		z: 22
-	},
-	
-		{
 		abbrev: "OTHER PUBLIC",
 		agency: "Other",
 		starting_total_acres : 0,
@@ -326,6 +305,24 @@ BootstrapVars.areaStats = [
 		color: '#A020F0',
 		z: 23
 	},
+	{
+		abbrev: "REVENUE",
+		agency: "Revenue Generation",
+		starting_total_acres : 0,
+		starting_total_cost: 0,
+		starting_total_revenue: 0,
+		total_acres : 0,
+		total_cost: 0,
+		total_revenue: 0,
+		mapTarget: "smartmine.sz90y66r",
+		visible: false,
+		layerGroupName: "landtypes",
+		layerGroup: null,
+		symbol: '#x2190;',
+		color: '#FF7F7F',
+		z: 19
+	},		
+	
 	{
 		abbrev: "PROPOSED PARKS",
 		agency: "Proposed Park Acquisitions",
@@ -378,7 +375,4 @@ BootstrapVars.areaStats = [
 		color: '#E69800',
 		z: 26
 	}
-
-
-
 ];
