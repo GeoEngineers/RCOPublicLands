@@ -59,7 +59,7 @@ BootstrapVars.boundaries = [
 			NameField: "DISTRICT_NR",
 			SelectText: "District",
 			sums: sums_congressional_districts,
-			jsonUrl: "./scripts/appClient/src/extensions/congressionaldistricts_simplified.geojson",
+			jsonUrl: "./scripts/appClient/src/extensions/congressionaldistricts.geojson",
 			json: null,
 			jsonLayer: null,
 			color: "white"
@@ -78,6 +78,42 @@ BootstrapVars.boundaries = [
 
 
 BootstrapVars.areaStats = [
+
+	{
+		abbrev: "DNR UPLANDS",
+		agency: "Dept. of Natural Resources Uplands",
+		starting_total_acres : 0,
+		starting_total_cost: 0,
+		starting_total_revenue: 0,
+		total_acres : 0,
+		total_cost: 0,
+		total_revenue: 0,
+		mapTarget: "smartmine.inr0be29",
+		visible: true,
+		layerGroupName: "agency",
+		layerGroup: null,
+		symbol: '#x214a;',
+		color: '#FF7F7F',
+
+		z: 10
+	},
+	{
+		abbrev: "DNR AQUATIC",
+		agency: "Dept. of Natural Resources Aquatic Lands",
+		starting_total_acres : 0,
+		starting_total_cost: 0,
+		starting_total_revenue: 0,
+		total_acres : 0,
+		total_cost: 0,
+		total_revenue: 0,
+		mapTarget: "smartmine.cqj5g66r",
+		visible: true,
+		layerGroupName: "agency",
+		layerGroup: null,
+		symbol: '#x214a;',
+		color: '#97DBF2',
+		z: 11
+	},
 	{
 		abbrev: "DFW",
 		agency: "Dept. of Fish and Wildlife",
@@ -93,12 +129,13 @@ BootstrapVars.areaStats = [
 		layerGroup: null,
 		symbol: '#x2190;',
 		color: '#E69800',
-		z: 10
+
+		z: 12
 	},
 	
 	{
 		abbrev: "PARKS",
-		agency: "Washington Parks Dept.",
+		agency: "State Parks",
 		starting_total_acres : 0,
 		starting_total_cost: 0,
 		starting_total_revenue: 0,
@@ -111,43 +148,11 @@ BootstrapVars.areaStats = [
 		layerGroup: null,
 		symbol: '#x21f4;',
 		color: '#E6E600',
-		z: 11
-	},
-	{
-		abbrev: "DNR UPLANDS",
-		agency: "DNR Uplands",
-		starting_total_acres : 0,
-		starting_total_cost: 0,
-		starting_total_revenue: 0,
-		total_acres : 0,
-		total_cost: 0,
-		total_revenue: 0,
-		mapTarget: "smartmine.inr0be29",
-		visible: true,
-		layerGroupName: "agency",
-		layerGroup: null,
-		symbol: '#x214a;',
-		color: '#FF7F7F',
-		z: 12
-	},
-
-{
-		abbrev: "DNR AQUATIC",
-		agency: "DNR Aquatic",
-		starting_total_acres : 0,
-		starting_total_cost: 0,
-		starting_total_revenue: 0,
-		total_acres : 0,
-		total_cost: 0,
-		total_revenue: 0,
-		mapTarget: "smartmine.cqj5g66r",
-		visible: true,
-		layerGroupName: "agency",
-		layerGroup: null,
-		symbol: '#x214a;',
-		color: '#97DBF2',
 		z: 13
 	},
+
+
+
 	{
 		abbrev: "FEDERAL",
 		agency: "Federal",
@@ -167,7 +172,7 @@ BootstrapVars.areaStats = [
 	},	
 	{
 		abbrev: "CITY-COUNTY",
-		agency: "City and County Lands",
+		agency: "City and County",
 		starting_total_acres : 0,
 		starting_total_cost: 0,
 		starting_total_revenue: 0,
@@ -192,7 +197,7 @@ BootstrapVars.areaStats = [
 		total_acres : 0,
 		total_cost: 0,
 		total_revenue: 0,
-		mapTarget: "smartmine.xwobhuxr",
+		mapTarget: "smartmine.7xwuq5mi",
 		visible: false,
 		layerGroupName: "acquisitions",
 		layerGroup: null,
@@ -210,12 +215,12 @@ BootstrapVars.areaStats = [
 		total_acres : 0,
 		total_cost: 0,
 		total_revenue: 0,
-		mapTarget: "smartmine.uiduc8fr",
+		mapTarget: "smartmine.6hdaq0k9",
 		visible: false,
 		layerGroupName: "acquisitions",
 		layerGroup: null,
 		symbol: '#x21f4;',
-		color: '#B4D79E',
+		color: '#E6E600',
 		z: 17
 	},
 	{
@@ -227,7 +232,7 @@ BootstrapVars.areaStats = [
 		total_acres : 0,
 		total_cost: 0,
 		total_revenue: 0,
-		mapTarget: "smartmine.3med0a4i",
+		mapTarget: "smartmine.omb9y66r",
 		visible: false,
 		layerGroupName: "acquisitions",
 		layerGroup: null,
@@ -237,14 +242,14 @@ BootstrapVars.areaStats = [
 	},
 	{
 		abbrev: "REVENUE",
-		agency: "Revenue",
+		agency: "Revenue Generation",
 		starting_total_acres : 0,
 		starting_total_cost: 0,
 		starting_total_revenue: 0,
 		total_acres : 0,
 		total_cost: 0,
 		total_revenue: 0,
-		mapTarget: "smartmine.imrevcxr",
+		mapTarget: "smartmine.sz90y66r",
 		visible: false,
 		layerGroupName: "landtypes",
 		layerGroup: null,
@@ -266,7 +271,7 @@ BootstrapVars.areaStats = [
 		layerGroupName: "landtypes",
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#B4D79E',
+		color: '#97DBF2',
 		z: 20
 	},	
 	{
@@ -283,7 +288,7 @@ BootstrapVars.areaStats = [
 		layerGroupName: "landtypes",
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#B2B2B2',
+		color: '#E6E600',
 		z: 21
 	},	
 	{
@@ -318,7 +323,7 @@ BootstrapVars.areaStats = [
 		layerGroupName: "landtypes",
 		layerGroup: null,
 		symbol: '#x2190;',
-		color: '#BEFFE8',
+		color: '#A020F0',
 		z: 23
 	},
 	{
@@ -330,7 +335,7 @@ BootstrapVars.areaStats = [
 		total_acres : 0,
 		total_cost: 0,
 		total_revenue: 0,
-		mapTarget: "smartmine.uovcmcxr",
+		mapTarget: "./scripts/appClient/src/extensions/rco_pli_parks_proposed_4326.geojson",
 		visible: false,
 		layerGroupName: "proposed",
 		layerGroup: null,
@@ -347,7 +352,7 @@ BootstrapVars.areaStats = [
 		total_acres : 0,
 		total_cost: 0,
 		total_revenue: 0,
-		mapTarget: "smartmine.fs1qbyb9",
+		mapTarget: "./scripts/appClient/src/extensions/rco_pli_dnr_proposed_4326.geojson",
 		visible: false,
 		layerGroupName: "proposed",
 		layerGroup: null,
@@ -365,7 +370,7 @@ BootstrapVars.areaStats = [
 		total_acres : 0,
 		total_cost: 0,
 		total_revenue: 0,
-		mapTarget: "smartmine.yhxmkj4i",
+		mapTarget: "./scripts/appClient/src/extensions/rco_pli_dfw_proposed_4326.geojson",
 		visible: false,
 		layerGroupName: "proposed",
 		layerGroup: null,

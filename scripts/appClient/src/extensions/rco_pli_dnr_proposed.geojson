@@ -1,0 +1,15 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::900913" } },
+                                                                                
+"features": [
+{ "type": "Feature", "properties": { "gid": 1, "taxid": "400000640005", "prov1": "Washington DNR", "acres": 1713438.830000, "pland": "Unknown" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -13787718.066635640338063, 6124007.313361883163452 ] ] } },
+{ "type": "Feature", "properties": { "gid": 9, "taxid": "400000640023", "prov1": "Washington DNR", "acres": 672677.940000, "pland": "Unknown" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -13723475.718331288546324, 6020779.162727335467935 ] ] } },
+{ "type": "Feature", "properties": { "gid": 11, "taxid": "400000640016", "prov1": "Washington DNR", "acres": 1399963.880000, "pland": "Unknown" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -13817802.906842349097133, 6061207.434996341355145 ] ] } },
+{ "type": "Feature", "properties": { "gid": 13, "taxid": "400000640018", "prov1": "Washington DNR", "acres": 362188.070000, "pland": "Unknown" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -13651889.487091621384025, 6043356.337404004298151 ] ] } },
+{ "type": "Feature", "properties": { "gid": 15, "taxid": "400000640017", "prov1": "Washington DNR", "acres": 1476858.930000, "pland": "Unknown" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -13545736.254929138347507, 6026142.929874454624951 ] ] } },
+{ "type": "Feature", "properties": { "gid": 18, "taxid": "400000640034", "prov1": "Washington DNR", "acres": 495359.000000, "pland": "Unknown" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -13678209.799191510304809, 5921265.802023975178599 ] ] } },
+{ "type": "Feature", "properties": { "gid": 22, "taxid": "400000640033", "prov1": "Washington DNR", "acres": 1625530.130000, "pland": "Unknown" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -13115594.077608799561858, 6181593.946902905590832 ] ] } },
+{ "type": "Feature", "properties": { "gid": 25, "taxid": "400000640001", "prov1": "Washington DNR", "acres": 1234960.230000, "pland": "Unknown" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -13192543.984630458056927, 5941684.658639191649854 ] ] } }
+]
+}

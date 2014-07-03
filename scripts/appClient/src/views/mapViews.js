@@ -67,25 +67,60 @@ var MapView = Backbone.Marionette.Layout.extend({
 		MainApplication.modalRegion.show(welcomeView);
 
 		for(area in BootstrapVars.areaStats){
-			var tileLayer = new L.mapbox.tileLayer(BootstrapVars.areaStats[area].mapTarget, { 
-				bounds: this.stateBounds,
-				minZoom: 6,
-				maxZoom: 14,
-				//maxNativeZoom: 14,
-				zIndex: BootstrapVars.areaStats[area].z,
-				opacity: 1
-			});
-			var utfGrid = new L.UtfGrid('http://{s}.tiles.mapbox.com/v3/'+BootstrapVars.areaStats[area].mapTarget+'/{z}/{x}/{y}.grid.json?callback={cb}', { 
-				bounds: this.stateBounds,
-				minZoom: 6,
-				maxZoom: 14,
-				zIndex: BootstrapVars.areaStats[area].z
-			});
-			
-			BootstrapVars.areaStats[area].layerGroup =  L.layerGroup([
-				tileLayer,
-				dc.createGrid(utfGrid, BootstrapVars.areaStats[area])
-			]);
+			if(BootstrapVars.areaStats[area].layerGroupName !== 'proposed')
+			{
+				var tileLayer = new L.mapbox.tileLayer(BootstrapVars.areaStats[area].mapTarget, { 
+					bounds: this.stateBounds,
+					minZoom: 6,
+					maxZoom: 14,
+					//maxNativeZoom: 14,
+					zIndex: BootstrapVars.areaStats[area].z,
+					opacity: 1
+				});
+				var utfGrid = new L.UtfGrid('http://{s}.tiles.mapbox.com/v3/'+BootstrapVars.areaStats[area].mapTarget+'/{z}/{x}/{y}.grid.json?callback={cb}', { 
+					bounds: this.stateBounds,
+					minZoom: 6,
+					maxZoom: 14,
+					zIndex: BootstrapVars.areaStats[area].z
+				});
+				BootstrapVars.areaStats[area].layerGroup =  L.layerGroup([
+					tileLayer,
+					dc.createGrid(utfGrid, BootstrapVars.areaStats[area])
+				]);
+			}
+			else
+			{
+				$.getJSON(BootstrapVars.areaStats[area].mapTarget, function(data) {
+					var provider = "";
+					_.each(data.features, function(feature)
+					{
+						provider = feature.properties.prov1;
+					});
+					area = provider == 'Washington Parks' ? 14 : area;
+					area = provider == 'Washington DNR' ? 15 : area;
+					area = provider == 'Washington DFW' ? 16 : area;
+
+					var geojsonMarkerOptions = {
+					    radius: 5,
+					    fillColor: BootstrapVars.areaStats[area].color,
+					    color: "#000",
+					    weight: 1,
+					    opacity: 1,
+					    fillOpacity: 0.8
+					};
+					var jsonLayer =L.geoJson(data, {
+					    pointToLayer: function (feature, latlng) {
+					        var marker =  L.circleMarker(latlng, geojsonMarkerOptions);
+					        var popupText =  "<div style='overflow:scroll; max-width:350px; max-height:260px;'>";
+					        popupText += "<span class='tipLabel'>Owner</span>: " + feature.properties['prov1'] + "<br>";
+					        popupText += "<span class='tipLabel'>Acres</span>: " + feature.properties['acres'] + "<br>";
+							marker.bindPopup(popupText);
+							return marker;
+					    }
+					});
+					BootstrapVars.areaStats[area].layerGroup = jsonLayer;
+				});
+			}
 		}
 		
 		this.esriMap = L.esri.clusteredFeatureLayer("http://gismanagerweb.rco.wa.gov/arcgis/rest/services/public_lands/WA_RCO_Public_Lands_Inventory_PRISM_v2/MapServer/0/", {
@@ -248,6 +283,7 @@ var MapView = Backbone.Marionette.Layout.extend({
         }
     },
 	boundaryChange: function(){
+		MainApplication.totalAcres = "";
 		GeoAppBase.showAppLoadingStart();
 		_.each(BootstrapVars.areaStats, function(area){
 				area.total_acres = 0;
@@ -353,8 +389,23 @@ var MapView = Backbone.Marionette.Layout.extend({
 			}
 		});
 	},
+	formatCommas: function(nStr){
+		nStr += '';
+		x = nStr.split('.');
+		x1 = x[0];
+		x2 = x.length > 1 ? '.' + x[1] : '';
+		var rgx = /(\d+)(\d{3})/;
+		while (rgx.test(x1)) {
+			x1 = x1.replace(rgx, '$1' + ',' + '$2');
+		}
+		return x1 + x2;
+	},
+	formatNumber: function(value, currency){
+		return this.formatCommas(parseFloat(value, 10).toFixed(currency ? 2 : 0).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+	},
 	areaChange: function(zoom)
 	{
+		var dc = this;
 		if(MainApplication.selectedBoundary !== undefined)
 		{
 			if(MainApplication.Map.hasLayer(MainApplication.selectedBoundary)){
@@ -367,6 +418,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 		_.each(boundary.jsonLayer._layers, function(shape){
 			if(selectedVal.toString() === shape.feature.properties[boundary.NameField].toString())
 			{
+				MainApplication.totalAcres = shape.feature.properties["SHAPE_Area"] !== undefined  && shape.feature.properties["SHAPE_Area"] !== '' ?  " of " + dc.formatNumber(shape.feature.properties["SHAPE_Area"] / 4046.85642, false)  :"" ;
+
 				var maxX = -1000, maxY = -1000, minX = 1000, minY = 1000;
 				_.each(shape._latlngs, function(coords){
 						if(maxX < coords.lng)
@@ -410,8 +463,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 			});
 		}
 		//Update Bootstrap vars
-		if(selectedVal.toString().length < 2 && selectedTypeVal === "Legislative Districts")
-			selectedVal = "0" + selectedVal;
+		//if(selectedVal.toString().length < 2 && selectedTypeVal === "Legislative Districts")
+		//	selectedVal = "0" + selectedVal;
 		_.each(BootstrapVars.areaStats, function(area)
 		{
 			var totalacres = 0;
@@ -468,13 +521,15 @@ var MapView = Backbone.Marionette.Layout.extend({
 				}
 				var acqCost = props.data.ACQCOST !== undefined ? '$' + props.data.ACQCOST.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : '$0.00';
 				var acqYear = props.data.ACQYEAR !== undefined && props.data.ACQYEAR !== 0 ? props.data.ACQYEAR : 'N/A';
+				var ownershipType = props.data.OWNTYPE !== 'Unknown' ? props.data.OWNTYPE : 'Assumed Fee Simple';
+				var landuseType = props.data.PLAND !== 'Revenue Generation' ? props.data.PLAND : 'Revenue-generating';
 				
 				var markerToolTip = new MapTipView({
             		ParcelName: "Parcel ID: " + props.data.TAXID,
             		Owner:  props.data.OWNER,
-            		OwnershipType: props.data.OWNTYPE,
+            		OwnershipType: ownershipType,
             		TotalArea: props.data.ACRES,
-            		LandUse: props.data.PLAND,
+            		LandUse: landuseType,
             		UnitName: props.data.UNITNAME,
             		AcquisitionDate: acqYear,
             		Cost: acqCost
@@ -562,6 +617,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 	},
 	setDisplayedLayers : function(layerType){
 		var dc=this;
+
 		this.currentLayersType = layerType;
 		this.activeLayers = [];
 		for(mapLayer in BootstrapVars.areaStats){
@@ -795,7 +851,7 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 		}else{
 			MainApplication.views.mapView.mapPaneView.slide.close();
             $("#toggleQuestionButton").animate({"margin-right": "0px"});
-			$(MainApplication.paneRegion.el).css({"width":"25em"});
+			$(MainApplication.paneRegion.el).css({"width":"26em"});
 			$('#expandSummaryButton').removeClass("collapsable");
 			$('#expandSummaryButton').hasClass("expandable") ? false : $('#expandSummaryButton').addClass("expandable");
 			$("#expandSummaryButton button").html("<i class='fa fa-arrow-circle-o-left fa-lg'></i>");
@@ -887,7 +943,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			this.slide = $('.slide-menu').bigSlide({ 
 				side:"right", 
 				menu:"#SummaryPaneSlideOut", 
-				menuWidth : "25em" }).css({ "z-index":"1030", "top":"35px", "right":"0px"});
+				menuWidth : "26em" }).css({ "z-index":"1030", "top":"35px", "right":"0px"});
 			this.slide._state = "open";
 		}
 		
@@ -1159,7 +1215,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			$("#summaryDateRange").css({"display":"block"});
 			_.each(BootstrapVars.areaInformation, function(area){
 				if(area.layerGroupName===MainApplication.views.mapView.currentLayersType){
-					$("#summaryDateRange").html("Acquisition data compiled between "+area.startDate+" and " +area.endDate);
+					$("#summaryDateRange").html("State acquisition from "+area.startDate+" and " +area.endDate);
 				}
 			});
 		}else{
@@ -1187,16 +1243,20 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				var legendKey = $("<div>", { class: "colorKey", style: "background-color:"+area.color+";" });
 				var checkedStatus = area.visible ? " checked='true'" : "";
 				
-				areaSummary += "<div>" + legendKey[0].outerHTML + "<input type='checkbox' name='inputSummaryItem-" + area.abbrev + "' id='inputSummaryItem-"+ area.abbrev + "' data-abbr='" + area.abbrev + "' class='usePointer'"+checkedStatus+" /> <label class='usePointer' data-abbr='" + area.abbrev + "' for='inputSummaryItem-" + area.abbrev + "' >" + area.agency + ": " + currencyPrefix + dc.formatNumber(val, isCurrency)+ "</label></div>";
+				areaSummary += "<div>" + legendKey[0].outerHTML + "<input type='checkbox' name='inputSummaryItem-" + area.abbrev + "' id='inputSummaryItem-"+ area.abbrev + "' data-abbr='" + area.abbrev + "' class='usePointer'"+checkedStatus+" /> <label class='usePointer' style='font-size: 12px' data-abbr='" + area.abbrev + "' for='inputSummaryItem-" + area.abbrev + "' >" + area.agency + ": " + currencyPrefix + dc.formatNumber(val, isCurrency)+ "</label></div>";
 				
 				legendKey.prependTo(areaSummary);
 				summaryText = summaryText + areaSummary;
 				total += val;
 			}
 		});
+
+
+		var totalAcresBoundary = MainApplication.totalAcres !== undefined ? MainApplication.totalAcres : "";
+
 		switch(typeView) {
 			case "total_acres":
-				prefixText = "<div style='margin-bottom: 10px; margin-top: 30px'>Total " + this.type.replace("total_", "")  + ": " + currencyPrefix  + dc.formatNumber(total, isCurrency)+ "</div>";
+				prefixText = "<div style='margin-bottom: 10px; margin-top: 30px'>Total " + this.type.replace("total_", "")  + ": " + currencyPrefix  + dc.formatNumber(total, isCurrency)+ totalAcresBoundary + "</div>";
 				break;
 			case "total_cost":
 				prefixText = "<div style='margin-bottom: 10px; margin-top: 30px'>Total " + this.type.replace("total_", "")+ "</div>";
