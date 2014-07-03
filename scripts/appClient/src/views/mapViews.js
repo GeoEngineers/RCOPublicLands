@@ -127,10 +127,10 @@ var MapView = Backbone.Marionette.Layout.extend({
 		var tipAliasObject = {
 			"ProjectNumber" : "Project Number",
 			"PrimarySponsor" : "Primary Sponsor",
-			"PrimaryProgramName" : "Primary Program Name",
-			"ProjectAcresAcqActual" : "Project AcresAcq Actual",
+			"PrimaryProgramName" : "Program Name",
+			"ProjectAcresAcqActual" : "Acquired Acres to Date",
 			"FiscalYear" : "Fiscal Year",
-			"SnapshotURL" : "Snapshot URL"
+			"SnapshotURL" : "Project URL"
 		}
 		this.esriMap = L.esri.clusteredFeatureLayer("http://gismanagerweb.rco.wa.gov/arcgis/rest/services/public_lands/WA_RCO_Public_Lands_Inventory_PRISM_v2/MapServer/0/", {
    			cluster: new L.MarkerClusterGroup(),
