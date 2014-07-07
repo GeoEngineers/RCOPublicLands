@@ -866,7 +866,7 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 		}else{
 			MainApplication.views.mapView.mapPaneView.slide.close();
             $("#toggleQuestionButton").animate({"margin-right": "0px"});
-			$(MainApplication.paneRegion.el).css({"width":"26em"});
+			$(MainApplication.paneRegion.el).css({"width":"25em"});
 			$('#expandSummaryButton').removeClass("collapsable");
 			$('#expandSummaryButton').hasClass("expandable") ? false : $('#expandSummaryButton').addClass("expandable");
 			$("#expandSummaryButton button").html("<i class='fa fa-arrow-circle-o-left fa-lg'></i>");
@@ -958,7 +958,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			this.slide = $('.slide-menu').bigSlide({ 
 				side:"right", 
 				menu:"#SummaryPaneSlideOut", 
-				menuWidth : "26em" }).css({ "z-index":"1030", "top":"35px", "right":"0px"});
+				menuWidth : "25em" }).css({ "z-index":"1030", "top":"35px", "right":"0px"});
 			this.slide._state = "open";
 		}
 		
@@ -1249,7 +1249,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				var legendKey = $("<div>", { class: "colorKey", style: "background-color:"+area.color+";" });
 				var checkedStatus = area.visible ? " checked='true'" : "";
 				
-				areaSummary += "<div>" + legendKey[0].outerHTML + "<input type='checkbox' name='inputSummaryItem-" + area.abbrev + "' id='inputSummaryItem-"+ area.abbrev + "' data-abbr='" + area.abbrev + "' class='usePointer'"+checkedStatus+" /> <label class='usePointer' style='font-size: 12px' data-abbr='" + area.abbrev + "' for='inputSummaryItem-" + area.abbrev + "' >" + area.agency + ": " + currencyPrefix + dc.formatNumber(val, isCurrency)+ "</label></div>";
+				areaSummary += "<div style='vertical-align: middle'><div style='display: inline-block; vertical-align: top; margin-right: 6px'>" + legendKey[0].outerHTML + "<input type='checkbox' name='inputSummaryItem-" + area.abbrev + "' id='inputSummaryItem-"+ area.abbrev + "' data-abbr='" + area.abbrev + "' class='usePointer'"+checkedStatus+" /></div><div style='display: inline-block; vertical-align: middle; width: 80%'><label class='usePointer'  data-abbr='" + area.abbrev + "' for='inputSummaryItem-" + area.abbrev + "' >" + area.agency + ": " + currencyPrefix + dc.formatNumber(val, isCurrency)+ "</label></div></div>";
 
 				legendKey.prependTo(areaSummary);
 				summaryText = summaryText + areaSummary;
