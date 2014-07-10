@@ -32,7 +32,7 @@
 }
 
 #SummaryPaneSlideOut {
-    background-color:  rgba(40, 70, 90, 1);
+    background-color:  rgb(40, 70, 90);
     border-left: 1px solid #555555;
 	border-top: 1px solid #555555;
     border-radius: 0px;
@@ -122,7 +122,7 @@
 }
 
 #FooterNavSlideOut{
-	background-color: rgba(34,34,34,1);
+	background-color: rgb(34,34,34);
 	border-top: 1px solid #000000;
 	bottom: 0px;
 	height:30px;
@@ -280,7 +280,7 @@
     padding: 10px;
 }
 .leaflet-popup-content-wrapper {
-    background-color: rgba(40, 40, 40, 1);
+    background-color: rgb(40, 40, 40);
     border-radius: 20px;
     color: #FFFFFF;
     opacity: 0.9;
@@ -930,9 +930,26 @@ a .genericHomeButton{
 
 .mask {
     background-color: #000000;
-    opacity: 0.25;
+	-khtml-opacity: 0.25;
+	-moz-opacity: 0.25;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=25)";
+	filter: alpha(opacity=25); 
+	opacity:0.25; 	
 }
 
+.tipBG{
+	background-color: #000000;
+	-khtml-opacity: 0.4;
+	-moz-opacity: 0.4;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	filter: alpha(opacity=40); 
+	opacity:0.4; 
+	height: 100%; 
+	left: 0px; 
+	position: absolute; 
+	top: 0px; 
+	width: 100%; 
+}
 .qtip{
 	border-radius: 6px;
 }

@@ -17,7 +17,7 @@
             if (MainApplication.pageInitializer !== undefined && MainApplication.pageInitializer[page_options.path] !== undefined) { MainApplication.pageInitializer[page_options.path].stop(); }
             if (MainApplication.views !== undefined) {
                 for (var viewToDelete in MainApplication.views) {
-					if(viewToDelete !== "indexOf"){
+					if(viewToDelete !== "indexOf" && MainApplication.views[viewToDelete].close !== undefined){
 						MainApplication.views[viewToDelete].close();
 					}
                 }

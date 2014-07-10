@@ -1,8 +1,8 @@
 var MapView = Backbone.Marionette.Layout.extend({
-    template: function (serialized_model) {
-        return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.MapTemplate);
-    },
-    initialize: function (options) {
+	template: function (serialized_model) {
+		return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.MapTemplate);
+	},
+	initialize: function (options) {
 		var dc = this;
 		this.clearAreaSums();
 		this.resetAreaSums();
@@ -29,8 +29,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 		MainApplication.totalAcres = " of 45,663,000";
 
 		_.bindAll(this, 'onShow');
-    },
-    events: {
+	},
+	events: {
 		"click #lnkOfflineButton" : "setBaseMapOffline",
 		"click #lnkDefaultButton" : "setBaseMapDefault",
 		"click #lnkToggleConnection" : "toggleConnection",
@@ -42,6 +42,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 	},	
 	onShow: function(){
 		var dc=this;
+		var area;
 		this.activeLayers=[];
 		for(area in BootstrapVars.areaStats){
 			if(BootstrapVars.areaStats[area].visible){
@@ -102,22 +103,22 @@ var MapView = Backbone.Marionette.Layout.extend({
 					area = provider == 'Washington DFW' ? 16 : area;
 
 					var geojsonMarkerOptions = {
-					    radius: 5,
-					    fillColor: BootstrapVars.areaStats[area].color,
-					    color: "#000",
-					    weight: 1,
-					    opacity: 1,
-					    fillOpacity: 0.8
+						radius: 5,
+						fillColor: BootstrapVars.areaStats[area].color,
+						color: "#000",
+						weight: 1,
+						opacity: 1,
+						fillOpacity: 0.8
 					};
-					var jsonLayer =L.geoJson(data, {
-					    pointToLayer: function (feature, latlng) {
-					        var marker =  L.circleMarker(latlng, geojsonMarkerOptions);
-					        var popupText =  "<div style='overflow:scroll; max-width:350px; max-height:260px;'>";
-					        popupText += "<span class='tipLabel'>Owner</span>: " + feature.properties['prov1'] + "<br>";
-					        popupText += "<span class='tipLabel'>Acres</span>: " + feature.properties['acres'] + "<br>";
+					var jsonLayer = L.geoJson(data, {
+						pointToLayer: function (feature, latlng) {
+							var marker =  L.circleMarker(latlng, geojsonMarkerOptions);
+							var popupText =  "<div style='overflow:scroll; max-width:350px; max-height:260px;'>";
+							popupText += "<span class='tipLabel'>Owner</span>: " + feature.properties.prov1 + "<br>";
+							popupText += "<span class='tipLabel'>Acres</span>: " + feature.properties.acres + "<br>";
 							marker.bindPopup(popupText);
 							return marker;
-					    }
+						}
 					});
 					BootstrapVars.areaStats[area].layerGroup = jsonLayer;
 				});
@@ -131,14 +132,14 @@ var MapView = Backbone.Marionette.Layout.extend({
 			"ProjectAcresAcqActual" : "Acquired Acres to Date",
 			"FiscalYear" : "Fiscal Year",
 			"SnapshotURL" : "Project URL"
-		}
+		};
 		this.esriMap = L.esri.clusteredFeatureLayer("http://gismanagerweb.rco.wa.gov/arcgis/rest/services/public_lands/WA_RCO_Public_Lands_Inventory_PRISM_v2/MapServer/0/", {
-   			cluster: new L.MarkerClusterGroup(),
+			cluster: new L.MarkerClusterGroup(),
 			minZoom:6,
 			zIndex: 101,
-   			onEachMarker: function(geojson, marker) {
-   				popupText =  "<div style='overflow:scroll; max-width:350px; max-height:260px;'>";
-				for (prop in geojson.properties) {
+			onEachMarker: function(geojson, marker) {
+				popupText =  "<div style='overflow:scroll; max-width:350px; max-height:260px;'>";
+				for (var prop in geojson.properties) {
 					var val = geojson.properties[prop];
 					var linkId = "shapshot"+ geojson.properties.OBJECTID;
 					if(prop.replace("PRISM.DBO.SV_DMPROJECT1.", "") === "SnapshotURL"){
@@ -153,8 +154,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 					}
 				}
 				marker.bindPopup(popupText);
-        	}
-      	});
+			}
+		});
 		
 		MainApplication.Map.setView([47,-120], 7);
 		L.control.navbar().addTo(MainApplication.Map);
@@ -172,7 +173,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 	clearAreaSums: function(){
 		var summaryValues = sums_statewide;
 		//Update Bootstrap vars
-		for(area in BootstrapVars.areaStats){
+		for(var area in BootstrapVars.areaStats){
 			BootstrapVars.areaStats[area].total_acres = 0;
 			BootstrapVars.areaStats[area].starting_total_acres = 0;
 			BootstrapVars.areaStats[area].total_cost = 0;
@@ -186,10 +187,10 @@ var MapView = Backbone.Marionette.Layout.extend({
 	resetAreaSums: function(){
 		var summaryValues = sums_statewide;
 		//Update Bootstrap vars
-		for(area in BootstrapVars.areaStats){
+		for(var area in BootstrapVars.areaStats){
 			var totalacres = 0;
 			var totalcost = 0;
-			for(summary in summaryValues){
+			for(var summary in summaryValues){
 				if(BootstrapVars.areaStats[area].abbrev === summaryValues[summary].agency)
 				{
 						BootstrapVars.areaStats[area].total_acres = summaryValues[summary].acres;
@@ -201,20 +202,20 @@ var MapView = Backbone.Marionette.Layout.extend({
 		}
 	},
 	loadGuidedHelp: function () {
-        this.landingPageGuideView = new GuidedHelpView({
-        });
-        MainApplication.maskRegion.show(this.landingPageGuideView);
-        return false;
-    },
-    loadToolTips: function () {
+		this.landingPageGuideView = new GuidedHelpView({
+		});
+		MainApplication.maskRegion.show(this.landingPageGuideView);
+		return false;
+	},
+	loadToolTips: function () {
 		var ToolTipClass1 = function () {
-            return {
-                content: {
-                    text: ''
-                },
-                hide: false,
-                show: false,
-                style: {
+			return {
+				content: {
+					text: ''
+				},
+				hide: false,
+				show: false,
+				style: {
 					classes: 'qtip-dark',
 					tip: {
 						width: 20,
@@ -222,79 +223,79 @@ var MapView = Backbone.Marionette.Layout.extend({
 						color: '#222222'
 					}
 				}
-            }
-        };
+			};
+		};
 		var ToolTipClass2 = function () {
-            return {
-                content: {
-                    text: ''
-                },
-                position: {
-                    my: 'right middle',
-                    at: 'middle left'
-                },
-                hide: false,
-                show: false,
-                style: {
-                    classes: 'qtip-dark',
-                    tip: {
+			return {
+				content: {
+					text: ''
+				},
+				position: {
+					my: 'right middle',
+					at: 'middle left'
+				},
+				hide: false,
+				show: false,
+				style: {
+					classes: 'qtip-dark',
+					tip: {
 						width: 20,
 						height: 20,
-                        corner: 'middle right',
+						corner: 'middle right',
 						color: '#222222'
-                    }
-                }
-            }
-        };
-        var ToolTipClass3 = function () {
-            return {
-                content: {
-                    text: ''
-                },
-                hide: false,
-                show: false,
-                position: {
-                    my: 'bottom middle',
-                    at: 'top middle'
-                },
-                style: {
-                    classes: 'qtip-dark',
-                    tip: {
+					}
+				}
+			};
+		};
+		var ToolTipClass3 = function () {
+			return {
+				content: {
+					text: ''
+				},
+				hide: false,
+				show: false,
+				position: {
+					my: 'bottom middle',
+					at: 'top middle'
+				},
+				style: {
+					classes: 'qtip-dark',
+					tip: {
 						width: 20,
 						height: 20,
-                        corner: 'bottomMiddle',
+						corner: 'bottomMiddle',
 						color: '#222222'
-                    }
-                }
-            }
-        };
-        var myToolTip1 = new ToolTipClass1();
-        var myToolTip2 = new ToolTipClass2();
-        var myToolTip3 = new ToolTipClass1();
-        var myToolTip4 = new ToolTipClass1();
-        var myToolTip5 = new ToolTipClass3();
-        myToolTip1.content.text = "Lookup Land Use by Boundary";
-        myToolTip2.content.text = "Summary Statistics.";
-        myToolTip3.content.text = "Change base map type.";
-        myToolTip4.content.text = "Map Navigation Tools";
-        myToolTip5.content.text = "Access Public Lands Maps";
+					}
+				}
+			};
+		};
+		var myToolTip1 = new ToolTipClass1();
+		var myToolTip2 = new ToolTipClass2();
+		var myToolTip3 = new ToolTipClass1();
+		var myToolTip4 = new ToolTipClass1();
+		var myToolTip5 = new ToolTipClass3();
+		myToolTip1.content.text = "Lookup Land Use by Boundary";
+		myToolTip2.content.text = "Summary Statistics.";
+		myToolTip3.content.text = "Change base map type.";
+		myToolTip4.content.text = "Map Navigation Tools";
+		myToolTip5.content.text = "Access Public Lands Maps";
 
-        $('#selectStateInput').qtip(myToolTip1);
-        $('#summaryPanelBlock').qtip(myToolTip2);
-        $('.leaflet-control-layers').qtip(myToolTip3);
-        $('.leaflet-control-zoom-out').qtip(myToolTip4);
-        $('#lnkMapsSlideToggle').qtip(myToolTip5);
+		$('#selectStateInput').qtip(myToolTip1);
+		$('#summaryPanelBlock').qtip(myToolTip2);
+		$('.leaflet-control-layers').qtip(myToolTip3);
+		$('.leaflet-control-zoom-out').qtip(myToolTip4);
+		$('#lnkMapsSlideToggle').qtip(myToolTip5);
 
-        //Add Qtips - if never loaded before
-        var loadedview = $.cookie('loadedView');
-        //loadedview = null;
-        if (loadedview === undefined || loadedview === null) {
-            $.cookie('loadedView', "loaded", { path: '/' });
-            $(".leaflet-bottom").css({"margin-bottom": "90px"});
+		//Add Qtips - if never loaded before
+		var loadedview = $.cookie('loadedView');
+		//loadedview = null;
+		if (loadedview === undefined || loadedview === null) {
+			$.cookie('loadedView', "loaded", { path: '/' });
+			$(".leaflet-bottom").css({"margin-bottom": "90px"});
 
-           this.loadGuidedHelp();
-        }
-    },
+			this.loadGuidedHelp();
+		}
+	},
 	boundaryChange: function(){
 		MainApplication.totalAcres = " of 45,663,000";
 		GeoAppBase.showAppLoadingStart();
@@ -316,7 +317,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		var selectedVal = $('#selectStateInput').val();
 		if(selectedVal === ""){
 
-    		this.resetAreaSums();
+			this.resetAreaSums();
 			this.loadRightSlide();
 			GeoAppBase.showAppLoadingEnd();
 		}
@@ -355,12 +356,12 @@ var MapView = Backbone.Marionette.Layout.extend({
 						boundary.jsonLayer = L.geoJson(boundary.json, {
 							style: function (feature) {
 								return {
-	      							fillColor: boundary.color,
-	      							fillOpacity: 0.01,
-					                weight: 1,
-					                opacity: 1,
-					                color: boundary.color,
-							    };
+									fillColor: boundary.color,
+									fillOpacity: 0.01,
+									weight: 1,
+									opacity: 1,
+									color: boundary.color
+								};
 							},
 							fill: true,
 							onEachFeature: function (feature, layer) {
@@ -372,7 +373,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 								});
 							}
 						});
-    					dc.resetAreaSums();
+						dc.resetAreaSums();
 						dc.loadRightSlide();
 						MainApplication.Map.addLayer(boundary.jsonLayer);
 						GeoAppBase.showAppLoadingEnd();
@@ -394,7 +395,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 							feature.fill =true;
 						});
 						MainApplication.Map.addLayer(boundary.jsonLayer);
-    					dc.resetAreaSums();
+						dc.resetAreaSums();
 						dc.loadRightSlide();
 						GeoAppBase.showAppLoadingEnd();
 				}
@@ -432,8 +433,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 		_.each(boundary.jsonLayer._layers, function(shape){
 			if(selectedVal.toString() === shape.feature.properties[boundary.NameField].toString())
 			{				
-				if(shape.feature.properties["SHAPE_Area"] !== undefined  && shape.feature.properties["SHAPE_Area"] !== ''){
-					MainApplication.totalAcres = " of " + dc.formatNumber(shape.feature.properties["SHAPE_Area"] / 4046.85642, false) 
+				if(shape.feature.properties.SHAPE_Area !== undefined  && shape.feature.properties.SHAPE_Area !== ''){
+					MainApplication.totalAcres = " of " + dc.formatNumber(shape.feature.properties.SHAPE_Area / 4046.85642, false);
 				}
 				var maxX = -1000, maxY = -1000, minX = 1000, minY = 1000;
 				_.each(shape._latlngs, function(coords){
@@ -512,8 +513,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 		return unboundMarker;
 	},
 	formatJSONDate: function(jsonDate) {
-		  var newDate = new Date(parseInt(jsonDate));
-		  return newDate;
+		var newDate = new Date(parseInt(jsonDate));
+		return newDate;
 	},
 	createGrid: function(gridLayer, area){
 		var dc = this;
@@ -521,7 +522,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 			if(e.data){ info.update(e); }
 		}).on('mouseout', function(e){ 
 			info.update();
-		})
+		});
 		gridLayer.on('click', function(props){
 			if(props.data){
 				//console.log(props.data);
@@ -540,17 +541,17 @@ var MapView = Backbone.Marionette.Layout.extend({
 				var landuseType = props.data.PLAND !== 'Revenue Generation' ? props.data.PLAND : 'Revenue-generating';
 				
 				var markerToolTip = new MapTipView({
-            		ParcelName: "Parcel ID: " + props.data.TAXID,
-            		Owner:  props.data.OWNER,
-            		OwnershipType: ownershipType,
-            		TotalArea: props.data.ACRES,
-            		LandUse: landuseType,
-            		UnitName: props.data.UNITNAME,
-            		AcquisitionDate: acqYear,
-            		Cost: acqCost
-        		});
+					ParcelName: "Parcel ID: " + props.data.TAXID,
+					Owner:  props.data.OWNER,
+					OwnershipType: ownershipType,
+					TotalArea: props.data.ACRES,
+					LandUse: landuseType,
+					UnitName: props.data.UNITNAME,
+					AcquisitionDate: acqYear,
+					Cost: acqCost
+				});
 
-        		markerToolTip.render();
+				markerToolTip.render();
 				var popup = L.popup()
 					.setLatLng(props.latlng)
 					.setContent(markerToolTip.$el[0])
@@ -560,9 +561,9 @@ var MapView = Backbone.Marionette.Layout.extend({
 		var info = L.control();
 		info.options.position = 'bottomright';
 		info.onAdd = function (map) {
-		    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-		    this.update();
-		    return this._div;
+			this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+			this.update();
+			return this._div;
 		};
 		
 		info.update = function (props) {
@@ -636,7 +637,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.currentLayersType = layerType;
 		this.activeLayers = [];
 
-		for(mapLayer in BootstrapVars.areaStats){
+		for(var mapLayer in BootstrapVars.areaStats){
 			if(BootstrapVars.areaStats[mapLayer].layerGroupName === layerType){
 				BootstrapVars.areaStats[mapLayer].visible = true;
 				dc.activeLayers.push(BootstrapVars.areaStats[mapLayer].abbrev);
@@ -678,7 +679,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 			this.featureLayerControls = L.control.layers(this.baseMaps, this.layerMaps, {position: 'bottomleft'});
 			this.featureLayerControls.addTo(MainApplication.Map);
 		}else{
-			for(overlayMap in this.layerMaps){
+			for(var overlayMap in this.layerMaps){
 				dc.featureLayerControls.addOverlay(this.layerMaps[overlayMap], overlayMap);
 			}
 		}
@@ -689,7 +690,10 @@ var MapView = Backbone.Marionette.Layout.extend({
 			});
 			//if it's found in the base areas array
 			if(layerDetails){
-				var legendKey = $("<div>", { class: "colorKey", style: "background-color:"+layerDetails.color+";" });
+				var legendKey = $('<div>', { 
+					"class": "colorKey", 
+					style: "background-color:"+layerDetails.color
+				});
 				$(legendItem).attr("data-abbrev",layerDetails.abbrev);
 				$(legendItem).prepend(legendKey);
 			}
@@ -789,39 +793,39 @@ var MapView = Backbone.Marionette.Layout.extend({
 
 
 var LayersView = Backbone.Marionette.ItemView.extend({
-    template: function (serialized_model) {
-        return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.LayersTemplate);
-    },
-    templateHelpers: function () {
-        //im a helper!
-    },
-    initialize: function (options) {
+	template: function (serialized_model) {
+		return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.LayersTemplate);
+	},
+	templateHelpers: function () {
+		//im a helper!
+	},
+	initialize: function (options) {
 		//nada
-    },
-    events: {
-        "click #lnkTopographic": "triggerBaseLayerSelected",
-        "click #lnkImagery": "triggerBaseLayerSelected",
-        "click #lnkStreets": "triggerBaseLayerSelected",
-        "click #btnCloseLayers": "paneCloseMenu"
-    },
-    paneCloseMenu: function () {
-        this.parentRegion.paneClose();
-        $("#lnkMarkersButton").removeClass("active");
-        return false;
-    },
-    triggerBaseLayerSelected: function (source) {
-        // need to throw an event here that is caught by the LandingPageView to set base map
-        //alert(source.target.name);
-        MainApplication.selectedBaseLayer = MainApplication.baseLayers[source.target.name];
-        MainApplication.vent.trigger("baseLayerSelected");
-        return false;
-    }	
+	},
+	events: {
+		"click #lnkTopographic": "triggerBaseLayerSelected",
+		"click #lnkImagery": "triggerBaseLayerSelected",
+		"click #lnkStreets": "triggerBaseLayerSelected",
+		"click #btnCloseLayers": "paneCloseMenu"
+	},
+	paneCloseMenu: function () {
+		this.parentRegion.paneClose();
+		$("#lnkMarkersButton").removeClass("active");
+		return false;
+	},
+	triggerBaseLayerSelected: function (source) {
+		// need to throw an event here that is caught by the LandingPageView to set base map
+		//alert(source.target.name);
+		MainApplication.selectedBaseLayer = MainApplication.baseLayers[source.target.name];
+		MainApplication.vent.trigger("baseLayerSelected");
+		return false;
+	}	
 });
 
 var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
-    template: function (serialized_model) {
+	template: function (serialized_model) {
 		return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.MapSelectorSlideTemplate);
-    },
+	},
 	templateHelpers: function(){
 		return {
 			Description: "Helper"
@@ -862,10 +866,10 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 	toggleRightMenu : function(ev){	
 		if(MainApplication.views.mapView.mapPaneView.slide._state === "closed"){
 			MainApplication.views.mapView.mapPaneView.slide.open();
-            $("#toggleQuestionButton").animate({"margin-right": "358px"});
+			$("#toggleQuestionButton").animate({"margin-right": "358px"});
 		}else{
 			MainApplication.views.mapView.mapPaneView.slide.close();
-            $("#toggleQuestionButton").animate({"margin-right": "0px"});
+			$("#toggleQuestionButton").animate({"margin-right": "0px"});
 			$(MainApplication.paneRegion.el).css({"width":"25em"});
 			$('#expandSummaryButton').removeClass("collapsable");
 			$('#expandSummaryButton').hasClass("expandable") ? false : $('#expandSummaryButton').addClass("expandable");
@@ -901,14 +905,14 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 				MainApplication.Map.removeLayer(map.path);
 			}
 		});	
-		return false
+		return false;
 	}
 });
 
 var NewMarkerToolTip = Backbone.Marionette.ItemView.extend({
-    template: function (serialized_model) {
+	template: function (serialized_model) {
 		return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.MapNewMarkerTipTemplate);
-    },
+	},
 	templateHelpers: function(){
 		return {
 			Description: this.Description
@@ -916,22 +920,22 @@ var NewMarkerToolTip = Backbone.Marionette.ItemView.extend({
 	},	
 	initialize: function(options){
 		this.marker = options.marker;
-		this.Description = "New Todo"
+		this.Description = "New Todo";
 	}
 });
 
 
 var MapPaneView = Backbone.Marionette.ItemView.extend({
-    template: function (serialized_model) {
-        return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.MapPaneTemplate);
-    },
-    templateHelpers: function()
-    {
-    	return{
+	template: function (serialized_model) {
+		return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.MapPaneTemplate);
+	},
+	templateHelpers: function()
+	{
+		return{
 			SummaryTitle: this.summaryText
-    	};
-    },
-    initialize: function (options) {
+		};
+	},
+	initialize: function (options) {
 		this.activeLayers = options.activeLayers;
 		this.arcColor="#000000";
 		this.chartDefaultHeight = 170;
@@ -939,14 +943,14 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		this.currentChartHeight = this.chartDefaultHeight;				
 		this.currentChartWidth = this.chartDefaultWidth;
 		this.summaryText = options.summaryText;
-    },
+	},
 	events: {
 		"click #showPieChart" : "setPieMode",
 		"click #showBarChart" : "setBarMode",
 		"click #expandSummaryButton" : "setSummarySize",
 		"click #closeSummaryButton" : "closeSummaryPanel",
 		"click #lnkHelpMenu" : "showHelpMenu",
-		"click #summaryLayer" : "setSummaryLayer",
+		"click #summaryLayer" : "setSummaryLayer"
 	},
 	onShow: function(){
 		//initially hide date range
@@ -970,7 +974,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		this.loadBarLayerComparison();
 		this.loadPieLayerComparison();
 		$( "#ddlSummaryType" ).change(function() {
-			dc.loadBarLayerComparison();
+			dc.loadBarLayerComparisonloadBarLayerComparison();
 			dc.loadPieLayerComparison();
 		});
 		
@@ -1029,14 +1033,14 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			chart: {
 				height: this.currentChartHeight,
 				width: this.currentChartWidth,
-				backgroundColor:'rgba(238, 238, 238, 0)',
+				backgroundColor:'rgb(40, 40, 40)',
 				type: 'bar',
 				renderTo: 'barChartLayer',
 				margin: [30,35,35,55]
 			},
 			title: {
 				text: GeoAppBase.capitaliseEach(MainApplication.views.mapView.currentLayersType + " " + xAxisTitle +" Compared"),
-				style: { "font-size" : "9.5pt", color: 'rgba(238, 238, 238, 1)' },
+				style: { "font-size" : "9.5pt", color: 'rgb(238, 238, 238)' }, //
 				align: "center",
 				margin: 5,
 				x: -20,
@@ -1046,7 +1050,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				categories: [xAxisTitle],
 				labels:
 				{
-					style: { color: 'rgba(238, 238, 238, 1)' }
+					style: { color: 'rgb(238, 238, 238)' }
 				}
 			},
 			yAxis: {
@@ -1055,7 +1059,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				},
 				labels:
 				{
-					style: { color: 'rgba(238, 238, 238, 1)' }
+					style: { color: 'rgb(238, 238, 238)' }
 				}
 			},
 			series: barChartSeries,
@@ -1063,7 +1067,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				enabled: false
 			},
 			exporting: {
-                enabled: true,
+				enabled: true,
 				buttons: {
 					contextButton: {
 						y : -5
@@ -1074,25 +1078,25 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 						width: 800,
 						height: 600,
 						type: 'bar',
-						backgroundColor:'rgba(40, 40, 40, 1)',
+						backgroundColor:'rgb(40, 40, 40)',
 						margin: [60,35,80,55]
 					},
 					title: {
-						style: { "font-size" : "9.5pt", color: 'rgba(255, 255, 255, 1)' },
+						style: { "font-size" : "9.5pt", color: 'rgb(255, 255, 255)' }, //
 						align: "center",
 						margin: 5,
 						x: 0,
 						y: 30
 					},					
 					legend: {
-			        	itemStyle:{ color: 'rgba(238, 238, 238, 1)'  },
+						itemStyle:{ color: 'rgb(238, 238, 238)'  },
 						enabled: true
 					},
 					xAxis: {
 						categories: [xAxisTitle],
 						labels:
 						{
-							style: { color: 'rgba(238, 238, 238, 1)' }
+							style: { color: 'rgb(238, 238, 238)' }
 						}
 					},
 					yAxis: {
@@ -1101,14 +1105,14 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 						},
 						labels:
 						{
-							style: { color: 'rgba(238, 238, 238, 1)' }
+							style: { color: 'rgba(238, 238, 238)' }
 						}
 					}
 				}
-            },
+			},
 			credits: {
-                enabled: false
-            }
+				enabled: false
+			}
 		});
 		
 		//on save override and set legend to true, 
@@ -1156,12 +1160,12 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				plotBackgroundColor: null,
 				plotBorderWidth: 0,
 				plotShadow: false,
-				backgroundColor:'rgba(238, 238, 238, 0)',
+				backgroundColor:'rgb(40, 40, 40)',
 				margin: [-20, -50, -55, -50]
 			},
 			title: {
 				text: GeoAppBase.capitaliseEach(MainApplication.views.mapView.currentLayersType + " " + xAxisTitle +" Compared"),
-				style: { "font-size" : "9.5pt", color: 'rgba(238, 238, 238, 1)'  },
+				style: { "font-size" : "9.5pt", color: 'rgb(238, 238, 238)'  }, //
 				align: "center",
 				margin: 5,
 				x: -20 
@@ -1190,31 +1194,31 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				enabled:false
 			},			
 			exporting: {
-                enabled: true,
+				enabled: true,
 				chartOptions: {
 					chart: {
 						width: 800,
 						height: 600,
-						backgroundColor:'rgba(40, 40, 40, 1)',
+						backgroundColor:'rgb(40, 40, 40)',
 						type: 'pie',
 						margin: [-10,-10,-10,-10]
 					},
 					title: {
-						style: { "font-size" : "9.5pt",color: 'rgba(238, 238, 238, 1)'  },
+						style: { "font-size" : "9.5pt", color: 'rgb(238, 238, 238)'  }, //
 						align: "center",
 						margin: 5,
 						x: 0,
 						y: 30
 					},	
-			        legend:{
-			        	itemStyle:{ color: 'rgba(238, 238, 238, 1)'  },
+					legend:{
+						itemStyle:{ color: 'rgb(238, 238, 238)'  },
 						enabled:true
 					}			
 				}
-            },
+			},
 			credits: {
-                enabled: false
-            }
+				enabled: false
+			}
 		});
 		
 		return false;
@@ -1246,7 +1250,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 					default:
 						break;
 				}
-				var legendKey = $("<div>", { class: "colorKey", style: "background-color:"+area.color+";" });
+				var legendKey = $("<div>", { "class": "colorKey", style: "background-color:"+area.color+";" });
 				var checkedStatus = area.visible ? " checked='true'" : "";
 				
 				areaSummary += "<div style='vertical-align: middle'><div style='display: inline-block; vertical-align: top; margin-right: 6px'>" + legendKey[0].outerHTML + "<input type='checkbox' name='inputSummaryItem-" + area.abbrev + "' id='inputSummaryItem-"+ area.abbrev + "' data-abbr='" + area.abbrev + "' class='usePointer'"+checkedStatus+" /></div><div style='display: inline-block; vertical-align: middle; width: 80%'><label class='usePointer'  data-abbr='" + area.abbrev + "' for='inputSummaryItem-" + area.abbrev + "' >" + area.agency + ": " + currencyPrefix + dc.formatNumber(val, isCurrency)+ "</label></div></div>";
@@ -1322,7 +1326,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			return true;
 		}else if(originalObject.attr("data-abbr") === undefined){
 			//return false if it's not one of the inputs
-			return false
+			return false;
 		}
 	},
 	setSummarySize: function(ev){
@@ -1381,16 +1385,16 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 });
 
 var WelcomeView = Backbone.Marionette.ItemView.extend({
-    template: function (serialized_model) {
+	template: function (serialized_model) {
 		return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.WelcomeTemplate);
-    },
-    events: {
-		"click #btnCloseWelcome": "closeModal",
-    },
+	},
+	events: {
+		"click #btnCloseWelcome": "closeModal"
+	},
 	closeModal: function () {			 
 		MainApplication.modalRegion.hideModal();
 		$("#SummaryPaneSlideOut").css("display","block");
-        $("#toggleQuestionButton").css({"margin-right": "358px"});
+		$("#toggleQuestionButton").css({"margin-right": "358px"});
 		MainApplication.views.mapView.mapPaneView.slide.open();
 		MainApplication.views.mapSelectorSlideView.toggleSlide();
 		MainApplication.views.mapView.loadToolTips();
@@ -1399,20 +1403,20 @@ var WelcomeView = Backbone.Marionette.ItemView.extend({
 });
 
 var AreaInformationView = Backbone.Marionette.ItemView.extend({
-    template: function (serialized_model) {
+	template: function (serialized_model) {
 		return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.AreaInformationTemplate);
-    },
+	},
 	initialize: function(options){
 		this.layerGroupName = options.layerGroupName;
 	},
-    events: {
-		"click #btnCancelInfo": "closeModal",
-    },
-    onShow: function()
-    {
-    	return false;
-    	/*var dc = this;
-    	var htmlInfo = "";
+	events: {
+		"click #btnCancelInfo": "closeModal"
+	},
+	onShow: function()
+	{
+		return false;
+		/*var dc = this;
+		var htmlInfo = "";
 		_.each(BootstrapVars.areaInformation, function(areaInformation){
 			if(dc.layerGroupName === areaInformation.layerGroupName)
 			{
@@ -1420,7 +1424,7 @@ var AreaInformationView = Backbone.Marionette.ItemView.extend({
 			}
 		});
 		$("#areaInfoDiv").html(htmlInfo);*/
-    },
+	},
 	closeModal: function () {			 
 		MainApplication.modalRegion.hideModal();
 		return false;
@@ -1428,13 +1432,13 @@ var AreaInformationView = Backbone.Marionette.ItemView.extend({
 });
 
 var QuestionView = Backbone.Marionette.ItemView.extend({
-    template: function (serialized_model) {
+	template: function (serialized_model) {
 		return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.QuestionTemplate);
-    },
-    events: {
+	},
+	events: {
 		"click #btnCloseQuestion": "closeModal",
 		"click #btnCancelQuestion": "closeModal"
-    },
+	},
 	closeModal: function () {
 		MainApplication.modalRegion.hideModal();
 		return false;
@@ -1442,66 +1446,66 @@ var QuestionView = Backbone.Marionette.ItemView.extend({
 });
 
 var HeaderView = Backbone.Marionette.ItemView.extend({
-    template: function (serialized_model) {
+	template: function (serialized_model) {
 		return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.HeaderTemplate);
-    }
+	}
 });
 
 
 var MapTipView = Backbone.Marionette.ItemView.extend({
-    template: function (serialized_model) {
-        return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.MapTipTemplate);
-    },
-    templateHelpers: function()
-    {
-    	return {
-    		ParcelName: this.ParcelName,
+	template: function (serialized_model) {
+		return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.MapTipTemplate);
+	},
+	templateHelpers: function()
+	{
+		return {
+			ParcelName: this.ParcelName,
 			Owner: this.Owner,
 			OwnershipType: this.OwnershipType,
 			TotalArea: this.TotalArea,
 			AcquisitionDate: this.AcquisitionDate,
 			LandUse: this.LandUse,
 			Cost: this.Cost
-    	}
-    },
-    initialize: function (options) {
-        this.ParcelName = options.ParcelName;
-        this.Owner = options.Owner;
-        this.OwnershipType = options.OwnershipType;
-        this.TotalArea = options.TotalArea;
-        this.LandUse = options.LandUse;
-        this.AcquisitionDate = options.AcquisitionDate;
-        this.Cost = options.Cost;
-    },
-    events: {
-		"click #btnQuestionPost": "postQuestion",
-    },
-    postQuestion: function(){
+		};
+	},
+	initialize: function (options) {
+		this.ParcelName = options.ParcelName;
+		this.Owner = options.Owner;
+		this.OwnershipType = options.OwnershipType;
+		this.TotalArea = options.TotalArea;
+		this.LandUse = options.LandUse;
+		this.AcquisitionDate = options.AcquisitionDate;
+		this.Cost = options.Cost;
+	},
+	events: {
+		"click #btnQuestionPost": "postQuestion"
+	},
+	postQuestion: function(){
 
 		var questionView = new QuestionView({});
 		MainApplication.modalRegion.show(questionView);
-    }
+	}
 });
 
 
 var GuidedHelpView = Backbone.Marionette.ItemView.extend({
-    template: function (serialized_model) {
-        return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.GuidedHelpTemplate);
-    },
-    templateHelpers: function () {
-        return {
-            guideElementOptions: this.guideElements
-        };
-    },
-    initialize: function (options) {
-        this.guideElements = false;
-    },
-    onShow: function () {
-        $('#selectStateInput').qtip("show");
-        $('#summaryPanelBlock').qtip("show");
-        $('.leaflet-control-layers').qtip("show");
-        $('.leaflet-control-zoom-out').qtip("show");
-        $('#lnkMapsSlideToggle').qtip("show");
-        return false;
-    }
+	template: function (serialized_model) {
+		return Handlebars.buildTemplate(serialized_model, MainApplication.Templates.GuidedHelpTemplate);
+	},
+	templateHelpers: function () {
+		return {
+			guideElementOptions: this.guideElements
+		};
+	},
+	initialize: function (options) {
+		this.guideElements = false;
+	},
+	onShow: function () {
+		$('#selectStateInput').qtip("show");
+		$('#summaryPanelBlock').qtip("show");
+		$('.leaflet-control-layers').qtip("show");
+		$('.leaflet-control-zoom-out').qtip("show");
+		$('#lnkMapsSlideToggle').qtip("show");
+		return false;
+	}
 });
