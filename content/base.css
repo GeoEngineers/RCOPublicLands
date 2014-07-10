@@ -606,9 +606,11 @@ a .genericHomeButton{
     max-width: 125px;
     padding: 0 5px 5px 0;
 }
-
 .markerReview{
 	padding:10px 0px 0px 0px;
+}
+#landUseWarning{
+	font-size:9pt;
 }
 
 .reviewLastUpdated{

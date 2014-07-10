@@ -861,6 +861,10 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 		return false;
 	},
 	showLandOptions : function(ev){
+		if(MainApplication.landUseClicked === undefined || MainApplication.landUseClicked === false){
+			MainApplication.landUseClicked = true;
+			alert("Warning: \"Land Use\" does not include Federal lands.");
+		}
 		MainApplication.views.mapView.showLandOptions(ev);	
 		return false;
 	},
@@ -1286,6 +1290,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				break;
 		}
 		
+		$("#landUseWarning").css("display","none");		
 		if(MainApplication.views.mapView.currentLayersType==="acquisitions"){
 			$("#summaryDateRange").css({"display":"block"});
 			_.each(BootstrapVars.areaInformation, function(area){
@@ -1293,6 +1298,8 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 					prefixText = prefixText + "<div style='font-size:9pt;'>State acquisitions from "+area.startDate+" to " +area.endDate + "</div>";
 				}
 			});
+		}else if(MainApplication.views.mapView.currentLayersType === "landtypes"){
+			$("#landUseWarning").css("display","block");
 		}
 		
 		$("#summaryLayer").html(prefixText + summaryText);
