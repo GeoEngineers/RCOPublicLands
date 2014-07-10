@@ -463,7 +463,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 		});
 		selectedVal = selectedVal.replace(' / ', '-');
 		selectedVal = selectedVal.replace('/', '-');
-		console.log(BootstrapVars.sums_counties );
 
 		//Get Data from Lookup Tables
 		var summaryValues = boundary.sums;
