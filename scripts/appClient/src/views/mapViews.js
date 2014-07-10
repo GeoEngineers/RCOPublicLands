@@ -1154,6 +1154,10 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		var parentEl = $('#pieChartLayer').parent(); 
 		$('#pieChartLayer').remove();
 		parentEl.html('<div id="pieChartLayer"></div>');		
+		if(this.pieChartObject !== undefined){
+			this.pieChartObject.destroy();
+			delete this.pieChartObject;
+		}
 		
 		this.loadSummaryText(this.type);
 		

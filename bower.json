@@ -36,7 +36,7 @@
 	"ydn-db": "*",
 	"qtip2": "*",
 	"font-awesome": "*",
-	"highcharts" :"https://github.com/highslide-software/highcharts.com.git",
+	"highcharts" :"*",
 	"Leaflet.utfgrid": "https://github.com/danzel/Leaflet.utfgrid.git",
 	"Leaflet.NavBar" : "https://github.com/davidchouse/Leaflet.NavBar.git",
 	"bigSlide" : "*"
