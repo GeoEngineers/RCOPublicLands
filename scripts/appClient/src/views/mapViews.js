@@ -975,10 +975,10 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		
 		var dc=this;
 		//start in bar mode
-		//this.loadBarLayerComparison();
+		this.loadBarLayerComparison();
 		this.loadPieLayerComparison();
 		$( "#ddlSummaryType" ).change(function() {
-			//dc.loadBarLayerComparison();
+			dc.loadBarLayerComparison();
 			dc.loadPieLayerComparison();
 		});
 		
@@ -1373,7 +1373,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		return false;
 	},
 	setChartSizes: function(width, height){
-//		this.barChartObject.setSize(width, height);
+		this.barChartObject.setSize(width, height);
 		this.pieChartObject.setSize(width, height);	
 	},
 	showHelpMenu : function(ev){

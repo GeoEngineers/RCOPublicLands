@@ -115,6 +115,18 @@
     overflow-y: auto;
     z-index: 1040;
 }
+.gridSetDescriptions h1 {
+    color: #365f91;
+    font-size: 16pt;
+    margin: 0;
+    padding: 0px 0 10px;
+}
+.gridSetDescriptions h2 {
+    color: #4f81bd;
+    font-size: 14pt;
+    margin: 0;
+    padding: 20px 0 10px;
+}
 
 .custom-cluster{
     display:inline-block;
