@@ -171,7 +171,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.setLegendControls();
 	},
 	clearAreaSums: function(){
-		var summaryValues = sums_statewide;
+		var summaryValues = BootstrapVars.sums_statewide;
 		//Update Bootstrap vars
 		for(var area in BootstrapVars.areaStats){
 			BootstrapVars.areaStats[area].total_acres = 0;
@@ -185,7 +185,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		MainApplication.Map.addLayer(overlayMask);
 	},
 	resetAreaSums: function(){
-		var summaryValues = sums_statewide;
+		var summaryValues = BootstrapVars.sums_statewide;
 		//Update Bootstrap vars
 		for(var area in BootstrapVars.areaStats){
 			var totalacres = 0;
@@ -428,7 +428,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 		}
 		var selectedVal = $('#selectAreaInput').val();
 		//Slashes are replaced with " - " in the json
-		selectedVal = selectedVal.replace('/', ' - ');
 		
 		var selectedTypeVal = $('#selectStateInput').val();
 		var boundary = MainApplication.boundarySelected;
@@ -461,6 +460,9 @@ var MapView = Backbone.Marionette.Layout.extend({
 				MainApplication.Map.addLayer(MainApplication.selectedBoundary);
 			}
 		});
+		selectedVal = selectedVal.replace(' / ', '-');
+		selectedVal = selectedVal.replace('/', '-');
+		console.log(BootstrapVars.sums_counties );
 
 		//Get Data from Lookup Tables
 		var summaryValues = boundary.sums;
