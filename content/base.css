@@ -29,6 +29,7 @@
 }
 .introText{
 	font-size:9pt;
+	padding: 10px;
 }
 
 #SummaryPaneSlideOut {
@@ -597,13 +598,13 @@ a .genericHomeButton{
     margin: 0 0 10px;
 }
 
-.aboutLogos a{
-
+.aboutLogos{
+	padding: 0px 0px 15px 0px;
 }
-
 .aboutLogos img {
     max-height: 115px;
-    max-width: 170px;
+    max-width: 125px;
+    padding: 0 5px 5px 0;
 }
 
 .markerReview{
