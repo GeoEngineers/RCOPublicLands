@@ -974,7 +974,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		this.loadBarLayerComparison();
 		this.loadPieLayerComparison();
 		$( "#ddlSummaryType" ).change(function() {
-			dc.loadBarLayerComparisonloadBarLayerComparison();
+			dc.loadBarLayerComparison();
 			dc.loadPieLayerComparison();
 		});
 		
@@ -1027,8 +1027,12 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				"color" : area.color
 			});
 		});
+
+		// cheap fix - see https://github.com/highslide-software/highcharts.com/issues/1132
+		var parentEl = $('#barChartLayer').parent(); 
+		$('#barChartLayer').remove();
+		parentEl.html('<div id="barChartLayer"></div>');		
 		
-		$("#barChartLayer").html("");
 		this.barChartObject = new Highcharts.Chart({
 			chart: {
 				height: this.currentChartHeight,
@@ -1146,7 +1150,11 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			colorRange.push(area.color);
 		});
 
-		$("#pieChartLayer").html("");
+		// cheap fix - see https://github.com/highslide-software/highcharts.com/issues/1132
+		var parentEl = $('#pieChartLayer').parent(); 
+		$('#pieChartLayer').remove();
+		parentEl.html('<div id="pieChartLayer"></div>');		
+		
 		this.loadSummaryText(this.type);
 		
 		Highcharts.setOptions({
