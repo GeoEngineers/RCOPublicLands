@@ -1028,23 +1028,20 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			});
 		});
 
-		// cheap fix - see https://github.com/highslide-software/highcharts.com/issues/1132
-		var parentEl = $('#barChartLayer').parent(); 
-		$('#barChartLayer').remove();
-		parentEl.html('<div id="barChartLayer"></div>');		
-		
-		this.barChartObject = new Highcharts.Chart({
+		//$("#barChartLayer").html();
+		var $container = $('.barChartLayer');
+		var chartOptions = {
 			chart: {
 				height: this.currentChartHeight,
 				width: this.currentChartWidth,
 				backgroundColor:'rgb(40, 40, 40)',
 				type: 'bar',
-				renderTo: 'barChartLayer',
+				renderTo: $container[0],
 				margin: [30,35,35,55]
 			},
 			title: {
 				text: GeoAppBase.capitaliseEach(MainApplication.views.mapView.currentLayersType + " " + xAxisTitle +" Compared"),
-				style: { "font-size" : "9.5pt", color: 'rgb(238, 238, 238)' }, //
+				style: { "font-size" : "9.5pt", color: 'rgb(238, 238, 238)' },
 				align: "center",
 				margin: 5,
 				x: -20,
@@ -1086,7 +1083,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 						margin: [60,35,80,55]
 					},
 					title: {
-						style: { "font-size" : "9.5pt", color: 'rgb(255, 255, 255)' }, //
+						style: { "font-size" : "9.5pt", color: 'rgb(255, 255, 255)' },
 						align: "center",
 						margin: 5,
 						x: 0,
@@ -1117,7 +1114,8 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			credits: {
 				enabled: false
 			}
-		});
+		};
+		this.barChartObject = new Highcharts.Chart(chartOptions);
 		
 		//on save override and set legend to true, 
 		return false;
@@ -1150,25 +1148,18 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			colorRange.push(area.color);
 		});
 
-		// cheap fix - see https://github.com/highslide-software/highcharts.com/issues/1132
-		var parentEl = $('#pieChartLayer').parent(); 
-		$('#pieChartLayer').remove();
-		parentEl.html('<div id="pieChartLayer"></div>');		
-		if(this.pieChartObject !== undefined){
-			this.pieChartObject.destroy();
-			delete this.pieChartObject;
-		}
-		
 		this.loadSummaryText(this.type);
 		
 		Highcharts.setOptions({
 			colors: colorRange
 		});
-		this.pieChartObject = new Highcharts.Chart({
+
+		var $container = $('.pieChartLayer');
+		var chartOptions = {
 			chart: {
 				height: this.currentChartHeight,
 				width: this.currentChartWidth,
-				renderTo: "pieChartLayer",
+				renderTo: $container[0],
 				plotBackgroundColor: null,
 				plotBorderWidth: 0,
 				plotShadow: false,
@@ -1177,7 +1168,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			},
 			title: {
 				text: GeoAppBase.capitaliseEach(MainApplication.views.mapView.currentLayersType + " " + xAxisTitle +" Compared"),
-				style: { "font-size" : "9.5pt", color: 'rgb(238, 238, 238)'  }, //
+				style: { "font-size" : "9.5pt", color: 'rgb(238, 238, 238)'  }, 
 				align: "center",
 				margin: 5,
 				x: -20 
@@ -1216,7 +1207,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 						margin: [-10,-10,-10,-10]
 					},
 					title: {
-						style: { "font-size" : "9.5pt", color: 'rgb(238, 238, 238)'  }, //
+						style: { "font-size" : "9.5pt", color: 'rgb(238, 238, 238)'  }, 
 						align: "center",
 						margin: 5,
 						x: 0,
@@ -1231,8 +1222,8 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			credits: {
 				enabled: false
 			}
-		});
-		
+		};
+		this.pieChartObject = new Highcharts.Chart(chartOptions);
 		return false;
 	},	
 	loadSummaryText: function(typeView){
@@ -1371,8 +1362,8 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		return false;
 	},
 	setChartSizes: function(width, height){
-		this.barChartObject.setSize(width, height);
-		this.pieChartObject.setSize(width, height);	
+//		this.barChartObject.setSize(width, height);
+//		this.pieChartObject.setSize(width, height);	
 	},
 	showHelpMenu : function(ev){
 		var selectedAreas = this.getVisibleAreas();
