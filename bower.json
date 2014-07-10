@@ -27,6 +27,8 @@
     "jquery.cookie": "*",
     "backbone.localStorage": "*",
 	"backbone-notifications":"https://github.com/fatiherikli/backbone-notifications.git",
+  "mapboxjs": "~1.6.1",
+  "jquery-ui": "*",
 	"marionette": "1.8.8",
 	"momentjs": "*",
 	"handlebars": "*",

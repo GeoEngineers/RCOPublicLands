@@ -171,7 +171,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.setLegendControls();
 	},
 	clearAreaSums: function(){
-		var summaryValues = sums_statewide;
+		var summaryValues = BootstrapVars.sums_statewide;
 		//Update Bootstrap vars
 		for(var area in BootstrapVars.areaStats){
 			BootstrapVars.areaStats[area].total_acres = 0;
@@ -185,7 +185,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		MainApplication.Map.addLayer(overlayMask);
 	},
 	resetAreaSums: function(){
-		var summaryValues = sums_statewide;
+		var summaryValues = BootstrapVars.sums_statewide;
 		//Update Bootstrap vars
 		for(var area in BootstrapVars.areaStats){
 			var totalacres = 0;
@@ -334,7 +334,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 				MainApplication.boundarySelected = boundary;
 				$('#selectAreaInput').css("display", "block");
 				$('#selectAreaInput').empty().append('<option value="">- Select Area -</option>');
-				
 				if(boundary.jsonLayer === null)
 				{
 					$.getJSON(boundary.jsonUrl, function(data) {
@@ -349,7 +348,9 @@ var MapView = Backbone.Marionette.Layout.extend({
 							return returnval;
 						});	
 						_.each(features, function(feature){
-							$("#selectAreaInput").append(new Option(boundary.SelectText + ' ' + feature.properties[boundary.NameField], feature.properties[boundary.NameField]));
+
+							$('#selectAreaInput').append('<option value="'+feature.properties[boundary.NameField]+'">'+boundary.SelectText + ' ' + feature.properties[boundary.NameField]+'</option>');
+							//$("#selectAreaInput").append(new Option(boundary.SelectText + ' ' + feature.properties[boundary.NameField], feature.properties[boundary.NameField]));
 							feature.fill =true;
 						});
 
@@ -427,6 +428,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 				}
 		}
 		var selectedVal = $('#selectAreaInput').val();
+		//Slashes are replaced with " - " in the json
+		
 		var selectedTypeVal = $('#selectStateInput').val();
 		var boundary = MainApplication.boundarySelected;
 
@@ -458,6 +461,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 				MainApplication.Map.addLayer(MainApplication.selectedBoundary);
 			}
 		});
+		selectedVal = selectedVal.replace(' / ', '-');
+		selectedVal = selectedVal.replace('/', '-');
 
 		//Get Data from Lookup Tables
 		var summaryValues = boundary.sums;
