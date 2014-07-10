@@ -957,12 +957,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		"click #lnkHelpMenu" : "showHelpMenu",
 		"click #summaryLayer" : "setSummaryLayer"
 	},
-	onShow: function(){
-		//initially hide date range
-		$( window ).smartresize(function() {
-			MainApplication.views.mapView.showRightSlide();
-		});
-		
+	onShow: function(){			
 		if(this.slide === undefined){
 			this.slide = $('.slide-menu').bigSlide({ 
 				side:"right", 
@@ -976,10 +971,10 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		
 		var dc=this;
 		//start in bar mode
-		this.loadBarLayerComparison();
+		//this.loadBarLayerComparison();
 		this.loadPieLayerComparison();
 		$( "#ddlSummaryType" ).change(function() {
-			dc.loadBarLayerComparison();
+			//dc.loadBarLayerComparison();
 			dc.loadPieLayerComparison();
 		});
 		
@@ -1024,24 +1019,23 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		var barChartSeries = [];
 		var xAxisTitle = GeoAppBase.capitaliseEach("Total " + this.type.replace("total_", ""));
 
-		_.each(selectedAreas, function(area){
+		for(area in selectedAreas){
 			var val = 0;
 			barChartSeries.push({
-				"name" : area.agency,
-				"data" : [parseInt(area[dc.type])], //, area.total_cost, area.total_revenue
-				"color" : area.color
+				"name" : selectedAreas[area].agency,
+				"data" : [parseInt(selectedAreas[area][dc.type])], 
+				"color" : selectedAreas[area].color
 			});
-		});
+		};
 
-		//$("#barChartLayer").html();
-		var $container = $('.barChartLayer');
+		$("#barChartLayer").html("");
 		var chartOptions = {
 			chart: {
 				height: this.currentChartHeight,
 				width: this.currentChartWidth,
 				backgroundColor:'rgb(40, 40, 40)',
 				type: 'bar',
-				renderTo: $container[0],
+				renderTo: "barChartLayer",
 				margin: [30,35,35,55]
 			},
 			title: {
@@ -1120,6 +1114,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				enabled: false
 			}
 		};
+		console.log("Creating Chart object");
 		this.barChartObject = new Highcharts.Chart(chartOptions);
 		
 		//on save override and set legend to true, 
@@ -1133,25 +1128,27 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		var xAxisTitle = GeoAppBase.capitaliseEach("Total " + this.type.replace("total_", ""));
 		var pieChartSeries = [];
 		
-		_.each(data, function(area){
+		for(var area in data){
 			var val = 0;
-			switch(dc.type)
+			switch(this.type)
 			{
 				case "total_acres":
-					val = area.total_acres;
+					val = data[area].total_acres;
 					break;
 				case "total_cost":
-					val = area.total_cost;
+					val = data[area].total_cost;
 					break;
 				case "total_revenue":
-					val =  area.total_revenue;
+					val =  data[area].total_revenue;
 					break;
 				default:
 					break;
 			}
-			pieChartSeries.push([area.abbrev, val]);
-			colorRange.push(area.color);
-		});
+			if(data[area].abbrev !== undefined){
+				pieChartSeries.push([data[area].abbrev, val]);
+				colorRange.push(data[area].color);
+			}
+		};
 
 		this.loadSummaryText(this.type);
 		
@@ -1159,12 +1156,13 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			colors: colorRange
 		});
 
-		var $container = $('.pieChartLayer');
+		$("#pieChartLayer").html("");
+		//var $container = $('.pieChartLayer');
 		var chartOptions = {
 			chart: {
 				height: this.currentChartHeight,
 				width: this.currentChartWidth,
-				renderTo: $container[0],
+				renderTo: "pieChartLayer",
 				plotBackgroundColor: null,
 				plotBorderWidth: 0,
 				plotShadow: false,
@@ -1228,6 +1226,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				enabled: false
 			}
 		};
+		
 		this.pieChartObject = new Highcharts.Chart(chartOptions);
 		return false;
 	},	
@@ -1368,7 +1367,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 	},
 	setChartSizes: function(width, height){
 //		this.barChartObject.setSize(width, height);
-//		this.pieChartObject.setSize(width, height);	
+		this.pieChartObject.setSize(width, height);	
 	},
 	showHelpMenu : function(ev){
 		var selectedAreas = this.getVisibleAreas();
@@ -1406,6 +1405,14 @@ var WelcomeView = Backbone.Marionette.ItemView.extend({
 		MainApplication.views.mapView.mapPaneView.slide.open();
 		MainApplication.views.mapSelectorSlideView.toggleSlide();
 		MainApplication.views.mapView.loadToolTips();
+		
+		/*Delaying resize update for ie8*/
+		setTimeout(function(){
+			$( window ).smartresize(function() {
+				console.log("resizing");
+				MainApplication.views.mapView.showRightSlide();
+			});		
+		}, 500);
 		return false;
 	}	
 });
