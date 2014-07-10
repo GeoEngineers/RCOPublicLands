@@ -957,12 +957,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		"click #lnkHelpMenu" : "showHelpMenu",
 		"click #summaryLayer" : "setSummaryLayer"
 	},
-	onShow: function(){
-		//initially hide date range
-		$( window ).smartresize(function() {
-			MainApplication.views.mapView.showRightSlide();
-		});
-		
+	onShow: function(){			
 		if(this.slide === undefined){
 			this.slide = $('.slide-menu').bigSlide({ 
 				side:"right", 
@@ -976,10 +971,10 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		
 		var dc=this;
 		//start in bar mode
-		this.loadBarLayerComparison();
+		//this.loadBarLayerComparison();
 		this.loadPieLayerComparison();
 		$( "#ddlSummaryType" ).change(function() {
-			dc.loadBarLayerComparison();
+			//dc.loadBarLayerComparison();
 			dc.loadPieLayerComparison();
 		});
 		
@@ -1024,32 +1019,28 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		var barChartSeries = [];
 		var xAxisTitle = GeoAppBase.capitaliseEach("Total " + this.type.replace("total_", ""));
 
-		_.each(selectedAreas, function(area){
+		for(area in selectedAreas){
 			var val = 0;
 			barChartSeries.push({
-				"name" : area.agency,
-				"data" : [parseInt(area[dc.type])], //, area.total_cost, area.total_revenue
-				"color" : area.color
+				"name" : selectedAreas[area].agency,
+				"data" : [parseInt(selectedAreas[area][dc.type])], 
+				"color" : selectedAreas[area].color
 			});
-		});
+		};
 
-		// cheap fix - see https://github.com/highslide-software/highcharts.com/issues/1132
-		var parentEl = $('#barChartLayer').parent(); 
-		$('#barChartLayer').remove();
-		parentEl.html('<div id="barChartLayer"></div>');		
-		
-		this.barChartObject = new Highcharts.Chart({
+		$("#barChartLayer").html("");
+		var chartOptions = {
 			chart: {
 				height: this.currentChartHeight,
 				width: this.currentChartWidth,
 				backgroundColor:'rgb(40, 40, 40)',
 				type: 'bar',
-				renderTo: 'barChartLayer',
+				renderTo: "barChartLayer",
 				margin: [30,35,35,55]
 			},
 			title: {
 				text: GeoAppBase.capitaliseEach(MainApplication.views.mapView.currentLayersType + " " + xAxisTitle +" Compared"),
-				style: { "font-size" : "9.5pt", color: 'rgb(238, 238, 238)' }, //
+				style: { "font-size" : "9.5pt", color: 'rgb(238, 238, 238)' },
 				align: "center",
 				margin: 5,
 				x: -20,
@@ -1091,7 +1082,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 						margin: [60,35,80,55]
 					},
 					title: {
-						style: { "font-size" : "9.5pt", color: 'rgb(255, 255, 255)' }, //
+						style: { "font-size" : "9.5pt", color: 'rgb(255, 255, 255)' },
 						align: "center",
 						margin: 5,
 						x: 0,
@@ -1122,7 +1113,9 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			credits: {
 				enabled: false
 			}
-		});
+		};
+		console.log("Creating Chart object");
+		this.barChartObject = new Highcharts.Chart(chartOptions);
 		
 		//on save override and set legend to true, 
 		return false;
@@ -1135,41 +1128,37 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		var xAxisTitle = GeoAppBase.capitaliseEach("Total " + this.type.replace("total_", ""));
 		var pieChartSeries = [];
 		
-		_.each(data, function(area){
+		for(var area in data){
 			var val = 0;
-			switch(dc.type)
+			switch(this.type)
 			{
 				case "total_acres":
-					val = area.total_acres;
+					val = data[area].total_acres;
 					break;
 				case "total_cost":
-					val = area.total_cost;
+					val = data[area].total_cost;
 					break;
 				case "total_revenue":
-					val =  area.total_revenue;
+					val =  data[area].total_revenue;
 					break;
 				default:
 					break;
 			}
-			pieChartSeries.push([area.abbrev, val]);
-			colorRange.push(area.color);
-		});
+			if(data[area].abbrev !== undefined){
+				pieChartSeries.push([data[area].abbrev, val]);
+				colorRange.push(data[area].color);
+			}
+		};
 
-		// cheap fix - see https://github.com/highslide-software/highcharts.com/issues/1132
-		var parentEl = $('#pieChartLayer').parent(); 
-		$('#pieChartLayer').remove();
-		parentEl.html('<div id="pieChartLayer"></div>');		
-		if(this.pieChartObject !== undefined){
-			this.pieChartObject.destroy();
-			delete this.pieChartObject;
-		}
-		
 		this.loadSummaryText(this.type);
 		
 		Highcharts.setOptions({
 			colors: colorRange
 		});
-		this.pieChartObject = new Highcharts.Chart({
+
+		$("#pieChartLayer").html("");
+		//var $container = $('.pieChartLayer');
+		var chartOptions = {
 			chart: {
 				height: this.currentChartHeight,
 				width: this.currentChartWidth,
@@ -1182,7 +1171,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			},
 			title: {
 				text: GeoAppBase.capitaliseEach(MainApplication.views.mapView.currentLayersType + " " + xAxisTitle +" Compared"),
-				style: { "font-size" : "9.5pt", color: 'rgb(238, 238, 238)'  }, //
+				style: { "font-size" : "9.5pt", color: 'rgb(238, 238, 238)'  }, 
 				align: "center",
 				margin: 5,
 				x: -20 
@@ -1221,7 +1210,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 						margin: [-10,-10,-10,-10]
 					},
 					title: {
-						style: { "font-size" : "9.5pt", color: 'rgb(238, 238, 238)'  }, //
+						style: { "font-size" : "9.5pt", color: 'rgb(238, 238, 238)'  }, 
 						align: "center",
 						margin: 5,
 						x: 0,
@@ -1236,8 +1225,9 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			credits: {
 				enabled: false
 			}
-		});
+		};
 		
+		this.pieChartObject = new Highcharts.Chart(chartOptions);
 		return false;
 	},	
 	loadSummaryText: function(typeView){
@@ -1376,7 +1366,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		return false;
 	},
 	setChartSizes: function(width, height){
-		this.barChartObject.setSize(width, height);
+//		this.barChartObject.setSize(width, height);
 		this.pieChartObject.setSize(width, height);	
 	},
 	showHelpMenu : function(ev){
@@ -1415,6 +1405,14 @@ var WelcomeView = Backbone.Marionette.ItemView.extend({
 		MainApplication.views.mapView.mapPaneView.slide.open();
 		MainApplication.views.mapSelectorSlideView.toggleSlide();
 		MainApplication.views.mapView.loadToolTips();
+		
+		/*Delaying resize update for ie8*/
+		setTimeout(function(){
+			$( window ).smartresize(function() {
+				console.log("resizing");
+				MainApplication.views.mapView.showRightSlide();
+			});		
+		}, 500);
 		return false;
 	}	
 });
