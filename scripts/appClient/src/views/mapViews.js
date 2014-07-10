@@ -1118,7 +1118,6 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				enabled: false
 			}
 		};
-		console.log("Creating Chart object");
 		this.barChartObject = new Highcharts.Chart(chartOptions);
 		
 		//on save override and set legend to true, 
