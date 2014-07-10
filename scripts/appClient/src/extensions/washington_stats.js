@@ -10,7 +10,25 @@ BootstrapVars.sums_legdistricts= [{"acres":5.42,"acquisitioncost":0,"name":"48",
 BootstrapVars.areaInformation = [
 	{
 		layerGroupName: "agency",
-		htmlInfo: "Agency Information goes here...",
+		htmlInfo: "<h2>City and County</h2> "+"<p class=MsoNormal>Local government lands data (lands owned by Washington’s 39 "+"counties and more than 280 cities and towns) were sourced from the <a "+
+"href=\"http://depts.washington.edu/wagis/projects/parcels/index.php\">2012 Washington "+"State Parcel Database</a>. The parcel database obtained the local jurisdiction "+
+"data directly from county auditor offices or other local records-keeping "+"officials. </p> "+"<h2><strong>Federal</strong></h2> "+
+"<p class=MsoNormal>Federal lands data were sourced from multiple providers via "+"the <a href=\"http://depts.washington.edu/wagis/projects/parcels/index.php\">Washington "+
+"State Parcel Database</a>. Providers include the U.S. Bureau of Land Management, "+"the Defense Installations Spatial Data Infrastructure, the U.S. Fish and "+
+"Wildlife Service, the National Park Service, and the U.S. Forest Service.</p> "+"<h2>Washington Department of Natural Resources</h2> "+
+"<p class=MsoNormal>The data for <span lang=EN>the Washington</span> Department "+"of Natural Resource managed lands (aquatic and uplands) were derived from the "+
+"combination of a land inventory system and land transaction database. This "+"information is subject to changes over time, and the Web application map may "+
+"not always reflect the most up-to-date information. The ownership layer shows "+"fee simple lands of the Department of Natural Resources. For landscape-specific "+
+"maps and other Geographic Information System data, visit our <a "+"href=\"http://www.dnr.wa.gov/Pages/default.aspx\" target=\"_blank\">Web site </a></p> "+
+"<h2>Washington Department of Fish and Wildlife</h2> "+"<p class=MsoNormal>Washington Department of Fish and Wildlife’s data on "+
+"acquisition projects were obtained from its real estate records and Lands "+"Information System. The Washington Department of Fish and Wildlife stores "+
+"information on more than 5,000 real estate transactions, dating back to the "+"Department of Game and Fisheries in the 1930s. The Washington Department of "+
+"Fish and Wildlife<span lang=EN> does not have a public Web interface of its "+"real estate transactions.</span></p> "+
+"<h2><span lang=EN>Washington State Parks</span></h2> "+"<p class=MsoNormal><span lang=EN>State Parks’ data on land acquisitions were "+
+"extracted from its Land Inventory database, which compiles records of all the "+"land donations, purchases, and management agreements that have built the park "+
+"system over the last century. The acquisition boundaries and land use "+"information were sourced from the agency Geographic Information System. State Parks "+
+"has a </span><a href=\"http://www.parks.wa.gov/\" target=\"_blank\">Web site</a> "+"where the public can find maps and additional information on the various "+
+"natural, cultural, recreational, artistic, and interpretive experiences "+"available at each park.</p>",
 		startDate: '2003',
 		endDate: '2014'
 	},
@@ -112,7 +130,7 @@ BootstrapVars.areaStats = [
 		total_acres : 0,
 		total_cost: 0,
 		total_revenue: 0,
-		mapTarget: "smartmine.cqj5g66r",
+		mapTarget: "smartmine.3med0a4i",
 		visible: true,
 		layerGroupName: "agency",
 		layerGroup: null,
@@ -330,23 +348,6 @@ BootstrapVars.areaStats = [
 		z: 19
 	},		
 	{
-		abbrev: "UNKNOWN",
-		agency: "Unknown",
-		starting_total_acres : 0,
-		starting_total_cost: 0,
-		starting_total_revenue: 0,
-		total_acres : 0,
-		total_cost: 0,
-		total_revenue: 0,
-		mapTarget: "smartmine.cqj5g66r",
-		visible: false,
-		layerGroupName: "landtypes",
-		layerGroup: null,
-		symbol: '#x2190;',
-		color: '#D0D0D0',
-		z: 20
-	},	
-	{
 		abbrev: "PROPOSED PARKS",
 		agency: "Proposed Park Acquisitions",
 		starting_total_acres : 0,
@@ -397,5 +398,22 @@ BootstrapVars.areaStats = [
 		symbol: '#x2190;',
 		color: '#E69800',
 		z: 26
+	},
+	{
+		abbrev: "UNKNOWN",
+		agency: "Unknown",
+		starting_total_acres : 0,
+		starting_total_cost: 0,
+		starting_total_revenue: 0,
+		total_acres : 0,
+		total_cost: 0,
+		total_revenue: 0,
+		mapTarget: "smartmine.cqj5g66r",
+		visible: false,
+		layerGroupName: "landtypes",
+		layerGroup: null,
+		symbol: '#x2120;',
+		color: '#D0D0D0',
+		z: 27
 	}
 ];
