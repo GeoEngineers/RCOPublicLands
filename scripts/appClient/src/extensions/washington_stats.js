@@ -380,7 +380,7 @@ BootstrapVars.areaStats = [
 		symbol: '#x2190;',
 		color: '#E69800',
 		z: 26
-	},
+	}/*,
 	{
 		abbrev: "UNKNOWN",
 		agency: "Unknown",
@@ -397,5 +397,5 @@ BootstrapVars.areaStats = [
 		symbol: '#x2120;',
 		color: '#D0D0D0',
 		z: 27
-	}
+	}*/
 ];

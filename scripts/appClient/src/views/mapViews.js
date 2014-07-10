@@ -1037,7 +1037,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			chart: {
 				height: this.currentChartHeight,
 				width: this.currentChartWidth,
-				backgroundColor:'rgb(40, 40, 40)',
+				backgroundColor:'rgb(40, 70, 90)',
 				type: 'bar',
 				renderTo: "barChartLayer",
 				margin: [30,35,35,55]
@@ -1082,7 +1082,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 						width: 800,
 						height: 600,
 						type: 'bar',
-						backgroundColor:'rgb(40, 40, 40)',
+						backgroundColor:'rgb(40, 70, 90)',
 						margin: [60,35,80,55]
 					},
 					title: {
@@ -1170,7 +1170,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				plotBackgroundColor: null,
 				plotBorderWidth: 0,
 				plotShadow: false,
-				backgroundColor:'rgb(40, 40, 40)',
+				backgroundColor:'rgb(40, 70, 90)',
 				margin: [-20, -50, -55, -50]
 			},
 			title: {
@@ -1209,7 +1209,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 					chart: {
 						width: 800,
 						height: 600,
-						backgroundColor:'rgb(40, 40, 40)',
+						backgroundColor:'rgb(40, 70, 90)',
 						type: 'pie',
 						margin: [-10,-10,-10,-10]
 					},
