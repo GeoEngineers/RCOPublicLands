@@ -1416,7 +1416,6 @@ var WelcomeView = Backbone.Marionette.ItemView.extend({
 		/*Delaying resize update for ie8*/
 		setTimeout(function(){
 			$( window ).smartresize(function() {
-				console.log("resizing");
 				MainApplication.views.mapView.showRightSlide();
 			});		
 		}, 500);
@@ -1436,7 +1435,6 @@ var AreaInformationView = Backbone.Marionette.ItemView.extend({
 	},
 	onShow: function()
 	{
-		
 		var dc = this;
 		var htmlInfo = "";
 		console.log(BootstrapVars.areaInformation);
@@ -1447,7 +1445,6 @@ var AreaInformationView = Backbone.Marionette.ItemView.extend({
 			}
 		});
 		$("#areaInfoDiv").html(htmlInfo);
-		
 		return false;
 	},
 	closeModal: function () {			 
