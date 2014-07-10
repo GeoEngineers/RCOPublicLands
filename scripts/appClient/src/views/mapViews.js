@@ -1436,6 +1436,7 @@ var AreaInformationView = Backbone.Marionette.ItemView.extend({
 	},
 	onShow: function()
 	{
+		
 		var dc = this;
 		var htmlInfo = "";
 		console.log(BootstrapVars.areaInformation);
@@ -1446,6 +1447,7 @@ var AreaInformationView = Backbone.Marionette.ItemView.extend({
 			}
 		});
 		$("#areaInfoDiv").html(htmlInfo);
+		
 		return false;
 	},
 	closeModal: function () {			 
