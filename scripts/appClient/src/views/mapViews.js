@@ -1430,15 +1430,16 @@ var AreaInformationView = Backbone.Marionette.ItemView.extend({
 	onShow: function()
 	{
 		return false;
-		/*var dc = this;
+		var dc = this;
 		var htmlInfo = "";
+		console.log(BootstrapVars.areaInformation);
 		_.each(BootstrapVars.areaInformation, function(areaInformation){
 			if(dc.layerGroupName === areaInformation.layerGroupName)
 			{
 				htmlInfo = areaInformation.htmlInfo;
 			}
 		});
-		$("#areaInfoDiv").html(htmlInfo);*/
+		$("#areaInfoDiv").html(htmlInfo);
 	},
 	closeModal: function () {			 
 		MainApplication.modalRegion.hideModal();

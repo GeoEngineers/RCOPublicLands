@@ -112,7 +112,7 @@ BootstrapVars.areaStats = [
 		total_acres : 0,
 		total_cost: 0,
 		total_revenue: 0,
-		mapTarget: "smartmine.cqj5g66r",
+		mapTarget: "smartmine.3med0a4i",
 		visible: true,
 		layerGroupName: "agency",
 		layerGroup: null,
@@ -330,23 +330,6 @@ BootstrapVars.areaStats = [
 		z: 19
 	},		
 	{
-		abbrev: "UNKNOWN",
-		agency: "Unknown",
-		starting_total_acres : 0,
-		starting_total_cost: 0,
-		starting_total_revenue: 0,
-		total_acres : 0,
-		total_cost: 0,
-		total_revenue: 0,
-		mapTarget: "smartmine.cqj5g66r",
-		visible: false,
-		layerGroupName: "landtypes",
-		layerGroup: null,
-		symbol: '#x2190;',
-		color: '#D0D0D0',
-		z: 20
-	},	
-	{
 		abbrev: "PROPOSED PARKS",
 		agency: "Proposed Park Acquisitions",
 		starting_total_acres : 0,
@@ -397,5 +380,22 @@ BootstrapVars.areaStats = [
 		symbol: '#x2190;',
 		color: '#E69800',
 		z: 26
+	},
+	{
+		abbrev: "UNKNOWN",
+		agency: "Unknown",
+		starting_total_acres : 0,
+		starting_total_cost: 0,
+		starting_total_revenue: 0,
+		total_acres : 0,
+		total_cost: 0,
+		total_revenue: 0,
+		mapTarget: "smartmine.cqj5g66r",
+		visible: false,
+		layerGroupName: "landtypes",
+		layerGroup: null,
+		symbol: '#x2120;',
+		color: '#D0D0D0',
+		z: 27
 	}
 ];
