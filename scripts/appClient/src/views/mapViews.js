@@ -427,6 +427,9 @@ var MapView = Backbone.Marionette.Layout.extend({
 				}
 		}
 		var selectedVal = $('#selectAreaInput').val();
+		//Slashes are replaced with " - " in the json
+		selectedVal = selectedVal.replace('/', ' - ');
+		
 		var selectedTypeVal = $('#selectStateInput').val();
 		var boundary = MainApplication.boundarySelected;
 
