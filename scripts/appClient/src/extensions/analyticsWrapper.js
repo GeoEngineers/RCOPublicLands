@@ -1,4 +1,4 @@
-/*var GA = {};
+var GA = {};
 
 //run google code
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -23,4 +23,4 @@ _.extend(GA, {
 		  'eventValue': gaObject.eventValue === -1 ? 0 : gaObject.eventValue
 		},metrics);
 	},
-});*/
+});
