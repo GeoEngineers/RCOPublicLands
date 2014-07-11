@@ -1379,6 +1379,7 @@ svg {
     position: relative;
     top: -0.8em;
 	z-index:10;
+    min-height: 46px
 }
 #HeaderNavContainer h4{
 	font-size:13pt;
@@ -1706,4 +1707,12 @@ Custom config styles
 }
 #barChartBlock{
     margin-top: 10px;
+}
+
+.btn {
+    background-color: #f4f4f4;
+}
+
+.btn-primary {
+    background-color: rgb(53, 126, 189);
 }
