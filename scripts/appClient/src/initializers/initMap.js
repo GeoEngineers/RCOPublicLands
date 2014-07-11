@@ -1,7 +1,14 @@
 ﻿GeoAppBase.initializePage("Map", [], function(options){
+	//in case we just come back to the map, clean it up
+	if(MainApplication.Map !== undefined){
+		MainApplication.Map.remove();
+		delete MainApplication.Map;
+	}
+	
 	MainApplication.defaultMarker = new Todo().getTodoLeafletMarker("teal");
 	MainApplication.models.dnrModel = new DnrModel();
 	MainApplication.boundaries = [];
+
 	_.each(BootstrapVars.boundaries, function(boundary)
 	{
 		MainApplication.boundaries.push(boundary);

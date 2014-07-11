@@ -1436,7 +1436,7 @@ var AreaInformationView = Backbone.Marionette.ItemView.extend({
 	{
 		var dc = this;
 		var htmlInfo = "";
-		console.log(BootstrapVars.areaInformation);
+		//console.log(BootstrapVars.areaInformation);
 		_.each(BootstrapVars.areaInformation, function(areaInformation){
 			if(dc.layerGroupName === areaInformation.layerGroupName)
 			{

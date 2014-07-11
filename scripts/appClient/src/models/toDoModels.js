@@ -138,10 +138,10 @@ Backbone.SynchCollection = Backbone.Collection.extend({
 	    var collection = this;
 		//offline check, cheap and easy, works with phonegap
 		//if(GeoAppBase.connectionAvailable()){
-			options.success = function(data){
+			//options.success = function(data){
 				//make this name agnostic, use url or some other thing
-				GeoAppBase.localDatabaseCollectionSet("todoItems",data.toJSON(),cb,"Id");
-			}
+				//GeoAppBase.localDatabaseCollectionSet("todoItems",data.toJSON(),cb,"Id");
+			//}
 			return Backbone.Collection.prototype.fetch.call(this, options);		
 		/*}else{
 			var data=GeoAppBase.localDatabaseCollectionGet("todoItems",cb);
