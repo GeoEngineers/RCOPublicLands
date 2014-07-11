@@ -863,7 +863,7 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 	showLandOptions : function(ev){
 		if(MainApplication.landUseClicked === undefined || MainApplication.landUseClicked === false){
 			MainApplication.landUseClicked = true;
-			alert("\"Land Use\" does not include Federal, City, or county lands.");
+			alert("\"Land Use\" does not include Federal, City, or County lands.");
 		}
 		MainApplication.views.mapView.showLandOptions(ev);	
 		return false;

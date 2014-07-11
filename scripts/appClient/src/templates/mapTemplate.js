@@ -62,7 +62,7 @@ MainApplication.Templates.MapPaneTemplate = [
 			"</div>",
 		"</div>",		
 		"<div id='summaryLayer'></div>",
-		"<div id='landUseWarning'>\"Land Use\" does not include Federal, City, or county lands.</div>",
+		"<div id='landUseWarning'>\"Land Use\" does not include Federal, City, or County lands.</div>",
 		//"<div id='summaryDateRange' style='font-size:8pt;text-align:left;'></div>",
 		"<div id='summaryHelpMenu' class='usePointer' style='margin-top: 20px'><a href='#' id='lnkHelpMenu' style='text-decoration:underline; color: #FFFF00'>More about this data?</a></div><br /><br /><br /><br />",
 	"</div>"
