@@ -175,7 +175,7 @@ MainApplication.Templates.AreaInformationTemplate = [
 	"<div class=\"modal-dialog\">",
 		"<div class=\"modal-content\">",
 			"<div class=\"modal-header\">",
-				"<h4 id=\"mySlideLabel\">About This Data</h4>",
+				"<h4 id=\"mySlideLabel\"><div id=\"areaInfoTitle\" style='padding:10px;'></div></h4>",
 			"</div>",
 			"<div class=\"modal-body\">",
 				"<div id=\"areaInfoDiv\" style='padding:10px;'></div>",

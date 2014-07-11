@@ -1442,9 +1442,11 @@ var AreaInformationView = Backbone.Marionette.ItemView.extend({
 			if(dc.layerGroupName === areaInformation.layerGroupName)
 			{
 				htmlInfo = areaInformation.htmlInfo;
+				titleInfo = areaInformation.titleInfo;
 			}
 		});
 		$("#areaInfoDiv").html(htmlInfo);
+		$("#areaInfoTitle").html(titleInfo);
 		return false;
 	},
 	closeModal: function () {			 
