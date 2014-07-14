@@ -4,7 +4,7 @@
 /////////////////////This application declaration//////////////
 var ApplicationName = "MainApplication";
 window[ApplicationName] = new Backbone.Marionette.Application();
-window[ApplicationName].appVersion = '0.0.1';
+window[ApplicationName].appVersion = '0.0.2';
 //Geoengineers main site loader
 var GeoAppBase = new Backbone.Marionette.Application();
 //indicates offline status, do not change.
