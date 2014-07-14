@@ -1379,7 +1379,6 @@ svg {
     position: relative;
     top: -0.8em;
 	z-index:10;
-    min-height: 46px
 }
 #HeaderNavContainer h4{
 	font-size:13pt;
