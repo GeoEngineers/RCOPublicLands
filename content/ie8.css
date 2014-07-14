@@ -1,9 +1,9 @@
-.leaflet-control-zoom-in {
+.leaflet-control-zoom-out {
     background-size: 35px 310px !important;
     background-position-x: -8px !important;
     background-position-y: -59px !important;
 }
-.leaflet-control-zoom-out {
+.leaflet-control-zoom-in {
     background-size: 35px 310px !important;
     background-position-x: -8px !important;
     background-position-y: -10px !important;
