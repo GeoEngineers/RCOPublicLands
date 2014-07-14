@@ -1240,7 +1240,6 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				enabled: false
 			}
 		};
-<<<<<<< HEAD
 		if(this.pieChartObject === undefined){
 			var localPieChartObject = new Highcharts.Chart(chartOptions);
 			this.pieChartObject = localPieChartObject; //[this.currentId]
@@ -1248,10 +1247,6 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			//console.log("setting series");
 			this.pieChartObject.series[0].setData(pieChartSeries);
 		}
-=======
-		
-		this.pieChartObject = new Highcharts.Chart(chartOptions);
->>>>>>> 5c30588b4f96430039d7527eaf30175c08f0c471
 		return false;
 	},	
 	loadSummaryText: function(typeView){
