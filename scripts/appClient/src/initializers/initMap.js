@@ -1,5 +1,6 @@
 ﻿GeoAppBase.initializePage("Map", [], function(options){
-	if(GeoAppBase.msieVersion() <= 8 && GeoAppBase.msieVersion !== false){
+	var versionCheck = GeoAppBase.msieVersion();
+	if(versionCheck <= 8 && versionCheck !== false){
 		window[ApplicationName].router.navigate("VersionError", true);
 	}else{
 		//in case we just come back to the map, clean it up
