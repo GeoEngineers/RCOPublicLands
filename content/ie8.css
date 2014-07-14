@@ -11,3 +11,7 @@
 .leaflet-control-layers-toggle {
     background-position: -8px -216px;
 }
+#HeaderNavContainer {
+    height: 35px !important;
+    padding-bottom: 0px !important;
+}
