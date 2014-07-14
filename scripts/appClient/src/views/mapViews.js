@@ -1015,6 +1015,12 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			return area.visible===true; 
 		});
 	},
+	redrawFirstLayer: function(){
+		var firstLayer = _.find(MainApplication.Map._layers, function(item){ return item.options !== undefined; });
+		MainApplication.Map.removeLayer(firstLayer);
+		MainApplication.Map.addLayer(firstLayer);
+		MainApplication.Map.invalidateSize();
+	},
 	loadBarLayerComparison: function(){
 		var dc=this;
 		this.type = $( "#ddlSummaryType" ).val();
@@ -1119,7 +1125,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			}
 		};
 		this.barChartObject = new Highcharts.Chart(chartOptions);
-		this.barChartObject.redraw();
+		this.redrawFirstLayer();
 		//on save override and set legend to true, 
 		return false;
 	},
@@ -1231,7 +1237,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		};
 		
 		this.pieChartObject = new Highcharts.Chart(chartOptions);
-		this.pieChartObject.redraw();
+		this.redrawFirstLayer();
 		return false;
 	},	
 	loadSummaryText: function(typeView){
@@ -1311,7 +1317,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		$('#pieChartBlock').css({"display":"none"});
 		$('#showBarChart').hasClass("btn-primary") ? false : $('#showBarChart').addClass("btn-primary");
 		$('#showPieChart').removeClass("btn-primary");
-		this.barChartObject.redraw();
+		this.redrawFirstLayer();
 		return false;
 	},
 	setPieMode: function(){
@@ -1320,7 +1326,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		$('#pieChartBlock').css({"display":"block"});
 		$('#showBarChart').removeClass("btn-primary");
 		$('#showPieChart').hasClass("btn-primary") ? false : $('#showPieChart').addClass("btn-primary");
-		this.pieChartObject.redraw();
+		this.redrawFirstLayer();
 		return false;
 	},
 	setSummaryLayer: function(ev){
