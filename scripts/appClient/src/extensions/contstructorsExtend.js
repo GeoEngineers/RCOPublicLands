@@ -190,6 +190,25 @@ _.extend(GeoAppBase, {
 		this.localDatabaseCollectionClear("todoItems");
 		this.localDatabaseCollectionClear("todoItemQueue");
 	},
+	/*
+	Chrome
+	Firefox
+	IE11
+	Opera
+	Safari 
+	*/
+	msieVersion: function () {
+        var ua = window.navigator.userAgent;
+        var msie = ua.indexOf("MSIE ");
+
+        if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)){
+			// If Internet Explorer, return version number
+            return parseInt(ua.substring(msie + 5, ua.indexOf(".", msie)));			
+        } else {                 
+			// If another browser, return 0
+            return false;
+		}
+	},
 	//requires files sequentially
 	recurseRequire: function(fileList, cb){
 		if(fileList.length > 0){

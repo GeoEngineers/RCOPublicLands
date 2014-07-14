@@ -96,5 +96,18 @@ MainApplication.ConfigFiles = {
             { "model" : "toDoModels.js" }
         ],		
         "initializers": "initSpec.js"
-    }	
+    },
+    "VersionError": {
+        "Id": 8,
+        "sectionName": "Node Boilerplate Spec Runner",
+        "containerClass": "node-outline",
+        "hashPath": "VersionError",	
+        "templates": [
+            { "template": "versionErrorTemplates.js" }
+        ],
+        "views": [
+            { "view": "versionErrorViews.js" }
+        ],
+        "initializers": "initVersionError.js"
+    }		
 };  

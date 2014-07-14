@@ -85,7 +85,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 					maxZoom: 14,
 					zIndex: BootstrapVars.areaStats[area].z
 				});
-				BootstrapVars.areaStats[area].layerGroup =  L.layerGroup([
+
+				BootstrapVars.areaStats[area].layerGroup = L.layerGroup([
 					tileLayer,
 					dc.createGrid(utfGrid, BootstrapVars.areaStats[area])
 				]);
@@ -607,6 +608,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		MainApplication.paneRegion.show(this.mapPaneView);
 	},	
 	showRightSlide: function(){
+		console.log("Reset Highcharts here");
 		this.mapPaneView.onShow();
 	},
 	resetBaseMaps: function(){
@@ -1247,7 +1249,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			var localPieChartObject = new Highcharts.Chart(chartOptions);
 			this.pieChartObject = localPieChartObject; //[this.currentId]
 			
-			console.log(JSON.stringify(pieChartSeries));
+			//console.log(JSON.stringify(pieChartSeries));
 			
 		//}else{
 			//console.log("setting series");
