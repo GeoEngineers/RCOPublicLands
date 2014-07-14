@@ -12,7 +12,7 @@ _.extend(GA, {
 	logGAPageView: function(){
 		ga('send', 'pageview');
 	},
-	logGAEvent: function(gaObject,metrics){
+	/*logGAEvent: function(gaObject,metrics){
 		//param metrics
 		metrics === undefined ? {} : metrics;
 		ga('send', {
@@ -23,4 +23,5 @@ _.extend(GA, {
 		  'eventValue': gaObject.eventValue === -1 ? 0 : gaObject.eventValue
 		},metrics);
 	},
+	*/
 });
