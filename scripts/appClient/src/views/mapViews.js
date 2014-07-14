@@ -603,10 +603,11 @@ var MapView = Backbone.Marionette.Layout.extend({
 			activeLayers : this.activeLayers,
 			summaryText: selectedVal
 		});
-		this.showRightSlide();
+		//this.showRightSlide();
+		MainApplication.paneRegion.show(this.mapPaneView);
 	},	
 	showRightSlide: function(){
-		MainApplication.paneRegion.show(this.mapPaneView);
+		this.mapPaneView.onShow();
 	},
 	resetBaseMaps: function(){
 		$("#lnkOfflineButton").removeClass('btn-primary');
@@ -662,7 +663,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		}
 		
 		//refreshes the right slide and legend
-		this.setLegendControls();			
+		this.setLegendControls();
 		this.showRightSlide();
 		
 		return false;
@@ -853,7 +854,7 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 		return false;
 	},
 	showAgencyOptions : function(ev){
-		MainApplication.views.mapView.showAgencyOptions(ev);	
+		MainApplication.views.mapView.showAgencyOptions(ev);
 		return false;
 	},
 	showAcquisitions : function(ev){
@@ -952,6 +953,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		this.currentChartHeight = this.chartDefaultHeight;				
 		this.currentChartWidth = this.chartDefaultWidth;
 		this.summaryText = options.summaryText;
+		//this.pieChartObject = {};
 	},
 	events: {
 		"click #showPieChart" : "setPieMode",
@@ -981,20 +983,10 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			}else{
 				this.setPieMode();
 			}
-		}		
+		}
 		
-		var dc=this;
-		GeoAppBase.showAppLoadingStart();
-		setTimeout(function(){
-			//start in bar mode
-			dc.loadBarLayerComparison();
-			dc.loadPieLayerComparison();
-			/*$( "#ddlSummaryType" ).change(function() {
-				dc.loadBarLayerComparison();
-				dc.loadPieLayerComparison();
-			});*/
-			GeoAppBase.showAppLoadingEnd();
-		},350);
+		this.loadBarLayerComparison();
+		this.loadPieLayerComparison();
 	},
 	closeSummaryPanel: function(){
 		MainApplication.views.mapSelectorSlideView.toggleRightMenu();
@@ -1020,10 +1012,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		});
 	},
 	redrawFirstLayer: function(){
-		var firstLayer = _.find(MainApplication.Map._layers, function(item){ return item.options !== undefined; });
-		MainApplication.Map.removeLayer(firstLayer);
-		MainApplication.Map.addLayer(firstLayer);
-		MainApplication.Map.invalidateSize();
+		//MainApplication.Map.invalidateSize();
 	},
 	loadBarLayerComparison: function(){
 		var dc=this;
@@ -1074,6 +1063,11 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				labels:
 				{
 					style: { color: 'rgb(238, 238, 238)' }
+				}
+			},
+			plotOptions: {
+				bar: {
+					animation: false
 				}
 			},
 			series: barChartSeries,
@@ -1129,7 +1123,6 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			}
 		};
 		this.barChartObject = new Highcharts.Chart(chartOptions);
-		this.redrawFirstLayer();
 		//on save override and set legend to true, 
 		return false;
 	},
@@ -1168,9 +1161,13 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		Highcharts.setOptions({
 			colors: colorRange
 		});
-
-		$("#pieChartLayer").html("");
-		//var $container = $('.pieChartLayer');
+		
+		//if(this.pieChartObject !== undefined){
+		//	this.pieChartObject.destroy();
+		//}
+		
+		//this.currentId = GeoAppBase.guid();		
+		//$("#pieChartLayer").append("<div id='pieChart'></div>");
 		var chartOptions = {
 			chart: {
 				height: this.currentChartHeight,
@@ -1194,6 +1191,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			},
 			plotOptions: {
 				pie: {
+					animation: false,
 					showInLegend: true,
 					dataLabels: {
 						enabled: false
@@ -1239,9 +1237,13 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				enabled: false
 			}
 		};
-		
-		this.pieChartObject = new Highcharts.Chart(chartOptions);
-		this.redrawFirstLayer();
+		if(this.pieChartObject === undefined){
+			var localPieChartObject = new Highcharts.Chart(chartOptions);
+			this.pieChartObject = localPieChartObject; //[this.currentId]
+		}else{
+			//console.log("setting series");
+			this.pieChartObject.series[0].setData(pieChartSeries);
+		}
 		return false;
 	},	
 	loadSummaryText: function(typeView){
@@ -1321,7 +1323,6 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		$('#pieChartBlock').css({"display":"none"});
 		$('#showBarChart').hasClass("btn-primary") ? false : $('#showBarChart').addClass("btn-primary");
 		$('#showPieChart').removeClass("btn-primary");
-		this.redrawFirstLayer();
 		return false;
 	},
 	setPieMode: function(){
@@ -1330,7 +1331,6 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		$('#pieChartBlock').css({"display":"block"});
 		$('#showBarChart').removeClass("btn-primary");
 		$('#showPieChart').hasClass("btn-primary") ? false : $('#showPieChart').addClass("btn-primary");
-		this.redrawFirstLayer();
 		return false;
 	},
 	setSummaryLayer: function(ev){
@@ -1346,9 +1346,9 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				if($(node).attr("data-abbrev") === originalObject.attr("data-abbr")){
 					$(node).children("input").trigger("click");
 					layerGroup.visible = !layerGroup.visible;
-					MainApplication.views.mapView.showRightSlide();
 				}
 			});
+			MainApplication.views.mapView.showRightSlide();
 			return true;
 		}else if(originalObject.attr("data-abbr") === undefined){
 			//return false if it's not one of the inputs
