@@ -12,9 +12,9 @@
     background-position: -8px -216px;
 }
 #HeaderNavContainer {
-    height: 35px !important;
+   
     padding-bottom: 0px !important;
 }
-#map{
-	/*width:50%;*/
+.tspan {
+	font-size: 9.5pt
 }
