@@ -366,7 +366,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 							},
 							fill: true,
 							onEachFeature: function (feature, layer) {
-								layer.bindLabel(boundary.SelectText + ' ' + feature.properties[boundary.NameField], { noHide: true });
+								layer.bindLabel(boundary.SelectText + ' ' + feature.properties[boundary.NameField], { noHide: false });
 								layer.on('click', function(e){
 									$('#selectAreaInput').val(feature.properties[boundary.NameField]);
 									MainApplication.Map.closePopup();
@@ -457,7 +457,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 					MainApplication.Map.fitBounds(bounds);
 				}
 				//console.log(boundary.sums);
-				MainApplication.selectedBoundary = L.polygon(shape._latlngs, {fillOpacity: 0.08}).bindLabel(boundary.SelectText + ' ' + shape.feature.properties[boundary.NameField].toString(), { noHide: true });
+				MainApplication.selectedBoundary = L.polygon(shape._latlngs, {fillOpacity: 0.08});//.bindLabel(boundary.SelectText + ' ' + shape.feature.properties[boundary.NameField].toString(), { noHide: true });
 				MainApplication.Map.addLayer(MainApplication.selectedBoundary);
 			}
 		});
