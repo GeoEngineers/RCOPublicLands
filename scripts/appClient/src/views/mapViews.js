@@ -973,15 +973,6 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		var summaryHeight = $(window).height()-67;
 		$("#summaryPanelBlock").css({"height":summaryHeight});
 		
-		var dc=this;
-		//start in bar mode
-		this.loadBarLayerComparison();
-		this.loadPieLayerComparison();
-		$( "#ddlSummaryType" ).change(function() {
-			dc.loadBarLayerComparison();
-			dc.loadPieLayerComparison();
-		});
-		
 		if(this.chartType === undefined){
 			this.setPieMode();
 		}else{
@@ -990,7 +981,20 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			}else{
 				this.setPieMode();
 			}
-		}
+		}		
+		
+		var dc=this;
+		GeoAppBase.showAppLoadingStart();
+		setTimeout(function(){
+			//start in bar mode
+			dc.loadBarLayerComparison();
+			dc.loadPieLayerComparison();
+			/*$( "#ddlSummaryType" ).change(function() {
+				dc.loadBarLayerComparison();
+				dc.loadPieLayerComparison();
+			});*/
+			GeoAppBase.showAppLoadingEnd();
+		},350);
 	},
 	closeSummaryPanel: function(){
 		MainApplication.views.mapSelectorSlideView.toggleRightMenu();
