@@ -1011,12 +1011,6 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			return area.visible===true; 
 		});
 	},
-<<<<<<< HEAD
-	redrawFirstLayer: function(){
-		//MainApplication.Map.invalidateSize();
-	},
-=======
->>>>>>> 5c30588b4f96430039d7527eaf30175c08f0c471
 	loadBarLayerComparison: function(){
 		var dc=this;
 		this.type = $( "#ddlSummaryType" ).val();
