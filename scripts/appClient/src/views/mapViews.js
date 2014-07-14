@@ -1119,7 +1119,22 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				enabled: false
 			}
 		};
-		this.barChartObject = new Highcharts.Chart(chartOptions);
+		//if(this.barChartObject === undefined){
+			var localBarChartObject = new Highcharts.Chart(chartOptions);
+			this.barChartObject = localBarChartObject; //[this.currentId]
+		//	console.log(barChartSeries);
+		//}else{
+			//console.log("setting series");
+			/*var newSeries = [];
+			for(bar in barChartSeries){
+				
+				newSeries[bar].data=barChartSeries[bar].data;
+			};
+			console.log(barChartSeries);
+			//console.log(barChartSeries);
+			{"name": "Total Acres", data: }*/
+			//this.barChartObject.series[0].setData(barChartSeries,true,false, false);
+		//}		
 		//on save override and set legend to true, 
 		return false;
 	},
@@ -1158,13 +1173,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		Highcharts.setOptions({
 			colors: colorRange
 		});
-		
-		//if(this.pieChartObject !== undefined){
-		//	this.pieChartObject.destroy();
-		//}
-		
-		//this.currentId = GeoAppBase.guid();		
-		//$("#pieChartLayer").append("<div id='pieChart'></div>");
+
 		var chartOptions = {
 			chart: {
 				height: this.currentChartHeight,
@@ -1234,13 +1243,16 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				enabled: false
 			}
 		};
-		if(this.pieChartObject === undefined){
+		//if(this.pieChartObject === undefined){
 			var localPieChartObject = new Highcharts.Chart(chartOptions);
 			this.pieChartObject = localPieChartObject; //[this.currentId]
-		}else{
+			
+			console.log(JSON.stringify(pieChartSeries));
+			
+		//}else{
 			//console.log("setting series");
-			this.pieChartObject.series[0].setData(pieChartSeries);
-		}
+		//	this.pieChartObject.series[0].setData(pieChartSeries);
+		//}
 		return false;
 	},	
 	loadSummaryText: function(typeView){
