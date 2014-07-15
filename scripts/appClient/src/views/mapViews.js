@@ -43,10 +43,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 	onShow: function(){
 		var dc=this;
 		var area;
-		this.activeLayers=[];
 		for(area in BootstrapVars.areaStats){
 			if(BootstrapVars.areaStats[area].visible){
-				dc.activeLayers.push(area.abbrev);
 				$('#ownerToggle' + BootstrapVars.areaStats[area].abbrev).css("color",BootstrapVars.areaStats[area].color);
 			}
 		}
@@ -125,6 +123,9 @@ var MapView = Backbone.Marionette.Layout.extend({
 				});
 			}
 		}
+		for(area in BootstrapVars.areaGroups){
+			BootstrapVars.areaGroups[area].leafletTileLayer = new L.mapbox.tileLayer(BootstrapVars.areaGroups[area].combinedLayergroup, { zIndex : 5 });
+		}
 		
 		var tipAliasObject = {
 			"ProjectNumber" : "Project Number",
@@ -163,12 +164,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 
 		//this.baseMapControl = L.control.layers(this.baseMaps, null, {position: 'bottomleft'}).addTo(MainApplication.Map);
 		this.mapFirstView=false;
-		for(area in BootstrapVars.areaStats){
-			if(BootstrapVars.areaStats[area].visible){
-				MainApplication.Map.addLayer(BootstrapVars.areaStats[area].layerGroup);	
-			}
-		}
-				
+		//initial tile layer
+		MainApplication.Map.addLayer(BootstrapVars.areaGroups[0].leafletTileLayer);
 		this.setLegendControls();
 	},
 	clearAreaSums: function(){
@@ -601,7 +598,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 		}
 
 		this.mapPaneView =  new MapPaneView({
-			activeLayers : this.activeLayers,
 			summaryText: selectedVal
 		});
 		//this.showRightSlide();
@@ -643,14 +639,17 @@ var MapView = Backbone.Marionette.Layout.extend({
 		var dc=this;
 
 		this.currentLayersType = layerType;
-		this.activeLayers = [];
 
+		_.each(BootstrapVars.areaGroups, function(area){
+			MainApplication.Map.removeLayer(area.leafletTileLayer);
+		});
+		var consolidatedLayer = _.findWhere(BootstrapVars.areaGroups, { layerGroupName : this.currentLayersType });
 		for(var mapLayer in BootstrapVars.areaStats){
 			if(BootstrapVars.areaStats[mapLayer].layerGroupName === layerType){
 				BootstrapVars.areaStats[mapLayer].visible = true;
-				dc.activeLayers.push(BootstrapVars.areaStats[mapLayer].abbrev);
 				try{
-					MainApplication.Map.addLayer(BootstrapVars.areaStats[mapLayer].layerGroup);
+					//if there is a consolidated layer, ignore this.
+					consolidatedLayer === undefined ? MainApplication.Map.addLayer(BootstrapVars.areaStats[mapLayer].layerGroup) : false;
 				}catch(e){
 					console.log(e);
 				}
@@ -663,6 +662,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 				}
 			}
 		}
+		//if there is a consolidated layer, use it.
+		consolidatedLayer !== undefined ? MainApplication.Map.addLayer(consolidatedLayer.leafletTileLayer) : false;
 		
 		//refreshes the right slide and legend
 		this.setLegendControls();
@@ -671,30 +672,29 @@ var MapView = Backbone.Marionette.Layout.extend({
 		return false;
 	},
 	setLegendControls : function(){
-		//console.log("Data");
 		var dc=this;
-
+		//set layer control maps
 		this.layerMaps = {};
 		_.each(BootstrapVars.areaStats, function(area){
-			if(area.visible){
+			//console.log(area, dc.currentLayersType);
+			if(area.layerGroupName === dc.currentLayersType){
 				dc.layerMaps[area.abbrev] = area.layerGroup;
 			}else if(dc.featureLayerControls !== undefined){
 				dc.featureLayerControls.removeLayer(area.layerGroup);
 			}
 		});
-		
+
+		//Create the legend control
 		if(this.featureLayerControls === undefined)	{
-			this.featureLayerControls = L.control.layers(this.baseMaps, this.layerMaps, {position: 'bottomleft'});
+			this.featureLayerControls = L.control.layers(this.baseMaps, {}, {position: 'bottomleft'});
 			this.featureLayerControls.addTo(MainApplication.Map);
-		}else{
-			for(var overlayMap in this.layerMaps){
-				dc.featureLayerControls.addOverlay(this.layerMaps[overlayMap], overlayMap);
-			}
 		}
-		_.each($(this.featureLayerControls._container).find("label"), function(legendItem){
-			var spanObject = $(legendItem).children("span").html().trim();
+		//manually adding overlays due to the "ALLLAYERS" mechanism, 		
+		//also, add colored labels to the control
+		$(".leaflet-control-layers-overlays").append($('<div class="miniDivider">&nbsp;</div>'));
+		for(var overlayMap in this.layerMaps){
 			var layerDetails = _.find(BootstrapVars.areaStats, function(area){
-				return area.abbrev === spanObject;
+				return area.abbrev === overlayMap;
 			});
 			//if it's found in the base areas array
 			if(layerDetails){
@@ -702,46 +702,43 @@ var MapView = Backbone.Marionette.Layout.extend({
 					"class": "colorKey", 
 					style: "background-color:"+layerDetails.color
 				});
-				$(legendItem).attr("data-abbrev",layerDetails.abbrev);
-				$(legendItem).prepend(legendKey);
-			}
-		});
+				var thisID = "layerSelect-"+layerDetails.abbrev.replace(" ","_");
+				var keyCheckbox = $('<input>', { 
+					"type": "checkbox", 
+					name: thisID,
+					id: thisID,
+					checked: layerDetails.visible
+				});		
+				var overlayText = $('<div class="overlayToggle">&nbsp;'+layerDetails.abbrev+'</div>');
+				overlayText.attr({"data-abbrev" : layerDetails.abbrev});
+				overlayText.prepend(keyCheckbox);
+				overlayText.prepend(legendKey);
+				$(".leaflet-control-layers-overlays").append(overlayText);
+			}			
+		}
 		
 		//setup respones to click events
-		$(this.featureLayerControls._container).find("label").on("click", function(ev){
-			setTimeout(function(){
-				//kludgy fix to prevent double clicks
+		$(this.featureLayerControls._container).find(".overlayToggle").on("click", function(ev){
+			ev.preventDefault();
+			setTimeout(function(){			
 				if(ev.timeStamp !== 0){
-					var checkboxObject = $(ev.currentTarget).children("input:checked");
-					var spanObject = $(ev.currentTarget).children("span").html().trim();
+					var abbrevObject = $(ev.currentTarget).attr("data-abbrev");
+					var idObject = abbrevObject.replace(" ","_");
+					var thisSelectedLayer = $("#layerSelect-" + idObject).prop("checked");
+					$("#layerSelect-" + idObject).prop("checked", thisSelectedLayer===true ? false : true);					
 					var layerDetails = _.find(BootstrapVars.areaStats, function(area){
-						return area.abbrev === spanObject;
+						return area.abbrev === abbrevObject;
 					});
 					if(layerDetails){
-						//set as inactive
-						if(checkboxObject.length === 1){
-							layerDetails.visible = true;
-						}else{
-							layerDetails.visible = false;				
-						}
-					}else{
-						//consoleconsole.log(ev);
+						layerDetails.visible = $("#layerSelect-" + idObject).prop("checked");
 					}
+					dc.toggleOverlayLayer(abbrevObject);
 					dc.showRightSlide();
 				}
 			}, 16);
+			return false;
 		});
-		
-		//extra layer clean up, just to be safe
-		/*MainApplication.Map.on("baselayerchange", function(ev){
-			console.log(ev, "Layer Changed");
-			for(mapLayer in MainApplication.views.mapView.baseMaps){
-				if(mapLayer !== ev.name && MainApplication.Map.hasLayer(MainApplication.views.mapView.baseMaps[mapLayer])){
-					MainApplication.Map.removeLayer(MainApplication.views.mapView.baseMaps[mapLayer]);
-				}
-			}
-		});*/
-		return false;
+		return true;
 	},
 	showMapsSlide : function(){
 		console.log("Slide Data");
@@ -783,6 +780,41 @@ var MapView = Backbone.Marionette.Layout.extend({
 		}else{
 			MainApplication.onDeviceOffline();
 		}
+	},
+	toggleOverlayLayer: function(layerID){
+		var selectedLayerGroup =  _.find(BootstrapVars.areaStats, function(area){ 
+			return area.abbrev===layerID; 
+		});
+		var layerGroupSet = _.filter(BootstrapVars.areaStats, function(area){ 
+			return area.layerGroupName===selectedLayerGroup.layerGroupName; 
+		});
+
+		var visibiltyArray = _.uniq(_.pluck(layerGroupSet, "visible"));
+		var consolidatedLayer = _.findWhere(BootstrapVars.areaGroups, { layerGroupName : selectedLayerGroup.layerGroupName});
+		//is visibilty array all true
+		
+		if(visibiltyArray.length === 1 && visibiltyArray[0]===true && consolidatedLayer !== undefined){ 
+			//yes - remove extraneaous layers, add group
+			_.each(BootstrapVars.areaStats, function(area){ 
+				if(area.layerGroupName===selectedLayerGroup.layerGroupName){
+					MainApplication.Map.removeLayer(area.layerGroup);
+				}
+			});
+			MainApplication.Map.addLayer(consolidatedLayer.leafletTileLayer);
+		}else{
+			//no, remove groups, add extraneous layers
+			_.each(BootstrapVars.areaGroups, function(area){
+				MainApplication.Map.removeLayer(area.leafletTileLayer);
+			});
+			_.each(BootstrapVars.areaStats, function(area){ 
+				if(area.layerGroupName===selectedLayerGroup.layerGroupName && area.visible){
+					MainApplication.Map.hasLayer(area.layerGroup) ? false : MainApplication.Map.addLayer(area.layerGroup);
+				}else{
+					MainApplication.Map.removeLayer(area.layerGroup);
+				}
+			});
+		}
+		return false;
 	},
 	toggleRightMenuPane: function(){
 		MainApplication.views.mapSelectorSlideView.toggleRightMenu();
@@ -948,7 +980,6 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 		};
 	},
 	initialize: function (options) {
-		this.activeLayers = options.activeLayers;
 		this.arcColor="#000000";
 		this.chartDefaultHeight = 170;
 		this.chartDefaultWidth = 310;
@@ -1121,23 +1152,8 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				enabled: false
 			}
 		};
-		//if(this.barChartObject === undefined){
-			var localBarChartObject = new Highcharts.Chart(chartOptions);
-			this.barChartObject = localBarChartObject; //[this.currentId]
-		//	console.log(barChartSeries);
-		//}else{
-			//console.log("setting series");
-			/*var newSeries = [];
-			for(bar in barChartSeries){
-				
-				newSeries[bar].data=barChartSeries[bar].data;
-			};
-			console.log(barChartSeries);
-			//console.log(barChartSeries);
-			{"name": "Total Acres", data: }*/
-			//this.barChartObject.series[0].setData(barChartSeries,true,false, false);
-		//}		
-		//on save override and set legend to true, 
+		var localBarChartObject = new Highcharts.Chart(chartOptions);
+		this.barChartObject = localBarChartObject; //[this.currentId]
 		return false;
 	},
 	loadPieLayerComparison: function(){	
@@ -1245,18 +1261,10 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 				enabled: false
 			}
 		};
-		//if(this.pieChartObject === undefined){
-			var localPieChartObject = new Highcharts.Chart(chartOptions);
-			this.pieChartObject = localPieChartObject; //[this.currentId]
-			
-			//console.log(JSON.stringify(pieChartSeries));
-			
-		//}else{
-			//console.log("setting series");
-		//	this.pieChartObject.series[0].setData(pieChartSeries);
-		//}
+		var localPieChartObject = new Highcharts.Chart(chartOptions);
+		this.pieChartObject = localPieChartObject; //[this.currentId]
 		return false;
-	},	
+	},
 	loadSummaryText: function(typeView){
 		var dc=this;
 		var summaryText = "";
@@ -1285,6 +1293,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 						break;
 				}
 				var legendKey = $("<div>", { "class": "colorKey", style: "background-color:"+area.color+";" });
+				legendKey.attr("data-abbr",area.abbrev);
 				var checkedStatus = area.visible ? " checked='true'" : "";
 				
 				areaSummary += "<div style='vertical-align: middle'><div style='display: inline-block; vertical-align: top; margin-right: 6px'>" + legendKey[0].outerHTML + "<input type='checkbox' name='inputSummaryItem-" + area.abbrev + "' id='inputSummaryItem-"+ area.abbrev + "' data-abbr='" + area.abbrev + "' class='usePointer'"+checkedStatus+" /></div><div style='display: inline-block; vertical-align: middle; width: 80%'><label class='usePointer'  data-abbr='" + area.abbrev + "' for='inputSummaryItem-" + area.abbrev + "' >" + area.agency + ": " + currencyPrefix + dc.formatNumber(val, isCurrency)+ "</label></div></div>";
@@ -1353,17 +1362,22 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			var layerGroup = _.find(BootstrapVars.areaStats, function(area){
 				return area.abbrev === originalObject.attr("data-abbr");
 			});
-			_.each($(MainApplication.views.mapView.featureLayerControls._form).children('.leaflet-control-layers-overlays')[0].childNodes,function(node){
-				if($(node).attr("data-abbrev") === originalObject.attr("data-abbr")){
-					$(node).children("input").trigger("click");
-					layerGroup.visible = !layerGroup.visible;
-				}
-			});
-			MainApplication.views.mapView.showRightSlide();
+			if(layerGroup !== undefined){
+				_.each($(MainApplication.views.mapView.featureLayerControls._form).children('.leaflet-control-layers-overlays')[0].childNodes,function(node){
+					if($(node).attr("data-abbrev") === originalObject.attr("data-abbr")){
+						//$(node).children("input").trigger("click");
+						layerGroup.visible = !layerGroup.visible;
+						MainApplication.views.mapView.toggleOverlayLayer(originalObject.attr("data-abbr"));
+					}
+				});
+
+				MainApplication.views.mapView.showRightSlide();
+				MainApplication.views.mapView.setLegendControls();
+			}
 			return true;
 		}else if(originalObject.attr("data-abbr") === undefined){
 			//return false if it's not one of the inputs
-			return false;
+			return true;
 		}
 	},
 	setSummarySize: function(ev){

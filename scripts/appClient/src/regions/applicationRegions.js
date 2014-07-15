@@ -18,7 +18,10 @@
 			$('#FooterNavSlideOut').css({"height":"90px"});
             $(".leaflet-bottom").css({"margin-bottom": "90px"});
             $("#smartmineLogo").css({"margin-bottom": "60px"});
+            $("#toggleMapLayers").css({"margin-bottom": "116px"});
+            $("#toggleMapLayersExpanded").css({"margin-bottom": "116px"});
             $("#toggleQuestionButton").css({"margin-bottom": "60px"});
+			
 			this.slideOpen = true;
 		}
     },
@@ -26,6 +29,8 @@
 		$('#FooterNavSlideOut').css({"height":"30px"});
         $(".leaflet-bottom").css({"margin-bottom": "30px"});
         $("#smartmineLogo").css({"margin-bottom": "0px"});
+        $("#toggleMapLayers").css({"margin-bottom": "56px"});
+        $("#toggleMapLayersExpanded").css({"margin-bottom": "56px"});
         $("#toggleQuestionButton").css({"margin-bottom": "0px"});
 		this.slideOpen = false;
     }

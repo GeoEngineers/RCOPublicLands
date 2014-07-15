@@ -16,6 +16,8 @@ MainApplication.Templates.MapTemplate = [
 		"<a href='#' id='lnkSlideMenu' class='navLink slide-menu' href='#SummaryPaneSlideOut'></a>",
 		"<div id='toggleSummaryButton' class='btn hardwareAnimation'><i class='fa fa-bar-chart-o fa-lg'></i></div>",
     	"<div id='toggleQuestionButton' class='btn hardwareAnimation'><i class='fa fa-info fa-2x'></i></div>",
+    	//"<div id='toggleMapLayers' class='btn hardwareAnimation'><i class='fa fa-stack fa-2x'></i></div>",
+    	//"<div id='toggleMapLayersExpanded' class='btn hardwareAnimation'></div>",
 		"<div id='map' style=\"top: 35px;\"></div>",
 	"</div>"
 ].join("\n");
