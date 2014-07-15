@@ -1064,11 +1064,11 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 					style: { color: 'rgb(238, 238, 238)' }
 				}
 			},
-			plotOptions: {
+			/*plotOptions: {
 				bar: {
 					animation: false
 				}
-			},
+			},*/
 			series: barChartSeries,
 			legend: {
 				enabled: false
@@ -1199,7 +1199,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			},
 			plotOptions: {
 				pie: {
-					animation: false,
+					//animation: false,
 					showInLegend: true,
 					dataLabels: {
 						enabled: false
