@@ -66,7 +66,9 @@ var MapView = Backbone.Marionette.Layout.extend({
 		var welcomeView = new WelcomeView({});
 		MainApplication.modalRegion.show(welcomeView);
 
+		var consolidatedGrids = {};
 		for(area in BootstrapVars.areaStats){
+			
 			if(BootstrapVars.areaStats[area].layerGroupName !== 'proposed')
 			{
 				var tileLayer = new L.mapbox.tileLayer(BootstrapVars.areaStats[area].mapTarget, { 
@@ -84,10 +86,15 @@ var MapView = Backbone.Marionette.Layout.extend({
 					zIndex: BootstrapVars.areaStats[area].z
 				});
 
+				var thisGrid = dc.createGrid(utfGrid, BootstrapVars.areaStats[area]);
 				BootstrapVars.areaStats[area].layerGroup = L.layerGroup([
 					tileLayer,
-					dc.createGrid(utfGrid, BootstrapVars.areaStats[area])
+					thisGrid
 				]);
+				if(consolidatedGrids[BootstrapVars.areaStats[area].layerGroupName] === undefined){
+					consolidatedGrids[BootstrapVars.areaStats[area].layerGroupName] = [];
+				}
+				consolidatedGrids[BootstrapVars.areaStats[area].layerGroupName].push(thisGrid);
 			}
 			else
 			{
@@ -124,7 +131,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 			}
 		}
 		for(area in BootstrapVars.areaGroups){
-			BootstrapVars.areaGroups[area].leafletTileLayer = new L.mapbox.tileLayer(BootstrapVars.areaGroups[area].combinedLayergroup, { zIndex : 5 });
+			consolidatedGrids[BootstrapVars.areaGroups[area].layerGroupName].push(new L.mapbox.tileLayer(BootstrapVars.areaGroups[area].combinedLayergroup, { zIndex : 5 }));
+			BootstrapVars.areaGroups[area].leafletTileGroup = L.layerGroup(consolidatedGrids[BootstrapVars.areaGroups[area].layerGroupName]);
 		}
 		
 		var tipAliasObject = {
@@ -165,7 +173,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		//this.baseMapControl = L.control.layers(this.baseMaps, null, {position: 'bottomleft'}).addTo(MainApplication.Map);
 		this.mapFirstView=false;
 		//initial tile layer
-		MainApplication.Map.addLayer(BootstrapVars.areaGroups[0].leafletTileLayer);
+		MainApplication.Map.addLayer(BootstrapVars.areaGroups[0].leafletTileGroup);
 		this.setLegendControls();
 	},
 	clearAreaSums: function(){
@@ -641,7 +649,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.currentLayersType = layerType;
 
 		_.each(BootstrapVars.areaGroups, function(area){
-			MainApplication.Map.removeLayer(area.leafletTileLayer);
+			MainApplication.Map.removeLayer(area.leafletTileGroup);
 		});
 		var consolidatedLayer = _.findWhere(BootstrapVars.areaGroups, { layerGroupName : this.currentLayersType });
 		for(var mapLayer in BootstrapVars.areaStats){
@@ -663,7 +671,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 			}
 		}
 		//if there is a consolidated layer, use it.
-		consolidatedLayer !== undefined ? MainApplication.Map.addLayer(consolidatedLayer.leafletTileLayer) : false;
+		consolidatedLayer !== undefined ? MainApplication.Map.addLayer(consolidatedLayer.leafletTileGroup) : false;
 		
 		//refreshes the right slide and legend
 		this.setLegendControls();
@@ -800,11 +808,11 @@ var MapView = Backbone.Marionette.Layout.extend({
 					MainApplication.Map.removeLayer(area.layerGroup);
 				}
 			});
-			MainApplication.Map.addLayer(consolidatedLayer.leafletTileLayer);
+			MainApplication.Map.addLayer(consolidatedLayer.leafletTileGroup);
 		}else{
 			//no, remove groups, add extraneous layers
 			_.each(BootstrapVars.areaGroups, function(area){
-				MainApplication.Map.removeLayer(area.leafletTileLayer);
+				MainApplication.Map.removeLayer(area.leafletTileGroup);
 			});
 			_.each(BootstrapVars.areaStats, function(area){ 
 				if(area.layerGroupName===selectedLayerGroup.layerGroupName && area.visible){
