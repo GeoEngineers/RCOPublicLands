@@ -8,22 +8,22 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.resetAreaSums();
 
 		this.dnrResources = options.dnrResources;
-		this.streetsMap = L.tileLayer.provider('MapBox.smartmine.igcmocio', { minZoom:6, zIndex: 1, attribution:"", reuseTiles: true });		
+		
+		this.attribution = "© Washington RCO © Mapbox © OpenStreetMap";
+		this.streetsMap = L.tileLayer.provider('MapBox.smartmine.igcmocio', { minZoom:6, zIndex: 1, attribution:this.attribution, reuseTiles: true });		
 		this.openMap = L.tileLayer('http://b.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
+			attribution: this.attribution,
 			minZoom: 6, 
 			maxZoom: 18,
 			zIndex: 2, 
 			reuseTiles: true
 		});
-		this.imageryMap = L.tileLayer.provider('MapBox.smartmine.map-nco5bdjp', { minZoom:6, zIndex: 3, attribution:"", reuseTiles: true });
-
+		this.imageryMap = L.tileLayer.provider('MapBox.smartmine.map-nco5bdjp', { minZoom:6, zIndex: 3, attribution:this.attribution, reuseTiles: true });
 		this.baseMaps = {
 			"Terrain": this.streetsMap,
 			"Streets" : this.openMap,
 			"Imagery": this.imageryMap
 		};
-
 		this.mapFirstView = true;
 		this.currentLayersType = 'agency';
 		MainApplication.totalAcres = " of 45,663,000";
@@ -57,7 +57,10 @@ var MapView = Backbone.Marionette.Layout.extend({
 			northEast = L.latLng(49.00, -116.85);
 		this.stateBounds = L.latLngBounds(southWest, northEast);
 		
-		MainApplication.Map === undefined ? MainApplication.Map = L.mapbox.map('map', null, { minZoom:6, maxZoom:14, attribution:"" }) : false;
+		MainApplication.Map === undefined ? MainApplication.Map = L.mapbox.map('map', null, { minZoom:6, maxZoom:14, attribution: this.attribution }) : false;
+		var credits = L.control.attribution().addTo(MainApplication.Map);
+		credits.addAttribution(this.attribution);
+		
 		this.setBaseMapDefault();
 		this.createOverlayMask();
 		

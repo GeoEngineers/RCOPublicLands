@@ -312,6 +312,13 @@
 	z-index:999999;
 }
 
+.leaflet-control-attribution {
+    bottom: 0;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    width: 330px;
+}
 .leaflet-bottom.leaflet-left {
     padding-bottom: 15px;
 }
