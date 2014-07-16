@@ -211,6 +211,13 @@ var MapView = Backbone.Marionette.Layout.extend({
 		}
 	},
 	loadGuidedHelp: function () {
+		GA.logGAEvent({
+		  'eventCategory': 'application',
+		  'eventAction': 'Load',
+		  'eventLabel': 'Help',
+		  'eventValue': -1
+		});
+	
 		this.landingPageGuideView = new GuidedHelpView({
 		});
 		MainApplication.maskRegion.show(this.landingPageGuideView);
@@ -380,6 +387,12 @@ var MapView = Backbone.Marionette.Layout.extend({
 									$('#selectAreaInput').val(feature.properties[boundary.NameField]);
 									MainApplication.Map.closePopup();
 									dc.areaChange(false);
+									GA.logGAEvent({
+									  'eventCategory': 'application',
+									  'eventAction': 'Boundary',
+									  'eventLabel': 'Select',
+									  'eventValue': -1
+									}, { "boundaryName": feature.properties[boundary.NameField] });
 								});
 							}
 						});
@@ -437,6 +450,14 @@ var MapView = Backbone.Marionette.Layout.extend({
 				}
 		}
 		var selectedVal = $('#selectAreaInput').val();
+
+		GA.logGAEvent({
+		  'eventCategory': 'application',
+		  'eventAction': 'Boundary',
+		  'eventLabel': 'Change',
+		  'eventValue': -1
+		}, { "boundaryName": selectedVal });
+		
 		//Slashes are replaced with " - " in the json
 		
 		var selectedTypeVal = $('#selectStateInput').val();
@@ -591,13 +612,21 @@ var MapView = Backbone.Marionette.Layout.extend({
 		return gridLayer;
 	},	
 	loadPrismFunding: function(){
+		var layerStatus=0;
 		if(MainApplication.Map.hasLayer(MainApplication.views.mapView.esriMap)){
 			$('#lnkPrismFunding').css("background-color","");
 			MainApplication.Map.removeLayer(MainApplication.views.mapView.esriMap);	
 		}else{
 			$('#lnkPrismFunding').css("background-color","#d1f1F4;");
 			MainApplication.views.mapView.esriMap.addTo(MainApplication.Map);
+			layerStatus=1;
 		}
+		GA.logGAEvent({
+		  'eventCategory': 'application',
+		  'eventAction': 'Inventory',
+		  'eventLabel': 'PrismFundingg',
+		  'eventValue': layerStatus
+		});
 		return false;
 	},	
 	loadRightSlide: function(){
@@ -1052,6 +1081,12 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 	},
 	closeSummaryPanel: function(){
 		MainApplication.views.mapSelectorSlideView.toggleRightMenu();
+		GA.logGAEvent({
+		  'eventCategory': 'application',
+		  'eventAction': 'ChangeSlide',
+		  'eventLabel': 'Close',
+		  'eventValue': -1
+		});
 		return false;
 	},
 	formatCommas: function(nStr){
@@ -1424,6 +1459,12 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			
 			this.currentChartWidth = parseInt(scale * this.chartDefaultWidth);
 			this.currentChartHeight = newHeight;
+			GA.logGAEvent({
+			  'eventCategory': 'application',
+			  'eventAction': 'ChangeSlide',
+			  'eventLabel': 'Collapse',
+			  'eventValue': -1
+			});
 		}else{
 			$(ev.currentTarget).removeClass("collapsable");
 			$(ev.currentTarget).addClass("expandable");
@@ -1434,6 +1475,12 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			
 			this.currentChartWidth = this.chartDefaultWidth;
 			this.currentChartHeight = this.chartDefaultHeight;			
+			GA.logGAEvent({
+			  'eventCategory': 'application',
+			  'eventAction': 'ChangeSlide',
+			  'eventLabel': 'Expand',
+			  'eventValue': -1
+			});
 		}
 
 		return false;
