@@ -8,6 +8,8 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
 ga('create', 'UA-50069705-1', 'auto');
 
+//Force CloudFront
+
 _.extend(GA, {
 	logGAPageView: function(){
 		ga('send', 'pageview');
