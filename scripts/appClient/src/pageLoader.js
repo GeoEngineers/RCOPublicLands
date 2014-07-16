@@ -68,7 +68,7 @@
 						//load application notification events
 						MainApplication.ApplicationNotificationLoader.runNotifications(page_options);
 						//log pageView
-						//	GA.logGAPageView();
+						GA.logGAPageView();
 						//run the main application
 						MainApplication.pageInitializer[this_path].start(page_options);
 					});
