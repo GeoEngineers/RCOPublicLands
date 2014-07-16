@@ -8,11 +8,14 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
 ga('create', 'UA-50069705-1', 'auto');
   
+ga('send', 'pageview');
+
+/*
 _.extend(GA, {
 	logGAPageView: function(){
 		ga('send', 'pageview');
 	}
-	/*logGAEvent: function(gaObject,metrics){
+	logGAEvent: function(gaObject,metrics){
 		//param metrics
 		metrics === undefined ? {} : metrics;
 		ga('send', {
@@ -23,5 +26,6 @@ _.extend(GA, {
 		  'eventValue': gaObject.eventValue === -1 ? 0 : gaObject.eventValue
 		},metrics);
 	},
-	*/
+	
 });
+*/
