@@ -12,7 +12,6 @@ _.extend(GA, {
 	logGAPageView: function(){
 		ga('send', 'pageview');
 	}
-	/*
 	logGAEvent: function(gaObject,metrics){
 		//param metrics
 		metrics === undefined ? {} : metrics;
@@ -23,6 +22,5 @@ _.extend(GA, {
 		  'eventLabel': gaObject.eventLabel,
 		  'eventValue': gaObject.eventValue === -1 ? 0 : gaObject.eventValue
 		},metrics);
-	},
-	*/
+	}
 });
