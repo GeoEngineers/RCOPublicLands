@@ -11,7 +11,7 @@ ga('create', 'UA-50069705-1', 'auto');
 _.extend(GA, {
 	logGAPageView: function(){
 		ga('send', 'pageview');
-	}
+	},
 	logGAEvent: function(gaObject,metrics){
 		//param metrics
 		metrics === undefined ? {} : metrics;

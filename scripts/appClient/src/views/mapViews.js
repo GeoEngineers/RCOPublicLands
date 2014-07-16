@@ -615,7 +615,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		MainApplication.paneRegion.show(this.mapPaneView);
 	},	
 	showRightSlide: function(){
-		console.log("Reset Highcharts here");
+		//console.log("Reset Highcharts here");
 		this.mapPaneView.onShow();
 	},
 	resetBaseMaps: function(){
@@ -675,6 +675,13 @@ var MapView = Backbone.Marionette.Layout.extend({
 		}
 		//if there is a consolidated layer, use it.
 		consolidatedLayer !== undefined ? MainApplication.Map.addLayer(consolidatedLayer.leafletTileGroup) : false;
+
+		GA.logGAEvent({
+		  'eventCategory': 'application',
+		  'eventAction': 'Inventory',
+		  'eventLabel': layerType,
+		  'eventValue': -1
+		},{'selectedLayers': "All" });
 		
 		//refreshes the right slide and legend
 		this.setLegendControls();
@@ -759,7 +766,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.resetNavOptions();
 		$('#lnkAgency').hasClass("btn-primary") ? false : $('#lnkAgency').addClass("btn-primary");
 		$('#agencyToggles').css("display","block");
-		this.setDisplayedLayers("agency");
+		this.setDisplayedLayers("agency");		
 		return false;
 	},
 	showAcquisitions : function(){
@@ -804,6 +811,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		var consolidatedLayer = _.findWhere(BootstrapVars.areaGroups, { layerGroupName : selectedLayerGroup.layerGroupName});
 		//is visibilty array all true
 		
+		var layerStatus = 0;
 		if(visibiltyArray.length === 1 && visibiltyArray[0]===true && consolidatedLayer !== undefined){ 
 			//yes - remove extraneaous layers, add group
 			_.each(BootstrapVars.areaStats, function(area){ 
@@ -812,6 +820,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 				}
 			});
 			MainApplication.Map.addLayer(consolidatedLayer.leafletTileGroup);
+			layerStatus = 1;
 		}else{
 			//no, remove groups, add extraneous layers
 			_.each(BootstrapVars.areaGroups, function(area){
@@ -820,11 +829,20 @@ var MapView = Backbone.Marionette.Layout.extend({
 			_.each(BootstrapVars.areaStats, function(area){ 
 				if(area.layerGroupName===selectedLayerGroup.layerGroupName && area.visible){
 					MainApplication.Map.hasLayer(area.layerGroup) ? false : MainApplication.Map.addLayer(area.layerGroup);
+					layerStatus = 1;
 				}else{
 					MainApplication.Map.removeLayer(area.layerGroup);
 				}
 			});
 		}
+		
+		GA.logGAEvent({
+		  'eventCategory': 'application',
+		  'eventAction': 'Inventory',
+		  'eventLabel': selectedLayerGroup.layerGroupName,
+		  'eventValue': layerStatus
+		},{'selectedLayers': layerID });		
+		
 		return false;
 	},
 	toggleRightMenuPane: function(){
