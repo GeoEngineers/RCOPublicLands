@@ -88,10 +88,8 @@ BootstrapVars.boundaries = [
 ];
 
 BootstrapVars.areaGroups = [
-	{ layerGroupName : "agency", combinedLayergroup: "smartmine.32bro1or" },
-	//{ layerGroupName : "acquisitions", combinedLayergroup: "smartmine.32bro1or" },
-	{ layerGroupName : "landtypes", combinedLayergroup: "smartmine.d0psc3di" }
-	//{ layerGroupName : "proposed", combinedLayergroup: "smartmine.d0psc3di" }
+	{ layerGroupName : "agency", combinedLayerGroup: "smartmine.32bro1or" },
+	{ layerGroupName : "landtypes", combinedLayerGroup: "smartmine.d0psc3di" }
 ];
 BootstrapVars.areaStats = [
 	{

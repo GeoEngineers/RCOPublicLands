@@ -134,7 +134,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 			}
 		}
 		for(area in BootstrapVars.areaGroups){
-			consolidatedGrids[BootstrapVars.areaGroups[area].layerGroupName].push(new L.mapbox.tileLayer(BootstrapVars.areaGroups[area].combinedLayergroup, { zIndex : 5 }));
+			consolidatedGrids[BootstrapVars.areaGroups[area].layerGroupName].push(new L.mapbox.tileLayer(BootstrapVars.areaGroups[area].combinedLayerGroup, { zIndex : 5 }));
 			BootstrapVars.areaGroups[area].leafletTileGroup = L.layerGroup(consolidatedGrids[BootstrapVars.areaGroups[area].layerGroupName]);
 		}
 		
