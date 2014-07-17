@@ -69,6 +69,7 @@
 						MainApplication.ApplicationNotificationLoader.runNotifications(page_options);
 						//log pageView
 						GA.logGAPageView();
+						
 						//run the main application
 						MainApplication.pageInitializer[this_path].start(page_options);
 					});
