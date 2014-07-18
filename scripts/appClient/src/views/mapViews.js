@@ -171,9 +171,11 @@ var MapView = Backbone.Marionette.Layout.extend({
 		});
 		
 		MainApplication.Map.setView([47,-120], 7);
-		
-		L !== undefined && L.control !== undefined && L.control.navbar !== undefined ? L.control.navbar().addTo(MainApplication.Map) : false;
-		
+		try {
+			L !== undefined && L.control !== undefined && L.control.navbar !== undefined ? L.control.navbar().addTo(MainApplication.Map) : false;
+		}catch(err) {
+			//error reading navbar
+		}
 		this.mapFirstView=false;
 		//initial tile layer
 		MainApplication.Map.addLayer(BootstrapVars.areaGroups[0].leafletTileGroup);
