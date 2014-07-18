@@ -137,7 +137,6 @@ var MapView = Backbone.Marionette.Layout.extend({
 			consolidatedGrids[BootstrapVars.areaGroups[area].layerGroupName].push(new L.mapbox.tileLayer(BootstrapVars.areaGroups[area].combinedLayerGroup, { zIndex : 5 }));
 			BootstrapVars.areaGroups[area].leafletTileGroup = L.layerGroup(consolidatedGrids[BootstrapVars.areaGroups[area].layerGroupName]);
 		}
-		
 		var tipAliasObject = {
 			"ProjectNumber" : "Project Number",
 			"PrimarySponsor" : "Primary Sponsor",
@@ -146,6 +145,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 			"FiscalYear" : "Fiscal Year",
 			"SnapshotURL" : "Project URL"
 		};
+		
 		this.esriMap = L.esri.clusteredFeatureLayer("http://gismanagerweb.rco.wa.gov/arcgis/rest/services/public_lands/WA_RCO_Public_Lands_Inventory_PRISM_v2/MapServer/0/", {
 			cluster: new L.MarkerClusterGroup(),
 			minZoom:6,
@@ -171,9 +171,9 @@ var MapView = Backbone.Marionette.Layout.extend({
 		});
 		
 		MainApplication.Map.setView([47,-120], 7);
-		L.control.navbar().addTo(MainApplication.Map);
-
-		//this.baseMapControl = L.control.layers(this.baseMaps, null, {position: 'bottomleft'}).addTo(MainApplication.Map);
+		
+		L !== undefined && L.control !== undefined && L.control.navbar !== undefined ? L.control.navbar().addTo(MainApplication.Map) : false;
+		
 		this.mapFirstView=false;
 		//initial tile layer
 		MainApplication.Map.addLayer(BootstrapVars.areaGroups[0].leafletTileGroup);
