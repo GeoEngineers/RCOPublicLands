@@ -974,7 +974,7 @@ var MapSelectorSlideView = Backbone.Marionette.ItemView.extend({
 		}else{
 			MainApplication.views.mapView.mapPaneView.slide.close();
 			$("#toggleQuestionButton").animate({"margin-right": "0px"});
-			$(MainApplication.paneRegion.el).css({"width":"25em"});
+			$(MainApplication.paneRegion.el).css({"width":"26em"});
 			$('#expandSummaryButton').removeClass("collapsable");
 			$('#expandSummaryButton').hasClass("expandable") ? false : $('#expandSummaryButton').addClass("expandable");
 			$("#expandSummaryButton button").html("<i class='fa fa-arrow-circle-o-left fa-lg'></i>");
@@ -1061,7 +1061,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			this.slide = $('.slide-menu').bigSlide({ 
 				side:"right", 
 				menu:"#SummaryPaneSlideOut", 
-				menuWidth : "25em" }).css({ "z-index":"1030", "top":"35px", "right":"0px"});
+				menuWidth : "26em" }).css({ "z-index":"1030", "top":"35px", "right":"0px"});
 			this.slide._state = "open";
 		}
 		
@@ -1471,7 +1471,7 @@ var MapPaneView = Backbone.Marionette.ItemView.extend({
 			$(ev.currentTarget).removeClass("collapsable");
 			$(ev.currentTarget).addClass("expandable");
 			$("#expandSummaryButton button").html("<i class='fa fa-arrow-circle-o-left fa-lg'></i>");
-			$(MainApplication.paneRegion.el).animate({"width":"25em"});		
+			$(MainApplication.paneRegion.el).animate({"width":"26em"});		
 			$("#summarySelectors").css({"width":"308px"});
 			this.setChartSizes(this.chartDefaultWidth, this.chartDefaultHeight);
 			
