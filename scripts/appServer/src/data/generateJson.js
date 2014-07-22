@@ -2,6 +2,8 @@
 var fs = require("fs");
 var data = [];
 
+//example console call "node generatejson.js counties"
+
 var targetType = 'statewide'; // Change this to update the specific sums json file
 
 var targetData = [
@@ -61,6 +63,7 @@ function generateJson(){
 		}
 
 	}
+	console.log(csvTarget);
 	fs.readFile(csvTarget, 'utf8', function (err,dataset) {
 	  	if (err) {
 	    	console.log(err);
