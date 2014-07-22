@@ -468,8 +468,8 @@ var MapView = Backbone.Marionette.Layout.extend({
 		_.each(boundary.jsonLayer._layers, function(shape){
 			if(selectedVal.toString() === shape.feature.properties[boundary.NameField].toString())
 			{				
-				if(shape.feature.properties.Acres !== undefined  && shape.feature.properties.Acres !== ''){
-					MainApplication.totalAcres = " of " + dc.formatNumber(shape.feature.properties.Acres, false);
+				if(shape.feature.properties.ACRES !== undefined  && shape.feature.properties.ACRES !== ''){
+					MainApplication.totalAcres = " of " + dc.formatNumber(shape.feature.properties.ACRES, false);
 				}
 				var maxX = -1000, maxY = -1000, minX = 1000, minY = 1000;
 				_.each(shape._latlngs, function(coords){
