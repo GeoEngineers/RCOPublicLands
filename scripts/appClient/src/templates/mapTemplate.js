@@ -16,8 +16,6 @@ MainApplication.Templates.MapTemplate = [
 		"<a href='#' id='lnkSlideMenu' class='navLink slide-menu' href='#SummaryPaneSlideOut'></a>",
 		"<div id='toggleSummaryButton' class='btn hardwareAnimation'><i class='fa fa-bar-chart-o fa-lg'></i></div>",
     	"<div id='toggleQuestionButton' class='btn hardwareAnimation'><i class='fa fa-info fa-2x'></i></div>",
-    	//"<div id='toggleMapLayers' class='btn hardwareAnimation'><i class='fa fa-stack fa-2x'></i></div>",
-    	//"<div id='toggleMapLayersExpanded' class='btn hardwareAnimation'></div>",
 		"<div id='map' style=\"top: 35px;\"></div>",
 	"</div>"
 ].join("\n");
@@ -29,7 +27,6 @@ MainApplication.Templates.MapSelectorSlideTemplate = [
 			"<button id='lnkAgency' class='btn btn-primary navLayers'><i class='fa fa-building'></i>&nbsp;&nbsp;Owner</button>",
 			"<button id='lnkLandTypes' class='btn navLayers'><i class='fa fa-tree'></i>&nbsp;&nbsp;Land Use</button>",
 			"<button id='lnkAcquisitions' class='btn navLayers'><i class='fa fa-flag'></i>&nbsp;&nbsp;Acquisitions</button>",
-			//"<button id='lnkProposed' class='btn navLayers'><i class='fa fa-map-marker'></i>&nbsp;&nbsp;Proposed</button>",
 			"<button id='lnkPrismFunding' class='btn'><i class='fa fa-institution'></i>&nbsp;&nbsp;RCO Grants</button>",
 		"</div>",
 	"</div>"
@@ -65,7 +62,6 @@ MainApplication.Templates.MapPaneTemplate = [
 		"</div>",		
 		"<div id='summaryLayer'></div>",
 		"<div id='landUseWarning'>\"Land Use\" does not include Federal, City, or County lands.</div>",
-		//"<div id='summaryDateRange' style='font-size:8pt;text-align:left;'></div>",
 		"<div id='summaryHelpMenu' class='usePointer' style='margin-top: 20px'><a href='#' id='lnkHelpMenu' style='text-decoration:underline; color: #FFFF00'>More about this data?</a></div><br /><br /><br /><br />",
 	"</div>"
 ].join("\n");
@@ -125,9 +121,7 @@ MainApplication.Templates.MapTipTemplate = [
 		"<span class='tipLabel'>Total Area (Acres):</span> {{TotalArea}}<br />",
 		"<span class='tipLabel'>Principal Land Use:</span> {{LandUse}}<br />",
 		"<span class='tipLabel'>Acquisition Year:</span> <span style=\" color: #FFFF00\">{{AcquisitionDate}}</span><br />",
-		"<span class='tipLabel'>Acquisition Cost:</span> <span style=\" color: #FFFF00\">{{Cost}}</span><br /><br/>",
-
-		//"<button class=\"btn btn-primary\" type=\"button\" id=\"btnQuestionPost\" style='display: none'>Post a Question</button>",	
+		"<span class='tipLabel'>Acquisition Cost:</span> <span style=\" color: #FFFF00\">{{Cost}}</span><br /><br/>"
 ].join("\n");
 
 MainApplication.Templates.QuestionTemplate = [

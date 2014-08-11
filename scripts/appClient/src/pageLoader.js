@@ -11,8 +11,6 @@
         this.startWithParent = false;
         this.on("before:start", function (options) {
             page_options = options;
-			
-            //kill the region display
             if (MainApplication.mainRegion !== undefined && MainApplication.mainRegion.close !== undefined) { MainApplication.mainRegion.close(); }
             if (MainApplication.pageInitializer !== undefined && MainApplication.pageInitializer[page_options.path] !== undefined) { MainApplication.pageInitializer[page_options.path].stop(); }
             if (MainApplication.views !== undefined) {
@@ -24,8 +22,6 @@
             }
             MainApplication.views = [];
             MainApplication.vent.unbind();
-            //kill all active models/collections
-            //kill all active templates
         });
         this.on("start", function() {
             //var scoped so we can use this within the module specifically
@@ -54,23 +50,17 @@
 			if(MainApplication.ConfigFiles[this.thisPath] !== undefined ){
 				require(["scripts/appClient/src/initializers/" + MainApplication.ConfigFiles[this.thisPath].initializers  + "?ver=" + MainApplication.appVersion], function () {
 					MainApplication.addInitializer(function () {
-						//we pass in page options from the module
 						MainApplication.mainRegion.once("show", function () {
 							var configPageTitle = MainApplication.ConfigFiles[this_path].sectionName !== undefined ? MainApplication.ConfigFiles[this_path].sectionName : "";
 							var configPageContainerClass = MainApplication.ConfigFiles[this_path].containerClass !== undefined ? MainApplication.ConfigFiles[this_path].containerClass : "";
-							//once the initializers load, load the page title and custom styles
 							MainApplication.views.sitePageTitle = new SiteMasterTitle({
 								pageTitle: configPageTitle
 							});
 							MainApplication.titleRegion.show(MainApplication.views.sitePageTitle);
 							MainApplication.mainRegion.$el.attr("class", configPageContainerClass);
 						});
-						//load application notification events
 						MainApplication.ApplicationNotificationLoader.runNotifications(page_options);
-						//log pageView
 						GA.logGAPageView();
-						
-						//run the main application
 						MainApplication.pageInitializer[this_path].start(page_options);
 					});
 				});

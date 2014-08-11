@@ -63,29 +63,14 @@ MainApplication.ConfigFiles = {
         "containerClass": "node-outline",
         "models": [
             { "model" : "toDoModels.js" }
-        ],
+        ],	
         "templates": [
             { "template" : "mapTemplate.js" },
-            { "template" : "toDoTemplates.js" }
         ],
         "views": [
             { "view": "mapViews.js" },
-            { "view": "toDoViews.js" }
         ],
         "initializers": "initMap.js"
-    },
-    "ContactUs": {
-        "Id": 6,
-        "sectionName": "Contact GeoEngineers",
-        "containerClass": "node-outline",
-        "hashPath": "ContactUs",
-        "templates": [
-            { "template": "contactUsTemplates.js" }
-        ],
-        "views": [
-            { "view": "contactUsViews.js" },
-        ],
-        "initializers": "initContactUs.js"
     },
     "Spec": {
         "Id": 7,
