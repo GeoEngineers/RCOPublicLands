@@ -4,7 +4,7 @@
 /////////////////////This application declaration//////////////
 var ApplicationName = "MainApplication";
 window[ApplicationName] = new Backbone.Marionette.Application();
-window[ApplicationName].appVersion = '0.0.2';
+window[ApplicationName].appVersion = '0.0.3';
 //Geoengineers main site loader
 var GeoAppBase = new Backbone.Marionette.Application();
 //indicates offline status, do not change.
@@ -13,7 +13,7 @@ MainApplication.clientOfflineMode = false;
 
 
 /////////////////////This application declaration//////////////
-MainApplication.jasmineEnv = jasmine.getEnv();
+/*MainApplication.jasmineEnv = jasmine.getEnv();
 MainApplication.jasmineEnv.updateInterval = 1000;
 var htmlReporter = new jasmine.HtmlReporter();
 MainApplication.jasmineEnv.addReporter(htmlReporter);
@@ -21,7 +21,7 @@ MainApplication.jasmineEnv.specFilter = function(spec) {
 	return htmlReporter.specFilter(spec);
 };
 var currentWindowOnload = window.onload;
-
+*/
 //debug override
 MainApplication.connectionActive = true;
 MainApplication.activeSynchQueue = [];
