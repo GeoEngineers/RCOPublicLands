@@ -18,7 +18,11 @@ The RCO Public Lands web application is a web application that allows people to 
 
 * Clone the RCOPublicLands to your local development environment.  NOTE: If you are new to Github you might want to consider using the Github GUI application.
 * 
-<p>Use npm to install all of the necessary components
+<p>Use npm to install all of the necessary components via
 <code>npm install</code></p>
+<p>Use bower to install necessary javascript libraries
+<code>bower install</code></p>
+
+<b> NOTE: </b> If you run into a problem via bower that the bower_components folder could not be created you might have to manually create the bower_components folder.
 
 
