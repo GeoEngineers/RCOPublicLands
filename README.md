@@ -9,3 +9,6 @@ The RCO Public Lands web application is a web application that allows people to 
 * Easily Deployable
 * Fast and Intuative
 
+### Prerequisites
+
+* Node.JS (and npm)
