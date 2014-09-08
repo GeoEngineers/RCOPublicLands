@@ -18,6 +18,7 @@ The RCO Public Lands web application is a web application that allows people to 
 
 * Clone the RCOPublicLands to your local development environment.  NOTE: If you are new to Github you might want to consider using the Github GUI application.
 * 
-<p>Use npm to install all of the necessary components<code>npm install</code> function.</p>
+<p>Use npm to install all of the necessary components
+<code>npm install</code></p>
 
 
