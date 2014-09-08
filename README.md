@@ -11,6 +11,13 @@ The RCO Public Lands web application is a web application that allows people to 
 
 ### Prerequisites
 
-* [Node.JS](http://nodejs.org/ "Node.JS").
+* [Node.JS](http://nodejs.org/ "Node.JS")
+* npm is also required, but should be installed with Node
+
+### Setting Up
+
+* Clone the RCOPublicLands to your local development environment.  NOTE: If you are new to Github you might want to consider using the Github GUI application.
+* 
+<p>Use npm to install all of the necessary components<code>npm install</code> function.</p>
 
 
