@@ -1,0 +1,25 @@
+_prefs: 
+  mapid: ''
+  saveCenter: true
+_properties: {}
+attribution: ''
+bounds: 
+  - -180
+  - -85.0511
+  - 180
+  - 85.0511
+center: 
+  - -123.64288330078126
+  - 47.11499982620772
+  - 8
+description: Washington Public Lands Parks Map Layer
+format: "png8:m=h"
+interactivity_layer: ''
+layers: null
+maxzoom: 16
+minzoom: 5
+name: Washington Public Lands Parks
+source: "tmsource:///Users/blairdeaver/Documents/projects/rco/rco_publiclands_taxlots.tm2source"
+styles: 
+  - style.mss
+template: ''

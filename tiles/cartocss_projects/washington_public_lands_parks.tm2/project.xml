@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map[]>
+<Map srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over">
+
+<Parameters>
+  <Parameter name="bounds">-180,-85.0511,180,85.0511</Parameter>
+  <Parameter name="center">-123.64288330078126,47.11499982620772,8</Parameter>
+  <Parameter name="description"><![CDATA[Washington Public Lands Parks Map Layer]]></Parameter>
+  <Parameter name="format">png8:m=h</Parameter>
+  <Parameter name="maxzoom">16</Parameter>
+  <Parameter name="minzoom">5</Parameter>
+  <Parameter name="name"><![CDATA[Washington Public Lands Parks]]></Parameter>
+  <Parameter name="source"><![CDATA[tmsource:///Users/blairdeaver/Documents/projects/rco/rco_publiclands_taxlots.tm2source]]></Parameter>
+</Parameters>
+
+
+<Style name="washington_rco_publiclands_parcels" filter-mode="first">
+  <Rule>
+    <MaxScaleDenominator>1500000</MaxScaleDenominator>
+    <Filter>([PROV1] = 605)</Filter>
+    <PolygonSymbolizer fill="#e6e600" fill-opacity="0.7" />
+    <LineSymbolizer stroke="#6e6e6e" stroke-width="0.3" stroke-opacity="0.6" stroke-linejoin="round" stroke-linecap="round" />
+  </Rule>
+  <Rule>
+    <MinScaleDenominator>1500000</MinScaleDenominator>
+    <Filter>([PROV1] = 605)</Filter>
+    <PolygonSymbolizer fill="#e6e600" fill-opacity="0.7" />
+    <LineSymbolizer stroke="#6e6e6e" stroke-width="0.1" />
+  </Rule>
+</Style>
+<Layer name="washington_rco_publiclands_parcels"
+  srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over">
+    <StyleName>washington_rco_publiclands_parcels</StyleName>  </Layer>
+
+</Map>
