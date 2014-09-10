@@ -21,9 +21,7 @@ GeoAppBase.views = {};
 GeoAppBase.models = {};
 
 GeoAppBase.commands.setHandler("StartMainApp", function () {
-    //This is where we put the app start for whatever applciation were running, we're dependent on the login here, so we're manually handling the events
     window[ApplicationName].start();
-    // Start Backbone history often this is placed with the router, however we want to wait to start this until we've checked the login
     Backbone.history.start();
     if (GeoAppBase.getHashTag() !== "") {
         window[ApplicationName].router.navigate(GeoAppBase.getHashTag(), true);
@@ -55,7 +53,6 @@ GeoAppBase.GenericModalInterface = Backbone.Marionette.ItemView.extend({
         this.okCallback = options.okCallback;
         this.cancelText = options.cancelText;
         this.cancelCallback = options.cancelCallback;
-        //bring focus to the first input
         $(window[ApplicationName].modalRegion.el).one('shown', function () {
             $('input:text:visible:first').focus();
         });
@@ -75,7 +72,6 @@ GeoAppBase.GenericModalInterface = Backbone.Marionette.ItemView.extend({
 
 
 GeoAppBase.on("start", function () {
-	//start the main application here, doing work directly in the source files?  comment this to prevent overrides
 	GeoAppBase.execute("StartMainApp");
 });
 

@@ -50,21 +50,18 @@ MainApplication.PaneRegion = Backbone.Marionette.Region.extend({
         return $el;
     },
     slideOut: function (view) {
-		//fix for first time display
-		//$("#SummaryPaneSlideOut").css("display","block");
 		this.slideOpen = true;
     },
     slideIn: function () {
 		this.slideOpen = false;	
     }
 });
-//$("#SummaryPaneSlideOut").css("display","none");
 
 
 MainApplication.ModalRegion = Backbone.Marionette.Region.extend({
     el: "#localModalBlock",
     constructor: function () {
-        _.bindAll(this, 'getEl', 'showModal', 'hideModal', 'lockModal', 'unlockModal');
+        _.bindAll(this, 'getEl', 'showModal', 'hideModal');
         Backbone.Marionette.Region.prototype.constructor.apply(this, arguments);
         this.on("show", this.showModal, this);
     },
@@ -76,19 +73,10 @@ MainApplication.ModalRegion = Backbone.Marionette.Region.extend({
     showModal: function (view) {
         view.on("close", this.hideModal, this);
         $("#localModalBlock").css("display","block");
-		//this.$el.modal('show');
 		this.$el.modal({ backdrop: "static", show: true });
     },
     hideModal: function () {
-		//this.unlockModal();
         this.$el.modal('hide');
-    },	
-    //requires custom lock function in bootstrap
-    lockModal: function() {
-        //this.$el.modal('lock');
-    },
-    unlockModal: function() {
-        //this.$el.modal('unlock');
     }
 });
 
