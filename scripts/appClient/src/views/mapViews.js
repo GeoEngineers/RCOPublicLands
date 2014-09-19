@@ -311,7 +311,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 			$.cookie('loadedView', "loaded", { path: '/' });
 			$(".leaflet-bottom").css({"margin-bottom": "90px"});
 
-			this.loadGuidedHelp();
+			//this.loadGuidedHelp();
 		}
 	},
 	boundaryChange: function(){
