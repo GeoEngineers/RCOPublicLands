@@ -1,0 +1,80 @@
+{
+  "bounds": [
+    -124.8871,
+    45.5217,
+    -116.8891,
+    49.0378
+  ],
+  "center": [
+    -120.1135,
+    47.4615,
+    8
+  ],
+  "format": "png",
+  "interactivity": {
+    "layer": "washington_acq_dnr",
+    "template_teaser": "<div style=\"text-align:center;\">\n<strong>{{TAXID}}</strong>\n<strong>{{OWNER}}</strong>\n<strong>{{ACQYEAR}}</strong>\n<strong>{{OWNTYPE}}</strong>\n<strong>{{ACRES}}</strong>\n<strong>{{PLAND}}</strong>\n<strong>{{ACQCOST}}</strong>\n<strong>{{UNITNAME}}</strong>\n</div>",
+    "template_full": "<div style=\"text-align:center;\">\n<strong>{{TAXID}}</strong>\n<strong>{{OWNER}}</strong>\n<strong>{{ACQYEAR}}</strong>\n<strong>{{OWNTYPE}}</strong>\n<strong>{{ACRES}}</strong>\n<strong>{{PLAND}}</strong>\n<strong>{{ACQCOST}}</strong>\n<strong>{{UNITNAME}}</strong>\n</div>",
+    "fields": [
+      "TAXID",
+      "OWNER",
+      "ACQYEAR",
+      "OWNTYPE",
+      "ACRES",
+      "PLAND",
+      "ACQCOST",
+      "UNITNAME"
+    ]
+  },
+  "minzoom": 7,
+  "maxzoom": 14,
+  "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+  "Stylesheet": [
+    "style.mss"
+  ],
+  "Layer": [
+    {
+      "geometry": "polygon",
+      "extent": [
+        -124.55495505952966,
+        45.55806833031597,
+        -117.06410623434347,
+        48.93774019481793
+      ],
+      "id": "washington_acq_dnr",
+      "class": "",
+      "Datasource": {
+        "file": "/Users/blairdeaver/Downloads/home 4/ubuntu/downloads/wa_pli_acq_dnr_gen_10.shp"
+      },
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "advanced": {},
+      "name": "washington_acq_dnr"
+    },
+    {
+      "geometry": "point",
+      "extent": [
+        -124.55207355271732,
+        45.55890669215302,
+        -117.18355196067556,
+        48.88670292579313
+      ],
+      "id": "washington_acq_dnr_centroids",
+      "class": "",
+      "Datasource": {
+        "file": "/Users/blairdeaver/Downloads/dnr_centroid_acquisitions.shp"
+      },
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "advanced": {},
+      "name": "washington_acq_dnr_centroids"
+    }
+  ],
+  "scale": 1,
+  "metatile": 2,
+  "_basemap": "wapubliclands_acq_dnr",
+  "name": "Washington Public Lands - DNR Acq",
+  "description": "",
+  "legend": "",
+  "attribution": ""
+}

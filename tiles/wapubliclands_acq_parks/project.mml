@@ -1,0 +1,80 @@
+{
+  "bounds": [
+    -124.8871,
+    45.5217,
+    -116.8891,
+    49.0378
+  ],
+  "center": [
+    -120.1135,
+    47.4615,
+    8
+  ],
+  "format": "png",
+  "interactivity": {
+    "layer": "washington_acq_dfw",
+    "template_teaser": "<div style=\"text-align:center;\">\n<strong>{{TAXID}}</strong>\n<strong>{{OWNER}}</strong>\n<strong>{{ACQYEAR}}</strong>\n<strong>{{OWNTYPE}}</strong>\n<strong>{{ACRES}}</strong>\n<strong>{{PLAND}}</strong>\n<strong>{{ACQCOST}}</strong>\n<strong>{{UNITNAME}}</strong>\n</div>",
+    "template_full": "<div style=\"text-align:center;\">\n<strong>{{TAXID}}</strong>\n<strong>{{OWNER}}</strong>\n<strong>{{ACQYEAR}}</strong>\n<strong>{{OWNTYPE}}</strong>\n<strong>{{ACRES}}</strong>\n<strong>{{PLAND}}</strong>\n<strong>{{ACQCOST}}</strong>\n<strong>{{UNITNAME}}</strong>\n</div>",
+    "fields": [
+      "TAXID",
+      "OWNER",
+      "ACQYEAR",
+      "OWNTYPE",
+      "ACRES",
+      "PLAND",
+      "ACQCOST",
+      "UNITNAME"
+    ]
+  },
+  "minzoom": 7,
+  "maxzoom": 14,
+  "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+  "Stylesheet": [
+    "style.mss"
+  ],
+  "Layer": [
+    {
+      "geometry": "polygon",
+      "extent": [
+        -124.05628563135286,
+        45.70591818435201,
+        -116.97541710814427,
+        49.000097988393755
+      ],
+      "id": "washington_acq_dfw",
+      "class": "",
+      "Datasource": {
+        "file": "/Users/blairdeaver/Downloads/home 6/ubuntu/downloads/wa_pli_acq_wdfw_gen_10.shp"
+      },
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "advanced": {},
+      "name": "washington_acq_dfw"
+    },
+    {
+      "geometry": "point",
+      "extent": [
+        -124.05542008965317,
+        45.70719189799716,
+        -116.98581771559948,
+        48.9820655885109
+      ],
+      "id": "wdfw_acq_centroid",
+      "class": "",
+      "Datasource": {
+        "file": "/Users/blairdeaver/Downloads/wdfw_centroid_acquisitions.shp"
+      },
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "advanced": {},
+      "name": "wdfw_acq_centroid"
+    }
+  ],
+  "scale": 1,
+  "metatile": 2,
+  "_basemap": "wapubliclands_acq_dfw",
+  "name": "Washington Public Lands - DFW ACQ",
+  "description": "",
+  "legend": "",
+  "attribution": ""
+}
