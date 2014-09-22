@@ -16,7 +16,7 @@ The RCO Public Lands web application is a web application that allows people to 
 
 * [Node.JS](http://nodejs.org/ "Node.JS")
 * npm is also required, but should be installed with Node
-* <b>NOTE:</b>Make sure your webserver is configured to support .geojson and .json MIME types.
+* <b>NOTE:</b> Make sure your webserver is configured to support .geojson and .json MIME types.  The Node server supports these mime types but IIS does not support .geojson by default.
 
 ### Setting Up
 
