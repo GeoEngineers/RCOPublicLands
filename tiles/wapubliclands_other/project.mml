@@ -1,0 +1,62 @@
+{
+  "bounds": [
+    -124.8871,
+    45.5217,
+    -116.8891,
+    49.0378
+  ],
+  "center": [
+    -120.1135,
+    47.4615,
+    8
+  ],
+  "format": "png",
+  "interactivity": {
+    "layer": "waconservation2",
+    "template_teaser": "<div style=\"text-align:center;\">\n<strong>{{TAXID}}</strong>\n<strong>{{OWNER}}</strong>\n<strong>{{ACQYEAR}}</strong>\n<strong>{{OWNTYPE}}</strong>\n<strong>{{ACRES}}</strong>\n<strong>{{PLAND}}</strong>\n<strong>{{ACQCOST}}</strong>\n<strong>{{UNITNAME}}</strong>\n</div>",
+    "template_full": "<div style=\"text-align:center;\">\n<strong>{{TAXID}}</strong>\n<strong>{{OWNER}}</strong>\n<strong>{{ACQYEAR}}</strong>\n<strong>{{OWNTYPE}}</strong>\n<strong>{{ACRES}}</strong>\n<strong>{{PLAND}}</strong>\n<strong>{{ACQCOST}}</strong>\n<strong>{{UNITNAME}}</strong>\n</div>",
+    "fields": [
+      "TAXID",
+      "OWNER",
+      "ACQYEAR",
+      "OWNTYPE",
+      "ACRES",
+      "PLAND",
+      "ACQCOST",
+      "UNITNAME"
+    ]
+  },
+  "minzoom": 7,
+  "maxzoom": 14,
+  "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+  "Stylesheet": [
+    "style.mss"
+  ],
+  "Layer": [
+    {
+      "geometry": "polygon",
+      "extent": [
+        -124.46619802319769,
+        45.558062792836914,
+        -117.22809963718348,
+        48.99992006736574
+      ],
+      "id": "waconservation2",
+      "class": "",
+      "Datasource": {
+        "file": "/Users/blairdeaver/Downloads/home 18/ubuntu/downloads/vw_rco_publiclands_conservation.shp"
+      },
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "advanced": {},
+      "name": "waconservation2"
+    }
+  ],
+  "scale": 1,
+  "metatile": 2,
+  "_basemap": "wapubliclands_conservation",
+  "name": "Washington Public Lands - Conservation",
+  "description": "",
+  "legend": "",
+  "attribution": ""
+}

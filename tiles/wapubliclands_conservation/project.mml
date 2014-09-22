@@ -1,0 +1,80 @@
+{
+  "bounds": [
+    -124.8871,
+    45.5217,
+    -116.8891,
+    49.0378
+  ],
+  "center": [
+    -120.1135,
+    47.4615,
+    8
+  ],
+  "format": "png",
+  "interactivity": {
+    "layer": "washington_acq_parks",
+    "template_teaser": "<div style=\"text-align:center;\">\n<strong>{{TAXID}}</strong>\n<strong>{{OWNER}}</strong>\n<strong>{{ACQYEAR}}</strong>\n<strong>{{OWNTYPE}}</strong>\n<strong>{{ACRES}}</strong>\n<strong>{{PLAND}}</strong>\n<strong>{{ACQCOST}}</strong>\n<strong>{{UNITNAME}}</strong>\n</div>",
+    "template_full": "<div style=\"text-align:center;\">\n<strong>{{TAXID}}</strong>\n<strong>{{OWNER}}</strong>\n<strong>{{ACQYEAR}}</strong>\n<strong>{{OWNTYPE}}</strong>\n<strong>{{ACRES}}</strong>\n<strong>{{PLAND}}</strong>\n<strong>{{ACQCOST}}</strong>\n<strong>{{UNITNAME}}</strong>\n</div>",
+    "fields": [
+      "TAXID",
+      "OWNER",
+      "ACQYEAR",
+      "OWNTYPE",
+      "ACRES",
+      "PLAND",
+      "ACQCOST",
+      "UNITNAME"
+    ]
+  },
+  "minzoom": 7,
+  "maxzoom": 14,
+  "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+  "Stylesheet": [
+    "style.mss"
+  ],
+  "Layer": [
+    {
+      "geometry": "polygon",
+      "extent": [
+        -124.36770266672906,
+        45.607003523951235,
+        -117.04030287192042,
+        48.68329912187349
+      ],
+      "id": "washington_acq_parks",
+      "class": "",
+      "Datasource": {
+        "file": "/Users/blairdeaver/Downloads/home 5/ubuntu/downloads/wa_pli_acq_parks_gen_10.shp"
+      },
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "advanced": {},
+      "name": "washington_acq_parks"
+    },
+    {
+      "geometry": "point",
+      "extent": [
+        -124.36550125403988,
+        45.61123756028201,
+        -117.27133032991306,
+        48.67639448908342
+      ],
+      "id": "washington_acq_parks_centroids",
+      "class": "",
+      "Datasource": {
+        "file": "/Users/blairdeaver/Downloads/parks_centroid_acquisitions.shp"
+      },
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "advanced": {},
+      "name": "washington_acq_parks_centroids"
+    }
+  ],
+  "scale": 1,
+  "metatile": 2,
+  "_basemap": "wapubliclands_acq_parks",
+  "name": "Washington Public Lands - Parks ACQ",
+  "description": "",
+  "legend": "",
+  "attribution": ""
+}
