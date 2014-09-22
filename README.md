@@ -30,6 +30,6 @@ The RCO Public Lands web application is a web application that allows people to 
 
 <b> NOTE: </b> If you run into a problem via bower that the bower_components folder could not be created you might have to manually create the bower_components folder.
 
-### Map Tile Setup
+### REFER TO THE WIKI FOR MAP SETUP AND CONFIGURATION
 
-Please refer to the wiki for detailed instructions on ![setting up the mbtiles for the application]
+Please refer to the [wiki](https://github.com/GeoEngineers/RCOPublicLands/wiki) for detailed instructions on map setup and more.
