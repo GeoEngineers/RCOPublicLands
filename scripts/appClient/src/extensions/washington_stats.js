@@ -99,7 +99,7 @@ BootstrapVars.boundaries = [
 
 BootstrapVars.areaGroups = [
 	{ layerGroupName : "agency", combinedLayerGroup: "eeheiser.32g1fw29" },
-	{ layerGroupName : "landtypes", combinedLayerGroup: "smartmine.d0psc3di" }
+	{ layerGroupName : "landtypes", combinedLayerGroup: "eeheiser.0i0jxlxr" }
 ];
 
 BootstrapVars.areaStats = [

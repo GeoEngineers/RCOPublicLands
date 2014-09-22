@@ -10,7 +10,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 		this.dnrResources = options.dnrResources;
 		
 		this.attribution = "© Washington RCO © Mapbox © OpenStreetMap";
-		this.streetsMap = L.tileLayer.provider('MapBox.smartmine.igcmocio', { minZoom:6, zIndex: 1, attribution:this.attribution, reuseTiles: true });		
+		this.streetsMap = L.tileLayer.provider('MapBox.eeheiser.jinoi3bg', { minZoom:6, zIndex: 1, attribution:this.attribution, reuseTiles: true });		
 		this.openMap = L.tileLayer('http://b.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
 			attribution: this.attribution,
 			minZoom: 6, 
@@ -18,7 +18,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 			zIndex: 2, 
 			reuseTiles: true
 		});
-		this.imageryMap = L.tileLayer.provider('MapBox.smartmine.map-nco5bdjp', { minZoom:6, zIndex: 3, attribution:this.attribution, reuseTiles: true });
+		this.imageryMap = L.tileLayer.provider('MapBox.eeheiser.jim7mm6m', { minZoom:6, zIndex: 3, attribution:this.attribution, reuseTiles: true });
 		this.baseMaps = {
 			"Terrain": this.streetsMap,
 			"Streets" : this.openMap,
