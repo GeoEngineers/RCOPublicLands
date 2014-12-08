@@ -1,0 +1,17 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+                                                                                
+"features": [
+{ "type": "Feature", "properties": { "Id": 0, "NAME": "Queets River NRCA" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -124.207487221127778, 47.562596876605042 ] ] } },
+{ "type": "Feature", "properties": { "Id": 0, "NAME": "Mt Si - Middle Fork Snoqualmie NRCAs" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -121.665490717508447, 47.490753598229716 ] ] } },
+{ "type": "Feature", "properties": { "Id": 0, "NAME": "Stavis NRCA - Kitsap Forest NAP" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -122.895791864517719, 47.600306823935867 ] ] } },
+{ "type": "Feature", "properties": { "Id": 0, "NAME": "Dabob Bay NA" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -122.811588661295744, 47.833167425754262 ] ] } },
+{ "type": "Feature", "properties": { "Id": 0, "NAME": "South Lake Ozette NAP" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -124.630214903671117, 48.033828390601315 ] ] } },
+{ "type": "Feature", "properties": { "Id": 0, "NAME": "Kennedy Creek NAP" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -123.086496191696185, 47.09225888889501 ] ] } },
+{ "type": "Feature", "properties": { "Id": 0, "NAME": "Schumacher Creek NAP" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -123.069133769527525, 47.30688923535282 ] ] } },
+{ "type": "Feature", "properties": { "Id": 0, "NAME": "Ink Blot NAP" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -123.239120091661135, 47.29411810109665 ] ] } },
+{ "type": "Feature", "properties": { "Id": 0, "NAME": "Trombetta Canyon NAP" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -117.775763567558371, 48.885004310772189 ] ] } },
+{ "type": "Feature", "properties": { "Id": 0, "NAME": "Marcellus Shrub Steppe NAP" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -118.39520727636905, 47.227532627542963 ] ] } }
+]
+}
