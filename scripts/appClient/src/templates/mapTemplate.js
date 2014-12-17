@@ -125,6 +125,14 @@ MainApplication.Templates.MapTipTemplate = [
 		"<span class='tipLabel'>Acquisition Cost:</span> <span style=\" color: #FFFF00\">{{Cost}}</span><br /><br/>"
 ].join("\n");
 
+MainApplication.Templates.MapTipTemplateProposed = [
+    "<h4>{{UnitName}}</h4>",
+		"<span class='tipLabel'>Proposed Owner: </span>{{Owner}} <br />",
+		"<span class='tipLabel'>Total Area (Acres):</span> {{TotalArea}}<br />",
+		"<span class='tipLabel'>Proposed funding sources:</span> {{FundingSource}}<br />",
+		"<span class='tipLabel'>Estimated Acquisition Cost:</span> <span style=\" color: #FFFF00\">{{Cost}}</span><br /><br/>"
+].join("\n");
+
 MainApplication.Templates.QuestionTemplate = [
 	"<div class=\"modal-dialog\">",
 		"<div class=\"modal-content\">",
