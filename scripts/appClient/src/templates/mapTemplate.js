@@ -28,7 +28,7 @@ MainApplication.Templates.MapSelectorSlideTemplate = [
 			"<button id='lnkLandTypes' class='btn navLayers'><i class='fa fa-tree'></i>&nbsp;&nbsp;Land Use</button>",
 			"<button id='lnkAcquisitions' class='btn navLayers'><i class='fa fa-flag'></i>&nbsp;&nbsp;Acquisitions</button>",
 			"<button id='lnkPrismFunding' class='btn'><i class='fa fa-institution'></i>&nbsp;&nbsp;RCO Grants</button>",
-		//	"<button id='lnkProposed' class='btn navLayers'><i class='fa fa-tree'></i>&nbsp;&nbsp;Proposed Acquisitions</button>",
+			"<button id='lnkProposed' class='btn navLayers'><i class='fa fa-tree'></i>&nbsp;&nbsp;Proposed Acquisitions</button>",
 		"</div>",
 	"</div>"
 ].join("\n");
@@ -60,7 +60,7 @@ MainApplication.Templates.MapPaneTemplate = [
 					"<button href='#' id='showBarChart' class='btn'><i id='barChartIcon' class='fa fa-bar-chart-o fa-lg'></i></button>",
 				"</div>",
 			"</div>",
-		"</div>",		
+		"</div>",
 		"<div id='summaryLayer'></div>",
 		"<div id='landUseWarning'>\"Land Use\" does not include Federal, City, or County lands.</div>",
 		"<div id='summaryHelpMenu' class='usePointer' style='margin-top: 20px'><a href='#' id='lnkHelpMenu' style='text-decoration:underline; color: #FFFF00'>More about this data?</a></div><br /><br /><br /><br />",
@@ -86,7 +86,7 @@ MainApplication.Templates.MapNewMarkerTipTemplate = [
 		"<b>{{Description}}</b><br />",
 		"Select \"Edit\" to rename or move this item.<br />",
 		"<a href='#' class='geoEditTodo'>Edit Todo</a> - ",
-		"<a href='#' class='geoDeleteTodo'>Delete Todo</a>",		
+		"<a href='#' class='geoDeleteTodo'>Delete Todo</a>",
 	"</div>",
 ].join("\n");
 
@@ -145,7 +145,7 @@ MainApplication.Templates.QuestionTemplate = [
 	"</div>",
 ].join("\n");
 
-MainApplication.Templates.HeaderTemplate = [ 
+MainApplication.Templates.HeaderTemplate = [
 	"<h4><img id='rcoLogo' src='./content/images/rco-logo-white.png' />&nbsp;WASHINGTON PUBLIC LANDS INVENTORY</h4>",
 ].join("\n");
 
