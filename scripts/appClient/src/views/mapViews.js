@@ -143,10 +143,10 @@ var MapView = Backbone.Marionette.Layout.extend({
 			"PrimaryProgramName" : "Program Name",
 			"ProjectAcresAcqActual" : "Acquired Acres to Date",
 			"FiscalYear" : "Fiscal Year",
-			"SnapshotURL" : "Project URL"
+			"SnapshotLink" : "Project URL"
 		};
 		
-		this.esriMap = L.esri.clusteredFeatureLayer("http://gismanagerweb.rco.wa.gov/arcgis/rest/services/public_lands/WA_RCO_Public_Lands_Inventory_PRISM_v2/MapServer/0/", {
+		this.esriMap = L.esri.clusteredFeatureLayer("http://gismanager.rco.wa.gov/arcgis/rest/services/WA_RCO_Funded_Projects/FeatureServer/0", {
 			cluster: new L.MarkerClusterGroup(),
 			minZoom:6,
 			zIndex: 101,
@@ -155,10 +155,10 @@ var MapView = Backbone.Marionette.Layout.extend({
 				for (var prop in geojson.properties) {
 					var val = geojson.properties[prop];
 					var linkId = "shapshot"+ geojson.properties.OBJECTID;
-					if(prop.replace("PRISM.DBO.SV_DMPROJECT1.", "") === "SnapshotURL"){
+					if(prop.replace("PRISM.DBO.SV_DMPROJECT1.", "") === "SnapshotLink"){
 						val = "<a href='" + val + "' id='shapshot"+ geojson.properties.OBJECTID +"' style='color: white; text-decoration: underline' onclick='window.open(this.href, \"Prism\", \"width=995,height=420,scroll=yes,scrolling=yes,scrollbars=yes\");return false;'>" + val + "</a>";
 					}
-					if (val != 'undefined' && val != "0" && prop !="OBJECTID" && prop != "Name") {
+					if (val != 'undefined' && val != "0" && prop !="OBJECTID" && prop != "Name" && (prop in tipAliasObject)) {
 						var tipFieldLabel = prop.replace(" (Esri)",'').replace("PRISM.DBO.SV_DMPROJECT1.", "");
 						if(tipFieldLabel in tipAliasObject){
 							tipFieldLabel = tipAliasObject[tipFieldLabel];
