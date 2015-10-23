@@ -30,6 +30,14 @@ The RCO Public Lands web application is a web application that allows people to 
 
 <b> NOTE: </b> If you run into a problem via bower that the bower_components folder could not be created you might have to manually create the bower_components folder.
 
+### Running The Application
+
+Since the application is build with no server side code (.NET, PHP, Java, Ruby, Etc) you can move all of the contents of the web application either under a new IIS Virtual Directory or run a simple Python Web Server from the root of the application directory.
+
+To start up a new python web server simply run the following command:
+
+<code>sudo python -m SimpleHTTPServer 80</code>
+
 ### REFER TO THE WIKI FOR MAP SETUP AND CONFIGURATION
 
 Please refer to the [wiki](https://github.com/GeoEngineers/RCOPublicLands/wiki) for detailed instructions on map setup and more.
