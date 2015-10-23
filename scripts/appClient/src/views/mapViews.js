@@ -146,7 +146,7 @@ var MapView = Backbone.Marionette.Layout.extend({
 			"SnapshotLink" : "Project URL"
 		};
 		
-		this.esriMap = L.esri.clusteredFeatureLayer("http://gismanager.rco.wa.gov/arcgis/rest/services/WA_RCO_Funded_Projects/FeatureServer/0", {
+		this.esriMap = L.esri.clusteredFeatureLayer("http://gismanager.rco.wa.gov/arcgis/rest/services/PublicLandsInventory/WARCOFundedLandAcquisitions/MapServer/0", {
 			cluster: new L.MarkerClusterGroup(),
 			minZoom:6,
 			zIndex: 101,
